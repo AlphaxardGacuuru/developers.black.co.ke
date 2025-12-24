@@ -2,6 +2,7 @@
 
 import LoginLinks from "@/app/LoginLinks"
 import Link from "next/link"
+import Img from "next/image"
 import ApplicationLogo from "@/components/ApplicationLogo"
 import { useState, useEffect } from "react"
 
@@ -402,7 +403,7 @@ const Home = () => {
 					<div className="absolute top-1/2 left-1/3 w-40 h-40 bg-blue-300/20 rounded-full blur-2xl animate-pulse animation-delay-2000" />
 				</div>
 
-				<div className="mx-auto max-w-7xl px-6 lg:px-8 relative z-10">
+				<div className="mx-auto px-6 lg:px-8 relative z-10">
 					<div className="text-center mb-20">
 						<h2 className="text-5xl sm:text-6xl font-extralight text-[#232323] mb-6 tracking-tight font-roboto drop-shadow-sm">
 							Latest{" "}
@@ -410,126 +411,301 @@ const Home = () => {
 								Work
 							</span>
 						</h2>
-						<p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed font-light font-nunito">
+						<p className="text-xl text-gray-900 max-w-3xl mx-auto leading-relaxed font-light font-nunito">
 							Discover our recent projects that showcase innovation, technical
 							excellence, and transformative digital solutions.
 						</p>
 					</div>
-					<div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-						{/* Project 1 */}
-						<div className="group relative overflow-hidden rounded-3xl bg-white/90 backdrop-blur-xl border border-[#232323]/20 hover:border-[#232323]/50 transition-all duration-700 hover:scale-105">
-							<div className="aspect-video bg-gradient-to-br from-[#232323] to-[#1a1a1a] relative overflow-hidden">
-								<div className="absolute inset-0 bg-gradient-to-br from-[#232323]/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-								<div className="absolute inset-0 flex items-center justify-center">
-									<div className="w-24 h-24 rounded-2xl bg-white/10 flex items-center justify-center backdrop-blur-sm">
-										<svg
-											className="w-12 h-12 text-white"
-											fill="none"
-											viewBox="0 0 24 24"
-											stroke="currentColor">
-											<path
-												strokeLinecap="round"
-												strokeLinejoin="round"
-												strokeWidth={2}
-												d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"
-											/>
-										</svg>
-									</div>
-								</div>
+					<div className="grid grid-cols-1 lg:grid-cols-4 gap-12">
+						{/* Black Music Start */}
+						<div className="group relative overflow-hidden bg-gradient-to-br rounded-3xl from-[#232323] to-[#1a1a1a] backdrop-blur-xl border border-white/10 hover:border-white/20 transition-all duration-700 hover:scale-105">
+							<h3 className="text-center text-2xl font-light text-white mt-8 mb-6 font-nunito">
+								Black Music
+							</h3>
+							<div className="flex justify-center px-5">
+								<Link
+									href="https://music.black.co.ke"
+									className="relative block w-96">
+									<Img
+										src="/black-music/android-chrome-512x512.png"
+										width={512}
+										height={512}
+										alt="Black Music"
+										className="rounded-full p-5 hover:scale-110 transition-transform duration-500"
+										style={{ background: "rgba(255, 215, 0, 1)" }}
+									/>
+								</Link>
 							</div>
 							<div className="p-8">
+								{/* Description Start */}
 								<div className="flex items-center gap-2 mb-4">
-									<span className="px-3 py-1 text-xs font-light bg-[#232323] text-white rounded-full">
-										E-Commerce
+									<span className="px-3 py-1 text-xs font-light bg-[rgba(255,215,0,1)] rounded-full">
+										E-Commerce / Social Network
 									</span>
-									<span className="px-3 py-1 text-xs font-light bg-[#3a3a3a] text-white rounded-full">
-										Full-Stack
+									<span className="px-3 py-1 text-xs font-light bg-[rgba(255,215,0,1)] rounded-full">
+										Bootstrap
+									</span>
+									<span className="px-3 py-1 text-xs font-light bg-[rgba(255,215,0,1)] rounded-full">
+										React
+									</span>
+									<span className="px-3 py-1 text-xs font-light bg-[rgba(255,215,0,1)] rounded-full">
+										Laravel
+									</span>
+									<span className="px-3 py-1 text-xs font-light bg-[rgba(255,215,0,1)] rounded-full">
+										MySQL
 									</span>
 								</div>
-								<h3 className="text-2xl font-light text-[#232323] mb-4 font-nunito">
-									Enterprise E-Commerce Platform
-								</h3>
-								<p className="text-gray-300 leading-relaxed mb-6">
-									Complete e-commerce solution with advanced inventory
-									management, payment processing, analytics dashboard, and
-									multi-vendor support. Built with modern technologies for
-									scalability and performance.
+								<p className="text-white/80 leading-relaxed">
+									An online music store and social network.
 								</p>
-								<div className="flex items-center justify-between">
-									<div className="flex -space-x-2">
-										<div className="w-8 h-8 rounded-full bg-[#232323] border-2 border-black flex items-center justify-center text-xs text-white font-light font-nunito">
-											R
-										</div>
-										<div className="w-8 h-8 rounded-full bg-[#3a3a3a] border-2 border-black flex items-center justify-center text-xs text-white font-light font-nunito">
-											N
-										</div>
-										<div className="w-8 h-8 rounded-full bg-[#4a4a4a] border-2 border-black flex items-center justify-center text-xs text-white font-light font-nunito">
-											L
-										</div>
-									</div>
-									<button className="text-[#232323] hover:text-white transition-colors font-light font-nunito">
-										View Case Study →
-									</button>
+							</div>
+							{/* Description End */}
+							{/* View Link Start */}
+							<div className="flex justify-center items-center mb-10">
+								<div>
+									<Link
+										target="_blank"
+										href="https://music.black.co.ke"
+										className="mt-20 p-1 px-5 rounded-3xl text-white bg-white/5 backdrop-blur-xl border border-white/10 hover:bg-white/10 transition-all duration-700 ease-out group">
+										Visit Black Music →
+									</Link>
 								</div>
 							</div>
+							{/* View Link End */}
 						</div>
+						{/* Black Music End */}
 
-						{/* Project 2 */}
-						<div className="group relative overflow-hidden rounded-3xl bg-white/90 backdrop-blur-xl border border-[#232323]/20 hover:border-[#232323]/50 transition-all duration-700 hover:scale-105">
-							<div className="aspect-video bg-gradient-to-br from-[#232323] to-[#1a1a1a] relative overflow-hidden">
-								<div className="absolute inset-0 bg-gradient-to-br from-[#232323]/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-								<div className="absolute inset-0 flex items-center justify-center">
-									<div className="w-24 h-24 rounded-2xl bg-white/10 flex items-center justify-center backdrop-blur-sm">
-										<svg
-											className="w-12 h-12 text-white"
-											fill="none"
-											viewBox="0 0 24 24"
-											stroke="currentColor">
-											<path
-												strokeLinecap="round"
-												strokeLinejoin="round"
-												strokeWidth={2}
-												d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"
-											/>
-										</svg>
-									</div>
-								</div>
+						{/* Black Pay Start */}
+						<div className="group relative overflow-hidden bg-gradient-to-br rounded-3xl from-[#232323] to-[#1a1a1a] backdrop-blur-xl border border-white/10 hover:border-white/20 transition-all duration-700 hover:scale-105">
+							<h3 className="text-center text-2xl font-light text-white mt-8 mb-6 font-nunito">
+								Black Pay
+							</h3>
+							<div className="flex justify-center px-5">
+								<Link
+									href="https://pay.black.co.ke"
+									className="relative block w-96">
+									<Img
+										src="/black-pay/android-chrome-512x512.png"
+										width={512}
+										height={512}
+										alt="Black Pay"
+										className="rounded-full p-5 hover:scale-110 transition-transform duration-500"
+										style={{ background: "rgba(0,111,62,1)" }}
+									/>
+								</Link>
 							</div>
 							<div className="p-8">
+								{/* Description Start */}
 								<div className="flex items-center gap-2 mb-4">
-									<span className="px-3 py-1 text-xs font-light bg-[#232323] text-white rounded-full">
-										Mobile
+									<span className="px-3 py-1 text-xs font-light bg-[rgba(0,111,62,1)] rounded-full text-white">
+										E-Commerce / Social Network
 									</span>
-									<span className="px-3 py-1 text-xs font-light bg-[#3a3a3a] text-white rounded-full">
-										Cross-Platform
+									<span className="px-3 py-1 text-xs font-light bg-[rgba(0,111,62,1)] rounded-full text-white">
+										Bootstrap
+									</span>
+									<span className="px-3 py-1 text-xs font-light bg-[rgba(0,111,62,1)] rounded-full text-white">
+										React
+									</span>
+									<span className="px-3 py-1 text-xs font-light bg-[rgba(0,111,62,1)] rounded-full text-white">
+										Laravel
+									</span>
+									<span className="px-3 py-1 text-xs font-light bg-[rgba(0,111,62,1)] rounded-full text-white">
+										MySQL
 									</span>
 								</div>
-								<h3 className="text-2xl font-light text-[#232323] mb-4 font-nunito">
-									Healthcare Management App
-								</h3>
-								<p className="text-gray-300 leading-relaxed mb-6">
-									Revolutionary healthcare management system with patient
-									portals, appointment scheduling, telemedicine integration, and
-									real-time health monitoring. HIPAA compliant and secure.
+								<p className="text-white/80 leading-relaxed">
+									A Payment Gateway and Parking payment system.
 								</p>
-								<div className="flex items-center justify-between">
-									<div className="flex -space-x-2">
-										<div className="w-8 h-8 rounded-full bg-[#232323] border-2 border-black flex items-center justify-center text-xs text-white font-light font-nunito">
-											RN
-										</div>
-										<div className="w-8 h-8 rounded-full bg-[#3a3a3a] border-2 border-black flex items-center justify-center text-xs text-white font-light font-nunito">
-											F
-										</div>
-										<div className="w-8 h-8 rounded-full bg-[#4a4a4a] border-2 border-black flex items-center justify-center text-xs text-white font-light font-nunito">
-											A
-										</div>
-									</div>
-									<button className="text-[#232323] hover:text-white transition-colors font-light font-nunito">
-										View Case Study →
-									</button>
+							</div>
+							{/* Description End */}
+							{/* View Link Start */}
+							<div className="flex justify-center items-center mb-10">
+								<div>
+									<Link
+										target="_blank"
+										href="https://pay.black.co.ke"
+										className="mt-20 p-1 px-5 rounded-3xl text-white bg-white/5 backdrop-blur-xl border border-white/10 hover:bg-white/10 transition-all duration-700 ease-out group">
+										Visit Black Pay →
+									</Link>
 								</div>
 							</div>
+							{/* View Link End */}
 						</div>
+						{/* Black Pay End */}
+
+						{/* Black Property Start */}
+						<div className="group relative overflow-hidden bg-gradient-to-br rounded-3xl from-[#232323] to-[#1a1a1a] backdrop-blur-xl border border-white/10 hover:border-white/20 transition-all duration-700 hover:scale-105">
+							<h3 className="text-center text-2xl font-light text-white mt-8 mb-6 font-nunito">
+								Black Property
+							</h3>
+							<div className="flex justify-center px-5">
+								<Link
+									href="https://property.black.co.ke"
+									className="relative block w-96">
+									<Img
+										src="/black-property/android-chrome-512x512.png"
+										width={512}
+										height={512}
+										alt="Black Property"
+										className="rounded-full p-5 hover:scale-110 transition-transform duration-500"
+										style={{ background: "rgba(0,123,255,1)" }}
+									/>
+								</Link>
+							</div>
+							<div className="p-8">
+								{/* Description Start */}
+								<div className="flex items-center gap-2 mb-4">
+									<span className="px-3 py-1 text-xs font-light bg-[rgba(0,123,255,1)] rounded-full">
+										E-Commerce / Social Network
+									</span>
+									<span className="px-3 py-1 text-xs font-light bg-[rgba(0,123,255,1)] rounded-full">
+										Bootstrap
+									</span>
+									<span className="px-3 py-1 text-xs font-light bg-[rgba(0,123,255,1)] rounded-full">
+										React
+									</span>
+									<span className="px-3 py-1 text-xs font-light bg-[rgba(0,123,255,1)] rounded-full">
+										Laravel
+									</span>
+									<span className="px-3 py-1 text-xs font-light bg-[rgba(0,123,255,1)] rounded-full">
+										MySQL
+									</span>
+								</div>
+								<p className="text-white/80 leading-relaxed">
+									A Property Management CRM.
+								</p>
+							</div>
+							{/* Description End */}
+							{/* View Link Start */}
+							<div className="flex justify-center items-center mb-10">
+								<div>
+									<Link
+										target="_blank"
+										href="https://property.black.co.ke"
+										className="mt-20 p-1 px-5 rounded-3xl text-white bg-white/5 backdrop-blur-xl border border-white/10 hover:bg-white/10 transition-all duration-700 ease-out group">
+										Visit Black Property →
+									</Link>
+								</div>
+							</div>
+							{/* View Link End */}
+						</div>
+						{/* Black Property End */}
+
+						{/* Black Photography Start */}
+						<div className="group relative overflow-hidden bg-gradient-to-br rounded-3xl from-[#232323] to-[#1a1a1a] backdrop-blur-xl border border-white/10 hover:border-white/20 transition-all duration-700 hover:scale-105">
+							<h3 className="text-center text-2xl font-light text-white mt-8 mb-6 font-nunito">
+								Black Photography
+							</h3>
+							<div className="flex justify-center px-5">
+								<Link
+									href="https://photography.black.co.ke"
+									className="relative block w-96">
+									<Img
+										src="/black-photography/android-chrome-512x512.png"
+										width={512}
+										height={512}
+										alt="Black Photography"
+										className="rounded-full p-5 hover:scale-110 transition-transform duration-500"
+										style={{ background: "rgba(255,255,255,1)" }}
+									/>
+								</Link>
+							</div>
+							<div className="p-8">
+								{/* Description Start */}
+								<div className="flex items-center gap-2 mb-4">
+									<span className="px-3 py-1 text-xs font-light bg-[rgba(255,255,255,1)] rounded-full">
+										E-Commerce / Social Network
+									</span>
+									<span className="px-3 py-1 text-xs font-light bg-[rgba(255,255,255,1)] rounded-full">
+										Bootstrap
+									</span>
+									<span className="px-3 py-1 text-xs font-light bg-[rgba(255,255,255,1)] rounded-full">
+										React
+									</span>
+									<span className="px-3 py-1 text-xs font-light bg-[rgba(255,255,255,1)] rounded-full">
+										Laravel
+									</span>
+									<span className="px-3 py-1 text-xs font-light bg-[rgba(255,255,255,1)] rounded-full">
+										MySQL
+									</span>
+								</div>
+								<p className="text-white/80 leading-relaxed">
+									A Landing page for a Photography Business.
+								</p>
+							</div>
+							{/* Description End */}
+							{/* View Link Start */}
+							<div className="flex justify-center items-center mb-10">
+								<div>
+									<Link
+										target="_blank"
+										href="https://photography.black.co.ke"
+										className="mt-20 p-1 px-5 rounded-3xl text-white bg-white/5 backdrop-blur-xl border border-white/10 hover:bg-white/10 transition-all duration-700 ease-out group">
+										Visit Black Photography →
+									</Link>
+								</div>
+							</div>
+							{/* View Link End */}
+						</div>
+						{/* Black Photography End */}
+
+						{/* Black Money Start */}
+						<div className="group relative overflow-hidden bg-gradient-to-br rounded-3xl from-[#232323] to-[#1a1a1a] backdrop-blur-xl border border-white/10 hover:border-white/20 transition-all duration-700 hover:scale-105">
+							<h3 className="text-center text-2xl font-light text-white mt-8 mb-6 font-nunito">
+								Black Money
+							</h3>
+							<div className="flex justify-center px-5">
+								<Link
+									href="https://money.black.co.ke"
+									className="relative block w-96">
+									<Img
+										src="/black-money/android-chrome-512x512.png"
+										width={512}
+										height={512}
+										alt="Black Money"
+										className="rounded-full p-5 hover:scale-110 transition-transform duration-500"
+										style={{ background: "rgba(255,255,255,1)" }}
+									/>
+								</Link>
+							</div>
+							<div className="p-8">
+								{/* Description Start */}
+								<div className="flex items-center gap-2 mb-4">
+									<span className="px-3 py-1 text-xs font-light bg-[rgba(255,255,255,1)] rounded-full">
+										E-Commerce / Social Network
+									</span>
+									<span className="px-3 py-1 text-xs font-light bg-[rgba(255,255,255,1)] rounded-full">
+										Bootstrap
+									</span>
+									<span className="px-3 py-1 text-xs font-light bg-[rgba(255,255,255,1)] rounded-full">
+										React
+									</span>
+									<span className="px-3 py-1 text-xs font-light bg-[rgba(255,255,255,1)] rounded-full">
+										Laravel
+									</span>
+									<span className="px-3 py-1 text-xs font-light bg-[rgba(255,255,255,1)] rounded-full">
+										MySQL
+									</span>
+								</div>
+								<p className="text-white/80 leading-relaxed">
+									A Money Management App.
+								</p>
+							</div>
+							{/* Description End */}
+							{/* View Link Start */}
+							<div className="flex justify-center items-center mb-10">
+								<div>
+									<Link
+										target="_blank"
+										href="https://money.black.co.ke"
+										className="mt-20 p-1 px-5 rounded-3xl text-white bg-white/5 backdrop-blur-xl border border-white/10 hover:bg-white/10 transition-all duration-700 ease-out group">
+										Visit Black Money →
+									</Link>
+								</div>
+							</div>
+							{/* View Link End */}
+						</div>
+						{/* Black Money End */}
 					</div>
 				</div>
 			</section>
@@ -658,10 +834,15 @@ const Home = () => {
 					<div className="grid grid-cols-1 md:grid-cols-4 gap-8">
 						<div className="md:col-span-2">
 							<div className="flex items-center space-x-4 mb-6">
-								<div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-white to-gray-300 flex items-center justify-center">
-									<span className="text-lg font-light text-[#232323] font-roboto">
-										BD
-									</span>
+								<div className="w-14 h-14 rounded-full bg-gradient-to-br from-white to-gray-300 flex items-center justify-center relative">
+									<Img
+										src="/black-developers/android-chrome-512x512.png"
+										width={512}
+										height={512}
+										alt="Black Developers"
+										className="rounded-full p-1 hover:scale-110 transition-transform duration-500"
+										style={{ background: "rgba(255,255,255,1)" }}
+									/>
 								</div>
 								<div>
 									<h3 className="text-2xl font-light text-white font-nunito">
