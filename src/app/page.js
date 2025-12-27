@@ -5,6 +5,9 @@ import Link from "next/link"
 import Img from "next/image"
 import ApplicationLogo from "@/components/ApplicationLogo"
 import { useState, useEffect } from "react"
+import PhoneSVG from "@/components/svgs/PhoneSVG"
+import WhatsAppSVG from "@/components/svgs/WhatsAppSVG"
+import EmailSVG from "@/components/svgs/EmailSVG"
 
 const Home = () => {
 	const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
@@ -73,9 +76,9 @@ const Home = () => {
 						</div>
 
 						{/* Logo standalone */}
-						<div className="relative transform hover:scale-110 transition-all duration-700 ease-out group cursor-pointer">
-							<div className="mx-auto w-80 h-20 flex items-center justify-center">
-								<div className="text-white opacity-90 group-hover:opacity-100 transition-opacity duration-500 text-3xl">
+						<div className="relative transform hover:scale-105 sm:hover:scale-110 transition-all duration-700 ease-out group cursor-pointer">
+							<div className="mx-auto w-48 sm:w-64 md:w-80 h-12 sm:h-16 md:h-20 flex items-center justify-center">
+								<div className="text-white opacity-90 group-hover:opacity-100 transition-opacity duration-500 text-md sm:text-2xl md:text-3xl">
 									<ApplicationLogo />
 								</div>
 							</div>
@@ -392,7 +395,7 @@ const Home = () => {
 				</div>
 			</section>
 
-			{/* Portfolio Section */}
+			{/* Portfolio Section Start */}
 			<section
 				id="portfolio"
 				className="py-32 bg-gradient-to-b from-purple-50/30 via-white to-blue-50/40 relative">
@@ -417,6 +420,498 @@ const Home = () => {
 						</p>
 					</div>
 					<div className="grid grid-cols-1 lg:grid-cols-4 gap-12">
+						{/* eCitizen Onboarding Start */}
+						<div className="group relative overflow-hidden bg-gradient-to-br rounded-3xl from-[#232323] to-[#1a1a1a] backdrop-blur-xl border border-white/10 hover:border-white/20 transition-all duration-700 hover:scale-105">
+							<h3 className="text-center text-2xl font-light text-white mt-8 mb-6 font-nunito">
+								eCitizen Onboarding
+							</h3>
+							<div className="flex justify-center px-5">
+								<Link
+									target="_blank"
+									href="https://onboarding.ecitizen.go.ke"
+									className="relative block w-96">
+									<Img
+										src="/ecitizen-onboarding/android-chrome-512x512.png"
+										width={512}
+										height={512}
+										placeholder="blur"
+										blurDataURL="/ecitizen-onboarding/android-chrome-512x512.png"
+										alt="eCitizen Onboarding"
+										className="rounded-full p-5 hover:scale-110 transition-transform duration-500"
+										style={{ background: "rgba(255,255,255,1)" }}
+									/>
+								</Link>
+							</div>
+							<div className="p-8">
+								{/* Description Start */}
+								<div className="flex items-center flex-wrap gap-2 mb-4">
+									<span className="px-3 py-1 text-xs font-light bg-[rgba(255,255,255,1)] rounded-full">
+										Government Services
+									</span>
+									<span className="px-3 py-1 text-xs font-light bg-[rgba(35,30,31,1)] border border-white  rounded-full text-white">
+										Bootstrap
+									</span>
+									<span className="px-3 py-1 text-xs font-light bg-[rgba(20,175,77,1)] rounded-full text-white">
+										Phoenix
+									</span>
+									<span className="px-3 py-1 text-xs font-light bg-[rgba(233,41,45,1)] rounded-full text-white">
+										Postgres
+									</span>
+								</div>
+								<p className="text-white/80 leading-relaxed">
+									eCitizen Digitization Onboarding Platform.
+								</p>
+							</div>
+							{/* Description End */}
+							{/* View Link Start */}
+							<div className="flex justify-center items-center mb-10">
+								<div>
+									<Link
+										target="_blank"
+										href="https://onboarding.ecitizen.go.ke"
+										className="mt-20 p-1 px-5 rounded-3xl text-white bg-white/5 backdrop-blur-xl border border-white/10 hover:bg-white/10 transition-all duration-700 ease-out group">
+										Visit eCitizen Onboarding →
+									</Link>
+								</div>
+							</div>
+							{/* View Link End */}
+						</div>
+						{/* eCitizen Onboarding End */}
+
+						{/* PaySoko Finance Start */}
+						<div className="group relative overflow-hidden bg-gradient-to-br rounded-3xl from-[#232323] to-[#1a1a1a] backdrop-blur-xl border border-white/10 hover:border-white/20 transition-all duration-700 hover:scale-105">
+							<h3 className="text-center text-2xl font-light text-white mt-8 mb-6 font-nunito">
+								PaySoko Finance
+							</h3>
+							<div className="flex justify-center px-5">
+								<Link
+									target="_blank"
+									href="https://demo.paysokofinance.comhttps://demo.paysokofinance.com"
+									className="relative block w-96">
+									<Img
+										src="/paysoko/android-chrome-512x512.png"
+										width={512}
+										height={512}
+										placeholder="blur"
+										blurDataURL="/paysoko/android-chrome-512x512.png"
+										alt="PaySoko Finance"
+										className="rounded-full p-5 hover:scale-110 transition-transform duration-500"
+										style={{ background: "rgba(255,255,255,1)" }}
+									/>
+								</Link>
+							</div>
+							<div className="p-8">
+								{/* Description Start */}
+								<div className="flex items-center flex-wrap gap-2 mb-4">
+									<span className="px-3 py-1 text-xs font-light bg-[rgba(255,255,255,1)] rounded-full">
+										Lending Management System
+									</span>
+									<span className="px-3 py-1 text-xs font-light bg-[rgba(5,75,234,1)] rounded-full text-white">
+										Bootstrap
+									</span>
+									<span className="px-3 py-1 text-xs font-light bg-[rgba(254,99,101,1)] rounded-full text-white">
+										Laravel
+									</span>
+									<span className="px-3 py-1 text-xs font-light bg-[rgba(254,99,101,1)] rounded-full">
+										MySQL
+									</span>
+								</div>
+								<p className="text-white/80 leading-relaxed">
+									Fintech firm delivering state-of-the-art Lending Management
+									Systems (LMS) for US-based Community Development Financial
+									Institutions (CDFIs), automating the full credit lifecycle
+									from origination to secure fund disbursement.
+								</p>
+							</div>
+							{/* Description End */}
+							{/* View Link Start */}
+							<div className="flex justify-center items-center mb-10">
+								<div>
+									<Link
+										target="_blank"
+										href="https://demo.paysokofinance.com"
+										className="mt-20 p-1 px-5 rounded-3xl text-white bg-white/5 backdrop-blur-xl border border-white/10 hover:bg-white/10 transition-all duration-700 ease-out group">
+										Visit PaySoko Finance →
+									</Link>
+								</div>
+							</div>
+							{/* View Link End */}
+						</div>
+						{/* PaySoko Finance End */}
+
+						{/* Amahoro Coalition Start */}
+						<div className="group relative overflow-hidden bg-gradient-to-br rounded-3xl from-[#232323] to-[#1a1a1a] backdrop-blur-xl border border-white/10 hover:border-white/20 transition-all duration-700 hover:scale-105">
+							<h3 className="text-center text-2xl font-light text-white mt-8 mb-6 font-nunito">
+								Amahoro Coalition
+							</h3>
+							<div className="flex justify-center px-5">
+								<Link
+									target="_blank"
+									href="https://mis.amahorocoalition.com"
+									className="relative block w-96">
+									<Img
+										src="/amahoro/android-chrome-512x512.png"
+										width={512}
+										height={512}
+										placeholder="blur"
+										blurDataURL="/amahoro/android-chrome-512x512.png"
+										alt="Amahoro Coalition"
+										className="rounded-full p-5 hover:scale-110 transition-transform duration-500"
+										style={{ background: "rgba(255,255,255,1)" }}
+									/>
+								</Link>
+							</div>
+							<div className="p-8">
+								{/* Description Start */}
+								<div className="flex items-center flex-wrap gap-2 mb-4">
+									<span className="px-3 py-1 text-xs font-light bg-[rgba(255,255,255,1)] rounded-full">
+										Management Information System
+									</span>
+									<span className="px-3 py-1 text-xs font-light bg-[rgba(31,27,133,1)] rounded-full text-white">
+										Bootstrap
+									</span>
+									<span className="px-3 py-1 text-xs font-light bg-[rgba(60,160,210,1)] rounded-full text-white">
+										Vue
+									</span>
+									<span className="px-3 py-1 text-xs font-light bg-[rgba(60,160,210,1)] rounded-full text-white">
+										Laravel
+									</span>
+									<span className="px-3 py-1 text-xs font-light bg-[rgba(60,160,210,1)] rounded-full text-white">
+										MySQL
+									</span>
+								</div>
+								<p className="text-white/80 leading-relaxed">
+									a high-complexity Management Information System (MIS) for the
+									Amahoro Coalition, an NGO focused on refugee inclusion,
+									designed to automate multi-country program tracking and impact
+									reporting.
+								</p>
+							</div>
+							{/* Description End */}
+							{/* View Link Start */}
+							<div className="flex justify-center items-center mb-10">
+								<div>
+									<Link
+										target="_blank"
+										href="https://mis.amahorocoalition.com"
+										className="mt-20 p-1 px-5 rounded-3xl text-white bg-white/5 backdrop-blur-xl border border-white/10 hover:bg-white/10 transition-all duration-700 ease-out group">
+										Visit Amahoro Coalition →
+									</Link>
+								</div>
+							</div>
+							{/* View Link End */}
+						</div>
+						{/* Amahoro Coalition End */}
+
+						{/* Nathan Digital Start */}
+						<div className="group relative overflow-hidden bg-gradient-to-br rounded-3xl from-[#232323] to-[#1a1a1a] backdrop-blur-xl border border-white/10 hover:border-white/20 transition-all duration-700 hover:scale-105">
+							<h3 className="text-center text-2xl font-light text-white mt-8 mb-6 font-nunito">
+								Nathan Digital
+							</h3>
+							<div className="flex justify-center px-5">
+								<Link
+									target="_blank"
+									href="https://ikea.nathanhr.com"
+									className="relative block w-96">
+									<Img
+										src="/nathan-digital/android-chrome-512x512.png"
+										width={512}
+										height={512}
+										placeholder="blur"
+										blurDataURL="/nathan-digital/android-chrome-512x512.png"
+										alt="Nathan Digital"
+										className="rounded-full p-5 hover:scale-110 transition-transform duration-500"
+										style={{ background: "rgba(36,145,199,1)" }}
+									/>
+								</Link>
+							</div>
+							<div className="p-8">
+								{/* Description Start */}
+								<div className="flex items-center flex-wrap gap-2 mb-4">
+									<span className="px-3 py-1 text-xs font-light bg-[rgba(255,255,255,1)] rounded-full">
+										ERP / HR Management System
+									</span>
+									<span className="px-3 py-1 text-xs font-light bg-[rgba(36,145,199,1)] rounded-full text-white">
+										Bootstrap
+									</span>
+									<span className="px-3 py-1 text-xs font-light bg-[rgba(36,145,199,1)] rounded-full text-white">
+										Nuxt
+									</span>
+									<span className="px-3 py-1 text-xs font-light bg-[rgba(36,145,199,1)] rounded-full text-white">
+										Express
+									</span>
+									<span className="px-3 py-1 text-xs font-light bg-[rgba(36,145,199,1)] rounded-full text-white">
+										MongoDB
+									</span>
+								</div>
+								<p className="text-white/80 leading-relaxed">
+									Human Resource Management System (HRMS) for UAE companies such
+									as IKEA, Hitachi, Chanel by Nathan Digital, the leading HR
+									solutions provider in UAE.
+								</p>
+							</div>
+							{/* Description End */}
+							{/* View Link Start */}
+							<div className="flex justify-center items-center mb-10">
+								<div>
+									<Link
+										target="_blank"
+										href="https://ikea.nathanhr.com"
+										className="mt-20 p-1 px-5 rounded-3xl text-white bg-white/5 backdrop-blur-xl border border-white/10 hover:bg-white/10 transition-all duration-700 ease-out group">
+										Visit Nathan Digital →
+									</Link>
+								</div>
+							</div>
+							{/* View Link End */}
+						</div>
+						{/* Nathan Digital End */}
+
+						{/* Bulk Agencies Start */}
+						<div className="group relative overflow-hidden bg-gradient-to-br rounded-3xl from-[#232323] to-[#1a1a1a] backdrop-blur-xl border border-white/10 hover:border-white/20 transition-all duration-700 hover:scale-105">
+							<h3 className="text-center text-2xl font-light text-white mt-8 mb-6 font-nunito">
+								Bulk Agencies
+							</h3>
+							<div className="flex justify-center px-5">
+								<Link
+									target="_blank"
+									href="https://www.bulkagencies.co.ke"
+									className="relative block w-96">
+									<Img
+										src="/bulk-agencies/android-chrome-512x512.png"
+										width={512}
+										height={512}
+										placeholder="blur"
+										blurDataURL="/bulk-agencies/android-chrome-512x512.png"
+										alt="Bulk Agencies"
+										className="rounded-full p-5 hover:scale-110 transition-transform duration-500"
+										style={{ background: "rgba(255,255,255, 1)" }}
+									/>
+								</Link>
+							</div>
+							<div className="p-8">
+								{/* Description Start */}
+								<div className="flex items-center flex-wrap gap-2 mb-4">
+									<span className="px-3 py-1 text-xs font-light bg-[rgba(255,255,255,1)] rounded-full">
+										CRM
+									</span>
+									<span className="px-3 py-1 text-xs font-light bg-[rgba(68,68,68,1)] rounded-full text-white">
+										Bootstrap
+									</span>
+									<span className="px-3 py-1 text-xs font-light bg-[rgba(68,68,68,1)] rounded-full text-white">
+										React
+									</span>
+									<span className="px-3 py-1 text-xs font-light bg-[rgba(68,68,68,1)] rounded-full text-white">
+										Laravel
+									</span>
+									<span className="px-3 py-1 text-xs font-light bg-[rgba(68,68,68,1)] rounded-full text-white">
+										MySQL
+									</span>
+								</div>
+								<p className="text-white/80 leading-relaxed">
+									A ERP for Bulk Agencies, a logistics company.
+								</p>
+							</div>
+							{/* Description End */}
+							{/* View Link Start */}
+							<div className="flex justify-center items-center mb-10">
+								<div>
+									<Link
+										target="_blank"
+										href="https://www.bulkagencies.co.ke"
+										className="mt-20 p-1 px-5 rounded-3xl text-white bg-white/5 backdrop-blur-xl border border-white/10 hover:bg-white/10 transition-all duration-700 ease-out group">
+										Visit Bulk Agencies →
+									</Link>
+								</div>
+							</div>
+							{/* View Link End */}
+						</div>
+						{/* Bulk Agencies End */}
+
+						{/* Marcus Miles Start */}
+						<div className="group relative overflow-hidden bg-gradient-to-br rounded-3xl from-[#232323] to-[#1a1a1a] backdrop-blur-xl border border-white/10 hover:border-white/20 transition-all duration-700 hover:scale-105">
+							<h3 className="text-center text-2xl font-light text-white mt-8 mb-6 font-nunito">
+								Marcus Miles
+							</h3>
+							<div className="flex justify-center px-5">
+								<Link
+									target="_blank"
+									href="https://admin.marcusmiles.co.ke/#/admin/dashboard"
+									className="relative block w-96">
+									<Img
+										src="/marcus-miles/android-chrome-512x512.png"
+										width={512}
+										height={512}
+										placeholder="blur"
+										blurDataURL="/marcus-miles/android-chrome-512x512.png"
+										alt="Marcus Miles"
+										className="rounded-full p-5 hover:scale-110 transition-transform duration-500"
+										style={{ background: "rgba(255,255,255,1)" }}
+									/>
+								</Link>
+							</div>
+							<div className="p-8">
+								{/* Description Start */}
+								<div className="flex items-center flex-wrap gap-2 mb-4">
+									<span className="px-3 py-1 text-xs font-light bg-[rgba(255,255,255,1)] rounded-full">
+										ERP
+									</span>
+									<span className="px-3 py-1 text-xs font-light bg-[rgba(0,0,0,1)] rounded-full text-white">
+										Bootstrap
+									</span>
+									<span className="px-3 py-1 text-xs font-light bg-[rgba(0,0,0,1)] rounded-full text-white">
+										React
+									</span>
+									<span className="px-3 py-1 text-xs font-light bg-[rgba(0,0,0,1)] rounded-full text-white">
+										Laravel
+									</span>
+									<span className="px-3 py-1 text-xs font-light bg-[rgba(0,0,0,1)] rounded-full text-white">
+										MySQL
+									</span>
+								</div>
+								<p className="text-white/80 leading-relaxed">
+									A ERP, CRM and HRMS for a construction and design consultancy
+									company.
+								</p>
+							</div>
+							{/* Description End */}
+							{/* View Link Start */}
+							<div className="flex justify-center items-center mb-10">
+								<div>
+									<Link
+										target="_blank"
+										href="https://admin.marcusmiles.co.ke/#/admin/dashboard"
+										className="mt-20 p-1 px-5 rounded-3xl text-white bg-white/5 backdrop-blur-xl border border-white/10 hover:bg-white/10 transition-all duration-700 ease-out group">
+										Visit Marcus Miles →
+									</Link>
+								</div>
+							</div>
+							{/* View Link End */}
+						</div>
+						{/* Marcus Miles End */}
+
+						{/* Online Uni Worldwide Start */}
+						<div className="group relative overflow-hidden bg-gradient-to-br rounded-3xl from-[#232323] to-[#1a1a1a] backdrop-blur-xl border border-white/10 hover:border-white/20 transition-all duration-700 hover:scale-105">
+							<h3 className="text-center text-2xl font-light text-white mt-8 mb-6 font-nunito">
+								Online Uni Worldwide
+							</h3>
+							<div className="flex justify-center px-5">
+								<Link
+									target="_blank"
+									href="https://www.onlineuniworldwide.com"
+									className="relative block w-96">
+									<Img
+										src="/online-uni-worldwide/android-chrome-512x512.png"
+										width={512}
+										height={512}
+										placeholder="blur"
+										blurDataURL="/online-uni-worldwide/android-chrome-512x512.png"
+										alt="Online Uni Worldwide"
+										className="rounded-full p-5 hover:scale-110 transition-transform duration-500"
+										style={{ background: "rgba(255,255,255,1)" }}
+									/>
+								</Link>
+							</div>
+							<div className="p-8">
+								{/* Description Start */}
+								<div className="flex items-center flex-wrap gap-2 mb-4">
+									<span className="px-3 py-1 text-xs font-light bg-[rgba(255,255,255,1)] rounded-full">
+										LMS
+									</span>
+									<span className="px-3 py-1 text-xs font-light bg-[rgba(0,0,0,1)] rounded-full text-white">
+										Bootstrap
+									</span>
+									<span className="px-3 py-1 text-xs font-light bg-[rgba(63,163,213,1)] rounded-full text-white">
+										React
+									</span>
+									<span className="px-3 py-1 text-xs font-light bg-[rgba(63,163,213,1)] rounded-full text-white">
+										Laravel
+									</span>
+									<span className="px-3 py-1 text-xs font-light bg-[rgba(63,163,213,1)] rounded-full text-white">
+										MySQL
+									</span>
+								</div>
+								<p className="text-white/80 leading-relaxed">
+									A Learning Management System for Online Uni Worldwide an
+									online university.
+								</p>
+							</div>
+							{/* Description End */}
+							{/* View Link Start */}
+							<div className="flex justify-center items-center mb-10">
+								<div>
+									<Link
+										target="_blank"
+										href="https://www.onlineuniworldwide.com"
+										className="mt-20 p-1 px-5 rounded-3xl text-white bg-white/5 backdrop-blur-xl border border-white/10 hover:bg-white/10 transition-all duration-700 ease-out group">
+										Visit Online Uni Worldwide →
+									</Link>
+								</div>
+							</div>
+							{/* View Link End */}
+						</div>
+						{/* Online Uni Worldwide End */}
+
+						{/* The Public Home Start */}
+						<div className="group relative overflow-hidden bg-gradient-to-br rounded-3xl from-[#232323] to-[#1a1a1a] backdrop-blur-xl border border-white/10 hover:border-white/20 transition-all duration-700 hover:scale-105">
+							<h3 className="text-center text-2xl font-light text-white mt-8 mb-6 font-nunito">
+								The Public Home
+							</h3>
+							<div className="flex justify-center px-5">
+								<Link
+									target="_blank"
+									href="https://www.thepublichome.com"
+									className="relative block w-96">
+									<Img
+										src="/the-public-home/android-chrome-512x512.png"
+										width={512}
+										height={512}
+										placeholder="blur"
+										blurDataURL="/the-public-home/android-chrome-512x512.png"
+										alt="The Public Home"
+										className="rounded-full p-5 hover:scale-110 transition-transform duration-500"
+										style={{ background: "rgba(37,37,37,1)" }}
+									/>
+								</Link>
+							</div>
+							<div className="p-8">
+								{/* Description Start */}
+								<div className="flex items-center flex-wrap gap-2 mb-4">
+									<span className="px-3 py-1 text-xs font-light bg-[rgba(255,255,255,1)] rounded-full">
+										E-Commerce / Social Network
+									</span>
+									<span className="px-3 py-1 text-xs font-light bg-[rgba(37,37,37,1)] rounded-full text-white">
+										Bootstrap
+									</span>
+									<span className="px-3 py-1 text-xs font-light bg-[rgba(184,173,129,1)] rounded-full text-white">
+										React
+									</span>
+									<span className="px-3 py-1 text-xs font-light bg-[rgba(184,173,129,1)] rounded-full">
+										Laravel
+									</span>
+									<span className="px-3 py-1 text-xs font-light bg-[rgba(184,173,129,1)] rounded-full">
+										MySQL
+									</span>
+								</div>
+								<p className="text-white/80 leading-relaxed">
+									An online music store and social network.
+								</p>
+							</div>
+							{/* Description End */}
+							{/* View Link Start */}
+							<div className="flex justify-center items-center mb-10">
+								<div>
+									<Link
+										target="_blank"
+										href="https://www.thepublichome.com"
+										className="mt-20 p-1 px-5 rounded-3xl text-white bg-white/5 backdrop-blur-xl border border-white/10 hover:bg-white/10 transition-all duration-700 ease-out group">
+										Visit The Public Home →
+									</Link>
+								</div>
+							</div>
+							{/* View Link End */}
+						</div>
+						{/* The Public Home End */}
+
 						{/* Black Music Start */}
 						<div className="group relative overflow-hidden bg-gradient-to-br rounded-3xl from-[#232323] to-[#1a1a1a] backdrop-blur-xl border border-white/10 hover:border-white/20 transition-all duration-700 hover:scale-105">
 							<h3 className="text-center text-2xl font-light text-white mt-8 mb-6 font-nunito">
@@ -424,12 +919,15 @@ const Home = () => {
 							</h3>
 							<div className="flex justify-center px-5">
 								<Link
+									target="_blank"
 									href="https://music.black.co.ke"
 									className="relative block w-96">
 									<Img
 										src="/black-music/android-chrome-512x512.png"
 										width={512}
 										height={512}
+										placeholder="blur"
+										blurDataURL="/black-music/android-chrome-512x512.png"
 										alt="Black Music"
 										className="rounded-full p-5 hover:scale-110 transition-transform duration-500"
 										style={{ background: "rgba(255, 215, 0, 1)" }}
@@ -438,7 +936,7 @@ const Home = () => {
 							</div>
 							<div className="p-8">
 								{/* Description Start */}
-								<div className="flex items-center gap-2 mb-4">
+								<div className="flex items-center flex-wrap gap-2 mb-4">
 									<span className="px-3 py-1 text-xs font-light bg-[rgba(255,215,0,1)] rounded-full">
 										E-Commerce / Social Network
 									</span>
@@ -482,12 +980,15 @@ const Home = () => {
 							</h3>
 							<div className="flex justify-center px-5">
 								<Link
+									target="_blank"
 									href="https://pay.black.co.ke"
 									className="relative block w-96">
 									<Img
 										src="/black-pay/android-chrome-512x512.png"
 										width={512}
 										height={512}
+										placeholder="blur"
+										blurDataURL="/black-pay/android-chrome-512x512.png"
 										alt="Black Pay"
 										className="rounded-full p-5 hover:scale-110 transition-transform duration-500"
 										style={{ background: "rgba(0,111,62,1)" }}
@@ -496,7 +997,7 @@ const Home = () => {
 							</div>
 							<div className="p-8">
 								{/* Description Start */}
-								<div className="flex items-center gap-2 mb-4">
+								<div className="flex items-center flex-wrap gap-2 mb-4">
 									<span className="px-3 py-1 text-xs font-light bg-[rgba(0,111,62,1)] rounded-full text-white">
 										E-Commerce / Social Network
 									</span>
@@ -540,12 +1041,15 @@ const Home = () => {
 							</h3>
 							<div className="flex justify-center px-5">
 								<Link
+									target="_blank"
 									href="https://property.black.co.ke"
 									className="relative block w-96">
 									<Img
 										src="/black-property/android-chrome-512x512.png"
 										width={512}
 										height={512}
+										placeholder="blur"
+										blurDataURL="/black-property/android-chrome-512x512.png"
 										alt="Black Property"
 										className="rounded-full p-5 hover:scale-110 transition-transform duration-500"
 										style={{ background: "rgba(0,123,255,1)" }}
@@ -554,7 +1058,7 @@ const Home = () => {
 							</div>
 							<div className="p-8">
 								{/* Description Start */}
-								<div className="flex items-center gap-2 mb-4">
+								<div className="flex items-center flex-wrap gap-2 mb-4">
 									<span className="px-3 py-1 text-xs font-light bg-[rgba(0,123,255,1)] rounded-full">
 										E-Commerce / Social Network
 									</span>
@@ -598,12 +1102,15 @@ const Home = () => {
 							</h3>
 							<div className="flex justify-center px-5">
 								<Link
+									target="_blank"
 									href="https://photography.black.co.ke"
 									className="relative block w-96">
 									<Img
 										src="/black-photography/android-chrome-512x512.png"
 										width={512}
 										height={512}
+										placeholder="blur"
+										blurDataURL="/black-photography/android-chrome-512x512.png"
 										alt="Black Photography"
 										className="rounded-full p-5 hover:scale-110 transition-transform duration-500"
 										style={{ background: "rgba(255,255,255,1)" }}
@@ -612,7 +1119,7 @@ const Home = () => {
 							</div>
 							<div className="p-8">
 								{/* Description Start */}
-								<div className="flex items-center gap-2 mb-4">
+								<div className="flex items-center flex-wrap gap-2 mb-4">
 									<span className="px-3 py-1 text-xs font-light bg-[rgba(255,255,255,1)] rounded-full">
 										E-Commerce / Social Network
 									</span>
@@ -656,12 +1163,15 @@ const Home = () => {
 							</h3>
 							<div className="flex justify-center px-5">
 								<Link
+									target="_blank"
 									href="https://money.black.co.ke"
 									className="relative block w-96">
 									<Img
 										src="/black-money/android-chrome-512x512.png"
 										width={512}
 										height={512}
+										placeholder="blur"
+										blurDataURL="/black-money/android-chrome-512x512.png"
 										alt="Black Money"
 										className="rounded-full p-5 hover:scale-110 transition-transform duration-500"
 										style={{ background: "rgba(255,255,255,1)" }}
@@ -670,7 +1180,7 @@ const Home = () => {
 							</div>
 							<div className="p-8">
 								{/* Description Start */}
-								<div className="flex items-center gap-2 mb-4">
+								<div className="flex items-center flex-wrap gap-2 mb-4">
 									<span className="px-3 py-1 text-xs font-light bg-[rgba(255,255,255,1)] rounded-full">
 										E-Commerce / Social Network
 									</span>
@@ -709,6 +1219,7 @@ const Home = () => {
 					</div>
 				</div>
 			</section>
+			{/* Portfolio Section End */}
 
 			{/* Contact Section */}
 			<section
@@ -728,57 +1239,100 @@ const Home = () => {
 						</p>
 					</div>
 
-					<div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+					<div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-stretch">
 						{/* Contact Info */}
 						<div className="space-y-8">
-							<div className="group p-8 rounded-3xl bg-white/5 backdrop-blur-xl border border-white/10 hover:bg-white/10 transition-all duration-500">
-								<div className="flex items-center space-x-4 mb-4">
-									<div className="w-12 h-12 rounded-2xl bg-[#232323] flex items-center justify-center">
-										<svg
-											className="w-6 h-6 text-white"
-											fill="none"
-											viewBox="0 0 24 24"
-											stroke="currentColor">
-											<path
-												strokeLinecap="round"
-												strokeLinejoin="round"
-												strokeWidth={2}
-												d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
-											/>
-										</svg>
-									</div>
-									<div>
-										<h3 className="text-lg font-light font-nunito text-white">
-											Email Us
-										</h3>
-										<p className="text-gray-400">alphaxardgacuuru@gmail.com</p>
+							{/* Phone Start */}
+							<Link
+								href="tel:0700364446"
+								className="block">
+								<div className="group p-8 rounded-3xl bg-white/5 backdrop-blur-xl border border-white/10 hover:bg-white/10 transition-all duration-500">
+									<div className="flex items-center space-x-4 mb-4">
+										<div className="w-12 h-12 rounded-2xl bg-[#232323] flex items-center justify-center text-white">
+											<PhoneSVG />
+										</div>
+										<div>
+											<h3 className="text-lg font-light font-nunito text-white">
+												Phone Us
+											</h3>
+											<p className="text-gray-400">al@black.co.ke</p>
+										</div>
 									</div>
 								</div>
-							</div>
+							</Link>
+							{/* Phone End */}
 
-							<div className="group p-8 rounded-3xl bg-white/5 backdrop-blur-xl border border-white/10 hover:bg-white/10 transition-all duration-500">
-								<div className="flex items-center space-x-4 mb-4">
-									<div className="w-12 h-12 rounded-2xl bg-[#232323] flex items-center justify-center">
-										<svg
-											className="w-6 h-6 text-white"
-											fill="currentColor"
-											viewBox="0 0 24 24">
-											<path
-												fillRule="evenodd"
-												d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"
-												clipRule="evenodd"></path>
-										</svg>
-									</div>
-									<div>
-										<h3 className="text-lg font-light font-nunito text-white">
-											GitHub
-										</h3>
-										<p className="text-gray-400">@AlphaxardGacuuru</p>
+							{/* WhatsApp Start */}
+							<Link
+								href="https://wa.me/+2540700364446"
+								className="block">
+								<div className="group p-8 rounded-3xl bg-white/5 backdrop-blur-xl border border-white/10 hover:bg-white/10 transition-all duration-500">
+									<div className="flex items-center space-x-4 mb-4">
+										<div className="w-12 h-12 rounded-2xl bg-[#232323] flex items-center justify-center text-white">
+											<WhatsAppSVG />
+										</div>
+										<div>
+											<h3 className="text-lg font-light font-nunito text-white">
+												WhatsApp Us
+											</h3>
+											<p className="text-gray-400">al@black.co.ke</p>
+										</div>
 									</div>
 								</div>
-							</div>
+							</Link>
+							{/* WhatsApp End */}
 
-							<div className="group p-8 rounded-3xl bg-white/5 backdrop-blur-xl border border-white/10 hover:bg-white/10 transition-all duration-500">
+							{/* Email Start */}
+							<Link
+								href="mailto:al@black.co.ke?subject=Property Management System&body=Enquiry"
+								className="block">
+								<div className="group p-8 rounded-3xl bg-white/5 backdrop-blur-xl border border-white/10 hover:bg-white/10 transition-all duration-500">
+									<div className="flex items-center space-x-4 mb-4">
+										<div className="w-12 h-12 rounded-2xl bg-[#232323] flex items-center justify-center text-white">
+											<EmailSVG />
+										</div>
+										<div>
+											<h3 className="text-lg font-light font-nunito text-white">
+												Email Us
+											</h3>
+											<p className="text-gray-400">al@black.co.ke</p>
+										</div>
+									</div>
+								</div>
+							</Link>
+							{/* Email End */}
+
+							{/* GitHub Start */}
+							<Link
+								href="https://github.com/AlphaxardGacuuru"
+								target="_blank"
+								className="block">
+								<div className="group p-8 rounded-3xl bg-white/5 backdrop-blur-xl border border-white/10 hover:bg-white/10 transition-all duration-500">
+									<div className="flex items-center space-x-4 mb-4">
+										<div className="w-12 h-12 rounded-2xl bg-[#232323] flex items-center justify-center">
+											<svg
+												className="w-6 h-6 text-white"
+												fill="currentColor"
+												viewBox="0 0 24 24">
+												<path
+													fillRule="evenodd"
+													d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"
+													clipRule="evenodd"></path>
+											</svg>
+										</div>
+										<div>
+											<h3 className="text-lg font-light font-nunito text-white">
+												GitHub
+											</h3>
+											<p className="text-gray-400">@AlphaxardGacuuru</p>
+										</div>
+									</div>
+								</div>
+							</Link>
+							{/* GitHub End */}
+
+							{/* Linked In Start */}
+							{/* <div className="group p-8 rounded-3xl bg-white/5 backdrop-blur-xl border border-white/10 hover:bg-white/10 transition-all duration-500">
 								<div className="flex items-center space-x-4 mb-4">
 									<div className="w-12 h-12 rounded-2xl bg-[#232323] flex items-center justify-center">
 										<svg
@@ -795,13 +1349,14 @@ const Home = () => {
 										<p className="text-gray-400">Connect with us</p>
 									</div>
 								</div>
-							</div>
+							</div> */}
+							{/* Linked In End */}
 						</div>
 
 						{/* CTA Card */}
 						<div className="relative">
 							<div className="absolute inset-0 bg-gradient-to-br from-[#232323] to-[#1a1a1a] rounded-3xl transform rotate-3" />
-							<div className="relative p-12 rounded-3xl bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-xl border border-white/20">
+							<div className="relative h-full flex flex-col justify-center p-12 rounded-3xl bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-xl border border-white/20">
 								<h3 className="text-3xl font-light font-nunito text-white mb-6">
 									Ready to Start?
 								</h3>
@@ -812,6 +1367,7 @@ const Home = () => {
 								</p>
 								<div className="space-y-4">
 									<Link
+										target="_blank"
 										href="mailto:alphaxardgacuuru@gmail.com"
 										className="block w-full px-8 py-4 bg-white text-[#232323] rounded-2xl font-light font-nunito text-center hover:bg-gray-100 transition-colors text-lg">
 										Start Your Project
@@ -839,6 +1395,8 @@ const Home = () => {
 										src="/black-developers/android-chrome-512x512.png"
 										width={512}
 										height={512}
+										placeholder="blur"
+										blurDataURL="/black-developers/android-chrome-512x512.png"
 										alt="Black Developers"
 										className="rounded-full p-1 hover:scale-110 transition-transform duration-500"
 										style={{ background: "rgba(255,255,255,1)" }}
@@ -901,30 +1459,30 @@ const Home = () => {
 							<ul className="space-y-2 text-gray-400">
 								<li>
 									<a
-										href="#"
+										href="tel:0700364446"
 										className="hover:text-white transition-colors">
-										GitHub
+										Phone
 									</a>
 								</li>
 								<li>
 									<a
-										href="#"
+										href="https://wa.me/+2540700364446"
 										className="hover:text-white transition-colors">
-										LinkedIn
+										WhatsApp
 									</a>
 								</li>
 								<li>
 									<a
-										href="#"
-										className="hover:text-white transition-colors">
-										Twitter
-									</a>
-								</li>
-								<li>
-									<a
-										href="#"
+										href="mailto:al@black.co.ke?subject=Property Management System&body=Enquiry"
 										className="hover:text-white transition-colors">
 										Email
+									</a>
+								</li>
+								<li>
+									<a
+										href="https://github.com/AlphaxardGacuuru"
+										className="hover:text-white transition-colors">
+										GitHub
 									</a>
 								</li>
 							</ul>
