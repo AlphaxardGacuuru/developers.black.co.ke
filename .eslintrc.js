@@ -41,6 +41,7 @@ module.exports = {
         // 'react/self-closing-comp': 1,
         'react/jsx-filename-extension': [1, { extensions: ['.js', 'jsx'] }],
         'react/prop-types': 0,
+        'react/display-name': 0,
         'react/destructuring-assignment': 0,
         'react/jsx-no-comment-textnodes': 0,
         'react/jsx-props-no-spreading': 0,
