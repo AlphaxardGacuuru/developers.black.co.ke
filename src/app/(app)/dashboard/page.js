@@ -1,7 +1,7 @@
 import Header from '@/app/(app)/Header'
 
 export const metadata = {
-    title: 'Laravel - Dashboard',
+	title: `${process.env.NEXT_PUBLIC_APP_NAME || "Black Developers"} - Dashboard`,
 }
 
 const Dashboard = () => {

@@ -5,9 +5,9 @@ import Link from "next/link"
 import Img from "next/image"
 import ApplicationLogo from "@/components/ApplicationLogo"
 import { useState, useEffect } from "react"
-import PhoneSVG from "@/components/svgs/PhoneSVG"
-import WhatsAppSVG from "@/components/svgs/WhatsAppSVG"
-import EmailSVG from "@/components/svgs/EmailSVG"
+import PhoneSVG from "@/svgs/PhoneSVG"
+import WhatsAppSVG from "@/svgs/WhatsAppSVG"
+import EmailSVG from "@/svgs/EmailSVG"
 
 const Home = () => {
 	const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })

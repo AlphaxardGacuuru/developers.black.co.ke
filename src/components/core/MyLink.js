@@ -1,18 +1,10 @@
-import { Link, useLocation } from "react-router-dom/cjs/react-router-dom.min"
+import Link from "next/link"
 
 const MyLink = ({ linkTo, text, icon, className }) => {
-	const location = useLocation()
-
 	return (
 		<Link
-			to={`${
-				location.pathname.match("/admin/")
-					? "/admin"
-					: location.pathname.match("/tenant/")
-						? "/tenant"
-						: "/super"
-			}${linkTo}`}
-			className={`btn mysonar-btn ${className}`}>
+			href={linkTo}
+			className={`ml-4 mt-20 p-1 px-5 rounded-3xl text-white bg-white/5 backdrop-blur-xl border border-white/10 hover:bg-white/10 transition-all duration-700 ease-out group ${className}`}>
 			<span>{icon}</span>
 			{text && <span className="mx-1">{text}</span>}
 		</Link>
