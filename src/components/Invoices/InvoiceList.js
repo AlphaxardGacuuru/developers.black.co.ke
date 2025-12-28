@@ -259,7 +259,7 @@ const InvoiceList = (props) => {
 			{/* Confirm Invoice Modal End */}
 
 			{/* Data */}
-			<div className="bg-white shadow-sm rounded mb-2 p-2">
+			<div className="bg-white/10 backdrop-blur-xl border border-white/20 shadow-sm rounded-3xl mb-2 p-2 hover:bg-white/15 transition-all duration-500">
 				{/* Total */}
 				<div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
 					{/* Total */}
@@ -321,48 +321,64 @@ const InvoiceList = (props) => {
 			<br />
 
 			{/* Filters */}
-			<div className="bg-white shadow-sm rounded px-4 pt-4 pb-3 mb-2">
+			<div className="bg-white/10 backdrop-blur-xl border border-white/20 shadow-sm rounded-3xl px-4 pt-4 pb-3 mb-2 hover:bg-white/15 transition-all duration-500">
 				<div className="flex flex-wrap gap-2">
 					{/* Code */}
 					<div className="flex-grow min-w-0 mb-2">
-						<label htmlFor="name">Code</label>
+						<label
+							htmlFor="name"
+							className="text-white">
+							Code
+						</label>
 						<input
 							type="text"
 							placeholder="Search by Code"
-							className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:border-blue-500"
+							className="w-full px-3 py-2 bg-white/10 border border-white/30 rounded text-white placeholder-white/50 focus:outline-none focus:border-white/60 focus:bg-white/20 transition-all"
 							onChange={(e) => props.setNumber(e.target.value)}
 						/>
 					</div>
 					{/* Code End */}
 					{/* Tenant */}
 					<div className="flex-grow min-w-0 mb-2">
-						<label htmlFor="name">Tenant</label>
+						<label
+							htmlFor="name"
+							className="text-white">
+							Tenant
+						</label>
 						<input
 							type="text"
 							placeholder="Search by Tenant"
-							className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:border-blue-500"
+							className="w-full px-3 py-2 bg-white/10 border border-white/30 rounded text-white placeholder-white/50 focus:outline-none focus:border-white/60 focus:bg-white/20 transition-all"
 							onChange={(e) => props.setTenant(e.target.value)}
 						/>
 					</div>
 					{/* Tenant End */}
 					{/* Unit */}
 					<div className="flex-grow min-w-0 mb-2">
-						<label htmlFor="name">Unit</label>
+						<label
+							htmlFor="name"
+							className="text-white">
+							Unit
+						</label>
 						<input
 							type="text"
 							placeholder="Search by Unit"
-							className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:border-blue-500"
+							className="w-full px-3 py-2 bg-white/10 border border-white/30 rounded text-white placeholder-white/50 focus:outline-none focus:border-white/60 focus:bg-white/20 transition-all"
 							onChange={(e) => props.setUnit(e.target.value)}
 						/>
 					</div>
 					{/* Unit End */}
 					{/* Type */}
 					<div className="flex-grow min-w-0 mb-2">
-						<label htmlFor="name">Type</label>
+						<label
+							htmlFor="name"
+							className="text-white">
+							Type
+						</label>
 						<select
 							type="text"
 							name="type"
-							className="w-full px-3 py-2 border border-gray-300 rounded capitalize focus:outline-none focus:border-blue-500"
+							className="w-full px-3 py-2 bg-white/10 border border-white/30 rounded capitalize text-white focus:outline-none focus:border-white/60 focus:bg-white/20 transition-all"
 							onChange={(e) => props.setType(e.target.value)}
 							required={true}>
 							{[
@@ -382,11 +398,15 @@ const InvoiceList = (props) => {
 					{/* Type End */}
 					{/* Status */}
 					<div className="flex-grow min-w-0 mb-2">
-						<label htmlFor="name">Status</label>
+						<label
+							htmlFor="name"
+							className="text-white">
+							Status
+						</label>
 						<select
 							type="text"
 							name="status"
-							className="w-full px-3 py-2 border border-gray-300 rounded capitalize focus:outline-none focus:border-blue-500"
+							className="w-full px-3 py-2 bg-white/10 border border-white/30 rounded capitalize text-white focus:outline-none focus:border-white/60 focus:bg-white/20 transition-all"
 							onChange={(e) => props.setStatus(e.target.value)}
 							required={true}>
 							{[
@@ -408,15 +428,19 @@ const InvoiceList = (props) => {
 				</div>
 			</div>
 
-			<div className="bg-white shadow-sm rounded py-2 px-4">
+			<div className="bg-white/10 backdrop-blur-xl border border-white/20 shadow-sm rounded-3xl py-2 px-4 hover:bg-white/15 transition-all duration-500">
 				<div className="flex justify-end flex-wrap">
 					<div className="flex flex-grow gap-2">
 						{/* Start Date */}
 						<div className="flex-grow mb-2">
-							<label htmlFor="">Start At</label>
+							<label
+								htmlFor=""
+								className="text-white">
+								Start At
+							</label>
 							{/* Start Month */}
 							<select
-								className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:border-blue-500"
+								className="w-full px-3 py-2 bg-white/10 border border-white/30 rounded text-white focus:outline-none focus:border-white/60 focus:bg-white/20 transition-all"
 								onChange={(e) => props.setStartMonth(e.target.value)}>
 								{props.months.map((month, key) => (
 									<option
@@ -436,7 +460,7 @@ const InvoiceList = (props) => {
 								Start At
 							</label>
 							<select
-								className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:border-blue-500"
+								className="w-full px-3 py-2 bg-white/10 border border-white/30 rounded text-white focus:outline-none focus:border-white/60 focus:bg-white/20 transition-all"
 								onChange={(e) => props.setStartYear(e.target.value)}>
 								<option value="">Select Year</option>
 								{props.years.map((year, key) => (
@@ -455,9 +479,13 @@ const InvoiceList = (props) => {
 					<div className="flex flex-grow gap-2">
 						{/* End Month */}
 						<div className="flex-grow mb-2">
-							<label htmlFor="">End At</label>
+							<label
+								htmlFor=""
+								className="text-white">
+								End At
+							</label>
 							<select
-								className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:border-blue-500"
+								className="w-full px-3 py-2 bg-white/10 border border-white/30 rounded text-white focus:outline-none focus:border-white/60 focus:bg-white/20 transition-all"
 								onChange={(e) => props.setEndMonth(e.target.value)}>
 								{props.months.map((month, key) => (
 									<option
@@ -477,7 +505,7 @@ const InvoiceList = (props) => {
 								End At
 							</label>
 							<select
-								className="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:border-blue-500"
+								className="w-full px-3 py-2 bg-white/10 border border-white/30 rounded text-white focus:outline-none focus:border-white/60 focus:bg-white/20 transition-all"
 								onChange={(e) => props.setStartYear(e.target.value)}>
 								<option value="">Select Year</option>
 								{props.years.map((year, key) => (
@@ -499,8 +527,8 @@ const InvoiceList = (props) => {
 			<br />
 
 			{/* Table */}
-			<div className="overflow-x-auto mb-5">
-				<table className="min-w-full table-auto hover:bg-gray-50">
+			<div className="overflow-x-auto mb-5 bg-white/10 backdrop-blur-xl border border-white/20 rounded-3xl">
+				<table className="min-w-full table-auto text-white">
 					<thead>
 						<tr>
 							<th colSpan="8"></th>
@@ -559,7 +587,7 @@ const InvoiceList = (props) => {
 							{props.invoices.data?.map((invoice, key) => (
 								<tr
 									key={key}
-									className="hover:bg-gray-100">
+									className="hover:bg-white/10 transition-all border-b border-white/10">
 									<td className="px-4 py-2">
 										<input
 											type="checkbox"

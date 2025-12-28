@@ -1,14 +1,21 @@
 import React from "react"
+import Image from "next/image"
 
 const NoData = () => {
 	return (
-		<div className="bg-white text-center w-100 py-5">
-			<img
-				src="/img/no-data-found.jpg"
-				alt="No entries found"
-				style={{ width: "30%", height: "auto" }}
-			/>
-			<h5 className="opacity-50">We didn't find anything</h5>
+		<div className="bg-white/5 border border-white/10 rounded-3xl text-center w-full py-8">
+			<div className="flex justify-center">
+				<Image
+					src="/img/no-data-found.jpg"
+					alt="No entries found"
+					width={400}
+					height={300}
+					className="w-[30%] h-auto opacity-50"
+				/>
+			</div>
+			<h5 className="text-white/50 text-lg font-medium mt-4">
+				We didn't find anything
+			</h5>
 		</div>
 	)
 }

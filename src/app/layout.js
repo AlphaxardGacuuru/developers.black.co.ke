@@ -22,7 +22,7 @@ const RootLayout = ({ children }) => {
 		<html
 			lang="en"
 			className={`${nunitoFont.className} ${robotoFont.variable}`}>
-			<body className="antialiased font-light">
+			<body className="antialiased font-light bg-gradient-to-br from-[#000000] via-[#1a1a1a] to-[#232323] min-h-screen">
 				<AppProvider>
 					<AppContextInjector>{children}</AppContextInjector>
 				</AppProvider>

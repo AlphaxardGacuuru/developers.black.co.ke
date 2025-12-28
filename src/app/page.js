@@ -32,7 +32,7 @@ const Home = () => {
 	}, [])
 
 	return (
-		<div className="min-h-screen bg-gradient-to-br from-[#000000] via-[#1a1a1a] to-[#232323] overflow-x-hidden relative">
+		<div className="min-h-screen overflow-x-hidden relative">
 			<LoginLinks />
 
 			{/* Animated background gradients */}

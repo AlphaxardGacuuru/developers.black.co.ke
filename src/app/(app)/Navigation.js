@@ -17,15 +17,16 @@ const Navigation = ({ user }) => {
 	const [open, setOpen] = useState(false)
 
 	return (
-		<nav className="bg-white border-b border-gray-100">
-			{/* Primary Navigation Menu */}
+		<nav className="bg-white/5 backdrop-blur-xl border-b border-white/10 relative z-50">
 			<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 				<div className="flex justify-between h-16">
 					<div className="flex">
 						{/* Logo */}
 						<div className="flex-shrink-0 flex items-center">
 							<Link href="/">
-								<ApplicationLogo className="block h-10 w-auto fill-current text-gray-600" />
+								<div className="text-white opacity-90 hover:opacity-100 transition-opacity duration-500">
+									<ApplicationLogo className="block h-10 w-auto fill-current" />
+								</div>
 							</Link>
 						</div>
 
@@ -63,7 +64,7 @@ const Navigation = ({ user }) => {
 							align="right"
 							width="48"
 							trigger={
-								<button className="flex items-center text-sm font-medium text-gray-500 hover:text-gray-700 focus:outline-none transition duration-150 ease-in-out">
+								<button className="flex items-center text-sm font-medium text-white hover:text-white/80 focus:outline-none transition duration-150 ease-in-out">
 									<div>{user?.name}</div>
 
 									<div className="ml-1">
@@ -80,7 +81,7 @@ const Navigation = ({ user }) => {
 					<div className="-mr-2 flex items-center sm:hidden">
 						<button
 							onClick={() => setOpen((open) => !open)}
-							className="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 focus:text-gray-500 transition duration-150 ease-in-out">
+							className="inline-flex items-center justify-center p-2 rounded-md text-white/80 hover:text-white hover:bg-white/10 focus:outline-none focus:bg-white/10 focus:text-white transition duration-150 ease-in-out">
 							<svg
 								className="h-6 w-6"
 								stroke="currentColor"
@@ -111,7 +112,7 @@ const Navigation = ({ user }) => {
 
 			{/* Responsive Navigation Menu */}
 			{open && (
-				<div className="block sm:hidden">
+				<div className="block sm:hidden bg-white/5 backdrop-blur-xl">
 					<div className="pt-2 pb-3 space-y-1">
 						<ResponsiveNavLink
 							href="/dashboard"
@@ -121,11 +122,11 @@ const Navigation = ({ user }) => {
 					</div>
 
 					{/* Responsive Settings Options */}
-					<div className="pt-4 pb-1 border-t border-gray-200">
+					<div className="pt-4 pb-1 border-t border-white/10">
 						<div className="flex items-center px-4">
 							<div className="flex-shrink-0">
 								<svg
-									className="h-10 w-10 fill-current text-gray-400"
+									className="h-10 w-10 fill-current text-white/50"
 									xmlns="http://www.w3.org/2000/svg"
 									fill="none"
 									viewBox="0 0 24 24"
@@ -140,10 +141,10 @@ const Navigation = ({ user }) => {
 							</div>
 
 							<div className="ml-3">
-								<div className="font-medium text-base text-gray-800">
+								<div className="font-medium text-base text-white">
 									{user?.name}
 								</div>
-								<div className="font-medium text-sm text-gray-500">
+								<div className="font-medium text-sm text-white/60">
 									{user?.email}
 								</div>
 							</div>
