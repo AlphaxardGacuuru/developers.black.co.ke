@@ -1,6 +1,6 @@
 import * as React from "react"
 import { Slot } from "@radix-ui/react-slot"
-import { cva } from "class-variance-authority";
+import { cva } from "class-variance-authority"
 
 import { cn } from "@/lib/utils"
 
@@ -52,7 +52,7 @@ function Button({
       data-size={size}
       className={cn(buttonVariants({ variant, size, className }))}
       {...props} />
-  );
+  )
 }
 
 export { Button, buttonVariants }

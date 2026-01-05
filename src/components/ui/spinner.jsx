@@ -12,7 +12,7 @@ function Spinner({
       aria-label="Loading"
       className={cn("size-4 animate-spin", className)}
       {...props} />
-  );
+  )
 }
 
 export { Spinner }
