@@ -8,6 +8,7 @@ import { useState, useEffect } from "react"
 import PhoneSVG from "@/svgs/PhoneSVG"
 import WhatsAppSVG from "@/svgs/WhatsAppSVG"
 import EmailSVG from "@/svgs/EmailSVG"
+import MyLink from "@/components/ui/my-link"
 
 const Home = () => {
 	const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
@@ -466,12 +467,12 @@ const Home = () => {
 							{/* View Link Start */}
 							<div className="flex justify-center items-center mb-10">
 								<div>
-									<Link
+									<MyLink
 										target="_blank"
 										href="https://onboarding.ecitizen.go.ke"
-										className="mt-20 p-1 px-5 rounded-3xl text-white bg-white/5 backdrop-blur-xl border border-white/10 hover:bg-white/10 transition-all duration-700 ease-out group">
+										className="mt-20">
 										Visit eCitizen Onboarding →
-									</Link>
+									</MyLink>
 								</div>
 							</div>
 							{/* View Link End */}
@@ -527,12 +528,12 @@ const Home = () => {
 							{/* View Link Start */}
 							<div className="flex justify-center items-center mb-10">
 								<div>
-									<Link
+									<MyLink
 										target="_blank"
 										href="https://demo.paysokofinance.com"
-										className="mt-20 p-1 px-5 rounded-3xl text-white bg-white/5 backdrop-blur-xl border border-white/10 hover:bg-white/10 transition-all duration-700 ease-out group">
+										className="mt-20">
 										Visit PaySoko Finance →
-									</Link>
+									</MyLink>
 								</div>
 							</div>
 							{/* View Link End */}
@@ -591,12 +592,12 @@ const Home = () => {
 							{/* View Link Start */}
 							<div className="flex justify-center items-center mb-10">
 								<div>
-									<Link
+									<MyLink
 										target="_blank"
 										href="https://mis.amahorocoalition.com"
-										className="mt-20 p-1 px-5 rounded-3xl text-white bg-white/5 backdrop-blur-xl border border-white/10 hover:bg-white/10 transition-all duration-700 ease-out group">
+										className="mt-20">
 										Visit Amahoro Coalition →
-									</Link>
+									</MyLink>
 								</div>
 							</div>
 							{/* View Link End */}
@@ -654,12 +655,12 @@ const Home = () => {
 							{/* View Link Start */}
 							<div className="flex justify-center items-center mb-10">
 								<div>
-									<Link
+									<MyLink
 										target="_blank"
 										href="https://ikea.nathanhr.com"
-										className="mt-20 p-1 px-5 rounded-3xl text-white bg-white/5 backdrop-blur-xl border border-white/10 hover:bg-white/10 transition-all duration-700 ease-out group">
+										className="mt-20">
 										Visit Nathan Digital →
-									</Link>
+									</MyLink>
 								</div>
 							</div>
 							{/* View Link End */}
@@ -715,12 +716,12 @@ const Home = () => {
 							{/* View Link Start */}
 							<div className="flex justify-center items-center mb-10">
 								<div>
-									<Link
+									<MyLink
 										target="_blank"
 										href="https://www.bulkagencies.co.ke"
-										className="mt-20 p-1 px-5 rounded-3xl text-white bg-white/5 backdrop-blur-xl border border-white/10 hover:bg-white/10 transition-all duration-700 ease-out group">
+										className="mt-20">
 										Visit Bulk Agencies →
-									</Link>
+									</MyLink>
 								</div>
 							</div>
 							{/* View Link End */}
@@ -777,12 +778,12 @@ const Home = () => {
 							{/* View Link Start */}
 							<div className="flex justify-center items-center mb-10">
 								<div>
-									<Link
+									<MyLink
 										target="_blank"
 										href="https://admin.marcusmiles.co.ke/#/admin/dashboard"
-										className="mt-20 p-1 px-5 rounded-3xl text-white bg-white/5 backdrop-blur-xl border border-white/10 hover:bg-white/10 transition-all duration-700 ease-out group">
+										className="mt-20">
 										Visit Marcus Miles →
-									</Link>
+									</MyLink>
 								</div>
 							</div>
 							{/* View Link End */}
@@ -839,12 +840,12 @@ const Home = () => {
 							{/* View Link Start */}
 							<div className="flex justify-center items-center mb-10">
 								<div>
-									<Link
+									<MyLink
 										target="_blank"
 										href="https://www.onlineuniworldwide.com"
-										className="mt-20 p-1 px-5 rounded-3xl text-white bg-white/5 backdrop-blur-xl border border-white/10 hover:bg-white/10 transition-all duration-700 ease-out group">
+										className="mt-20">
 										Visit Online Uni Worldwide →
-									</Link>
+									</MyLink>
 								</div>
 							</div>
 							{/* View Link End */}
@@ -900,12 +901,12 @@ const Home = () => {
 							{/* View Link Start */}
 							<div className="flex justify-center items-center mb-10">
 								<div>
-									<Link
+									<MyLink
 										target="_blank"
 										href="https://www.thepublichome.com"
-										className="mt-20 p-1 px-5 rounded-3xl text-white bg-white/5 backdrop-blur-xl border border-white/10 hover:bg-white/10 transition-all duration-700 ease-out group">
+										className="mt-20">
 										Visit The Public Home →
-									</Link>
+									</MyLink>
 								</div>
 							</div>
 							{/* View Link End */}
@@ -961,12 +962,12 @@ const Home = () => {
 							{/* View Link Start */}
 							<div className="flex justify-center items-center mb-10">
 								<div>
-									<Link
+									<MyLink
 										target="_blank"
 										href="https://music.black.co.ke"
-										className="mt-20 p-1 px-5 rounded-3xl text-white bg-white/5 backdrop-blur-xl border border-white/10 hover:bg-white/10 transition-all duration-700 ease-out group">
+										className="mt-20">
 										Visit Black Music →
-									</Link>
+									</MyLink>
 								</div>
 							</div>
 							{/* View Link End */}
@@ -1022,12 +1023,12 @@ const Home = () => {
 							{/* View Link Start */}
 							<div className="flex justify-center items-center mb-10">
 								<div>
-									<Link
+									<MyLink
 										target="_blank"
 										href="https://pay.black.co.ke"
-										className="mt-20 p-1 px-5 rounded-3xl text-white bg-white/5 backdrop-blur-xl border border-white/10 hover:bg-white/10 transition-all duration-700 ease-out group">
+										className="mt-20">
 										Visit Black Pay →
-									</Link>
+									</MyLink>
 								</div>
 							</div>
 							{/* View Link End */}
@@ -1083,12 +1084,12 @@ const Home = () => {
 							{/* View Link Start */}
 							<div className="flex justify-center items-center mb-10">
 								<div>
-									<Link
+									<MyLink
 										target="_blank"
 										href="https://property.black.co.ke"
-										className="mt-20 p-1 px-5 rounded-3xl text-white bg-white/5 backdrop-blur-xl border border-white/10 hover:bg-white/10 transition-all duration-700 ease-out group">
+										className="mt-20">
 										Visit Black Property →
-									</Link>
+									</MyLink>
 								</div>
 							</div>
 							{/* View Link End */}
@@ -1144,12 +1145,12 @@ const Home = () => {
 							{/* View Link Start */}
 							<div className="flex justify-center items-center mb-10">
 								<div>
-									<Link
+									<MyLink
 										target="_blank"
 										href="https://photography.black.co.ke"
-										className="mt-20 p-1 px-5 rounded-3xl text-white bg-white/5 backdrop-blur-xl border border-white/10 hover:bg-white/10 transition-all duration-700 ease-out group">
+										className="mt-20">
 										Visit Black Photography →
-									</Link>
+									</MyLink>
 								</div>
 							</div>
 							{/* View Link End */}
@@ -1205,12 +1206,12 @@ const Home = () => {
 							{/* View Link Start */}
 							<div className="flex justify-center items-center mb-10">
 								<div>
-									<Link
+									<MyLink
 										target="_blank"
 										href="https://money.black.co.ke"
-										className="mt-20 p-1 px-5 rounded-3xl text-white bg-white/5 backdrop-blur-xl border border-white/10 hover:bg-white/10 transition-all duration-700 ease-out group">
+										className="mt-20">
 										Visit Black Money →
-									</Link>
+									</MyLink>
 								</div>
 							</div>
 							{/* View Link End */}

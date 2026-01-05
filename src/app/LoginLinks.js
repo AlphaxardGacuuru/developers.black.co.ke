@@ -1,7 +1,8 @@
 "use client"
 
-import Link from "next/link"
 import { useAuth } from "@/hooks/auth"
+import Link from "next/link"
+import MyLink from "@/components/ui/my-link"
 
 const LoginLinks = () => {
 	const { user } = useAuth({ middleware: "guest" })
@@ -9,24 +10,24 @@ const LoginLinks = () => {
 	return (
 		<div className="hidden fixed top-0 right-0 px-6 py-4 sm:block z-10">
 			{user ? (
-				<Link
+				<MyLink
 					href="/dashboard"
-					className="mt-20 p-1 px-5 rounded-3xl text-white bg-white/5 backdrop-blur-xl border border-white/10 hover:bg-white/10 transition-all duration-700 ease-out group">
+					className="mt-20">
 					Dashboard
-				</Link>
+				</MyLink>
 			) : (
 				<>
-					<Link
+					<MyLink
 						href="/login"
-						className="mt-20 p-1 px-5 rounded-3xl text-white bg-white/5 backdrop-blur-xl border border-white/10 hover:bg-white/10 transition-all duration-700 ease-out group">
+						className="mt-20">
 						Login
-					</Link>
+					</MyLink>
 
-					<Link
+					<MyLink
 						href="/register"
-						className="ml-4 mt-20 p-1 px-5 rounded-3xl text-white bg-white/5 backdrop-blur-xl border border-white/10 hover:bg-white/10 transition-all duration-700 ease-out group">
+						className="ml-4 mt-20">
 						Register
-					</Link>
+					</MyLink>
 				</>
 			)}
 		</div>

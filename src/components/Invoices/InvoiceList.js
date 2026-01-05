@@ -1,8 +1,8 @@
 import React, { useState, useRef, useEffect } from "react"
 import Axios from "@/lib/axios"
 
-import Btn from "@/components/core/Btn"
-import MyLink from "@/components/core/MyLink"
+import Btn from "@/components/ui/button"
+import MyLink from "@/components/ui/my-link"
 import DeleteModal from "@/components/core/DeleteModal"
 
 import PaginationLinks from "@/components/core/PaginationLinks"
@@ -545,7 +545,7 @@ const InvoiceList = (props) => {
 									)}
 
 									<MyLink
-										linkTo={`/invoices/create`}
+										href={`/invoices/create`}
 										icon={<PlusSVG />}
 										text="create invoice"
 									/>
@@ -669,7 +669,7 @@ const InvoiceList = (props) => {
 											{/* Button trigger modal End */}
 
 											<MyLink
-												linkTo={`/invoices/${invoice.id}/show`}
+												href={`/invoices/${invoice.id}/show`}
 												icon={<ViewSVG />}
 											/>
 

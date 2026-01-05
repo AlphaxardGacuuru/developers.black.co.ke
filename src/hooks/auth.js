@@ -1,126 +1,143 @@
-import useSWR from 'swr'
-import axios from '@/lib/axios'
-import { useEffect } from 'react'
-import { useParams, useRouter } from 'next/navigation'
+import useSWR from "swr"
+import axios from "@/lib/axios"
+import { useEffect, useState } from "react"
+import { useParams, useRouter } from "next/navigation"
 
 export const useAuth = ({ middleware, redirectIfAuthenticated } = {}) => {
-    const router = useRouter()
-    const params = useParams()
+	const router = useRouter()
+	const params = useParams()
 
-    const { data: user, error, mutate } = useSWR('/api/user', () =>
-        axios
-            .get('/api/user')
-            .then(res => res.data)
-            .catch(error => {
-                if (error.response.status !== 409) throw error
+	const [authLoading, setAuthLoading] = useState(false)
 
-                router.push('/verify-email')
-            }),
-    )
+	const {
+		data: user,
+		error,
+		mutate,
+	} = useSWR("/api/user", () =>
+		axios
+			.get("/api/user")
+			.then((res) => res.data)
+			.catch((error) => {
+				if (error.response.status !== 409) throw error
 
-    const csrf = () => axios.get('/sanctum/csrf-cookie')
+				router.push("/verify-email")
+			})
+	)
 
-    const register = async ({ setErrors, ...props }) => {
-        await csrf()
+	const csrf = () => axios.get("/sanctum/csrf-cookie")
 
-        setErrors([])
+	const register = async ({ setErrors, ...props }) => {
+		await csrf()
 
-        axios
-            .post('/register', props)
-            .then(() => mutate())
-            .catch(error => {
-                if (error.response.status !== 422) throw error
+		setErrors([])
+		setAuthLoading(true)
 
-                setErrors(error.response.data.errors)
+		axios
+			.post("/register", props)
+			.then(() => {
+				setAuthLoading(false)
+				mutate()
+			})
+			.catch((error) => {
+				setAuthLoading(false)
+
+				if (error.response.status !== 422) throw error
+
+				setErrors(error.response.data.errors)
+			})
+	}
+
+	const login = async ({ setErrors, setStatus, ...props }) => {
+		await csrf()
+
+		setErrors([])
+		setStatus(null)
+		setAuthLoading(true)
+
+		axios
+			.post("/login", props)
+			.then(() => {
+				setAuthLoading(false)
+
+                mutate()
             })
-    }
+			.catch((error) => {
+				setAuthLoading(false)
 
-    const login = async ({ setErrors, setStatus, ...props }) => {
-        await csrf()
+				if (error.response.status !== 422) throw error
 
-        setErrors([])
-        setStatus(null)
+				setErrors(error.response.data.errors)
+			})
+	}
 
-        axios
-            .post('/login', props)
-            .then(() => mutate())
-            .catch(error => {
-                if (error.response.status !== 422) throw error
+	const forgotPassword = async ({ setErrors, setStatus, email }) => {
+		await csrf()
 
-                setErrors(error.response.data.errors)
-            })
-    }
+		setErrors([])
+		setStatus(null)
 
-    const forgotPassword = async ({ setErrors, setStatus, email }) => {
-        await csrf()
+		axios
+			.post("/forgot-password", { email })
+			.then((response) => setStatus(response.data.status))
+			.catch((error) => {
+				if (error.response.status !== 422) throw error
 
-        setErrors([])
-        setStatus(null)
+				setErrors(error.response.data.errors)
+			})
+	}
 
-        axios
-            .post('/forgot-password', { email })
-            .then(response => setStatus(response.data.status))
-            .catch(error => {
-                if (error.response.status !== 422) throw error
+	const resetPassword = async ({ setErrors, setStatus, ...props }) => {
+		await csrf()
 
-                setErrors(error.response.data.errors)
-            })
-    }
+		setErrors([])
+		setStatus(null)
 
-    const resetPassword = async ({ setErrors, setStatus, ...props }) => {
-        await csrf()
+		axios
+			.post("/reset-password", { token: params.token, ...props })
+			.then((response) =>
+				router.push("/login?reset=" + btoa(response.data.status))
+			)
+			.catch((error) => {
+				if (error.response.status !== 422) throw error
 
-        setErrors([])
-        setStatus(null)
+				setErrors(error.response.data.errors)
+			})
+	}
 
-        axios
-            .post('/reset-password', { token: params.token, ...props })
-            .then(response =>
-                router.push('/login?reset=' + btoa(response.data.status)),
-            )
-            .catch(error => {
-                if (error.response.status !== 422) throw error
+	const resendEmailVerification = ({ setStatus }) => {
+		axios
+			.post("/email/verification-notification")
+			.then((response) => setStatus(response.data.status))
+	}
 
-                setErrors(error.response.data.errors)
-            })
-    }
+	const logout = async () => {
+		if (!error) {
+			await axios.post("/logout").then(() => mutate())
+		}
 
-    const resendEmailVerification = ({ setStatus }) => {
-        axios
-            .post('/email/verification-notification')
-            .then(response => setStatus(response.data.status))
-    }
+		window.location.pathname = "/login"
+	}
 
-    const logout = async () => {
-        if (!error) {
-            await axios.post('/logout').then(() => mutate())
-        }
+	useEffect(() => {
+		if (middleware === "guest" && redirectIfAuthenticated && user)
+			router.push(redirectIfAuthenticated)
 
-        window.location.pathname = '/login'
-    }
+		// if (middleware === 'auth' && (user && !user.email_verified_at))
+		//     router.push('/verify-email')
 
-    useEffect(() => {
-        if (middleware === 'guest' && redirectIfAuthenticated && user)
-            router.push(redirectIfAuthenticated)
+		if (window.location.pathname === "/verify-email" && user?.email_verified_at)
+			router.push(redirectIfAuthenticated)
+		if (middleware === "auth" && error) logout()
+	}, [user, error])
 
-        // if (middleware === 'auth' && (user && !user.email_verified_at))
-        //     router.push('/verify-email')
-        
-        if (
-            window.location.pathname === '/verify-email' &&
-            user?.email_verified_at
-        )
-            router.push(redirectIfAuthenticated)
-        if (middleware === 'auth' && error) logout()
-    }, [user, error])
-
-    return {
-        user,
-        register,
-        login,
-        forgotPassword,
-        resetPassword,
-        resendEmailVerification,
-        logout,
-    }
+	return {
+		user,
+		register,
+		login,
+		forgotPassword,
+		resetPassword,
+		resendEmailVerification,
+		logout,
+		authLoading,
+	}
 }

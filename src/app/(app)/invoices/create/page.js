@@ -1,0 +1,395 @@
+"use client"
+
+import React, { useEffect, useState } from "react"
+import { useRouter } from "next/navigation"
+import Link from "next/link"
+import { useApp } from "@/contexts/AppContext"
+import Axios from "@/lib/axios"
+
+import Header from "@/app/(app)/Header"
+import Btn from "@/components/ui/button"
+import { Input } from "@/components/ui/input"
+import { Select } from "@/components/ui/select"
+import { Textarea } from "@/components/ui/textarea"
+import { ChevronDownIcon } from "lucide-react"
+
+import BackSVG from "@/svgs/BackSVG"
+import CloseSVG from "@/svgs/CloseSVG"
+import PlusSVG from "@/svgs/PlusSVG"
+import { DatePicker } from "@/components/ui/date-picker"
+import MyLink from "@/components/ui/my-link"
+
+const CreateInvoice = () => {
+	const router = useRouter()
+	const appProps = useApp()
+
+	const [clients, setClients] = useState([])
+	const [loading, setLoading] = useState(false)
+
+	// Invoice Details
+	const [clientId, setClientId] = useState("")
+	const [invoiceNumber, setInvoiceNumber] = useState(`INV-${Date.now()}`)
+
+	const [issueDate, setIssueDate] = useState(
+		new Date().toISOString().split("T")[0]
+	)
+	const [dueDate, setDueDate] = useState("")
+	const [notes, setNotes] = useState("")
+	const [terms, setTerms] = useState(
+		"Payment is due within 30 days of invoice date."
+	)
+
+	// Line Items
+	const [lineItems, setLineItems] = useState([
+		{ description: "", quantity: 1, rate: 0, amount: 0 },
+	])
+
+	// Get data
+	useEffect(() => {
+		// Fetch Clients (could be from a clients endpoint)
+		appProps.get(`users?type=client`, setClients)
+
+		// Set default due date (30 days from now)
+		const defaultDueDate = new Date()
+		defaultDueDate.setDate(defaultDueDate.getDate() + 30)
+		setDueDate(defaultDueDate.toISOString().split("T")[0])
+	}, [])
+
+	// Calculate line item amount
+	const calculateLineItemAmount = (quantity, rate) => {
+		return (parseFloat(quantity) || 0) * (parseFloat(rate) || 0)
+	}
+
+	// Update line item
+	const updateLineItem = (index, field, value) => {
+		const newLineItems = [...lineItems]
+		newLineItems[index][field] = value
+
+		// Recalculate amount if quantity or rate changes
+		if (field === "quantity" || field === "rate") {
+			newLineItems[index].amount = calculateLineItemAmount(
+				newLineItems[index].quantity,
+				newLineItems[index].rate
+			)
+		}
+
+		setLineItems(newLineItems)
+	}
+
+	// Add line item
+	const addLineItem = () => {
+		setLineItems([
+			...lineItems,
+			{ description: "", quantity: 1, rate: 0, amount: 0 },
+		])
+	}
+
+	// Remove line item
+	const removeLineItem = (index) => {
+		if (lineItems.length > 1) {
+			setLineItems(lineItems.filter((_, i) => i !== index))
+		}
+	}
+
+	// Calculate totals
+	const calculateSubtotal = () => {
+		return lineItems.reduce(
+			(sum, item) => sum + (parseFloat(item.amount) || 0),
+			0
+		)
+	}
+
+	const calculateTotal = () => {
+		return calculateSubtotal()
+	}
+
+	/*
+	 * Submit Form
+	 */
+	const onSubmit = (e) => {
+		e.preventDefault()
+		setLoading(true)
+
+		const invoiceData = {
+			clientId,
+			invoiceNumber,
+			issueDate,
+			dueDate,
+			lineItems: lineItems.filter((item) => item.description.trim() !== ""),
+			subtotal: calculateSubtotal(),
+			total: calculateTotal(),
+			notes,
+			terms,
+			status: "pending",
+		}
+
+		Axios.post("/api/invoices", invoiceData)
+			.then((res) => {
+				setLoading(false)
+				appProps.setMessages(["Invoice created successfully!"])
+				setTimeout(() => router.push(`/invoices`), 500)
+			})
+			.catch((err) => {
+				setLoading(false)
+				appProps.getErrors(err)
+			})
+	}
+
+	return (
+		<>
+			<Header title="Create Invoice" />
+
+			<div className="py-12">
+				<div className="max-w-4xl mx-auto px-6 lg:px-8">
+					<form onSubmit={onSubmit}>
+						<div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl p-8 space-y-8">
+							{/* Invoice Header Info */}
+							<div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+								{/* Client Selection Start */}
+								<Select
+									label="Client"
+									placeholder=""
+									value={clientId}
+									onChange={(e) => setClientId(e.target.value)}
+									required>
+									{clients.map((client, key) => (
+										<option
+											key={key}
+											value={client.id}>
+											{client.name}
+										</option>
+									))}
+								</Select>
+								{/* Client Selection End */}
+
+								{/* Invoice Number */}
+								<Input
+									type="text"
+									label="Invoice Number"
+									value={invoiceNumber}
+									onChange={(e) => setInvoiceNumber(e.target.value)}
+									required
+								/>
+
+								{/* Issue Date Start */}
+								<DatePicker
+									label="Issue Date"
+									value={issueDate ? new Date(issueDate) : null}
+									onChange={(date) =>
+										setIssueDate(date?.toISOString().split("T")[0] || "")
+									}
+								/>
+								{/* Issue Date End */}
+
+								{/* Due Date Start */}
+								<DatePicker
+									label="Due Date"
+									value={dueDate ? new Date(dueDate) : null}
+									onChange={(date) =>
+										setDueDate(date?.toISOString().split("T")[0] || "")
+									}
+								/>
+								{/* Due Date End */}
+							</div>
+
+							{/* Line Items Section */}
+							<div className="space-y-4">
+								<div className="flex items-center justify-between">
+									<h3 className="text-xl text-white font-light font-nunito">
+										Line Items
+									</h3>
+									<Btn
+										icon={<PlusSVG />}
+										onClick={addLineItem}
+										text="Add Item"
+									/>
+								</div>
+
+								{/* Line Items Table */}
+								<div className="overflow-x-auto">
+									<div className="min-w-full space-y-3">
+										{/* Header */}
+										<div className="hidden md:grid md:grid-cols-12 gap-3 px-4 py-2 text-white/60 font-light font-nunito text-sm">
+											<div className="col-span-5">Description</div>
+											<div className="col-span-2">Quantity</div>
+											<div className="col-span-2">Rate</div>
+											<div className="col-span-2">Amount</div>
+											<div className="col-span-1"></div>
+										</div>
+
+										{/* Line Items */}
+										{lineItems.map((item, index) => (
+											<div
+												key={index}
+												className="grid grid-cols-1 md:grid-cols-12 gap-3 p-4 bg-white/5 border border-white/10 rounded-xl">
+												{/* Description */}
+												<div className="col-span-12 md:col-span-5">
+													<Input
+														type="text"
+														label="Description"
+														className="md:hidden"
+														value={item.description}
+														onChange={(e) =>
+															updateLineItem(
+																index,
+																"description",
+																e.target.value
+															)
+														}
+														required
+													/>
+													<input
+														type="text"
+														className="hidden md:block w-full px-3 py-2 bg-white/10 border border-white/20 rounded-lg text-white font-light font-nunito focus:outline-none focus:border-white/40 transition-all duration-300"
+														placeholder="Web development services..."
+														value={item.description}
+														onChange={(e) =>
+															updateLineItem(
+																index,
+																"description",
+																e.target.value
+															)
+														}
+														required
+													/>
+												</div>
+
+												{/* Quantity */}
+												<div className="col-span-6 md:col-span-2">
+													<Input
+														type="number"
+														label="Quantity"
+														className="md:hidden"
+														min="0"
+														step="0.01"
+														value={item.quantity}
+														onChange={(e) =>
+															updateLineItem(index, "quantity", e.target.value)
+														}
+														required
+													/>
+													<input
+														type="number"
+														min="0"
+														step="0.01"
+														className="hidden md:block w-full px-3 py-2 bg-white/10 border border-white/20 rounded-lg text-white font-light font-nunito focus:outline-none focus:border-white/40 transition-all duration-300"
+														value={item.quantity}
+														onChange={(e) =>
+															updateLineItem(index, "quantity", e.target.value)
+														}
+														required
+													/>
+												</div>
+
+												{/* Rate */}
+												<div className="col-span-6 md:col-span-2">
+													<Input
+														type="number"
+														label="Rate"
+														className="md:hidden"
+														min="0"
+														step="0.01"
+														value={item.rate}
+														onChange={(e) =>
+															updateLineItem(index, "rate", e.target.value)
+														}
+														required
+													/>
+													<input
+														type="number"
+														min="0"
+														step="0.01"
+														className="hidden md:block w-full px-3 py-2 bg-white/10 border border-white/20 rounded-lg text-white font-light font-nunito focus:outline-none focus:border-white/40 transition-all duration-300"
+														value={item.rate}
+														onChange={(e) =>
+															updateLineItem(index, "rate", e.target.value)
+														}
+														required
+													/>
+												</div>
+
+												{/* Amount */}
+												<div className="col-span-10 md:col-span-2">
+													<label className="block md:hidden text-white/60 font-light font-nunito text-sm mb-1">
+														Amount
+													</label>
+													<div className="px-3 py-2 bg-white/5 border border-white/10 rounded-lg text-white/80 font-light font-nunito">
+														${item.amount.toFixed(2)}
+													</div>
+												</div>
+
+												{/* Remove Button */}
+												<div className="col-span-2 md:col-span-1 flex items-end md:items-center justify-end">
+													<button
+														type="button"
+														onClick={() => removeLineItem(index)}
+														disabled={lineItems.length === 1}
+														className="p-2 text-white/60 hover:text-red-400 disabled:opacity-30 disabled:cursor-not-allowed transition-colors">
+														<CloseSVG />
+													</button>
+												</div>
+											</div>
+										))}
+									</div>
+								</div>
+							</div>
+
+							{/* Totals Section */}
+							<div className="flex justify-end">
+								<div className="w-full md:w-96 space-y-3">
+								{/* Total */}
+								<div className="flex justify-between items-center px-4 py-3 bg-gradient-to-br from-white/10 to-white/5 border border-white/20 rounded-xl">
+									<span className="text-white font-nunito text-lg">
+											Total:
+										</span>
+										<span className="text-white font-nunito text-xl font-medium">
+											${calculateTotal().toFixed(2)}
+										</span>
+									</div>
+								</div>
+							</div>
+
+							{/* Notes and Terms Start */}
+							<div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+								{/* Notes */}
+								<Textarea
+									label="Notes"
+									rows={4}
+									placeholder="Additional notes or comments..."
+									value={notes}
+									onChange={(e) => setNotes(e.target.value)}
+								/>
+
+								{/* Terms */}
+								<Textarea
+									label="Terms & Conditions"
+									rows={4}
+									placeholder="Payment terms..."
+									value={terms}
+									onChange={(e) => setTerms(e.target.value)}
+								/>
+							</div>
+							{/* Notes and Terms End */}
+
+							{/* Action Buttons */}
+							<div className="flex flex-col sm:flex-row justify-between items-center gap-4 pt-4">
+								<MyLink
+									href="/invoices"
+									icon={<BackSVG />}
+									text="cancel"
+								/>
+
+								<Btn
+									text="Create Invoice"
+									loading={loading}
+								/>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</>
+	)
+}
+
+export default CreateInvoice

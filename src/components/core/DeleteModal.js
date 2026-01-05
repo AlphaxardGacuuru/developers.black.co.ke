@@ -1,6 +1,6 @@
 import React from "react"
 
-import Btn from "@/components/core/Btn"
+import Btn from "@/components/ui/button"
 
 import DeleteSVG from "@/svgs/DeleteSVG"
 import CloseSVG from "@/svgs/CloseSVG"
