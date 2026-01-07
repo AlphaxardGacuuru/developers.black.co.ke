@@ -8,6 +8,8 @@ const nunitoFont = Nunito({
 	display: "swap",
 	weight: ["200", "300", "400", "500", "600", "700"],
 	variable: "--font-nunito",
+	preload: true, // Preload for faster initial load
+	adjustFontFallback: true, // Reduce layout shift
 })
 
 const robotoFont = Roboto({
@@ -15,6 +17,8 @@ const robotoFont = Roboto({
 	display: "swap",
 	weight: ["100", "300", "400", "500", "700"],
 	variable: "--font-roboto",
+	preload: true, // Preload for faster initial load
+	adjustFontFallback: true, // Reduce layout shift
 })
 
 const RootLayout = ({ children }) => {

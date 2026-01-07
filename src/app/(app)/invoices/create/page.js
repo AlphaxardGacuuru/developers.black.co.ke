@@ -26,9 +26,13 @@ const CreateInvoice = () => {
 	const [clients, setClients] = useState([])
 	const [loading, setLoading] = useState(false)
 
+	// Format currency with commas
+	const formatCurrency = (amount) => {
+		return amount.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+	}
+
 	// Invoice Details
 	const [clientId, setClientId] = useState("")
-	const [invoiceNumber, setInvoiceNumber] = useState(`INV-${Date.now()}`)
 
 	const [issueDate, setIssueDate] = useState(
 		new Date().toISOString().split("T")[0]
@@ -112,7 +116,6 @@ const CreateInvoice = () => {
 
 		const invoiceData = {
 			clientId,
-			invoiceNumber,
 			issueDate,
 			dueDate,
 			lineItems: lineItems.filter((item) => item.description.trim() !== ""),
@@ -144,8 +147,8 @@ const CreateInvoice = () => {
 					<form onSubmit={onSubmit}>
 						<div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl p-8 space-y-8">
 							{/* Invoice Header Info */}
-							<div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-								{/* Client Selection Start */}
+							{/* Client Selection Start */}
+							<div className="grid grid-cols-1 gap-6">
 								<Select
 									label="Client"
 									placeholder=""
@@ -160,17 +163,10 @@ const CreateInvoice = () => {
 										</option>
 									))}
 								</Select>
-								{/* Client Selection End */}
+							</div>
+							{/* Client Selection End */}
 
-								{/* Invoice Number */}
-								<Input
-									type="text"
-									label="Invoice Number"
-									value={invoiceNumber}
-									onChange={(e) => setInvoiceNumber(e.target.value)}
-									required
-								/>
-
+							<div className="grid grid-cols-1 md:grid-cols-2 gap-6">
 								{/* Issue Date Start */}
 								<DatePicker
 									label="Issue Date"
@@ -212,8 +208,8 @@ const CreateInvoice = () => {
 										<div className="hidden md:grid md:grid-cols-12 gap-3 px-4 py-2 text-white/60 font-light font-nunito text-sm">
 											<div className="col-span-5">Description</div>
 											<div className="col-span-2">Quantity</div>
-											<div className="col-span-2">Rate</div>
-											<div className="col-span-2">Amount</div>
+											<div className="col-span-2">Rate (KES)</div>
+											<div className="col-span-2">Amount (KES)</div>
 											<div className="col-span-1"></div>
 										</div>
 
@@ -314,7 +310,7 @@ const CreateInvoice = () => {
 														Amount
 													</label>
 													<div className="px-3 py-2 bg-white/5 border border-white/10 rounded-lg text-white/80 font-light font-nunito">
-														${item.amount.toFixed(2)}
+														{formatCurrency(item.amount)}
 													</div>
 												</div>
 
@@ -337,13 +333,13 @@ const CreateInvoice = () => {
 							{/* Totals Section */}
 							<div className="flex justify-end">
 								<div className="w-full md:w-96 space-y-3">
-								{/* Total */}
-								<div className="flex justify-between items-center px-4 py-3 bg-gradient-to-br from-white/10 to-white/5 border border-white/20 rounded-xl">
-									<span className="text-white font-nunito text-lg">
+									{/* Total */}
+									<div className="flex justify-between items-center px-4 py-3 bg-gradient-to-br from-white/10 to-white/5 border border-white/20 rounded-xl">
+										<span className="text-white font-nunito text-lg">
 											Total:
 										</span>
 										<span className="text-white font-nunito text-xl font-medium">
-											${calculateTotal().toFixed(2)}
+											KES {formatCurrency(calculateTotal())}
 										</span>
 									</div>
 								</div>

@@ -1,29 +1,32 @@
 import * as React from "react"
+import { forwardRef } from "react"
 import { Slot } from "@radix-ui/react-slot"
 import { cva } from "class-variance-authority"
 
 import { cn } from "@/lib/utils"
 
-const buttonVariants = cva(
-  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-all disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4 shrink-0 [&_svg]:shrink-0 outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive",
+const btnVariants = cva(
+  "inline-flex items-center justify-center rounded-3xl text-white border border-white/10 backdrop-blur-md bg-white/5 hover:bg-white/10 transition-all duration-700 ease-out group font-light font-nunito text-base capitalize disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none shrink-0 [&_svg]:shrink-0 outline-none",
   {
     variants: {
       variant: {
-        default: "bg-primary text-primary-foreground hover:bg-primary/90",
+        default: "bg-white/5 backdrop-blur-md border-white/10 hover:bg-white/10",
         destructive:
-          "bg-destructive text-white hover:bg-destructive/90 focus-visible:ring-destructive/20 dark:focus-visible:ring-destructive/40 dark:bg-destructive/60",
+          "bg-destructive/5 backdrop-blur-md border-destructive/10 text-white hover:bg-destructive/10",
         outline:
-          "border bg-background shadow-xs hover:bg-accent hover:text-accent-foreground dark:bg-input/30 dark:border-input dark:hover:bg-input/50",
+          "border backdrop-blur-md bg-white/5 border-white/20 hover:bg-white/10",
         secondary:
-          "bg-secondary text-secondary-foreground hover:bg-secondary/80",
+          "bg-secondary/5 backdrop-blur-md border-secondary/10 text-secondary-foreground hover:bg-secondary/10",
         ghost:
-          "hover:bg-accent hover:text-accent-foreground dark:hover:bg-accent/50",
-        link: "text-primary underline-offset-4 hover:underline",
+          "bg-transparent backdrop-blur-md hover:bg-white/10 border-transparent",
+        link: "text-white underline-offset-4 hover:underline backdrop-blur-md border-transparent",
+        glass:
+          "bg-white/10 backdrop-blur-xl border border-white/20 text-white hover:bg-white/20 hover:border-white/30",
       },
       size: {
-        default: "h-9 px-4 py-2 has-[>svg]:px-3",
-        sm: "h-8 rounded-md gap-1.5 px-3 has-[>svg]:px-2.5",
-        lg: "h-10 rounded-md px-6 has-[>svg]:px-4",
+        default: "p-1 px-5",
+        sm: "p-0.5 px-3",
+        lg: "p-2 px-8",
         icon: "size-9",
         "icon-sm": "size-8",
         "icon-lg": "size-10",
@@ -36,23 +39,56 @@ const buttonVariants = cva(
   }
 )
 
-function Button({
+const Btn = forwardRef(({
   className,
   variant = "default",
   size = "default",
   asChild = false,
+  text,
+  icon,
+  iconFront,
+  loading,
+  children,
   ...props
-}) {
+}, ref) => {
   const Comp = asChild ? Slot : "button"
+
+  // If text, icon, or loading props are used, render custom button style
+  const hasCustomProps = text || icon || iconFront || loading
 
   return (
     <Comp
+      ref={ref}
       data-slot="button"
       data-variant={variant}
       data-size={size}
-      className={cn(buttonVariants({ variant, size, className }))}
-      {...props} />
-  )
-}
+      disabled={loading || props.disabled}
+      className={cn(btnVariants({ variant, size, className }))}
+      {...props}>
+      {/* Loading Spinner */}
+      {loading && (
+        <div className="w-4 h-4 border-2 border-current/30 border-t-current rounded-full animate-spin" />
+      )}
 
-export { Button, buttonVariants }
+      {/* Icon */}
+      {!loading && icon && <span className="text-inherit">{icon}</span>}
+
+      {/* Text or Children */}
+      {text ? (
+        <span className="mx-2 text-inherit font-light font-nunito text-nowrap">{text}</span>
+      ) : (
+        children
+      )}
+
+      {/* Icon Front */}
+      {!loading && iconFront && (
+        <span className="text-inherit">{iconFront}</span>
+      )}
+    </Comp>
+  )
+})
+
+Btn.displayName = "Btn"
+
+export { Btn, btnVariants }
+export default Btn

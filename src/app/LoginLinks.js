@@ -11,21 +11,19 @@ const LoginLinks = () => {
 		<div className="hidden fixed top-0 right-0 px-6 py-4 sm:block z-10">
 			{user ? (
 				<MyLink
-					href="/dashboard"
-					className="mt-20">
+					href="/dashboard">
 					Dashboard
 				</MyLink>
 			) : (
 				<>
 					<MyLink
-						href="/login"
-						className="mt-20">
+						href="/login">
 						Login
 					</MyLink>
 
 					<MyLink
 						href="/register"
-						className="ml-4 mt-20">
+						className="ml-4">
 						Register
 					</MyLink>
 				</>

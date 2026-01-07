@@ -6,8 +6,7 @@ import { useEffect, useState } from "react"
 import { useRouter } from "next/navigation"
 import AuthSessionStatus from "@/app/(auth)/AuthSessionStatus"
 import { Input } from "@/components/ui/input"
-// import Btn from "@/components/core/Btn"
-import Btn from "@/components/ui/button"
+import { Btn } from "@/components/ui/button"
 import { Checkbox } from "@/components/ui/checkbox"
 
 const Login = () => {
@@ -126,9 +125,9 @@ const Login = () => {
 				<Btn
 					type="submit"
 					className="w-full"
-					loading={authLoading}>
-					Sign In
-				</Btn>
+					text="Sign In"
+					loading={authLoading}
+				/>
 
 				<div className="text-center">
 					<p className="text-white/60 font-light font-nunito text-sm">

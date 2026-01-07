@@ -11,7 +11,7 @@ import {
 import { DayPicker, getDefaultClassNames } from "react-day-picker"
 
 import { cn } from "@/lib/utils"
-import { Button, buttonVariants } from "@/components/ui/button"
+import { Btn, btnVariants } from "@/components/ui/button"
 import { Calendar } from "@/components/ui/calendar"
 import {
 	Popover,
@@ -59,12 +59,12 @@ function CalendarComponent({
 					defaultClassNames.nav
 				),
 				button_previous: cn(
-					buttonVariants({ variant: buttonVariant }),
+				btnVariants({ variant: buttonVariant }),
 					"size-(--cell-size) aria-disabled:opacity-50 p-0 select-none",
 					defaultClassNames.button_previous
 				),
 				button_next: cn(
-					buttonVariants({ variant: buttonVariant }),
+				btnVariants({ variant: buttonVariant }),
 					"size-(--cell-size) aria-disabled:opacity-50 p-0 select-none",
 					defaultClassNames.button_next
 				),
@@ -195,7 +195,7 @@ function CalendarDayButton({ className, day, modifiers, ...props }) {
 	}, [modifiers.focused])
 
 	return (
-		<Button
+		<Btn
 			ref={ref}
 			variant="ghost"
 			size="icon"
