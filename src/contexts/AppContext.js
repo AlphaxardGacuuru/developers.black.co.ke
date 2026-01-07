@@ -1,6 +1,6 @@
 "use client"
 
-import { createContext, useContext, useState } from "react"
+import { createContext, useContext, useState, useEffect } from "react"
 import {
 	getLocalStorage,
 	getNormalLocalStorage,
@@ -26,17 +26,21 @@ export const AppProvider = ({ children }) => {
 	const [errors, setErrors] = useState([])
 	const [formErrors, setFormErrors] = useState([])
 	const [login, setLogin] = useState()
-	const [auth, setAuth] = useState(() => getLocalStorageAuth("auth"))
-	const [headerMenu, setHeaderMenu] = useState()
-	const [adminMenu, setAdminMenu] = useState(() =>
-		typeof window !== "undefined" && window.innerWidth <= 768 ? "" : "left-open"
-	)
-	const [properties, setProperties] = useState(() => getLocalStorage("properties"))
-	const [selectedPropertyId, setSelectedPropertyId] = useState(() => {
-		const storedId = getNormalLocalStorage("selectedPropertyId")
-		const authData = getLocalStorageAuth("auth")
-		return storedId || [...(authData.propertyIds ?? []), ...(authData.subscriptionByPropertyIds ?? [])]
+	const [auth, setAuth] = useState({
+		id: 0,
+		name: "Guest",
+		username: "@guest",
+		avatar: "/storage/avatars/male-avatar.png",
+		accountType: "normal",
+		propertyIds: [],
+		assignedPropertyIds: [],
+		subscriptionByPropertyIds: [],
+		permissions: [],
 	})
+	const [headerMenu, setHeaderMenu] = useState()
+	const [adminMenu, setAdminMenu] = useState("left-open")
+	const [properties, setProperties] = useState([])
+	const [selectedPropertyId, setSelectedPropertyId] = useState([])
 	const [page, setPage] = useState({ name: "/", path: [] })
 	const [loadingItems, setLoadingItems] = useState(0)
 	const [showPayMenu, setShowPayMenu] = useState("")
@@ -45,6 +49,27 @@ export const AppProvider = ({ children }) => {
 	const [paymentAmount, setPaymentAmount] = useState()
 	const [downloadLink, setDownloadLink] = useState()
 	const [downloadLinkText, setDownloadLinkText] = useState("")
+
+	// Initialize client-side only state after mount
+	useEffect(() => {
+		// Load auth from localStorage
+		setAuth(getLocalStorageAuth("auth"))
+		
+		// Load properties from localStorage
+		setProperties(getLocalStorage("properties"))
+		
+		// Set admin menu based on screen size
+		if (typeof window !== "undefined" && window.innerWidth <= 768) {
+			setAdminMenu("")
+		}
+		
+		// Load selected property ID
+		const storedId = getNormalLocalStorage("selectedPropertyId")
+		const authData = getLocalStorageAuth("auth")
+		setSelectedPropertyId(
+			storedId || [...(authData.propertyIds ?? []), ...(authData.subscriptionByPropertyIds ?? [])]
+		)
+	}, [])
 
 	// Function for fetching data from API
 	const get = (
