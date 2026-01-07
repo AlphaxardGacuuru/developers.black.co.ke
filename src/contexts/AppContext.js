@@ -26,17 +26,17 @@ export const AppProvider = ({ children }) => {
 	const [errors, setErrors] = useState([])
 	const [formErrors, setFormErrors] = useState([])
 	const [login, setLogin] = useState()
-	const [auth, setAuth] = useState(getLocalStorageAuth("auth"))
+	const [auth, setAuth] = useState(() => getLocalStorageAuth("auth"))
 	const [headerMenu, setHeaderMenu] = useState()
-	const [adminMenu, setAdminMenu] = useState(
+	const [adminMenu, setAdminMenu] = useState(() =>
 		typeof window !== "undefined" && window.innerWidth <= 768 ? "" : "left-open"
 	)
-	const [properties, setProperties] = useState(getLocalStorage("properties"))
-	const [selectedPropertyId, setSelectedPropertyId] = useState(
-		getNormalLocalStorage("selectedPropertyId")
-			? getNormalLocalStorage("selectedPropertyId")
-			: [...(auth.propertyIds ?? []), ...(auth.subscriptionByPropertyIds ?? [])]
-	)
+	const [properties, setProperties] = useState(() => getLocalStorage("properties"))
+	const [selectedPropertyId, setSelectedPropertyId] = useState(() => {
+		const storedId = getNormalLocalStorage("selectedPropertyId")
+		const authData = getLocalStorageAuth("auth")
+		return storedId || [...(authData.propertyIds ?? []), ...(authData.subscriptionByPropertyIds ?? [])]
+	})
 	const [page, setPage] = useState({ name: "/", path: [] })
 	const [loadingItems, setLoadingItems] = useState(0)
 	const [showPayMenu, setShowPayMenu] = useState("")
