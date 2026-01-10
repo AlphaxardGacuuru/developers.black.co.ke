@@ -1,18 +1,30 @@
-'use client'
+"use client"
 
-import { useApp } from '@/contexts/AppContext'
-import { Children, cloneElement, isValidElement } from 'react'
+import { useApp } from "@/contexts/AppContext"
+import { Children, cloneElement, isValidElement } from "react"
+import Messages from "@/components/core/Messages"
 
 export default function AppContextInjector({ children }) {
-    const appContext = useApp()
+	const appContext = useApp()
 
-    // Clone children and inject app context as props
-    const childrenWithProps = Children.map(children, child => {
-        if (isValidElement(child)) {
-            return cloneElement(child, appContext)
-        }
-        return child
-    })
+	// Clone children and inject app context as props
+	const childrenWithProps = Children.map(children, (child) => {
+		if (isValidElement(child)) {
+			return cloneElement(child, appContext)
+		}
+		return child
+	})
 
-    return <>{childrenWithProps}</>
+	return (
+		<>
+			<Messages
+				messages={appContext.messages}
+				setMessages={appContext.setMessages}
+				errors={appContext.errors}
+				setErrors={appContext.setErrors}
+				setFormErrors={appContext.setFormErrors}
+			/>
+			{childrenWithProps}
+		</>
+	)
 }

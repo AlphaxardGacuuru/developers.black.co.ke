@@ -2,8 +2,10 @@ import useSWR from "swr"
 import axios from "@/lib/axios"
 import { useEffect, useState } from "react"
 import { useParams, useRouter } from "next/navigation"
+import { useApp } from "@/contexts/AppContext"
 
 export const useAuth = ({ middleware, redirectIfAuthenticated } = {}) => {
+	const appProps = useApp()
 	const router = useRouter()
 	const params = useParams()
 
@@ -56,8 +58,9 @@ export const useAuth = ({ middleware, redirectIfAuthenticated } = {}) => {
 
 		axios
 			.post("/login", props)
-			.then(() => {
+			.then((res) => {
 				setAuthLoading(false)
+				appProps.setMessages(["Login Successful!"])
 
                 mutate()
             })

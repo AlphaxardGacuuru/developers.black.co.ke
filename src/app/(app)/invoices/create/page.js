@@ -33,7 +33,6 @@ const CreateInvoice = () => {
 
 	// Invoice Details
 	const [clientId, setClientId] = useState("")
-
 	const [issueDate, setIssueDate] = useState(
 		new Date().toISOString().split("T")[0]
 	)
@@ -119,18 +118,17 @@ const CreateInvoice = () => {
 			issueDate,
 			dueDate,
 			lineItems: lineItems.filter((item) => item.description.trim() !== ""),
-			subtotal: calculateSubtotal(),
 			total: calculateTotal(),
 			notes,
 			terms,
-			status: "pending",
+			status: "not_paid",
 		}
 
 		Axios.post("/api/invoices", invoiceData)
 			.then((res) => {
 				setLoading(false)
-				appProps.setMessages(["Invoice created successfully!"])
-				setTimeout(() => router.push(`/invoices`), 500)
+				appProps.setMessages([res.data.message])
+				// setTimeout(() => router.push(`/invoices`), 500)
 			})
 			.catch((err) => {
 				setLoading(false)
