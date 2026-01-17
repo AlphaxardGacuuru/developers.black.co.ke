@@ -6,7 +6,7 @@ import { cva } from "class-variance-authority"
 import { cn } from "@/lib/utils"
 
 const btnVariants = cva(
-  "inline-flex items-center justify-center rounded-3xl text-white border border-white/10 backdrop-blur-md bg-white/5 hover:bg-white/10 transition-all duration-700 ease-out group font-light font-nunito text-base capitalize disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none shrink-0 [&_svg]:shrink-0 outline-none",
+  "inline-flex items-center justify-center min-h-[36px] rounded-3xl text-white border border-white/10 backdrop-blur-md bg-white/5 hover:bg-white/10 transition-all duration-700 ease-out group font-light font-nunito text-base capitalize disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none shrink-0 [&_svg]:shrink-0 outline-none",
   {
     variants: {
       variant: {

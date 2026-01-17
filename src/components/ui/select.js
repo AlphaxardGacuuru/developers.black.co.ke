@@ -1,5 +1,5 @@
 import * as React from "react"
-import { useState, forwardRef } from "react"
+import { useState, useEffect, forwardRef } from "react"
 import { cn } from "@/lib/utils"
 import { InputWrapper } from "./input-wrapper"
 
@@ -19,12 +19,27 @@ const Select = forwardRef(
 	) => {
 		const [hasValue, setHasValue] = useState(false)
 
+		// Check for initial value on mount and when value prop changes
+		useEffect(() => {
+			if (props.value !== undefined && props.value !== "") {
+				setHasValue(true)
+			} else if (
+				props.defaultValue !== undefined &&
+				props.defaultValue !== ""
+			) {
+				setHasValue(true)
+			}
+		}, [props.value, props.defaultValue])
+
 		const handleChange = (e) => {
 			setHasValue(e.target.value !== "")
 			props.onChange?.(e)
 		}
 
-		const isActive = hasValue || props.value || props.defaultValue
+		const isActive =
+			hasValue ||
+			(props.value !== undefined && props.value !== "") ||
+			(props.defaultValue !== undefined && props.defaultValue !== "")
 
 		return (
 			<div className={cn("relative w-full", className)}>
@@ -56,10 +71,17 @@ const Select = forwardRef(
 									}}
 									onChange={handleChange}
 									{...props}>
-									<option value="">{placeholder}</option>
+									<option
+										value=""
+										disabled
+										hidden>
+										{placeholder}
+									</option>
 									{children ||
 										options.map((option, index) => (
-											<option key={index} value={option.value}>
+											<option
+												key={index}
+												value={option.value}>
 												{option.label}
 											</option>
 										))}

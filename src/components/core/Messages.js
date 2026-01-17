@@ -9,18 +9,23 @@ const Messages = ({
 	setErrors,
 	setFormErrors,
 }) => {
-	const [isMobile, setIsMobile] = useState(window.innerWidth <= 768)
-	const [isSmallMobile, setIsSmallMobile] = useState(window.innerWidth <= 480)
+	const [isMobile, setIsMobile] = useState(false)
+	const [isSmallMobile, setIsSmallMobile] = useState(false)
 
-	// Handle window resize
+	// Handle window resize and initial size
 	useEffect(() => {
-		const handleResize = () => {
+		// Set initial values
+		const checkSize = () => {
 			setIsMobile(window.innerWidth <= 768)
 			setIsSmallMobile(window.innerWidth <= 480)
 		}
 
-		window.addEventListener("resize", handleResize)
-		return () => window.removeEventListener("resize", handleResize)
+		// Check size on mount
+		checkSize()
+
+		// Add resize listener
+		window.addEventListener("resize", checkSize)
+		return () => window.removeEventListener("resize", checkSize)
 	}, [])
 
 	useEffect(() => {
@@ -48,19 +53,23 @@ const Messages = ({
 
 	return (
 		<ToastContainer
-			toastId="messages-toast" // Unique ID for this toast
 			position="top-right"
 			autoClose={10000}
 			hideProgressBar={false}
 			newestOnTop={false}
-			closeOnClick
+			closeOnClick={true}
 			rtl={false}
-			pauseOnFocusLoss
-			draggable
+			pauseOnFocusLoss={true}
+			draggable={true}
 			draggablePercent={40}
-			pauseOnHover
+			pauseOnHover={true}
 			theme="colored"
 			transition={Bounce}
+			limit={undefined}
+			closeButton={true}
+			icon={true}
+			enableMultiContainer={false}
+			containerId={undefined}
 			style={{
 				zIndex: 1000002,
 				fontSize: isSmallMobile ? "14px" : "16px",

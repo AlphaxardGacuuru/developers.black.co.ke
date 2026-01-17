@@ -19,9 +19,11 @@ import PlusSVG from "@/svgs/PlusSVG"
 import { DatePicker } from "@/components/ui/date-picker"
 import MyLink from "@/components/ui/my-link"
 
-const CreateInvoice = () => {
+const CreateInvoice = (props) => {
 	const router = useRouter()
 	const appProps = useApp()
+
+	props = [...props, appProps]
 
 	const [clients, setClients] = useState([])
 	const [loading, setLoading] = useState(false)
@@ -50,7 +52,7 @@ const CreateInvoice = () => {
 	// Get data
 	useEffect(() => {
 		// Fetch Clients (could be from a clients endpoint)
-		appProps.get(`users?type=client`, setClients)
+		props.get(`users?type=client`, setClients)
 
 		// Set default due date (30 days from now)
 		const defaultDueDate = new Date()
@@ -127,12 +129,12 @@ const CreateInvoice = () => {
 		Axios.post("/api/invoices", invoiceData)
 			.then((res) => {
 				setLoading(false)
-				appProps.setMessages([res.data.message])
-				// setTimeout(() => router.push(`/invoices`), 500)
+				props.setMessages([res.data.message])
+				setTimeout(() => router.push(`/invoices`), 500)
 			})
 			.catch((err) => {
 				setLoading(false)
-				appProps.getErrors(err)
+				props.getErrors(err)
 			})
 	}
 

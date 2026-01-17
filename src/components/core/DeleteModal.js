@@ -1,69 +1,54 @@
-import React from "react"
+import React, { useState } from "react"
 
 import Btn from "@/components/ui/button"
+import Modal from "@/components/ui/modal"
 
 import DeleteSVG from "@/svgs/DeleteSVG"
-import CloseSVG from "@/svgs/CloseSVG"
 
 const DeleteModal = ({ index, model, modelName, onDelete }) => {
+	const [open, setOpen] = useState(false)
+
+	const handleDelete = () => {
+		onDelete(model.id)
+		setOpen(false)
+	}
+
 	return (
 		<React.Fragment>
-			{/* Confirm Delete Modal End */}
-			<div
-				className="modal fade"
-				id={`deleteModal${index}`}
-				tabIndex="-1"
-				aria-labelledby="deleteModalLabel"
-				aria-hidden="true">
-				<div className="modal-dialog">
-					<div className="modal-content bg-danger rounded-0 text-white">
-						<div className="modal-header border-0">
-							<h1
-								id="deleteModalLabel"
-								className="modal-title fs-5">
-								Delete {modelName}
-							</h1>
-
-							{/* Close Start */}
-							<span
-								type="button"
-								className="text-white"
-								data-bs-dismiss="modal">
-								<CloseSVG />
-							</span>
-							{/* Close End */}
-						</div>
-						<div className="modal-body text-start text-wrap">
-							Are you sure you want to Delete {model.name ?? modelName}. All
-							Associated Data will be lost.
-						</div>
-						<div className="modal-footer justify-content-between border-0">
-							<button
-								type="button"
-								className="mysonar-btn btn-2"
-								data-bs-dismiss="modal">
-								cancel
-							</button>
-							<button
-								type="button"
-								className="mysonar-btn btn-2"
-								data-bs-dismiss="modal"
-								onClick={() => onDelete(model.id)}>
-								<span className="me-1">{<DeleteSVG />}</span>
-								Delete
-							</button>
-						</div>
+			{/* Delete Modal */}
+			<Modal
+				open={open}
+				onOpenChange={setOpen}
+				title={`Delete ${modelName}`}
+				className="bg-red-600 text-white border-red-600 data-[state=open]:slide-in-from-top data-[state=closed]:slide-out-to-top"
+				footer={
+					<div className="flex justify-between w-full">
+						<button
+							type="button"
+							className="mysonar-btn btn-2"
+							onClick={() => setOpen(false)}>
+							Cancel
+						</button>
+						<Btn
+							icon={<DeleteSVG />}
+							text="Delete"
+							className="btn-2"
+							onClick={handleDelete}
+						/>
 					</div>
+				}>
+				<div className="text-white">
+					Are you sure you want to delete {model.name ?? modelName}? All
+					associated data will be lost.
 				</div>
-			</div>
-			{/* Confirm Delete Modal End */}
+			</Modal>
+			{/* Delete Modal End */}
 
 			{/* Button trigger modal */}
 			<Btn
 				icon={<DeleteSVG />}
 				text="delete"
-				dataBsToggle="modal"
-				dataBsTarget={`#deleteModal${index}`}
+				onClick={() => setOpen(true)}
 			/>
 			{/* Button trigger modal End */}
 		</React.Fragment>

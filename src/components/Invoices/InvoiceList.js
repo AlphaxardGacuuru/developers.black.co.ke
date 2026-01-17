@@ -4,6 +4,9 @@ import Axios from "@/lib/axios"
 import Btn from "@/components/ui/button"
 import MyLink from "@/components/ui/my-link"
 import DeleteModal from "@/components/core/DeleteModal"
+import { Input } from "@/components/ui/input"
+import { Select } from "@/components/ui/select"
+import { DataTable } from "@/components/Invoices/DataTable"
 
 import PaginationLinks from "@/components/core/PaginationLinks"
 
@@ -324,145 +327,95 @@ const InvoiceList = (props) => {
 			<div className="bg-white/10 backdrop-blur-xl border border-white/20 shadow-sm rounded-3xl px-4 pt-4 pb-3 mb-2 hover:bg-white/15 transition-all duration-500">
 				<div className="flex flex-wrap gap-2">
 					{/* Code */}
-					<div className="flex-grow min-w-0 mb-2">
-						<label
-							htmlFor="name"
-							className="text-white">
-							Code
-						</label>
-						<input
+					<div className="flex-grow min-w-0">
+						<Input
 							type="text"
+							label="Code"
 							placeholder="Search by Code"
-							className="w-full px-3 py-2 bg-white/10 border border-white/30 rounded text-white placeholder-white/50 focus:outline-none focus:border-white/60 focus:bg-white/20 transition-all"
+							value={props.number}
 							onChange={(e) => props.setNumber(e.target.value)}
 						/>
 					</div>
 					{/* Code End */}
 					{/* Tenant */}
-					<div className="flex-grow min-w-0 mb-2">
-						<label
-							htmlFor="name"
-							className="text-white">
-							Tenant
-						</label>
-						<input
+					<div className="flex-grow min-w-0">
+						<Input
 							type="text"
+							label="Tenant"
 							placeholder="Search by Tenant"
-							className="w-full px-3 py-2 bg-white/10 border border-white/30 rounded text-white placeholder-white/50 focus:outline-none focus:border-white/60 focus:bg-white/20 transition-all"
+							value={props.tenant}
 							onChange={(e) => props.setTenant(e.target.value)}
 						/>
 					</div>
 					{/* Tenant End */}
 					{/* Unit */}
-					<div className="flex-grow min-w-0 mb-2">
-						<label
-							htmlFor="name"
-							className="text-white">
-							Unit
-						</label>
-						<input
+					<div className="flex-grow min-w-0">
+						<Input
 							type="text"
+							label="Unit"
 							placeholder="Search by Unit"
-							className="w-full px-3 py-2 bg-white/10 border border-white/30 rounded text-white placeholder-white/50 focus:outline-none focus:border-white/60 focus:bg-white/20 transition-all"
+							value={props.unit}
 							onChange={(e) => props.setUnit(e.target.value)}
 						/>
 					</div>
 					{/* Unit End */}
-					{/* Type */}
-					<div className="flex-grow min-w-0 mb-2">
-						<label
-							htmlFor="name"
-							className="text-white">
-							Type
-						</label>
-						<select
-							type="text"
-							name="type"
-							className="w-full px-3 py-2 bg-white/10 border border-white/30 rounded capitalize text-white focus:outline-none focus:border-white/60 focus:bg-white/20 transition-all"
-							onChange={(e) => props.setType(e.target.value)}
-							required={true}>
-							{[
-								{ id: "", name: "All" },
-								{ id: "rent", name: "Rent" },
-								{ id: "water", name: "Water" },
-								{ id: "service_charge", name: "Service Charge" },
-							].map((type, key) => (
-								<option
-									key={key}
-									value={type.id}>
-									{type.name}
-								</option>
-							))}
-						</select>
-					</div>
-					{/* Type End */}
 					{/* Status */}
-					<div className="flex-grow min-w-0 mb-2">
-						<label
-							htmlFor="name"
-							className="text-white">
-							Status
-						</label>
-						<select
-							type="text"
+					<div className="flex-grow min-w-0">
+						<Select
+							label="Status"
+							placeholder=""
 							name="status"
-							className="w-full px-3 py-2 bg-white/10 border border-white/30 rounded capitalize text-white focus:outline-none focus:border-white/60 focus:bg-white/20 transition-all"
+							value={props.status}
 							onChange={(e) => props.setStatus(e.target.value)}
-							required={true}>
+							required>
 							{[
-								{ id: "", name: "All" },
+								{ id: "", name: "" },
 								{ id: "not_paid", name: "Not Paid" },
 								{ id: "partially_paid", name: "Partially Paid" },
 								{ id: "paid", name: "Paid" },
 								{ id: "overpaid", name: "Overpaid" },
-							].map((status, key) => (
+							].map((client, key) => (
 								<option
 									key={key}
-									value={status.id}>
-									{status.name}
+									value={client.id}>
+									{client.name}
 								</option>
 							))}
-						</select>
+						</Select>
 					</div>
 					{/* Status End */}
 				</div>
 			</div>
 
 			<div className="bg-white/10 backdrop-blur-xl border border-white/20 shadow-sm rounded-3xl py-2 px-4 hover:bg-white/15 transition-all duration-500">
-				<div className="flex justify-end flex-wrap">
+				<div className="flex justify-end flex-wrap gap-2">
 					<div className="flex flex-grow gap-2">
 						{/* Start Date */}
-						<div className="flex-grow mb-2">
-							<label
-								htmlFor=""
-								className="text-white">
-								Start At
-							</label>
+						<div className="flex-grow">
 							{/* Start Month */}
-							<select
-								className="w-full px-3 py-2 bg-white/10 border border-white/30 rounded text-white focus:outline-none focus:border-white/60 focus:bg-white/20 transition-all"
-								onChange={(e) => props.setStartMonth(e.target.value)}>
+							<Select
+								label="Start At"
+								value={props.startMonth}
+								// placeholder="Select Month"
+								onChange={(e) => props.setStartMonth(e.target.value)}
+								options={props.months}>
 								{props.months.map((month, key) => (
 									<option
 										key={key}
 										value={key}>
-										{month}
+										{key == 0 ? "" : month}
 									</option>
 								))}
-							</select>
+							</Select>
 						</div>
 						{/* Start Month End */}
 						{/* Start Year */}
-						<div className="flex-grow mb-2">
-							<label
-								htmlFor=""
-								className="invisible">
-								Start At
-							</label>
-							<select
-								className="w-full px-3 py-2 bg-white/10 border border-white/30 rounded text-white focus:outline-none focus:border-white/60 focus:bg-white/20 transition-all"
+						<div className="flex-grow">
+							<Select
+								label="Year"
+								value={props.startYear}
 								onChange={(e) => props.setStartYear(e.target.value)}>
-								<option value="">Select Year</option>
+								<option value=""></option>
 								{props.years.map((year, key) => (
 									<option
 										key={key}
@@ -470,7 +423,7 @@ const InvoiceList = (props) => {
 										{year}
 									</option>
 								))}
-							</select>
+							</Select>
 						</div>
 						{/* Start Year End */}
 					</div>
@@ -478,36 +431,28 @@ const InvoiceList = (props) => {
 					{/* End Date */}
 					<div className="flex flex-grow gap-2">
 						{/* End Month */}
-						<div className="flex-grow mb-2">
-							<label
-								htmlFor=""
-								className="text-white">
-								End At
-							</label>
-							<select
-								className="w-full px-3 py-2 bg-white/10 border border-white/30 rounded text-white focus:outline-none focus:border-white/60 focus:bg-white/20 transition-all"
+						<div className="flex-grow">
+							<Select
+								label="End At"
+								value={props.endMonth}
 								onChange={(e) => props.setEndMonth(e.target.value)}>
 								{props.months.map((month, key) => (
 									<option
 										key={key}
 										value={key}>
-										{month}
+										{key == 0 ? "" : month}
 									</option>
 								))}
-							</select>
+							</Select>
 						</div>
 						{/* End Month End */}
 						{/* End Year */}
-						<div className="flex-grow mb-2">
-							<label
-								htmlFor=""
-								className="invisible">
-								End At
-							</label>
-							<select
-								className="w-full px-3 py-2 bg-white/10 border border-white/30 rounded text-white focus:outline-none focus:border-white/60 focus:bg-white/20 transition-all"
-								onChange={(e) => props.setStartYear(e.target.value)}>
-								<option value="">Select Year</option>
+						<div className="flex-grow">
+							<Select
+								label="Year"
+								value={props.endYear}
+								onChange={(e) => props.setEndYear(e.target.value)}>
+								<option value=""></option>
 								{props.years.map((year, key) => (
 									<option
 										key={key}
@@ -515,7 +460,7 @@ const InvoiceList = (props) => {
 										{year}
 									</option>
 								))}
-							</select>
+							</Select>
 						</div>
 						{/* End Year End */}
 					</div>
@@ -526,187 +471,149 @@ const InvoiceList = (props) => {
 
 			<br />
 
-			{/* Table */}
-			<div className="overflow-x-auto mb-5 bg-white/10 backdrop-blur-xl border border-white/20 rounded-3xl">
-				<table className="min-w-full table-auto text-white">
-					<thead>
-						<tr>
-							<th colSpan="8"></th>
-							<th
-								colSpan="2"
-								className="text-right">
-								<div className="flex justify-end gap-2">
-									{deleteIds.length > 0 && (
-										<Btn
-											text={`delete ${deleteIds.length}`}
-											onClick={() => onDeleteInvoice(deleteIds)}
-											loading={loading}
-										/>
-									)}
+			{/* DataTable */}
+			<div className="bg-white/10 backdrop-blur-xl border border-white/20 rounded-3xl p-4 mb-5">
+				{/* Create Invoice Link Start */}
+				<div className="flex justify-end">
+					<MyLink
+						href={`/invoices/create`}
+						icon={<PlusSVG />}
+						text="create invoice"
+					/>
+				</div>
+				{/* Create Invoice Link End */}
 
-									<MyLink
-										href={`/invoices/create`}
-										icon={<PlusSVG />}
-										text="create invoice"
-									/>
-								</div>
-							</th>
-						</tr>
-						<tr>
-							<th className="px-4 py-2">
+				<DataTable
+					columns={[
+						{
+							id: "select",
+							header: ({ table }) => (
 								<input
 									type="checkbox"
-									checked={
-										deleteIds.length == props.invoices.data?.length &&
-										deleteIds.length != 0
-									}
-									onClick={() =>
-										setDeleteIds(
-											deleteIds.length == props.invoices.data.length
-												? []
-												: props.invoices.data.map((invoice) => invoice.id)
-										)
+									checked={table.getIsAllPageRowsSelected()}
+									onChange={(e) =>
+										table.toggleAllPageRowsSelected(!!e.target.checked)
 									}
 								/>
-							</th>
-							<th className="px-4 py-2">INV</th>
-							<th className="px-4 py-2">Tenant</th>
-							<th className="px-4 py-2">Unit</th>
-							<th className="px-4 py-2">Type</th>
-							<th className="px-4 py-2">Month</th>
-							<th className="px-4 py-2">Year</th>
-							<th className="px-4 py-2">Amount</th>
-							{/* <th>Paid</th> */}
-							{/* <th>Balance</th> */}
-							<th className="px-4 py-2">Status</th>
-							<th className="px-4 py-2 text-center">Action</th>
-						</tr>
-					</thead>
-					{props.invoices.data?.length > 0 ? (
-						<tbody>
-							{props.invoices.data?.map((invoice, key) => (
-								<tr
-									key={key}
-									className="hover:bg-white/10 transition-all border-b border-white/10">
-									<td className="px-4 py-2">
-										<input
-											type="checkbox"
-											checked={deleteIds.includes(invoice.id)}
-											onClick={() => handleSetDeleteIds(invoice.id)}
-										/>
-									</td>
-									{/* <td>{props.iterator(key, invoices)}</td> */}
-									<td className="px-4 py-2 whitespace-nowrap">
-										{invoice.number}
-									</td>
-									<td className="px-4 py-2">{invoice.tenantName}</td>
-									<td className="px-4 py-2">{invoice.unitName}</td>
-									<td className="px-4 py-2 capitalize">
-										{invoice.type
+							),
+							cell: ({ row }) => (
+								<input
+									type="checkbox"
+									checked={row.getIsSelected()}
+									onChange={(e) => row.toggleSelected(!!e.target.checked)}
+								/>
+							),
+							enableSorting: false,
+							enableHiding: false,
+						},
+						{
+							accessorKey: "number",
+							header: "Number",
+							cell: ({ row }) => (
+								<div className="whitespace-nowrap">
+									{row.getValue("number")}
+								</div>
+							),
+						},
+						{
+							accessorKey: "clientName",
+							header: "Client",
+						},
+						{
+							accessorKey: "amount",
+							header: "Amount",
+							cell: ({ row }) => (
+								<div className="text-green-600 whitespace-nowrap">
+									<small>KES</small> {row.getValue("amount")}
+								</div>
+							),
+						},
+						{
+							accessorKey: "paid",
+							header: "Paid",
+						},
+						{
+							accessorKey: "balance",
+							header: "Balance",
+						},
+						{
+							accessorKey: "status",
+							header: "Status",
+							cell: ({ row }) => {
+								const status = row.getValue("status")
+								return (
+									<span
+										className={`
+											${
+												status == "not_paid"
+													? "bg-red-600 text-white"
+													: status == "partially_paid"
+														? "bg-yellow-500 text-gray-900"
+														: status == "paid"
+															? "bg-green-600 text-white"
+															: "bg-gray-600 text-white"
+											}
+											py-1 px-3 rounded capitalize whitespace-nowrap
+										`}>
+										{status
 											.split("_")
 											.map(
 												(word) => word.charAt(0).toUpperCase() + word.slice(1)
 											)
 											.join(" ")}
-									</td>
-									<td className="px-4 py-2 capitalize">
-										{props.months[invoice.month]}
-									</td>
-									<td className="px-4 py-2">{invoice.year}</td>
-									<td className="px-4 py-2 text-green-600 whitespace-nowrap">
-										<small>KES</small> {invoice.amount}
-									</td>
-									{/* <td className="text-success">
-										<small>KES</small> {invoice.paid}
-									</td> */}
-									{/* <td className="text-success">
-										<small>KES</small> {invoice.balance}
-									</td> */}
-									<td className="px-4 py-2 capitalize whitespace-nowrap">
-										<span
-											className={`
-									${
-										invoice.status == "not_paid"
-											? "bg-red-100"
-											: invoice.status == "partially_paid"
-												? "bg-yellow-100"
-												: invoice.status == "paid"
-													? "bg-green-100"
-													: "bg-gray-100"
-									}
-								 py-1 px-3 rounded`}>
-											{invoice.status
-												.split("_")
-												.map(
-													(word) => word.charAt(0).toUpperCase() + word.slice(1)
-												)
-												.join(" ")}
-										</span>
-									</td>
-									<td className="px-4 py-2">
-										<div className="flex justify-center gap-2">
-											{/* Button trigger modal */}
-											<React.Fragment>
-												{parseFloat(invoice.balance?.replace(/,/g, "")) > 0 && (
-													<Btn
-														icon={<ChatSendSVG />}
-														text={`send invoice ${
-															invoice.smsesSent || invoice.emailsSent
-																? `(${invoice.smsesSent + invoice.emailsSent})`
-																: ""
-														}`}
-														className={`${
-															invoice.smsesSent || invoice.emailsSent
-																? "btn-green"
-																: ""
-														}`}
-														dataBsToggle="modal"
-														dataBsTarget={`#invoiceModal`}
-														onClick={() => setInvoiceToSend(invoice)}
-													/>
-												)}
-											</React.Fragment>
-											{/* Button trigger modal End */}
-
-											<MyLink
-												href={`/invoices/${invoice.id}/show`}
-												icon={<ViewSVG />}
+									</span>
+								)
+							},
+						},
+						{
+							accessorKey: "createdAt",
+							header: "Created At",
+						},
+						{
+							id: "actions",
+							header: "Action",
+							cell: ({ row }) => {
+								const invoice = row.original
+								return (
+									<div className="flex items-center gap-2">
+										{parseFloat(invoice.balance?.replace(/,/g, "")) > 0 && (
+											<Btn
+												icon={<ChatSendSVG />}
+												text={`send invoice ${
+													invoice.smsesSent || invoice.emailsSent
+														? `(${invoice.smsesSent + invoice.emailsSent})`
+														: ""
+												}`}
+												className={`${
+													invoice.smsesSent || invoice.emailsSent
+														? "btn-green"
+														: ""
+												}`}
+												dataBsToggle="modal"
+												dataBsTarget={`#invoiceModal`}
+												onClick={() => setInvoiceToSend(invoice)}
 											/>
-
-											<div>
-												<DeleteModal
-													index={`invoice${key}`}
-													model={invoice}
-													modelName="Invoice"
-													onDelete={onDeleteInvoice}
-												/>
-											</div>
-										</div>
-									</td>
-								</tr>
-							))}
-						</tbody>
-					) : (
-						<tbody>
-							<tr>
-								<td
-									colSpan="10"
-									className="p-0">
-									<NoData />
-								</td>
-							</tr>
-						</tbody>
-					)}
-				</table>
-				{/* Pagination Links */}
-				<PaginationLinks
-					list={props.invoices}
-					getPaginated={props.getPaginated}
-					setState={props.setInvoices}
+										)}
+										<MyLink
+											href={`/invoices/${invoice.id}/show`}
+											icon={<ViewSVG />}
+											// text="view"
+										/>
+										<DeleteModal
+											index={`invoice-dt-${invoice.id}`}
+											model={invoice}
+											modelName="Invoice"
+											onDelete={onDeleteInvoice}
+										/>
+									</div>
+								)
+							},
+						},
+					]}
+					data={props.invoices.data || []}
 				/>
-				{/* Pagination Links End */}
 			</div>
-			{/* Table End */}
+			{/* DataTable End */}
 		</div>
 	)
 }
