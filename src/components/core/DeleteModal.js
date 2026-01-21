@@ -23,12 +23,11 @@ const DeleteModal = ({ index, model, modelName, onDelete }) => {
 				className="bg-red-600 text-white border-red-600 data-[state=open]:slide-in-from-top data-[state=closed]:slide-out-to-top"
 				footer={
 					<div className="flex justify-between w-full">
-						<button
+						<Btn
 							type="button"
-							className="mysonar-btn btn-2"
-							onClick={() => setOpen(false)}>
-							Cancel
-						</button>
+							text="Cancel"
+							onClick={() => setOpen(false)}
+						/>
 						<Btn
 							icon={<DeleteSVG />}
 							text="Delete"

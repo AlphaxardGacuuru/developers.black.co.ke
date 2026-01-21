@@ -7,6 +7,7 @@ import DeleteModal from "@/components/core/DeleteModal"
 import { Input } from "@/components/ui/input"
 import { Select } from "@/components/ui/select"
 import { DataTable } from "@/components/Invoices/DataTable"
+import Modal from "@/components/ui/modal"
 
 import PaginationLinks from "@/components/core/PaginationLinks"
 
@@ -16,6 +17,7 @@ import NoData from "@/components/core/NoData"
 
 import ViewSVG from "@/svgs/ViewSVG"
 import EditSVG from "@/svgs/EditSVG"
+import DeleteSVG from "@/svgs/DeleteSVG"
 import PlusSVG from "@/svgs/PlusSVG"
 import InvoiceSVG from "@/svgs/InvoiceSVG"
 import PaymentSVG from "@/svgs/PaymentSVG"
@@ -34,6 +36,8 @@ const InvoiceList = (props) => {
 	const [loading, setLoading] = useState()
 	const [loadingSMS, setLoadingSMS] = useState()
 	const [loadingEmail, setLoadingEmail] = useState()
+	const [rowSelection, setRowSelection] = useState({})
+	const [showBulkDeleteDialog, setShowBulkDeleteDialog] = useState(false)
 
 	// Timer states
 	const [emailCountdown, setEmailCountdown] = useState(0)
@@ -159,7 +163,7 @@ const InvoiceList = (props) => {
 					links: props.invoices.links,
 					data: props.invoices.data.filter((invoice) => {
 						if (Array.isArray(invoiceId)) {
-							return !invoiceIds.includes(invoice.id)
+							return !invoiceId.map(String).includes(String(invoice.id))
 						} else {
 							return invoice.id != invoiceId
 						}
@@ -167,17 +171,52 @@ const InvoiceList = (props) => {
 				})
 				// Clear DeleteIds
 				setDeleteIds([])
+				setRowSelection({})
 			})
 			.catch((err) => {
 				setLoading(false)
 				props.getErrors(err)
 				// Clear DeleteIds
 				setDeleteIds([])
+				setRowSelection({})
 			})
 	}
 
 	return (
 		<div className={props.activeTab}>
+			{/* Bulk Delete Confirmation Modal Start */}
+			<Modal
+				open={showBulkDeleteDialog}
+				onOpenChange={setShowBulkDeleteDialog}
+				title="Delete Selected Invoices"
+				className="bg-white/10 backdrop-blur-xl border border-white/20 shadow-sm rounded-3xl text-white data-[state=open]:slide-in-from-top data-[state=closed]:slide-out-to-top"
+				footer={
+					<div className="flex justify-between w-full">
+						<Btn
+							type="button"
+							text="Cancel"
+							onClick={() => setShowBulkDeleteDialog(false)}
+						/>
+						<Btn
+							icon={<DeleteSVG />}
+							text="Delete"
+							className="btn-2"
+							onClick={() => {
+								onDeleteInvoice(Object.keys(rowSelection))
+								setShowBulkDeleteDialog(false)
+							}}
+							loading={loading}
+						/>
+					</div>
+				}>
+				<div className="text-white">
+					Are you sure you want to delete {Object.keys(rowSelection).length}{" "}
+					selected invoice{Object.keys(rowSelection).length > 1 ? "s" : ""}?
+					This action cannot be undone.
+				</div>
+			</Modal>
+			{/* Bulk Delete Confirmation Modal End */}
+
 			{/* Confirm Invoice Modal End */}
 			<div
 				className="fixed inset-0 bg-black bg-opacity-50 hidden"
@@ -474,7 +513,14 @@ const InvoiceList = (props) => {
 			{/* DataTable */}
 			<div className="bg-white/10 backdrop-blur-xl border border-white/20 rounded-3xl p-4 mb-5">
 				{/* Create Invoice Link Start */}
-				<div className="flex justify-end">
+				<div className="flex justify-end gap-2">
+					{Object.keys(rowSelection).length > 0 && (
+						<Btn
+							icon={<DeleteSVG />}
+							text={`Delete Selected (${Object.keys(rowSelection).length})`}
+							onClick={() => setShowBulkDeleteDialog(true)}
+						/>
+					)}
 					<MyLink
 						href={`/invoices/create`}
 						icon={<PlusSVG />}
@@ -484,6 +530,8 @@ const InvoiceList = (props) => {
 				{/* Create Invoice Link End */}
 
 				<DataTable
+					rowSelection={rowSelection}
+					setRowSelection={setRowSelection}
 					columns={[
 						{
 							id: "select",
@@ -500,11 +548,20 @@ const InvoiceList = (props) => {
 								<input
 									type="checkbox"
 									checked={row.getIsSelected()}
-									onChange={(e) => row.toggleSelected(!!e.target.checked)}
+									onChange={row.getToggleSelectedHandler()}
 								/>
 							),
 							enableSorting: false,
 							enableHiding: false,
+						},
+						{
+							accessorKey: "",
+							header: "#",
+							cell: ({ row }) => (
+								<div className="whitespace-nowrap">
+									{props.iterator(row.index, props.invoices)}
+								</div>
+							),
 						},
 						{
 							accessorKey: "number",
@@ -611,6 +668,11 @@ const InvoiceList = (props) => {
 						},
 					]}
 					data={props.invoices.data || []}
+					pagination={{
+						getPaginated: props.getPaginated,
+						setState: props.setInvoices,
+						list: props.invoices,
+					}}
 				/>
 			</div>
 			{/* DataTable End */}

@@ -1,6 +1,6 @@
 "use client"
 
-import * as React from "react"
+import { useState } from "react"
 import {
 	flexRender,
 	getCoreRowModel,
@@ -18,8 +18,9 @@ import {
 	DropdownMenuCheckboxItem,
 	DropdownMenuContent,
 	DropdownMenuTrigger,
+	DropdownMenuRadioGroup,
+	DropdownMenuRadioItem,
 } from "@/components/ui/dropdown-menu"
-import { Input } from "@/components/ui/input"
 import {
 	Table,
 	TableBody,
@@ -28,16 +29,30 @@ import {
 	TableHeader,
 	TableRow,
 } from "@/components/ui/table"
+import NoData from "@/components/core/NoData"
+import PaginationLinks from "@/components/core/PaginationLinks"
 
-export function DataTable({ columns, data }) {
-	const [sorting, setSorting] = React.useState([])
-	const [columnFilters, setColumnFilters] = React.useState([])
-	const [columnVisibility, setColumnVisibility] = React.useState({})
-	const [rowSelection, setRowSelection] = React.useState({})
+export function DataTable({
+	columns,
+	data,
+	pagination,
+	rowSelection,
+	setRowSelection,
+}) {
+	const [sorting, setSorting] = useState([])
+	const [columnFilters, setColumnFilters] = useState([])
+	const [columnVisibility, setColumnVisibility] = useState({})
+	const [internalRowSelection, setInternalRowSelection] = useState({})
+
+	const finalRowSelection = rowSelection ?? internalRowSelection
+	const finalSetRowSelection = setRowSelection ?? setInternalRowSelection
 
 	const table = useReactTable({
 		data,
 		columns,
+		getRowId: (row) => row.id,
+		pageCount: pagination?.list?.meta?.last_page ?? -1,
+		manualPagination: !!pagination,
 		onSortingChange: setSorting,
 		onColumnFiltersChange: setColumnFilters,
 		getCoreRowModel: getCoreRowModel(),
@@ -45,55 +60,104 @@ export function DataTable({ columns, data }) {
 		getSortedRowModel: getSortedRowModel(),
 		getFilteredRowModel: getFilteredRowModel(),
 		onColumnVisibilityChange: setColumnVisibility,
-		onRowSelectionChange: setRowSelection,
+		onRowSelectionChange: finalSetRowSelection,
 		state: {
 			sorting,
 			columnFilters,
 			columnVisibility,
-			rowSelection,
+			rowSelection: finalRowSelection,
 		},
 	})
 
+	const PaginationControl = (
+		<div className="flex items-center justify-end space-x-4 py-4">
+			{/* Rows selected Start */}
+			<div className="flex-1 text-sm text-muted-foreground text-white">
+				{table.getFilteredSelectedRowModel().rows.length} of{" "}
+				{table.getFilteredRowModel().rows.length} row
+				{table.getFilteredRowModel().rows.length !== 1 ? "s" : ""} selected.
+			</div>
+			{/* Rows selected End */}
+
+			{/* Columns Visibility Start */}
+			<DropdownMenu>
+				<DropdownMenuTrigger asChild>
+					<Btn
+						variant="outline"
+						size="sm">
+						Columns <ChevronDown className="ml-2 h-4 w-4" />
+					</Btn>
+				</DropdownMenuTrigger>
+				<DropdownMenuContent align="end">
+					{table
+						.getAllColumns()
+						.filter((column) => column.getCanHide())
+						.map((column) => {
+							return (
+								<DropdownMenuCheckboxItem
+									key={column.id}
+									className="capitalize"
+									checked={column.getIsVisible()}
+									onCheckedChange={(value) => column.toggleVisibility(!!value)}>
+									{column.id}
+								</DropdownMenuCheckboxItem>
+							)
+						})}
+				</DropdownMenuContent>
+			</DropdownMenu>
+			{/* Columns Visibility End */}
+
+			{/* Pagination Start */}
+			{pagination ? (
+				<PaginationLinks {...pagination} />
+			) : (
+				<div className="flex items-center space-x-2">
+					<DropdownMenu>
+						<DropdownMenuTrigger asChild>
+							<Btn
+								variant="outline"
+								size="sm">
+								Rows Per Page: {table.getState().pagination.pageSize}{" "}
+								<ChevronDown className="ml-2 h-4 w-4" />
+							</Btn>
+						</DropdownMenuTrigger>
+						<DropdownMenuContent align="end">
+							<DropdownMenuRadioGroup
+								value={table.getState().pagination.pageSize.toString()}
+								onValueChange={(value) => table.setPageSize(Number(value))}>
+								{[5, 10, 20, 30, 40, 50].map((pageSize) => (
+									<DropdownMenuRadioItem
+										key={pageSize}
+										value={pageSize.toString()}>
+										{pageSize}
+									</DropdownMenuRadioItem>
+								))}
+							</DropdownMenuRadioGroup>
+						</DropdownMenuContent>
+					</DropdownMenu>
+					<Btn
+						variant="outline"
+						size="sm"
+						onClick={() => table.previousPage()}
+						disabled={!table.getCanPreviousPage()}>
+						Previous
+					</Btn>
+					<Btn
+						variant="outline"
+						size="sm"
+						onClick={() => table.nextPage()}
+						disabled={!table.getCanNextPage()}>
+						Next
+					</Btn>
+				</div>
+			)}
+			{/* Pagination End */}
+		</div>
+	)
+
 	return (
 		<div className="w-full">
-			<div className="flex items-center py-4">
-				<Input
-					label="Filter by Email"
-					placeholder="Filter emails..."
-					value={table.getColumn("email")?.getFilterValue() ?? ""}
-					onChange={(event) =>
-						table.getColumn("email")?.setFilterValue(event.target.value)
-					}
-					className="max-w-sm"
-				/>
-				<DropdownMenu>
-					<DropdownMenuTrigger asChild>
-						<Btn
-							variant="outline"
-							className="ml-auto">
-							Columns <ChevronDown className="ml-2 h-4 w-4" />
-						</Btn>
-					</DropdownMenuTrigger>
-					<DropdownMenuContent align="end">
-						{table
-							.getAllColumns()
-							.filter((column) => column.getCanHide())
-							.map((column) => {
-								return (
-									<DropdownMenuCheckboxItem
-										key={column.id}
-										className="capitalize"
-										checked={column.getIsVisible()}
-										onCheckedChange={(value) =>
-											column.toggleVisibility(!!value)
-										}>
-										{column.id}
-									</DropdownMenuCheckboxItem>
-								)
-							})}
-					</DropdownMenuContent>
-				</DropdownMenu>
-			</div>
+			{PaginationControl}
 			<div className="rounded-md border border-white/20">
 				<Table>
 					<TableHeader>
@@ -137,36 +201,15 @@ export function DataTable({ columns, data }) {
 							<TableRow>
 								<TableCell
 									colSpan={columns.length}
-									className="h-24 text-center">
-									No results.
+									className="p-0">
+									<NoData />
 								</TableCell>
 							</TableRow>
 						)}
 					</TableBody>
 				</Table>
 			</div>
-			<div className="flex items-center justify-end space-x-2 py-4">
-				<div className="flex-1 text-sm text-muted-foreground text-white">
-					{table.getFilteredSelectedRowModel().rows.length} of{" "}
-					{table.getFilteredRowModel().rows.length} row(s) selected.
-				</div>
-				<div className="space-x-2">
-					<Btn
-						variant="outline"
-						size="sm"
-						onClick={() => table.previousPage()}
-						disabled={!table.getCanPreviousPage()}>
-						Previous
-					</Btn>
-					<Btn
-						variant="outline"
-						size="sm"
-						onClick={() => table.nextPage()}
-						disabled={!table.getCanNextPage()}>
-						Next
-					</Btn>
-				</div>
-			</div>
+			{PaginationControl}
 		</div>
 	)
 }

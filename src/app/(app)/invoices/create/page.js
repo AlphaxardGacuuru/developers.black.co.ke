@@ -23,7 +23,7 @@ const CreateInvoice = (props) => {
 	const router = useRouter()
 	const appProps = useApp()
 
-	props = [...props, appProps]
+	props = { ...props, ...appProps }
 
 	const [clients, setClients] = useState([])
 	const [loading, setLoading] = useState(false)
