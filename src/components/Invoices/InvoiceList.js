@@ -365,39 +365,17 @@ const InvoiceList = (props) => {
 			{/* Filters */}
 			<div className="bg-white/10 backdrop-blur-xl border border-white/20 shadow-sm rounded-3xl px-4 pt-4 pb-3 mb-2 hover:bg-white/15 transition-all duration-500">
 				<div className="flex flex-wrap gap-2">
-					{/* Code */}
+					{/* Number */}
 					<div className="flex-grow min-w-0">
 						<Input
 							type="text"
-							label="Code"
-							placeholder="Search by Code"
+							label="Number"
+							placeholder="Search by Number"
 							value={props.number}
 							onChange={(e) => props.setNumber(e.target.value)}
 						/>
 					</div>
-					{/* Code End */}
-					{/* Tenant */}
-					<div className="flex-grow min-w-0">
-						<Input
-							type="text"
-							label="Tenant"
-							placeholder="Search by Tenant"
-							value={props.tenant}
-							onChange={(e) => props.setTenant(e.target.value)}
-						/>
-					</div>
-					{/* Tenant End */}
-					{/* Unit */}
-					<div className="flex-grow min-w-0">
-						<Input
-							type="text"
-							label="Unit"
-							placeholder="Search by Unit"
-							value={props.unit}
-							onChange={(e) => props.setUnit(e.target.value)}
-						/>
-					</div>
-					{/* Unit End */}
+					{/* Number End */}
 					{/* Status */}
 					<div className="flex-grow min-w-0">
 						<Select
@@ -423,11 +401,7 @@ const InvoiceList = (props) => {
 						</Select>
 					</div>
 					{/* Status End */}
-				</div>
-			</div>
 
-			<div className="bg-white/10 backdrop-blur-xl border border-white/20 shadow-sm rounded-3xl py-2 px-4 hover:bg-white/15 transition-all duration-500">
-				<div className="flex justify-end flex-wrap gap-2">
 					<div className="flex flex-grow gap-2">
 						{/* Start Date */}
 						<div className="flex-grow">
@@ -652,9 +626,14 @@ const InvoiceList = (props) => {
 											/>
 										)}
 										<MyLink
-											href={`/invoices/${invoice.id}/show`}
+											href={`/invoices/${invoice.id}/view`}
 											icon={<ViewSVG />}
 											// text="view"
+										/>
+										<MyLink
+											href={`/invoices/${invoice.id}/edit`}
+											icon={<EditSVG />}
+											// text="edit"
 										/>
 										<DeleteModal
 											index={`invoice-dt-${invoice.id}`}

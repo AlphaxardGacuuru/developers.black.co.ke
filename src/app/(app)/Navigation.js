@@ -43,7 +43,7 @@ const Navigation = ({ user }) => {
 							{/* Invoices Start */}
 							<NavLink
 								href="/invoices"
-								active={usePathname() === "/invoices"}>
+								active={usePathname().startsWith("/invoices")}>
 								Invoices
 							</NavLink>
 							{/* Invoices End */}
@@ -51,10 +51,26 @@ const Navigation = ({ user }) => {
 							{/* Payments Start */}
 							<NavLink
 								href="/payments"
-								active={usePathname() === "/payments"}>
+								active={usePathname().startsWith("/payments")}>
 								Payments
 							</NavLink>
 							{/* Payments End */}
+
+							{/* Credit Notes Start */}
+							<NavLink
+								href="/credit-notes"
+								active={usePathname().startsWith("/credit-notes")}>
+								Credit Notes
+							</NavLink>
+							{/* Credit Notes End */}
+
+							{/* Deductions Start */}
+							<NavLink
+								href="/deductions"
+								active={usePathname().startsWith("/deductions")}>
+								Deductions
+							</NavLink>
+							{/* Deductions End */}
 						</div>
 					</div>
 
