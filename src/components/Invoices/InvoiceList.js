@@ -402,8 +402,8 @@ const InvoiceList = (props) => {
 					</div>
 					{/* Status End */}
 
+					{/* Start Date */}
 					<div className="flex flex-grow gap-2">
-						{/* Start Date */}
 						<div className="flex-grow">
 							{/* Start Month */}
 							<Select

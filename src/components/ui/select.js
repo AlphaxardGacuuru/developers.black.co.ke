@@ -11,7 +11,7 @@ const Select = forwardRef(
 			error,
 			helperText,
 			options = [],
-			placeholder = "Select an option",
+			placeholder,
 			children,
 			...props
 		},

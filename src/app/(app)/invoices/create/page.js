@@ -33,6 +33,22 @@ const CreateInvoice = (props) => {
 		return amount.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",")
 	}
 
+	// Parse date string to local Date object (avoids timezone issues)
+	const parseLocalDate = (dateStr) => {
+		if (!dateStr) return null
+		const [y, m, d] = dateStr.split("-")
+		return new Date(y, m - 1, d)
+	}
+
+	// Format Date object to YYYY-MM-DD in local timezone
+	const formatLocalDate = (date) => {
+		if (!date) return ""
+		const year = date.getFullYear()
+		const month = String(date.getMonth() + 1).padStart(2, "0")
+		const day = String(date.getDate()).padStart(2, "0")
+		return `${year}-${month}-${day}`
+	}
+
 	// Invoice Details
 	const [clientId, setClientId] = useState("")
 	const [issueDate, setIssueDate] = useState(
@@ -170,7 +186,7 @@ const CreateInvoice = (props) => {
 								{/* Issue Date Start */}
 								<DatePicker
 									label="Issue Date"
-									value={issueDate ? new Date(issueDate) : null}
+									value={parseLocalDate(issueDate)}
 									onChange={(date) =>
 										setIssueDate(date?.toISOString().split("T")[0] || "")
 									}
@@ -180,7 +196,7 @@ const CreateInvoice = (props) => {
 								{/* Due Date Start */}
 								<DatePicker
 									label="Due Date"
-									value={dueDate ? new Date(dueDate) : null}
+									value={parseLocalDate(dueDate)}
 									onChange={(date) =>
 										setDueDate(date?.toISOString().split("T")[0] || "")
 									}
