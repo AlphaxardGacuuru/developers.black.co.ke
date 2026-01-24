@@ -16,35 +16,48 @@ import ViewSVG from "@/svgs/ViewSVG"
 import EditSVG from "@/svgs/EditSVG"
 import DeleteSVG from "@/svgs/DeleteSVG"
 import PlusSVG from "@/svgs/PlusSVG"
+import CreditNoteSVG from "@/svgs/CreditNoteSVG"
+import InvoiceSVG from "@/svgs/InvoiceSVG"
+import PaymentSVG from "@/svgs/PaymentSVG"
+import BalanceSVG from "@/svgs/BalanceSVG"
+import EmailSentSVG from "@/svgs/EmailSentSVG"
+import SendEmailSVG from "@/svgs/SendEmailSVG"
+import SMSSVG from "@/svgs/SMSSVG"
+import ChatSVG from "@/svgs/ChatSVG"
+import ChatSendSVG from "@/svgs/ChatSendSVG"
+import CloseSVG from "@/svgs/CloseSVG"
 import MoneySVG from "@/svgs/MoneySVG"
+import CoinSVG from "@/svgs/CoinSVG"
 
-const PaymentList = (props) => {
+const CreditNoteList = (props) => {
 	const [deleteIds, setDeleteIds] = useState([])
 	const [loading, setLoading] = useState()
 	const [rowSelection, setRowSelection] = useState({})
 	const [showBulkDeleteDialog, setShowBulkDeleteDialog] = useState(false)
 
 	/*
-	 * Delete Payment
+	 * Delete Credit Note
 	 */
-	const onDeletePayment = (paymentId) => {
+	const onDeleteCreditNote = (creditNoteId) => {
 		setLoading(true)
-		var paymentIds = Array.isArray(paymentId) ? paymentId.join(",") : paymentId
+		var creditNoteIds = Array.isArray(creditNoteId)
+			? creditNoteId.join(",")
+			: creditNoteId
 
-		Axios.delete(`/api/payments/${paymentIds}`)
+		Axios.delete(`/api/credit-notes/${creditNoteIds}`)
 			.then((res) => {
 				setLoading(false)
 				props.setMessages([res.data.message])
 				// Remove row
-				props.setPayments({
-					sum: props.payments.sum,
-					meta: props.payments.meta,
-					links: props.payments.links,
-					data: props.payments.data.filter((payment) => {
-						if (Array.isArray(paymentId)) {
-							return !paymentId.map(String).includes(String(payment.id))
+				props.setCreditNotes({
+					sum: props.creditNotes.sum,
+					meta: props.creditNotes.meta,
+					links: props.creditNotes.links,
+					data: props.creditNotes.data.filter((creditNote) => {
+						if (Array.isArray(creditNoteId)) {
+							return !creditNoteId.map(String).includes(String(creditNote.id))
 						} else {
-							return payment.id != paymentId
+							return creditNote.id != creditNoteId
 						}
 					}),
 				})
@@ -67,7 +80,7 @@ const PaymentList = (props) => {
 			<Modal
 				open={showBulkDeleteDialog}
 				onOpenChange={setShowBulkDeleteDialog}
-				title="Delete Selected Payments"
+				title="Delete Selected Credit Notes"
 				className="bg-white/10 backdrop-blur-xl border border-white/20 shadow-sm rounded-3xl text-white data-[state=open]:slide-in-from-top data-[state=closed]:slide-out-to-top"
 				footer={
 					<div className="flex justify-between w-full">
@@ -81,7 +94,7 @@ const PaymentList = (props) => {
 							text="Delete"
 							className="btn-2"
 							onClick={() => {
-								onDeletePayment(Object.keys(rowSelection))
+								onDeleteCreditNote(Object.keys(rowSelection))
 								setShowBulkDeleteDialog(false)
 							}}
 							loading={loading}
@@ -90,7 +103,7 @@ const PaymentList = (props) => {
 				}>
 				<div className="text-white">
 					Are you sure you want to delete {Object.keys(rowSelection).length}{" "}
-					selected payment{Object.keys(rowSelection).length > 1 ? "s" : ""}?
+					selected credit note{Object.keys(rowSelection).length > 1 ? "s" : ""}?
 					This action cannot be undone.
 				</div>
 			</Modal>
@@ -99,14 +112,15 @@ const PaymentList = (props) => {
 			{/* Data */}
 			<div className="bg-white/10 backdrop-blur-xl border border-white/20 shadow-sm rounded-3xl mb-2 p-2 hover:bg-white/15 transition-all duration-500">
 				{/* Total */}
-				<div className="grid grid-cols-1">
+				<div className="grid grid-cols-1 gap-4">
+					{/* Total */}
 					<div>
 						<div className="flex justify-between flex-grow mx-2">
 							<HeroHeading
-								heading="Total Payments"
+								heading="Total"
 								data={
 									<span>
-										<small>KES</small> {props.payments.sum}
+										<small>KES</small> {props.creditNotes.sum}
 									</span>
 								}
 							/>
@@ -115,6 +129,7 @@ const PaymentList = (props) => {
 							</HeroIcon>
 						</div>
 					</div>
+					{/* Total End */}
 				</div>
 				{/* Total End */}
 			</div>
@@ -244,9 +259,9 @@ const PaymentList = (props) => {
 
 			<br />
 
-			{/* DataTable */}
+			{/* Data */}
 			<div className="bg-white/10 backdrop-blur-xl border border-white/20 rounded-3xl p-4 mb-5">
-				{/* Create Payment Link Start */}
+				{/* Create Invoice Link Start */}
 				<div className="flex justify-end gap-2">
 					{Object.keys(rowSelection).length > 0 && (
 						<Btn
@@ -256,16 +271,15 @@ const PaymentList = (props) => {
 						/>
 					)}
 					<MyLink
-						href={`/payments/create`}
+						href={`/credit-notes/create`}
 						icon={<PlusSVG />}
-						text="create payment"
+						text="create credit note"
 					/>
 				</div>
-				{/* Create Payment Link End */}
+				{/* Create Invoice Link End */}
 
+				{/* DataTable Start */}
 				<DataTable
-					rowSelection={rowSelection}
-					setRowSelection={setRowSelection}
 					columns={[
 						{
 							id: "select",
@@ -273,9 +287,7 @@ const PaymentList = (props) => {
 								<input
 									type="checkbox"
 									checked={table.getIsAllPageRowsSelected()}
-									onChange={(e) =>
-										table.toggleAllPageRowsSelected(!!e.target.checked)
-									}
+									onChange={table.getToggleAllPageRowsSelectedHandler()}
 								/>
 							),
 							cell: ({ row }) => (
@@ -293,13 +305,18 @@ const PaymentList = (props) => {
 							header: "#",
 							cell: ({ row }) => (
 								<div className="whitespace-nowrap">
-									{props.iterator(row.index, props.payments)}
+									{props.iterator(row.index, props.creditNotes)}
 								</div>
 							),
 						},
 						{
 							accessorKey: "number",
 							header: "Number",
+							cell: ({ row }) => (
+								<div className="whitespace-nowrap">
+									{row.getValue("number")}
+								</div>
+							),
 						},
 						{
 							accessorKey: "clientName",
@@ -315,41 +332,45 @@ const PaymentList = (props) => {
 							),
 						},
 						{
-							accessorKey: "paymentDate",
-							header: "Payment Date",
+							accessorKey: "issueDate",
+							header: "Issue Date",
 						},
 						{
 							id: "actions",
 							header: "Action",
 							cell: ({ row }) => {
-								const payment = row.original
+								const creditNote = row.original
 								return (
 									<div className="flex items-center gap-2">
 										<MyLink
-											href={`/payments/${payment.id}/view`}
+											href={`/credit-notes/${creditNote.id}/view`}
 											icon={<ViewSVG />}
+											// text="view"
 										/>
 										<MyLink
-											href={`/payments/${payment.id}/edit`}
+											href={`/credit-notes/${creditNote.id}/edit`}
 											icon={<EditSVG />}
+											// text="edit"
 										/>
 										<DeleteModal
-											index={`payment-dt-${payment.id}`}
-											model={payment}
-											modelName="Payment"
-											onDelete={onDeletePayment}
+											index={`credit-note-dt-${creditNote.id}`}
+											model={creditNote}
+											modelName="Credit Note"
+											onDelete={onDeleteCreditNote}
 										/>
 									</div>
 								)
 							},
 						},
 					]}
-					data={props.payments.data || []}
+					data={props.creditNotes.data || []}
 					pagination={{
 						getPaginated: props.getPaginated,
-						setState: props.setPayments,
-						list: props.payments,
+						setState: props.setCreditNotes,
+						list: props.creditNotes,
 					}}
+					rowSelection={rowSelection}
+					setRowSelection={setRowSelection}
 				/>
 			</div>
 			{/* DataTable End */}
@@ -357,4 +378,4 @@ const PaymentList = (props) => {
 	)
 }
 
-export default PaymentList
+export default CreditNoteList
