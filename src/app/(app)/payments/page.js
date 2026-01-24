@@ -14,6 +14,7 @@ const Payments = (props) => {
 
 	const [payments, setPayments] = useState([])
 
+	const [number, setNumber] = useState("")
 	const [startMonth, setStartMonth] = useState("")
 	const [startYear, setStartYear] = useState("")
 	const [endMonth, setEndMonth] = useState("")
@@ -22,13 +23,14 @@ const Payments = (props) => {
 	useEffect(() => {
 		// Fetch Payments
 		props.getPaginated(
-			`payments?startMonth=${startMonth}&
+			`payments?number=${number}&
+			startMonth=${startMonth}&
 			endMonth=${endMonth}&
 			startYear=${startYear}&
 			endYear=${endYear}`,
 			setPayments
 		)
-	}, [startMonth, endMonth, startYear, endYear])
+	}, [number, startMonth, endMonth, startYear, endYear])
 
 	return (
 		<>
@@ -39,6 +41,8 @@ const Payments = (props) => {
 					{...props}
 					payments={payments}
 					setPayments={setPayments}
+					number={number}
+					setNumber={setNumber}
 					startMonth={startMonth}
 					setStartMonth={setStartMonth}
 					endMonth={endMonth}

@@ -136,32 +136,6 @@ const PaymentList = (props) => {
 						/>
 					</div>
 					{/* Number End */}
-					{/* Status */}
-					<div className="flex-grow min-w-0">
-						<Select
-							label="Status"
-							placeholder=""
-							name="status"
-							value={props.status}
-							onChange={(e) => props.setStatus(e.target.value)}
-							required>
-							{[
-								{ id: "", name: "" },
-								{ id: "not_paid", name: "Not Paid" },
-								{ id: "partially_paid", name: "Partially Paid" },
-								{ id: "paid", name: "Paid" },
-								{ id: "overpaid", name: "Overpaid" },
-							].map((client, key) => (
-								<option
-									key={key}
-									value={client.id}>
-									{client.name}
-								</option>
-							))}
-						</Select>
-					</div>
-					{/* Status End */}
-
 					{/* Start Date */}
 					<div className="flex flex-grow gap-2">
 						<div className="flex-grow">
