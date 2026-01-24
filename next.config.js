@@ -25,8 +25,6 @@ const nextConfig = {
 
 	// Experimental features for better performance
 	experimental: {
-		// Optimize CSS loading
-		optimizeCss: true,
 		// Optimize package imports
 		optimizePackageImports: [
 			"lucide-react",
