@@ -35,6 +35,7 @@ const Payments = (props) => {
 	return (
 		<>
 			<Header title="Payments" />
+			
 			<div className="py-12 px-6">
 				{/* Payments Tab */}
 				<PaymentList

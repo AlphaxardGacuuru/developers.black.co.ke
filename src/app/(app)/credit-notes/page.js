@@ -40,6 +40,7 @@ const CreditNotes = (props) => {
 	return (
 		<>
 			<Header title="Credit Notes" />
+			
 			<div className="py-12 px-6">
 				{/* Credit Notes Tab */}
 				<CreditNoteList

@@ -40,6 +40,14 @@ const Navigation = ({ user }) => {
 							</NavLink>
 							{/* Dashboard End */}
 
+							{/* Clients Start */}
+							<NavLink
+								href="/clients"
+								active={usePathname().startsWith("/clients")}>
+								Clients
+							</NavLink>
+							{/* Clients End */}
+
 							{/* Invoices Start */}
 							<NavLink
 								href="/invoices"

@@ -40,6 +40,7 @@ const Deductions = (props) => {
 	return (
 		<>
 			<Header title="Deductions" />
+			
 			<div className="py-12 px-6">
 				{/* Deductions Tab */}
 				<DeductionList
