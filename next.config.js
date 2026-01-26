@@ -35,6 +35,17 @@ const nextConfig = {
 
 	// Disable powered by header
 	poweredByHeader: false,
+
+	// Development optimizations
+	...(process.env.NODE_ENV === "development" && {
+		// Reduce memory usage in development
+		onDemandEntries: {
+			// Period (in ms) where the server will keep pages in the buffer
+			maxInactiveAge: 25 * 1000,
+			// Number of pages that should be kept simultaneously
+			pagesBufferLength: 2,
+		},
+	}),
 }
 
 module.exports = nextConfig

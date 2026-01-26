@@ -3,7 +3,7 @@ import Image from "next/image"
 
 const NoData = () => {
 	return (
-		<div className="bg-white/5 border border-white/10 rounded-3xl text-center w-full py-8">
+		<div className="bg-white/5 border border-white/10 text-center w-full py-8">
 			<div className="flex justify-center">
 				<Image
 					src="/img/no-data-found.jpg"

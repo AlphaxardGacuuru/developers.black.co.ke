@@ -93,7 +93,6 @@ const CreateClient = (props) => {
 									placeholder="+254712345678"
 									// value={phone}
 									onChange={(e) => setPhone(e.target.value)}
-									required
 								/>
 								{/* Phone End */}
 							</div>

@@ -1,6 +1,6 @@
 "use client"
 
-import { createContext, useContext, useState, useEffect } from "react"
+import { createContext, useContext, useState, useEffect, useMemo } from "react"
 import {
 	getLocalStorage,
 	getNormalLocalStorage,
@@ -190,31 +190,40 @@ export const AppProvider = ({ children }) => {
 	/*
 	 * Genereate Month and Year Arrays
 	 */
-	var currentDate = new Date()
-	var currentYear = currentDate.getFullYear()
-	var currentMonth = currentDate.getMonth() + 1
+	const { currentDate, currentYear, currentMonth, months, years } = useMemo(() => {
+		const date = new Date()
+		const year = date.getFullYear()
+		const month = date.getMonth() + 1
 
-	const months = [
-		"Select Month",
-		"January",
-		"February",
-		"March",
-		"April",
-		"May",
-		"June",
-		"July",
-		"August",
-		"September",
-		"October",
-		"November",
-		"December",
-	]
+		const monthsList = [
+			"Select Month",
+			"January",
+			"February",
+			"March",
+			"April",
+			"May",
+			"June",
+			"July",
+			"August",
+			"September",
+			"October",
+			"November",
+			"December",
+		]
 
-	const years = []
+		const yearsList = []
+		for (let i = year; i > 2009; i--) {
+			yearsList.push(i)
+		}
 
-	for (let i = currentYear; i > 2009; i--) {
-		years.push(i)
-	}
+		return {
+			currentDate: date,
+			currentYear: year,
+			currentMonth: month,
+			months: monthsList,
+			years: yearsList,
+		}
+	}, [])
 
 	const value = {
 		messages,

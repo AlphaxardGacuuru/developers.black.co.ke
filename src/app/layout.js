@@ -2,6 +2,7 @@ import { Nunito, Roboto } from "next/font/google"
 import "@/app/global.css"
 import { AppProvider } from "@/contexts/AppContext"
 import AppContextInjector from "@/components/AppContextInjector"
+import CsrfInitializer from "@/components/CsrfInitializer"
 
 const nunitoFont = Nunito({
 	subsets: ["latin"],
@@ -28,6 +29,7 @@ const RootLayout = ({ children }) => {
 			className={`${nunitoFont.className} ${robotoFont.variable}`}>
 			<body className="antialiased font-light bg-gradient-to-br from-[#000000] via-[#1a1a1a] to-[#232323] min-h-screen">
 				<AppProvider>
+					<CsrfInitializer />
 					<AppContextInjector>{children}</AppContextInjector>
 				</AppProvider>
 			</body>

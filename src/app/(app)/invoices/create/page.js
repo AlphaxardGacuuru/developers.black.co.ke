@@ -187,9 +187,7 @@ const CreateInvoice = (props) => {
 								<DatePicker
 									label="Issue Date"
 									value={parseLocalDate(issueDate)}
-									onChange={(date) =>
-										setIssueDate(date?.toISOString().split("T")[0] || "")
-									}
+									onChange={(date) => setIssueDate(formatLocalDate(date))}
 								/>
 								{/* Issue Date End */}
 
@@ -197,9 +195,7 @@ const CreateInvoice = (props) => {
 								<DatePicker
 									label="Due Date"
 									value={parseLocalDate(dueDate)}
-									onChange={(date) =>
-										setDueDate(date?.toISOString().split("T")[0] || "")
-									}
+									onChange={(date) => setDueDate(formatLocalDate(date))}
 								/>
 								{/* Due Date End */}
 							</div>
