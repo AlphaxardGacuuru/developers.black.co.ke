@@ -293,6 +293,10 @@ const CreditNoteList = (props) => {
 							),
 						},
 						{
+							accessorKey: "invoiceNumber",
+							header: "Invoice",
+						},
+						{
 							accessorKey: "clientName",
 							header: "Client",
 						},

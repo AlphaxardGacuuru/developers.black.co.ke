@@ -28,7 +28,7 @@ const EditClient = ({ params }) => {
 	// Get data
 	useEffect(() => {
 		// Fetch Client
-		Axios.get(`/api/clients/${params.id}`)
+		Axios.get(`/api/users/${params.id}`)
 			.then((res) => {
 				const client = res.data.data
 
@@ -57,7 +57,7 @@ const EditClient = ({ params }) => {
 			phone,
 		}
 
-		Axios.put(`/api/clients/${params.id}`, clientData)
+		Axios.put(`/api/users/${params.id}`, clientData)
 			.then((res) => {
 				setLoading(false)
 				appProps.setMessages([res.data.message])
@@ -112,7 +112,7 @@ const EditClient = ({ params }) => {
 									placeholder="client@example.com"
 									value={email}
 									onChange={(e) => setEmail(e.target.value)}
-									required
+									disabled
 								/>
 								{/* Email End */}
 							</div>

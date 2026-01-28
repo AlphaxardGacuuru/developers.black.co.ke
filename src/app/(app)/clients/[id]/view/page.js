@@ -22,7 +22,7 @@ const ViewClient = ({ params }) => {
 
 	useEffect(() => {
 		// Fetch Client
-		Axios.get(`/api/clients/${params.id}`)
+		Axios.get(`/api/users/${params.id}`)
 			.then((res) => {
 				setClient(res.data.data)
 				setLoading(false)
@@ -87,8 +87,10 @@ const ViewClient = ({ params }) => {
 						className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl p-8 print:bg-white print:border-gray-300">
 						{/* Header */}
 						<div className="flex flex-col md:flex-row justify-between items-start mb-8 pb-6 border-b border-white/20 print:border-gray-300">
-							<div>
-								<LogoSVG />
+							<div className="text-white print:text-gray-900">
+								<div className="text-4xl mb-2">
+									<LogoSVG />
+								</div>
 							</div>
 
 							<div className="text-right">

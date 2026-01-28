@@ -313,6 +313,10 @@ const DeductionList = (props) => {
 							header: "Client",
 						},
 						{
+							accessorKey: "invoiceNumber",
+							header: "Invoice",
+						},
+						{
 							accessorKey: "amount",
 							header: "Amount",
 							cell: ({ row }) => (

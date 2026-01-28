@@ -276,6 +276,10 @@ const PaymentList = (props) => {
 							header: "Number",
 						},
 						{
+							accessorKey: "invoiceNumber",
+							header: "Invoice",
+						},
+						{
 							accessorKey: "clientName",
 							header: "Client",
 						},

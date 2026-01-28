@@ -35,7 +35,7 @@ const EditPayment = ({ params }) => {
 	// Get data
 	useEffect(() => {
 		// Fetch Invoices
-		appProps.get(`invoices?status=not_paid,partially_paid`, setInvoices)
+		appProps.get(`invoices`, setInvoices)
 
 		setLoadingPayment(false)
 
@@ -118,7 +118,7 @@ const EditPayment = ({ params }) => {
 									placeholder=""
 									value={invoiceId}
 									onChange={(e) => setInvoiceId(e.target.value)}
-									required>
+									disabled>
 									<option value="">Select Invoice</option>
 									{invoices.map((invoice, key) => (
 										<option

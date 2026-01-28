@@ -119,14 +119,14 @@ const EditDeduction = ({ params }) => {
 									placeholder=""
 									value={invoiceId}
 									onChange={(e) => setInvoiceId(e.target.value)}
-									required>
+									disabled>
 									<option value="">Select Invoice</option>
 									{invoices.map((invoice, key) => (
 										<option
 											key={key}
 											value={invoice.id}>
 											{invoice.number} - {invoice.clientName} - KES{" "}
-											{invoice.amount}
+											{invoice.balance}
 										</option>
 									))}
 								</Select>

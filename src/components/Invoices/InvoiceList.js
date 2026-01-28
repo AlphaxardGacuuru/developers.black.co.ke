@@ -568,6 +568,24 @@ const InvoiceList = (props) => {
 							header: "Balance",
 						},
 						{
+							accessorKey: "credits",
+							header: "Credits",
+							cell: ({ row }) => (
+								<div className="text-yellow-400 whitespace-nowrap">
+									<small>KES</small> {row.getValue("credits")}
+								</div>
+							),
+						},
+						{
+							accessorKey: "deductions",
+							header: "Deductions",
+							cell: ({ row }) => (
+								<div className="text-red-400 whitespace-nowrap">
+									<small>KES</small> {row.getValue("deductions")}
+								</div>
+							),
+						},
+						{
 							accessorKey: "status",
 							header: "Status",
 							cell: ({ row }) => {

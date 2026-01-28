@@ -10,12 +10,14 @@ import PaymentSVG from "@/svgs/PaymentSVG"
 import CreditNoteSVG from "@/svgs/CreditNoteSVG"
 import DeductionSVG from "@/svgs/DeductionSVG"
 import MoneySVG from "@/svgs/MoneySVG"
+import PeopleSVG from "@/svgs/PeopleSVG"
 import Axios from "@/lib/axios"
 
 const Dashboard = () => {
 	const appProps = useApp()
 
 	const [stats, setStats] = useState({
+		clients: { count: 0 },
 		invoices: { count: 0, total: 0 },
 		payments: { count: 0, total: 0 },
 		creditNotes: { count: 0, total: 0 },
@@ -61,7 +63,25 @@ const Dashboard = () => {
 					</div>
 
 					{/* Stats Grid */}
-					<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+					<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6">
+						{/* Clients Stat */}
+						<div className="bg-white/10 backdrop-blur-xl border border-white/20 shadow-sm rounded-3xl p-6 hover:bg-white/15 transition-all duration-500">
+							<div className="flex justify-between items-center mb-4">
+								<HeroHeading
+									heading="Clients"
+									data={loading ? "..." : stats.clients.count}
+								/>
+								<HeroIcon>
+									<PeopleSVG />
+								</HeroIcon>
+							</div>
+							<div className="text-sm text-white/70 mt-2">
+								<span className="text-purple-400 font-semibold">
+									Active Clients
+								</span>
+							</div>
+						</div>
+
 						{/* Invoices Stat */}
 						<div className="bg-white/10 backdrop-blur-xl border border-white/20 shadow-sm rounded-3xl p-6 hover:bg-white/15 transition-all duration-500">
 							<div className="flex justify-between items-center mb-4">

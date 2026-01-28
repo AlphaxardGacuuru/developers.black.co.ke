@@ -95,7 +95,7 @@ const CreateDeduction = (props) => {
 											key={key}
 											value={invoice.id}>
 											{invoice.number} - {invoice.clientName} - KES{" "}
-											{invoice.amount}
+											{invoice.balance}
 										</option>
 									))}
 								</Select>
