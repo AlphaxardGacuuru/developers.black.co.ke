@@ -71,7 +71,7 @@ const Dashboard = () => {
 									heading="Clients"
 									data={loading ? "..." : stats.clients.count}
 								/>
-								<HeroIcon>
+								<HeroIcon color="purple">
 									<PeopleSVG />
 								</HeroIcon>
 							</div>
@@ -89,7 +89,7 @@ const Dashboard = () => {
 									heading="Invoices"
 									data={loading ? "..." : stats.invoices.count}
 								/>
-								<HeroIcon>
+								<HeroIcon color="blue">
 									<InvoiceSVG />
 								</HeroIcon>
 							</div>
@@ -108,7 +108,7 @@ const Dashboard = () => {
 									heading="Payments"
 									data={loading ? "..." : stats.payments.count}
 								/>
-								<HeroIcon>
+								<HeroIcon color="green">
 									<PaymentSVG />
 								</HeroIcon>
 							</div>
@@ -127,7 +127,7 @@ const Dashboard = () => {
 									heading="Credit Notes"
 									data={loading ? "..." : stats.creditNotes.count}
 								/>
-								<HeroIcon>
+								<HeroIcon color="yellow">
 									<CreditNoteSVG />
 								</HeroIcon>
 							</div>
@@ -147,7 +147,7 @@ const Dashboard = () => {
 									heading="Deductions"
 									data={loading ? "..." : stats.deductions.count}
 								/>
-								<HeroIcon>
+								<HeroIcon color="red">
 									<DeductionSVG />
 								</HeroIcon>
 							</div>
