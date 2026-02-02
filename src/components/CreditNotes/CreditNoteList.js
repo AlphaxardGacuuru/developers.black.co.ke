@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react"
+import React, { useState } from "react"
 import Axios from "@/lib/axios"
 
 import Btn from "@/components/ui/button"
@@ -6,7 +6,7 @@ import MyLink from "@/components/ui/my-link"
 import DeleteModal from "@/components/core/DeleteModal"
 import { Input } from "@/components/ui/input"
 import { Select } from "@/components/ui/select"
-import { DataTable } from "@/components/Invoices/DataTable"
+import { DataTable } from "@/components/ui/data-table"
 import Modal from "@/components/ui/modal"
 
 import HeroHeading from "@/components/core/HeroHeading"
@@ -16,21 +16,10 @@ import ViewSVG from "@/svgs/ViewSVG"
 import EditSVG from "@/svgs/EditSVG"
 import DeleteSVG from "@/svgs/DeleteSVG"
 import PlusSVG from "@/svgs/PlusSVG"
-import CreditNoteSVG from "@/svgs/CreditNoteSVG"
-import InvoiceSVG from "@/svgs/InvoiceSVG"
-import PaymentSVG from "@/svgs/PaymentSVG"
-import BalanceSVG from "@/svgs/BalanceSVG"
-import EmailSentSVG from "@/svgs/EmailSentSVG"
-import SendEmailSVG from "@/svgs/SendEmailSVG"
-import SMSSVG from "@/svgs/SMSSVG"
-import ChatSVG from "@/svgs/ChatSVG"
-import ChatSendSVG from "@/svgs/ChatSendSVG"
-import CloseSVG from "@/svgs/CloseSVG"
 import MoneySVG from "@/svgs/MoneySVG"
-import CoinSVG from "@/svgs/CoinSVG"
+import CreditNoteSVG from "@/svgs/CreditNoteSVG"
 
 const CreditNoteList = (props) => {
-	const [deleteIds, setDeleteIds] = useState([])
 	const [loading, setLoading] = useState()
 	const [rowSelection, setRowSelection] = useState({})
 	const [showBulkDeleteDialog, setShowBulkDeleteDialog] = useState(false)
@@ -61,15 +50,11 @@ const CreditNoteList = (props) => {
 						}
 					}),
 				})
-				// Clear DeleteIds
-				setDeleteIds([])
 				setRowSelection({})
 			})
 			.catch((err) => {
 				setLoading(false)
 				props.getErrors(err)
-				// Clear DeleteIds
-				setDeleteIds([])
 				setRowSelection({})
 			})
 	}
@@ -112,7 +97,24 @@ const CreditNoteList = (props) => {
 			{/* Data */}
 			<div className="bg-white/10 backdrop-blur-xl border border-white/20 shadow-sm rounded-3xl mb-2 p-2 px-5 hover:bg-white/15 transition-all duration-500">
 				{/* Total */}
-				<div className="grid grid-cols-1 gap-4">
+				<div className="grid grid-cols-2 gap-4">
+					{/* Count */}
+					<div>
+						<div className="flex justify-between flex-grow mx-2">
+							<HeroHeading
+								heading="Count"
+								data={
+									<span>
+										<small>KES</small> {props.creditNotes.meta?.total}
+									</span>
+								}
+							/>
+							<HeroIcon>
+								<CreditNoteSVG />
+							</HeroIcon>
+						</div>
+					</div>
+					{/* Count End */}
 					{/* Total */}
 					<div>
 						<div className="flex justify-between flex-grow mx-2">

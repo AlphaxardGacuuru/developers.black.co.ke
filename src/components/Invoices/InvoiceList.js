@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from "react"
+import React, { useState, useEffect } from "react"
 import Axios from "@/lib/axios"
 
 import Btn from "@/components/ui/button"
@@ -6,46 +6,37 @@ import MyLink from "@/components/ui/my-link"
 import DeleteModal from "@/components/core/DeleteModal"
 import { Input } from "@/components/ui/input"
 import { Select } from "@/components/ui/select"
-import { DataTable } from "@/components/Invoices/DataTable"
+import { DataTable } from "@/components/ui/data-table"
 import Modal from "@/components/ui/modal"
-
-import PaginationLinks from "@/components/core/PaginationLinks"
 
 import HeroHeading from "@/components/core/HeroHeading"
 import HeroIcon from "@/components/core/HeroIcon"
-import NoData from "@/components/core/NoData"
 
 import ViewSVG from "@/svgs/ViewSVG"
 import EditSVG from "@/svgs/EditSVG"
 import DeleteSVG from "@/svgs/DeleteSVG"
 import PlusSVG from "@/svgs/PlusSVG"
-import InvoiceSVG from "@/svgs/InvoiceSVG"
-import PaymentSVG from "@/svgs/PaymentSVG"
 import BalanceSVG from "@/svgs/BalanceSVG"
-import EmailSentSVG from "@/svgs/EmailSentSVG"
 import SendEmailSVG from "@/svgs/SendEmailSVG"
 import SMSSVG from "@/svgs/SMSSVG"
-import ChatSVG from "@/svgs/ChatSVG"
 import ChatSendSVG from "@/svgs/ChatSendSVG"
-import CloseSVG from "@/svgs/CloseSVG"
 import MoneySVG from "@/svgs/MoneySVG"
 import CoinSVG from "@/svgs/CoinSVG"
+import InvoiceSVG from "@/svgs/InvoiceSVG"
 
 const InvoiceList = (props) => {
-	const [deleteIds, setDeleteIds] = useState([])
 	const [loading, setLoading] = useState()
 	const [loadingSMS, setLoadingSMS] = useState()
 	const [loadingEmail, setLoadingEmail] = useState()
 	const [rowSelection, setRowSelection] = useState({})
 	const [showBulkDeleteDialog, setShowBulkDeleteDialog] = useState(false)
+	const [showSendInvoiceModal, setShowSendInvoiceModal] = useState(false)
 
 	// Timer states
 	const [emailCountdown, setEmailCountdown] = useState(0)
 	const [smsCountdown, setSmsCountdown] = useState(0)
 	const [canSendEmail, setCanSendEmail] = useState(true)
 	const [canSendSms, setCanSendSms] = useState(true)
-
-	const invoiceModalBtnClose = useRef()
 
 	// Timer effects
 	useEffect(() => {
@@ -79,7 +70,7 @@ const InvoiceList = (props) => {
 	const [invoiceToSend, setInvoiceToSend] = useState({})
 
 	/*
-	 * Send Email
+	 * Send Email with PDF Attachment
 	 */
 	const onSendEmail = (invoiceId) => {
 		if (!canSendEmail || loadingEmail) return
@@ -88,12 +79,35 @@ const InvoiceList = (props) => {
 		setCanSendEmail(false)
 		setEmailCountdown(60) // 60 second cooldown
 
-		Axios.post(`api/invoices/send-email/${invoiceId}`)
+		// Call Laravel endpoint that generates PDF using Browsershot and sends email
+		Axios.post(`api/invoices/${invoiceId}/send-email`)
 			.then((res) => {
 				setLoadingEmail(false)
-				props.setMessages([res.data.message])
-				// Clode Modal
-				invoiceModalBtnClose.current.click()
+				props.setMessages([
+					res.data.message ||
+						"Invoice email sent successfully with PDF attachment",
+				])
+
+				// Update the invoice emailsSent count if returned
+				if (res.data.emailsSent) {
+					setInvoiceToSend((prev) => ({
+						...prev,
+						emailsSent: res.data.emailsSent,
+					}))
+
+					// Update invoice in list
+					props.setInvoices((prev) => ({
+						...prev,
+						data: prev.data.map((inv) =>
+							inv.id === invoiceId
+								? { ...inv, emailsSent: res.data.emailsSent }
+								: inv
+						),
+					}))
+				}
+
+				// Close Modal
+				setShowSendInvoiceModal(false)
 			})
 			.catch((err) => {
 				setLoadingEmail(false)
@@ -118,8 +132,8 @@ const InvoiceList = (props) => {
 			.then((res) => {
 				setLoadingSMS(false)
 				props.setMessages([res.data.message])
-				// Clode Modal
-				invoiceModalBtnClose.current.click()
+				// Close Modal
+				setShowSendInvoiceModal(false)
 			})
 			.catch((err) => {
 				setLoadingSMS(false)
@@ -128,19 +142,6 @@ const InvoiceList = (props) => {
 				setCanSendSms(true)
 				setSmsCountdown(0)
 			})
-	}
-
-	/*
-	 * Handle DeleteId checkboxes
-	 */
-	const handleSetDeleteIds = (invoiceId) => {
-		var exists = deleteIds.includes(invoiceId)
-
-		var newDeleteIds = exists
-			? deleteIds.filter((item) => item != invoiceId)
-			: [...deleteIds, invoiceId]
-
-		setDeleteIds(newDeleteIds)
 	}
 
 	/*
@@ -170,14 +171,12 @@ const InvoiceList = (props) => {
 					}),
 				})
 				// Clear DeleteIds
-				setDeleteIds([])
 				setRowSelection({})
 			})
 			.catch((err) => {
 				setLoading(false)
 				props.getErrors(err)
 				// Clear DeleteIds
-				setDeleteIds([])
 				setRowSelection({})
 			})
 	}
@@ -217,93 +216,93 @@ const InvoiceList = (props) => {
 			</Modal>
 			{/* Bulk Delete Confirmation Modal End */}
 
-			{/* Confirm Invoice Modal End */}
-			<div
-				className="fixed inset-0 bg-black bg-opacity-50 hidden"
-				id={`invoiceModal`}
-				tabIndex="-1"
-				aria-labelledby="invoiceModalLabel"
-				aria-hidden="true">
-				<div className="flex items-center justify-center min-h-screen p-4">
-					<div className="bg-blue-600 max-w-md w-full">
-						<div className="p-4 border-b-0">
-							<h1
-								id="invoiceModalLabel"
-								className="text-white text-xl">
-								Send Invoice {invoiceToSend.number}
-							</h1>
-
-							{/* Close Start */}
-							<span
-								type="button"
-								className="text-white cursor-pointer"
-								data-bs-dismiss="modal">
-								<CloseSVG />
-							</span>
-							{/* Close End */}
-						</div>
-						<div className="p-4 text-left text-white border-0">
-							Are you sure you want to send an Invoice to{" "}
-							{invoiceToSend.tenantName}.
-						</div>
-						<div className="p-4 flex justify-between items-center border-0">
-							<button
-								ref={invoiceModalBtnClose}
-								type="button"
-								className="mysonar-btn btn-2"
-								data-bs-dismiss="modal">
-								Close
-							</button>
-
-							<div className="flex gap-2">
-								<Btn
-									icon={<SMSSVG />}
-									text={
-										smsCountdown > 0
-											? `send sms in ${smsCountdown}s`
-											: `send sms ${
-													invoiceToSend.smsesSent
-														? `${invoiceToSend.smsesSent}`
-														: ""
-												}`
-									}
-									className={`hidden ${
-										invoiceToSend.smsesSent ? `btn-green` : `btn-2`
-									} ${!canSendSms ? "opacity-50 cursor-not-allowed" : ""}`}
-									onClick={() => onSendSMS(invoiceToSend.id)}
-									loading={loadingSMS}
-									disabled={!canSendSms || loadingSMS}
-								/>
-
-								<Btn
-									icon={<SendEmailSVG />}
-									text={
-										emailCountdown > 0
-											? `send email in ${emailCountdown}s`
-											: `send email ${
-													invoiceToSend.emailsSent
-														? `(${invoiceToSend.emailsSent})`
-														: ""
-												}`
-									}
-									className={`${
-										invoiceToSend.emailsSent ? `btn-green` : `btn-2`
-									} ${!canSendEmail ? "opacity-50 cursor-not-allowed" : ""}`}
-									onClick={() => onSendEmail(invoiceToSend.id)}
-									loading={loadingEmail}
-									disabled={!canSendEmail || loadingEmail}
-								/>
-							</div>
+			{/* Send Invoice Modal Start */}
+			<Modal
+				open={showSendInvoiceModal}
+				onOpenChange={setShowSendInvoiceModal}
+				title={`Send Invoice ${invoiceToSend.number}`}
+				className="bg-white/10 backdrop-blur-xl border border-white/20 shadow-sm rounded-3xl text-white data-[state=open]:slide-in-from-top data-[state=closed]:slide-out-to-top"
+				footer={
+					<div className="flex justify-between w-full">
+						<Btn
+							type="button"
+							text="Cancel"
+							onClick={() => setShowSendInvoiceModal(false)}
+						/>
+						<div className="flex gap-2">
+							<Btn
+								icon={<SMSSVG />}
+								text={
+									smsCountdown > 0
+										? `Send SMS in ${smsCountdown}s`
+										: `Send SMS ${
+												invoiceToSend.smsesSent
+													? `(${invoiceToSend.smsesSent})`
+													: ""
+											}`
+								}
+								className={`hidden ${
+									invoiceToSend.smsesSent ? `btn-green` : `btn-2`
+								} ${!canSendSms ? "opacity-50 cursor-not-allowed" : ""}`}
+								onClick={() => onSendSMS(invoiceToSend.id)}
+								loading={loadingSMS}
+								disabled={!canSendSms || loadingSMS}
+							/>
+							<Btn
+								icon={<SendEmailSVG />}
+								text={
+									loadingEmail
+										? "Generating PDF & Sending..."
+										: emailCountdown > 0
+											? `Wait ${emailCountdown}s`
+											: invoiceToSend.emailsSent
+												? `Send Email (${invoiceToSend.emailsSent} sent)`
+												: "Send Email with PDF"
+								}
+								className={`${
+									invoiceToSend.emailsSent ? `btn-green` : `btn-2`
+								} ${!canSendEmail ? "opacity-50 cursor-not-allowed" : ""}`}
+								onClick={() => onSendEmail(invoiceToSend.id)}
+								loading={loadingEmail}
+								disabled={!canSendEmail || loadingEmail}
+							/>
 						</div>
 					</div>
+				}>
+				<div className="text-white">
+					<p className="mb-2">
+						Send invoice <strong>{invoiceToSend.number}</strong> to{" "}
+						<strong>{invoiceToSend.clientName}</strong>?
+					</p>
+					<p className="text-sm text-white/80">
+						A PDF invoice will be generated and sent to{" "}
+						<strong>{invoiceToSend.clientEmail || "the client"}</strong>.
+					</p>
 				</div>
-			</div>
-			{/* Confirm Invoice Modal End */}
+			</Modal>
+			{/* Send Invoice Modal End */}
 
 			{/* Data */}
 			<div className="bg-white/10 backdrop-blur-xl border border-white/20 shadow-sm rounded-3xl mb-2 p-2 px-5 hover:bg-white/15 transition-all duration-500">
 				{/* Total */}
-				<div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+				<div className="grid grid-cols-1 sm:grid-cols-4 gap-4">
+					{/* Count */}
+					<div>
+						<div className="flex justify-between flex-grow mx-2">
+							<HeroHeading
+								heading="Count"
+								data={
+									<span>
+										<small>KES</small> {props.invoices.meta?.total}
+									</span>
+								}
+							/>
+							<HeroIcon>
+								<InvoiceSVG />
+							</HeroIcon>
+						</div>
+					</div>
+					{/* Count End */}
 					{/* Total */}
 					<div>
 						<div className="flex justify-between flex-grow mx-2">
@@ -625,6 +624,7 @@ const InvoiceList = (props) => {
 								const invoice = row.original
 								return (
 									<div className="flex items-center gap-2">
+										{/* Send Invoice Start */}
 										{parseFloat(invoice.balance?.replace(/,/g, "")) > 0 && (
 											<Btn
 												icon={<ChatSendSVG />}
@@ -638,27 +638,35 @@ const InvoiceList = (props) => {
 														? "btn-green"
 														: ""
 												}`}
-												dataBsToggle="modal"
-												dataBsTarget={`#invoiceModal`}
-												onClick={() => setInvoiceToSend(invoice)}
+												onClick={() => {
+													setInvoiceToSend(invoice)
+													setShowSendInvoiceModal(true)
+												}}
 											/>
 										)}
+										{/* Send Invoice End */}
+										{/* View Start */}
 										<MyLink
 											href={`/invoices/${invoice.id}/view`}
 											icon={<ViewSVG />}
 											// text="view"
 										/>
+										{/* View End */}
+										{/* Edit Start */}
 										<MyLink
 											href={`/invoices/${invoice.id}/edit`}
 											icon={<EditSVG />}
 											// text="edit"
 										/>
+										{/* Edit End */}
+										{/* Delete Start */}
 										<DeleteModal
 											index={`invoice-dt-${invoice.id}`}
 											model={invoice}
 											modelName="Invoice"
 											onDelete={onDeleteInvoice}
 										/>
+										{/* Delete End */}
 									</div>
 								)
 							},

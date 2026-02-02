@@ -59,8 +59,8 @@ const CreateInvoice = (props) => {
 		"Payment is due within 30 days of invoice date."
 	)
 
-	// Line Items
-	const [lineItems, setLineItems] = useState([
+	// Invoice Items
+	const [invoiceItems, setInvoiceItems] = useState([
 		{ description: "", quantity: 1, rate: 0, amount: 0 },
 	])
 
@@ -75,45 +75,45 @@ const CreateInvoice = (props) => {
 		setDueDate(defaultDueDate.toISOString().split("T")[0])
 	}, [])
 
-	// Calculate line item amount
-	const calculateLineItemAmount = (quantity, rate) => {
+	// Calculate invoice item amount
+	const calculateInvoiceItemAmount = (quantity, rate) => {
 		return (parseFloat(quantity) || 0) * (parseFloat(rate) || 0)
 	}
 
-	// Update line item
-	const updateLineItem = (index, field, value) => {
-		const newLineItems = [...lineItems]
-		newLineItems[index][field] = value
+	// Update invoice item
+	const updateInvoiceItem = (index, field, value) => {
+		const newInvoiceItems = [...invoiceItems]
+		newInvoiceItems[index][field] = value
 
 		// Recalculate amount if quantity or rate changes
 		if (field === "quantity" || field === "rate") {
-			newLineItems[index].amount = calculateLineItemAmount(
-				newLineItems[index].quantity,
-				newLineItems[index].rate
+			newInvoiceItems[index].amount = calculateInvoiceItemAmount(
+				newInvoiceItems[index].quantity,
+				newInvoiceItems[index].rate
 			)
 		}
 
-		setLineItems(newLineItems)
+		setInvoiceItems(newInvoiceItems)
 	}
 
-	// Add line item
-	const addLineItem = () => {
-		setLineItems([
-			...lineItems,
+	// Add invoice item
+	const addInvoiceItem = () => {
+		setInvoiceItems([
+			...invoiceItems,
 			{ description: "", quantity: 1, rate: 0, amount: 0 },
 		])
 	}
 
-	// Remove line item
-	const removeLineItem = (index) => {
-		if (lineItems.length > 1) {
-			setLineItems(lineItems.filter((_, i) => i !== index))
+	// Remove invoice item
+	const removeInvoiceItem = (index) => {
+		if (invoiceItems.length > 1) {
+			setInvoiceItems(invoiceItems.filter((_, i) => i !== index))
 		}
 	}
 
 	// Calculate totals
 	const calculateSubtotal = () => {
-		return lineItems.reduce(
+		return invoiceItems.reduce(
 			(sum, item) => sum + (parseFloat(item.amount) || 0),
 			0
 		)
@@ -134,7 +134,7 @@ const CreateInvoice = (props) => {
 			clientId,
 			issueDate,
 			dueDate,
-			lineItems: lineItems.filter((item) => item.description.trim() !== ""),
+			invoiceItems: invoiceItems.filter((item) => item.description.trim() !== ""),
 			total: calculateTotal(),
 			notes,
 			terms,
@@ -199,20 +199,20 @@ const CreateInvoice = (props) => {
 								{/* Due Date End */}
 							</div>
 
-							{/* Line Items Section */}
+							{/* Invoice Items Section */}
 							<div className="space-y-4">
 								<div className="flex items-center justify-between">
 									<h3 className="text-xl text-white font-light font-nunito">
-										Line Items
+										Invoice Items
 									</h3>
 									<Btn
 										icon={<PlusSVG />}
-										onClick={addLineItem}
+										onClick={addInvoiceItem}
 										text="Add Item"
 									/>
 								</div>
 
-								{/* Line Items Table */}
+								{/* Invoice Items Table */}
 								<div className="overflow-x-auto">
 									<div className="min-w-full space-y-3">
 										{/* Header */}
@@ -224,8 +224,8 @@ const CreateInvoice = (props) => {
 											<div className="col-span-1"></div>
 										</div>
 
-										{/* Line Items */}
-										{lineItems.map((item, index) => (
+										{/* Invoice Items */}
+										{invoiceItems.map((item, index) => (
 											<div
 												key={index}
 												className="grid grid-cols-1 md:grid-cols-12 gap-3 p-4 bg-white/5 border border-white/10 rounded-xl">
@@ -237,7 +237,7 @@ const CreateInvoice = (props) => {
 														className="md:hidden"
 														value={item.description}
 														onChange={(e) =>
-															updateLineItem(
+															updateInvoiceItem(
 																index,
 																"description",
 																e.target.value
@@ -251,7 +251,7 @@ const CreateInvoice = (props) => {
 														placeholder="Web development services..."
 														value={item.description}
 														onChange={(e) =>
-															updateLineItem(
+															updateInvoiceItem(
 																index,
 																"description",
 																e.target.value
@@ -271,7 +271,7 @@ const CreateInvoice = (props) => {
 														step="0.01"
 														value={item.quantity}
 														onChange={(e) =>
-															updateLineItem(index, "quantity", e.target.value)
+															updateInvoiceItem(index, "quantity", e.target.value)
 														}
 														required
 													/>
@@ -282,7 +282,7 @@ const CreateInvoice = (props) => {
 														className="hidden md:block w-full px-3 py-2 bg-white/10 border border-white/20 rounded-lg text-white font-light font-nunito focus:outline-none focus:border-white/40 transition-all duration-300"
 														value={item.quantity}
 														onChange={(e) =>
-															updateLineItem(index, "quantity", e.target.value)
+															updateInvoiceItem(index, "quantity", e.target.value)
 														}
 														required
 													/>
@@ -298,7 +298,7 @@ const CreateInvoice = (props) => {
 														step="0.01"
 														value={item.rate}
 														onChange={(e) =>
-															updateLineItem(index, "rate", e.target.value)
+															updateInvoiceItem(index, "rate", e.target.value)
 														}
 														required
 													/>
@@ -309,7 +309,7 @@ const CreateInvoice = (props) => {
 														className="hidden md:block w-full px-3 py-2 bg-white/10 border border-white/20 rounded-lg text-white font-light font-nunito focus:outline-none focus:border-white/40 transition-all duration-300"
 														value={item.rate}
 														onChange={(e) =>
-															updateLineItem(index, "rate", e.target.value)
+															updateInvoiceItem(index, "rate", e.target.value)
 														}
 														required
 													/>
@@ -329,8 +329,8 @@ const CreateInvoice = (props) => {
 												<div className="col-span-2 md:col-span-1 flex items-end md:items-center justify-end">
 													<button
 														type="button"
-														onClick={() => removeLineItem(index)}
-														disabled={lineItems.length === 1}
+														onClick={() => removeInvoiceItem(index)}
+														disabled={invoiceItems.length === 1}
 														className="p-2 text-white/60 hover:text-red-400 disabled:opacity-30 disabled:cursor-not-allowed transition-colors">
 														<CloseSVG />
 													</button>

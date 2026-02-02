@@ -6,7 +6,7 @@ import MyLink from "@/components/ui/my-link"
 import DeleteModal from "@/components/core/DeleteModal"
 import { Input } from "@/components/ui/input"
 import { Select } from "@/components/ui/select"
-import { DataTable } from "@/components/Invoices/DataTable"
+import { DataTable } from "@/components/ui/data-table"
 import Modal from "@/components/ui/modal"
 
 import HeroHeading from "@/components/core/HeroHeading"
@@ -16,11 +16,10 @@ import ViewSVG from "@/svgs/ViewSVG"
 import EditSVG from "@/svgs/EditSVG"
 import DeleteSVG from "@/svgs/DeleteSVG"
 import PlusSVG from "@/svgs/PlusSVG"
-import DeductionSVG from "@/svgs/DeductionSVG"
 import MoneySVG from "@/svgs/MoneySVG"
+import DeductionSVG from "@/svgs/DeductionSVG"
 
 const DeductionList = (props) => {
-	const [deleteIds, setDeleteIds] = useState([])
 	const [loading, setLoading] = useState()
 	const [rowSelection, setRowSelection] = useState({})
 	const [showBulkDeleteDialog, setShowBulkDeleteDialog] = useState(false)
@@ -51,15 +50,11 @@ const DeductionList = (props) => {
 						}
 					}),
 				})
-				// Clear DeleteIds
-				setDeleteIds([])
 				setRowSelection({})
 			})
 			.catch((err) => {
 				setLoading(false)
 				props.getErrors(err)
-				// Clear DeleteIds
-				setDeleteIds([])
 				setRowSelection({})
 			})
 	}
@@ -102,7 +97,24 @@ const DeductionList = (props) => {
 			{/* Data */}
 			<div className="bg-white/10 backdrop-blur-xl border border-white/20 shadow-sm rounded-3xl mb-2 p-2 px-5 hover:bg-white/15 transition-all duration-500">
 				{/* Total */}
-				<div className="grid grid-cols-1 gap-4">
+				<div className="grid grid-cols-2 gap-4">
+					{/* Count */}
+					<div>
+						<div className="flex justify-between flex-grow mx-2">
+							<HeroHeading
+								heading="Count"
+								data={
+									<span>
+										<small>KES</small> {props.deductions.meta?.total}
+									</span>
+								}
+							/>
+							<HeroIcon>
+								<DeductionSVG />
+							</HeroIcon>
+						</div>
+					</div>
+					{/* Count End */}
 					{/* Total */}
 					<div>
 						<div className="flex justify-between flex-grow mx-2">

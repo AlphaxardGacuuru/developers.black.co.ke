@@ -5,7 +5,7 @@ import Btn from "@/components/ui/button"
 import MyLink from "@/components/ui/my-link"
 import DeleteModal from "@/components/core/DeleteModal"
 import { Input } from "@/components/ui/input"
-import { DataTable } from "@/components/Invoices/DataTable"
+import { DataTable } from "@/components/ui/data-table"
 import Modal from "@/components/ui/modal"
 
 import HeroHeading from "@/components/core/HeroHeading"
@@ -15,12 +15,10 @@ import ViewSVG from "@/svgs/ViewSVG"
 import EditSVG from "@/svgs/EditSVG"
 import DeleteSVG from "@/svgs/DeleteSVG"
 import PlusSVG from "@/svgs/PlusSVG"
-import PersonSVG from "@/svgs/PersonSVG"
 import PeopleSVG from "@/svgs/PeopleSVG"
 
 const ClientList = (props) => {
-	const [deleteIds, setDeleteIds] = useState([])
-	const [loading, setLoading] = useState()
+	const [loading, setLoading] = useState(false)
 	const [rowSelection, setRowSelection] = useState({})
 	const [showBulkDeleteDialog, setShowBulkDeleteDialog] = useState(false)
 
@@ -47,15 +45,11 @@ const ClientList = (props) => {
 						}
 					}),
 				})
-				// Clear DeleteIds
-				setDeleteIds([])
 				setRowSelection({})
 			})
 			.catch((err) => {
 				setLoading(false)
 				props.getErrors(err)
-				// Clear DeleteIds
-				setDeleteIds([])
 				setRowSelection({})
 			})
 	}

@@ -173,7 +173,7 @@ const ViewInvoice = ({ params }) => {
 									</tr>
 								</thead>
 								<tbody>
-									{invoice.lineItems?.map((item, key) => (
+									{invoice.invoiceItems?.map((item, key) => (
 										<tr
 											key={key}
 											className="border-b border-white/10 print:border-gray-200">
@@ -269,7 +269,7 @@ const ViewInvoice = ({ params }) => {
 							<div className="text-right text-white print:text-gray-900">
 								<h3 className="text-xl font-nunito mb-2">Black Developers</h3>
 								<div className="text-white/80 text-sm print:text-gray-700">
-									<div>Email: al@black.co.ke</div>
+									<div>Email: al@developers.black.co.ke</div>
 									<div>Phone: +254 700 364446</div>
 								</div>
 							</div>

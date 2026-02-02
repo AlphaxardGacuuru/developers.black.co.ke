@@ -199,7 +199,7 @@ function CalendarDayButton({ className, day, modifiers, ...props }) {
 			ref={ref}
 			variant="ghost"
 			size="icon"
-			data-day={day.date.toLocaleDateString()}
+			data-day={day.date.toLocaleDateString('en-GB')}
 			data-selected-single={
 				modifiers.selected &&
 				!modifiers.range_start &&
@@ -257,7 +257,7 @@ export function DatePicker({
 										{...props}>
 										<span
 											className={cn("truncate", !value && "text-transparent")}>
-											{value ? value.toLocaleDateString() : label || "Select date"}
+											{value ? value.toLocaleDateString('en-GB') : label || "Select date"}
 										</span>
 										<CalendarIcon className="ml-auto size-4 opacity-50" />
 									</button>
