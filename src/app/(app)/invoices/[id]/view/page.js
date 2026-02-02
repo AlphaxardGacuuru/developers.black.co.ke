@@ -1,9 +1,9 @@
 "use client"
 
 import React, { useEffect, useState } from "react"
-import { useRouter } from "next/navigation"
 import { useApp } from "@/contexts/AppContext"
 import Axios from "@/lib/axios"
+import { format } from "date-fns"
 
 import Header from "@/app/(app)/Header"
 import MyLink from "@/components/ui/my-link"
@@ -14,7 +14,6 @@ import PrintSVG from "@/svgs/PrintSVG"
 import LogoSVG from "@/svgs/LogoSVG"
 
 const ViewInvoice = ({ params }) => {
-	const router = useRouter()
 	const appProps = useApp()
 
 	const [invoice, setInvoice] = useState({})
@@ -146,9 +145,10 @@ const ViewInvoice = ({ params }) => {
 									Invoice No: {invoice.number}
 								</h5>
 								<div className="text-white/80 print:text-gray-700">
-									<div>Issue Date: {invoice.issueDate}</div>
-									<div>Due Date: {invoice.dueDate}</div>
-									<div>Created: {invoice.createdAt}</div>
+									<div>
+										Issue Date: {format(invoice.issueDate, "dd MMM yyyy")}
+									</div>
+									<div>Due Date: {format(invoice.dueDate, "dd MMM yyyy")}</div>
 								</div>
 							</div>
 						</div>
@@ -261,7 +261,8 @@ const ViewInvoice = ({ params }) => {
 						{/* Footer */}
 						<div className="text-center mb-4">
 							<h4 className="text-white text-xl font-nunito print:text-gray-900">
-								Thank you for your business!
+								<div className="mb-2">Pay to 0700364446 via M-Pesa.</div>
+								<div>Thank you for your business!</div>
 							</h4>
 						</div>
 

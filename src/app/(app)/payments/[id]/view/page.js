@@ -130,7 +130,6 @@ const ViewPayment = ({ params }) => {
 								<h5 className="text-lg font-nunito mb-4">Payment Details</h5>
 								<div className="text-white/80 print:text-gray-700 space-y-1">
 									<div>Payment Date: {formatDate(payment.paymentDate)}</div>
-									<div>Created: {payment.createdAt}</div>
 								</div>
 							</div>
 						</div>

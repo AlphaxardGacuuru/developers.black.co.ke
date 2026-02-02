@@ -8,6 +8,7 @@ import { Input } from "@/components/ui/input"
 import { Select } from "@/components/ui/select"
 import { DataTable } from "@/components/ui/data-table"
 import Modal from "@/components/ui/modal"
+import { format } from "date-fns"
 
 import HeroHeading from "@/components/core/HeroHeading"
 import HeroIcon from "@/components/core/HeroIcon"
@@ -492,6 +493,11 @@ const PaymentList = (props) => {
 						{
 							accessorKey: "paymentDate",
 							header: "Payment Date",
+							cell: ({ row }) => (
+								<div>
+									{format(row.getValue("paymentDate"), "dd MMM yyyy")}
+								</div>
+							)
 						},
 						{
 							id: "actions",
