@@ -1,7 +1,7 @@
 "use client"
 
 import * as React from "react"
-import { useState } from "react"
+import { useState, useEffect, useRef } from "react"
 import {
 	CalendarIcon,
 	ChevronDownIcon,
@@ -23,7 +23,7 @@ import { InputWrapper } from "./input-wrapper"
 function CalendarComponent({
 	className,
 	classNames,
-	showOutsideDays = true,
+	showOutsideDays = false,
 	captionLayout = "label",
 	buttonVariant = "ghost",
 	formatters,
@@ -189,8 +189,8 @@ function CalendarComponent({
 function CalendarDayButton({ className, day, modifiers, ...props }) {
 	const defaultClassNames = getDefaultClassNames()
 
-	const ref = React.useRef(null)
-	React.useEffect(() => {
+	const ref = useRef(null)
+	useEffect(() => {
 		if (modifiers.focused) ref.current?.focus()
 	}, [modifiers.focused])
 

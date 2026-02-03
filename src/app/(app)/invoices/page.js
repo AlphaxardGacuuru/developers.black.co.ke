@@ -13,12 +13,10 @@ const Invoices = (props) => {
 	props = { ...props, ...appProps }
 
 	const [invoices, setInvoices] = useState([])
+	const [clients, setClients] = useState([])
 
 	const [number, setNumber] = useState("")
-	const [invoice, setInvoice] = useState("")
-	const [unit, setUnit] = useState("")
-	const [tenant, setTenant] = useState("")
-	const [type, setType] = useState("")
+	const [clientId, setClientId] = useState("")
 	const [status, setStatus] = useState("")
 	const [startMonth, setStartMonth] = useState("")
 	const [startYear, setStartYear] = useState("")
@@ -29,10 +27,7 @@ const Invoices = (props) => {
 		// Fetch Invoices
 		props.getPaginated(
 			`invoices?number=${number}&
-			invoice=${invoice}&
-			unit=${unit}&
-			tenant=${tenant}&
-			type=${type}&
+			clientId=${clientId}&
 			status=${status}&
 			startMonth=${startMonth}&
 			endMonth=${endMonth}&
@@ -40,12 +35,11 @@ const Invoices = (props) => {
 			endYear=${endYear}`,
 			setInvoices
 		)
+
+		props.get("users?idAndName=true&type=client", setClients)
 	}, [
 		number,
-		invoice,
-		unit,
-		tenant,
-		type,
+		clientId,
 		status,
 		startMonth,
 		endMonth,
@@ -56,18 +50,16 @@ const Invoices = (props) => {
 	return (
 		<>
 			<Header title="Invoices" />
-			
+
 			<div className="py-12 px-6">
 				{/* Invoices Tab */}
 				<InvoiceList
 					{...props}
 					invoices={invoices}
 					setInvoices={setInvoices}
+					clients={clients}
 					setNumber={setNumber}
-					setInvoice={setNumber}
-					setUnit={setUnit}
-					setTenant={setTenant}
-					setType={setType}
+					setClientId={setClientId}
 					setStatus={setStatus}
 					setStartMonth={setStartMonth}
 					setEndMonth={setEndMonth}
