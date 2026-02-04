@@ -375,7 +375,6 @@ const InvoiceList = (props) => {
 						/>
 					</div>
 					{/* Number End */}
-
 					{/* Client */}
 					<div className="flex-grow min-w-0">
 						<Select
@@ -396,7 +395,6 @@ const InvoiceList = (props) => {
 						</Select>
 					</div>
 					{/* Client End */}
-
 					{/* Status */}
 					<div className="flex-grow min-w-0">
 						<Select
@@ -422,7 +420,6 @@ const InvoiceList = (props) => {
 						</Select>
 					</div>
 					{/* Status End */}
-
 					{/* Start Date */}
 					<div className="flex flex-grow gap-2">
 						<div className="flex-grow">

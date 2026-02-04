@@ -13,8 +13,10 @@ const CreditNotes = (props) => {
 	props = { ...props, ...appProps }
 
 	const [creditNotes, setCreditNotes] = useState([])
+	const [clients, setClients] = useState([])
 
 	const [number, setNumber] = useState("")
+	const [clientId, setClientId] = useState("")
 	const [clientName, setClientName] = useState("")
 	const [status, setStatus] = useState("")
 	const [startMonth, setStartMonth] = useState("")
@@ -27,7 +29,7 @@ const CreditNotes = (props) => {
 		props.getPaginated(
 			`credit-notes?
 			number=${number}&
-			clientName=${clientName}&
+			clientId=${clientId}&
 			status=${status}&
 			startMonth=${startMonth}&
 			endMonth=${endMonth}&
@@ -35,22 +37,32 @@ const CreditNotes = (props) => {
 			endYear=${endYear}`,
 			setCreditNotes
 		)
-	}, [number, clientName, status, startMonth, endMonth, startYear, endYear])
+
+		props.get("users?idAndName=true&type=client", setClients)
+	}, [
+		number,
+		clientId,
+		clientName,
+		status,
+		startMonth,
+		endMonth,
+		startYear,
+		endYear,
+	])
 
 	return (
 		<>
 			<Header title="Credit Notes" />
-			
+
 			<div className="py-12 px-6">
 				{/* Credit Notes Tab */}
 				<CreditNoteList
 					{...props}
 					creditNotes={creditNotes}
 					setCreditNotes={setCreditNotes}
-					number={number}
+					clients={clients}
 					setNumber={setNumber}
-					clientName={clientName}
-					setClientName={setClientName}
+					setClientId={setClientId}
 					status={status}
 					setStatus={setStatus}
 					startMonth={startMonth}

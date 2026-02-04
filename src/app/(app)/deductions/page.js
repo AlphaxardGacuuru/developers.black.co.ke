@@ -13,8 +13,10 @@ const Deductions = (props) => {
 	props = { ...props, ...appProps }
 
 	const [deductions, setDeductions] = useState([])
+	const [clients, setClients] = useState([])
 
 	const [number, setNumber] = useState("")
+	const [clientId, setClientId] = useState("")
 	const [clientName, setClientName] = useState("")
 	const [status, setStatus] = useState("")
 	const [startMonth, setStartMonth] = useState("")
@@ -27,7 +29,7 @@ const Deductions = (props) => {
 		props.getPaginated(
 			`deductions?
 			number=${number}&
-			clientName=${clientName}&
+			clientId=${clientId}&
 			status=${status}&
 			startMonth=${startMonth}&
 			endMonth=${endMonth}&
@@ -35,22 +37,32 @@ const Deductions = (props) => {
 			endYear=${endYear}`,
 			setDeductions
 		)
-	}, [number, clientName, status, startMonth, endMonth, startYear, endYear])
+
+		props.get("users?idAndName=true&type=client", setClients)
+	}, [
+		number,
+		clientId,
+		clientName,
+		status,
+		startMonth,
+		endMonth,
+		startYear,
+		endYear,
+	])
 
 	return (
 		<>
 			<Header title="Deductions" />
-			
+
 			<div className="py-12 px-6">
 				{/* Deductions Tab */}
 				<DeductionList
 					{...props}
 					deductions={deductions}
 					setDeductions={setDeductions}
-					number={number}
+					clients={clients}
 					setNumber={setNumber}
-					clientName={clientName}
-					setClientName={setClientName}
+					setClientId={setClientId}
 					status={status}
 					setStatus={setStatus}
 					startMonth={startMonth}

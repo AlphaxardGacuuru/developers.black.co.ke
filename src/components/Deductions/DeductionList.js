@@ -153,6 +153,26 @@ const DeductionList = (props) => {
 						/>
 					</div>
 					{/* Number End */}
+					{/* Client */}
+					<div className="flex-grow min-w-0">
+						<Select
+							label="Client"
+							placeholder=""
+							name="client"
+							value={props.clientId}
+							onChange={(e) => props.setClientId(e.target.value)}
+							required>
+							<option value=""></option>
+							{props.clients.map((client, key) => (
+								<option
+									key={key}
+									value={client.id}>
+									{client.name}
+								</option>
+							))}
+						</Select>
+					</div>
+					{/* Client End */}
 					{/* Status */}
 					<div className="flex-grow min-w-0">
 						<Select

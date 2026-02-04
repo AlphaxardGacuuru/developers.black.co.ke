@@ -13,8 +13,10 @@ const Payments = (props) => {
 	props = { ...props, ...appProps }
 
 	const [payments, setPayments] = useState([])
+	const [clients, setClients] = useState([])
 
 	const [number, setNumber] = useState("")
+	const [clientId, setClientId] = useState("")
 	const [startMonth, setStartMonth] = useState("")
 	const [startYear, setStartYear] = useState("")
 	const [endMonth, setEndMonth] = useState("")
@@ -24,26 +26,30 @@ const Payments = (props) => {
 		// Fetch Payments
 		props.getPaginated(
 			`payments?number=${number}&
+			clientId=${clientId}&
 			startMonth=${startMonth}&
 			endMonth=${endMonth}&
 			startYear=${startYear}&
 			endYear=${endYear}`,
 			setPayments
 		)
-	}, [number, startMonth, endMonth, startYear, endYear])
+
+		props.get("users?idAndName=true&type=client", setClients)
+	}, [number, clientId, startMonth, endMonth, startYear, endYear])
 
 	return (
 		<>
 			<Header title="Payments" />
-			
+
 			<div className="py-12 px-6">
 				{/* Payments Tab */}
 				<PaymentList
 					{...props}
 					payments={payments}
 					setPayments={setPayments}
-					number={number}
+					clients={clients}
 					setNumber={setNumber}
+					setClientId={setClientId}
 					startMonth={startMonth}
 					setStartMonth={setStartMonth}
 					endMonth={endMonth}
