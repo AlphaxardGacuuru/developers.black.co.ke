@@ -4,7 +4,7 @@ import { useApp } from "@/contexts/AppContext"
 import { useState, useEffect } from "react"
 import { usePathname, useSearchParams } from "next/navigation"
 import Header from "@/app/(app)/Header"
-import DeductionList from "@/components/Deductions/DeductionList"
+import DeductionList from "@/components/deductions/DeductionList"
 
 const Deductions = (props) => {
 	const appProps = useApp()

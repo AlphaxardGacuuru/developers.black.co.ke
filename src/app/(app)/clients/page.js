@@ -3,7 +3,7 @@
 import { useApp } from "@/contexts/AppContext"
 import { useState, useEffect } from "react"
 import Header from "@/app/(app)/Header"
-import ClientList from "@/components/Clients/ClientList"
+import ClientList from "@/components/clients/ClientList"
 
 const Clients = (props) => {
 	const appProps = useApp()

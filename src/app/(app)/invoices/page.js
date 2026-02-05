@@ -4,7 +4,7 @@ import { useApp } from "@/contexts/AppContext"
 import { useState, useEffect } from "react"
 import { usePathname, useSearchParams } from "next/navigation"
 import Header from "@/app/(app)/Header"
-import InvoiceList from "@/components/Invoices/InvoiceList"
+import InvoiceList from "@/components/invoices/InvoiceList"
 
 const Invoices = (props) => {
 	const appProps = useApp()

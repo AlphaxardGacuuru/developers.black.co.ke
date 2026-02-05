@@ -4,7 +4,7 @@ import { useApp } from "@/contexts/AppContext"
 import { useState, useEffect } from "react"
 import { usePathname, useSearchParams } from "next/navigation"
 import Header from "@/app/(app)/Header"
-import CreditNoteList from "@/components/CreditNotes/CreditNoteList"
+import CreditNoteList from "@/components/creditNotes/CreditNoteList"
 
 const CreditNotes = (props) => {
 	const appProps = useApp()
