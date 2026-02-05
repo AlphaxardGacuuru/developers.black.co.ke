@@ -59,12 +59,12 @@ function CalendarComponent({
 					defaultClassNames.nav
 				),
 				button_previous: cn(
-				btnVariants({ variant: buttonVariant }),
+					btnVariants({ variant: buttonVariant }),
 					"size-(--cell-size) aria-disabled:opacity-50 p-0 select-none",
 					defaultClassNames.button_previous
 				),
 				button_next: cn(
-				btnVariants({ variant: buttonVariant }),
+					btnVariants({ variant: buttonVariant }),
 					"size-(--cell-size) aria-disabled:opacity-50 p-0 select-none",
 					defaultClassNames.button_next
 				),
@@ -199,7 +199,7 @@ function CalendarDayButton({ className, day, modifiers, ...props }) {
 			ref={ref}
 			variant="ghost"
 			size="icon"
-			data-day={day.date.toLocaleDateString('en-GB')}
+			data-day={day.date.toLocaleDateString("en-GB")}
 			data-selected-single={
 				modifiers.selected &&
 				!modifiers.range_start &&
@@ -234,7 +234,9 @@ export function DatePicker({
 
 	return (
 		<div className={cn("relative w-full", className)}>
-			<Popover open={open} onOpenChange={setOpen}>
+			<Popover
+				open={open}
+				onOpenChange={setOpen}>
 				<InputWrapper error={error}>
 					{({ focused, handleFocus, handleBlur }) => {
 						const isActiveWithFocus = focused || isActive
@@ -257,7 +259,9 @@ export function DatePicker({
 										{...props}>
 										<span
 											className={cn("truncate", !value && "text-transparent")}>
-											{value ? value.toLocaleDateString('en-GB') : label || "Select date"}
+											{value
+												? value.toLocaleDateString("en-GB")
+												: label || "Select date"}
 										</span>
 										<CalendarIcon className="ml-auto size-4 opacity-50" />
 									</button>
@@ -286,6 +290,7 @@ export function DatePicker({
 					<CalendarComponent
 						mode="single"
 						selected={value}
+						defaultMonth={value}
 						captionLayout="dropdown"
 						onSelect={(date) => {
 							onChange?.(date)
