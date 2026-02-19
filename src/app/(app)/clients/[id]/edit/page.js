@@ -112,7 +112,6 @@ const EditClient = ({ params }) => {
 									placeholder="client@example.com"
 									value={email}
 									onChange={(e) => setEmail(e.target.value)}
-									disabled
 								/>
 								{/* Email End */}
 							</div>

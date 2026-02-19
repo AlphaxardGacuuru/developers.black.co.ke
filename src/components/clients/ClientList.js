@@ -211,9 +211,10 @@ const ClientList = (props) => {
 							accessorKey: "name",
 							header: "Name",
 							cell: ({ row }) => (
-								<div className="whitespace-nowrap font-semibold">
-									{row.getValue("name")}
-								</div>
+								<MyLink
+									href={`/clients/${row.original.id}/view`}
+									text={row.getValue("name")}
+								/>
 							),
 						},
 						{
