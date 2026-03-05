@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react"
 import { useRouter } from "next/navigation"
 import { useApp } from "@/contexts/AppContext"
 import Axios from "@/lib/axios"
+import { format, parse, isValid } from "date-fns"
 
 import Header from "@/app/(app)/Header"
 import MyLink from "@/components/ui/my-link"
@@ -30,8 +31,12 @@ const ViewPayment = ({ params }) => {
 	// Format date from YYYY-MM-DD to DD-MM-YYYY
 	const formatDate = (dateString) => {
 		if (!dateString) return ""
-		const [year, month, day] = dateString.split("-")
-		return `${day}-${month}-${year}`
+		const date = parse(
+			String(dateString).slice(0, 10),
+			"yyyy-MM-dd",
+			new Date()
+		)
+		return isValid(date) ? format(date, "dd-MM-yyyy") : ""
 	}
 
 	useEffect(() => {
