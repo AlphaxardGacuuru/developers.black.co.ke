@@ -219,6 +219,22 @@ function CalendarDayButton({ className, day, modifiers, ...props }) {
 	)
 }
 
+// Parse YYYY-MM-DD string to local Date object (avoids timezone issues)
+function parseLocalDate(dateStr) {
+	if (!dateStr) return null
+	const [y, m, d] = dateStr.split("-")
+	return new Date(y, m - 1, d)
+}
+
+// Format Date object to YYYY-MM-DD in local timezone
+export function formatLocalDate(date) {
+	if (!date) return ""
+	const year = date.getFullYear()
+	const month = String(date.getMonth() + 1).padStart(2, "0")
+	const day = String(date.getDate()).padStart(2, "0")
+	return `${year}-${month}-${day}`
+}
+
 export function DatePicker({
 	className,
 	label,
@@ -229,6 +245,9 @@ export function DatePicker({
 	...props
 }) {
 	const [open, setOpen] = useState(false)
+
+	// Convert string value to Date for internal use
+	const dateValue = typeof value === "string" ? parseLocalDate(value) : value
 
 	const isActive = value
 
@@ -259,8 +278,8 @@ export function DatePicker({
 										{...props}>
 										<span
 											className={cn("truncate", !value && "text-transparent")}>
-											{value
-												? value.toLocaleDateString("en-GB")
+											{dateValue
+												? dateValue.toLocaleDateString("en-GB")
 												: label || "Select date"}
 										</span>
 										<CalendarIcon className="ml-auto size-4 opacity-50" />
@@ -289,11 +308,11 @@ export function DatePicker({
 					align="start">
 					<CalendarComponent
 						mode="single"
-						selected={value}
-						defaultMonth={value}
+						selected={dateValue}
+						defaultMonth={dateValue}
 						captionLayout="dropdown"
 						onSelect={(date) => {
-							onChange?.(date)
+							onChange?.(formatLocalDate(date))
 							setOpen(false)
 						}}
 					/>

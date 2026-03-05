@@ -15,7 +15,7 @@ import { Textarea } from "@/components/ui/textarea"
 import BackSVG from "@/svgs/BackSVG"
 import CloseSVG from "@/svgs/CloseSVG"
 import PlusSVG from "@/svgs/PlusSVG"
-import { DatePicker } from "@/components/ui/date-picker"
+import { DatePicker, formatLocalDate } from "@/components/ui/date-picker"
 import MyLink from "@/components/ui/my-link"
 
 const EditInvoice = ({ params }) => {
@@ -33,9 +33,7 @@ const EditInvoice = ({ params }) => {
 
 	// Invoice Details
 	const [clientId, setClientId] = useState("")
-	const [issueDate, setIssueDate] = useState(
-		new Date().toISOString().split("T")[0]
-	)
+	const [issueDate, setIssueDate] = useState(formatLocalDate(new Date()))
 	const [dueDate, setDueDate] = useState("")
 	const [notes, setNotes] = useState("")
 	const [terms, setTerms] = useState(
@@ -57,9 +55,7 @@ const EditInvoice = ({ params }) => {
 			.then((res) => {
 				const invoice = res.data.data
 				setClientId(invoice.clientId || "")
-				setIssueDate(
-					invoice.issueDate || new Date().toISOString().split("T")[0]
-				)
+				setIssueDate(invoice.issueDate || formatLocalDate(new Date()))
 				setDueDate(invoice.dueDate || "")
 				setNotes(invoice.notes || "")
 				setTerms(
@@ -211,20 +207,16 @@ const EditInvoice = ({ params }) => {
 								{/* Issue Date Start */}
 								<DatePicker
 									label="Issue Date"
-									value={issueDate ? new Date(issueDate) : null}
-									onChange={(date) =>
-										setIssueDate(date?.toISOString().split("T")[0] || "")
-									}
+									value={issueDate}
+									onChange={setIssueDate}
 								/>
 								{/* Issue Date End */}
 
 								{/* Due Date Start */}
 								<DatePicker
 									label="Due Date"
-									value={dueDate ? new Date(dueDate) : null}
-									onChange={(date) =>
-										setDueDate(date?.toISOString().split("T")[0] || "")
-									}
+									value={dueDate}
+									onChange={setDueDate}
 								/>
 								{/* Due Date End */}
 							</div>

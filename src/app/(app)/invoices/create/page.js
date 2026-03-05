@@ -15,7 +15,7 @@ import { Textarea } from "@/components/ui/textarea"
 import BackSVG from "@/svgs/BackSVG"
 import CloseSVG from "@/svgs/CloseSVG"
 import PlusSVG from "@/svgs/PlusSVG"
-import { DatePicker } from "@/components/ui/date-picker"
+import { DatePicker, formatLocalDate } from "@/components/ui/date-picker"
 import MyLink from "@/components/ui/my-link"
 
 const CreateInvoice = (props) => {
@@ -32,27 +32,9 @@ const CreateInvoice = (props) => {
 		return amount.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",")
 	}
 
-	// Parse date string to local Date object (avoids timezone issues)
-	const parseLocalDate = (dateStr) => {
-		if (!dateStr) return null
-		const [y, m, d] = dateStr.split("-")
-		return new Date(y, m - 1, d)
-	}
-
-	// Format Date object to YYYY-MM-DD in local timezone
-	const formatLocalDate = (date) => {
-		if (!date) return ""
-		const year = date.getFullYear()
-		const month = String(date.getMonth() + 1).padStart(2, "0")
-		const day = String(date.getDate()).padStart(2, "0")
-		return `${year}-${month}-${day}`
-	}
-
 	// Invoice Details
 	const [clientId, setClientId] = useState("")
-	const [issueDate, setIssueDate] = useState(
-		new Date().toISOString().split("T")[0]
-	)
+	const [issueDate, setIssueDate] = useState(formatLocalDate(new Date()))
 	const [dueDate, setDueDate] = useState("")
 	const [notes, setNotes] = useState("")
 	const [terms, setTerms] = useState(
@@ -72,7 +54,7 @@ const CreateInvoice = (props) => {
 		// Set default due date (30 days from now)
 		const defaultDueDate = new Date()
 		defaultDueDate.setDate(defaultDueDate.getDate() + 30)
-		setDueDate(defaultDueDate.toISOString().split("T")[0])
+		setDueDate(formatLocalDate(defaultDueDate))
 	}, [])
 
 	// Calculate invoice item amount
@@ -134,7 +116,9 @@ const CreateInvoice = (props) => {
 			clientId,
 			issueDate,
 			dueDate,
-			invoiceItems: invoiceItems.filter((item) => item.description.trim() !== ""),
+			invoiceItems: invoiceItems.filter(
+				(item) => item.description.trim() !== ""
+			),
 			total: calculateTotal(),
 			notes,
 			terms,
@@ -185,16 +169,16 @@ const CreateInvoice = (props) => {
 								{/* Issue Date Start */}
 								<DatePicker
 									label="Issue Date"
-									value={parseLocalDate(issueDate)}
-									onChange={(date) => setIssueDate(formatLocalDate(date))}
+									value={issueDate}
+									onChange={setIssueDate}
 								/>
 								{/* Issue Date End */}
 
 								{/* Due Date Start */}
 								<DatePicker
 									label="Due Date"
-									value={parseLocalDate(dueDate)}
-									onChange={(date) => setDueDate(formatLocalDate(date))}
+									value={dueDate}
+									onChange={setDueDate}
 								/>
 								{/* Due Date End */}
 							</div>
@@ -271,7 +255,11 @@ const CreateInvoice = (props) => {
 														step="0.01"
 														value={item.quantity}
 														onChange={(e) =>
-															updateInvoiceItem(index, "quantity", e.target.value)
+															updateInvoiceItem(
+																index,
+																"quantity",
+																e.target.value
+															)
 														}
 														required
 													/>
@@ -282,7 +270,11 @@ const CreateInvoice = (props) => {
 														className="hidden md:block w-full px-3 py-2 bg-white/10 border border-white/20 rounded-lg text-white font-light font-nunito focus:outline-none focus:border-white/40 transition-all duration-300"
 														value={item.quantity}
 														onChange={(e) =>
-															updateInvoiceItem(index, "quantity", e.target.value)
+															updateInvoiceItem(
+																index,
+																"quantity",
+																e.target.value
+															)
 														}
 														required
 													/>

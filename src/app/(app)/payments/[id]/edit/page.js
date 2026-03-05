@@ -13,7 +13,7 @@ import { Select } from "@/components/ui/select"
 import { Textarea } from "@/components/ui/textarea"
 
 import BackSVG from "@/svgs/BackSVG"
-import { DatePicker } from "@/components/ui/date-picker"
+import { DatePicker, formatLocalDate } from "@/components/ui/date-picker"
 import MyLink from "@/components/ui/my-link"
 
 const EditPayment = ({ params }) => {
@@ -27,9 +27,7 @@ const EditPayment = ({ params }) => {
 	// Payment Details
 	const [invoiceId, setInvoiceId] = useState("")
 	const [amount, setAmount] = useState("")
-	const [paymentDate, setPaymentDate] = useState(
-		new Date().toISOString().split("T")[0]
-	)
+	const [paymentDate, setPaymentDate] = useState(formatLocalDate(new Date()))
 	const [notes, setNotes] = useState("")
 
 	// Get data
@@ -47,11 +45,11 @@ const EditPayment = ({ params }) => {
 				setLoadingPayment(false)
 				setInvoiceId(payment.invoiceId || "")
 				// Remove commas from amount string and convert to number
-				const cleanAmount = payment.amount ? String(payment.amount).replace(/,/g, "") : ""
+				const cleanAmount = payment.amount
+					? String(payment.amount).replace(/,/g, "")
+					: ""
 				setAmount(cleanAmount)
-				setPaymentDate(
-					payment.paymentDate || new Date().toISOString().split("T")[0]
-				)
+				setPaymentDate(payment.paymentDate || formatLocalDate(new Date()))
 				setNotes(payment.notes || "")
 			})
 			.catch((err) => {
@@ -149,10 +147,8 @@ const EditPayment = ({ params }) => {
 								{/* Payment Date Start */}
 								<DatePicker
 									label="Payment Date"
-									value={paymentDate ? new Date(paymentDate) : null}
-									onChange={(date) =>
-										setPaymentDate(date?.toISOString().split("T")[0] || "")
-									}
+									value={paymentDate}
+									onChange={setPaymentDate}
 								/>
 								{/* Payment Date End */}
 							</div>

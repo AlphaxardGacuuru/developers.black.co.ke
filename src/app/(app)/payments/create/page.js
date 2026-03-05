@@ -13,7 +13,7 @@ import { Select } from "@/components/ui/select"
 import { Textarea } from "@/components/ui/textarea"
 
 import BackSVG from "@/svgs/BackSVG"
-import { DatePicker } from "@/components/ui/date-picker"
+import { DatePicker, formatLocalDate } from "@/components/ui/date-picker"
 import MyLink from "@/components/ui/my-link"
 
 const CreatePayment = (props) => {
@@ -30,28 +30,10 @@ const CreatePayment = (props) => {
 		return amount.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",")
 	}
 
-	// Parse date string to local Date object (avoids timezone issues)
-	const parseLocalDate = (dateStr) => {
-		if (!dateStr) return null
-		const [y, m, d] = dateStr.split("-")
-		return new Date(y, m - 1, d)
-	}
-
-	// Format Date object to YYYY-MM-DD in local timezone
-	const formatLocalDate = (date) => {
-		if (!date) return ""
-		const year = date.getFullYear()
-		const month = String(date.getMonth() + 1).padStart(2, "0")
-		const day = String(date.getDate()).padStart(2, "0")
-		return `${year}-${month}-${day}`
-	}
-
 	// Payment Details
 	const [invoiceId, setInvoiceId] = useState("")
 	const [amount, setAmount] = useState("")
-	const [paymentDate, setPaymentDate] = useState(
-		new Date().toISOString().split("T")[0]
-	)
+	const [paymentDate, setPaymentDate] = useState(formatLocalDate(new Date()))
 	const [notes, setNotes] = useState("")
 
 	// Get data
@@ -133,10 +115,8 @@ const CreatePayment = (props) => {
 								{/* Payment Date Start */}
 								<DatePicker
 									label="Payment Date"
-									value={parseLocalDate(paymentDate)}
-									onChange={(date) =>
-										setPaymentDate(date?.toISOString().split("T")[0] || "")
-									}
+									value={paymentDate}
+									onChange={setPaymentDate}
 								/>
 								{/* Payment Date End */}
 							</div>

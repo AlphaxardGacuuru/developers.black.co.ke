@@ -13,7 +13,7 @@ import { Select } from "@/components/ui/select"
 import { Textarea } from "@/components/ui/textarea"
 
 import BackSVG from "@/svgs/BackSVG"
-import { DatePicker } from "@/components/ui/date-picker"
+import { DatePicker, formatLocalDate } from "@/components/ui/date-picker"
 import MyLink from "@/components/ui/my-link"
 
 const EditCreditNote = ({ params }) => {
@@ -24,19 +24,10 @@ const EditCreditNote = ({ params }) => {
 	const [loading, setLoading] = useState(false)
 	const [loadingCreditNote, setLoadingCreditNote] = useState(true)
 
-	// Parse date string to local Date object (avoids timezone issues)
-	const parseLocalDate = (dateStr) => {
-		if (!dateStr) return null
-		const [y, m, d] = dateStr.split("-")
-		return new Date(y, m - 1, d)
-	}
-
 	// Credit Note Details
 	const [invoiceId, setInvoiceId] = useState("")
 	const [amount, setAmount] = useState("")
-	const [issueDate, setIssueDate] = useState(
-		new Date().toISOString().split("T")[0]
-	)
+	const [issueDate, setIssueDate] = useState(formatLocalDate(new Date()))
 	const [notes, setNotes] = useState("")
 
 	// Get data
@@ -152,10 +143,8 @@ const EditCreditNote = ({ params }) => {
 								{/* Issue Date Start */}
 								<DatePicker
 									label="Issue Date"
-									value={parseLocalDate(issueDate)}
-									onChange={(date) =>
-										setIssueDate(date?.toISOString().split("T")[0] || "")
-									}
+									value={issueDate}
+									onChange={setIssueDate}
 								/>
 								{/* Issue Date End */}
 							</div>
