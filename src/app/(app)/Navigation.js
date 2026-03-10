@@ -25,7 +25,7 @@ const Navigation = ({ user }) => {
 						<div className="flex-shrink-0 flex items-center">
 							<Link href="/">
 								<div className="text-white opacity-90 hover:opacity-100 transition-opacity duration-500">
-									<ApplicationLogo className="block h-10 w-auto fill-current" />
+									<ApplicationLogo className="block h-6 sm:h-8 w-auto fill-current" />
 								</div>
 							</Link>
 						</div>
@@ -140,8 +140,44 @@ const Navigation = ({ user }) => {
 					<div className="pt-2 pb-3 space-y-1">
 						<ResponsiveNavLink
 							href="/dashboard"
-							active={usePathname() === "/dashboard"}>
+							active={usePathname() === "/dashboard"}
+							onClick={() => setOpen(false)}>
 							Dashboard
+						</ResponsiveNavLink>
+
+						<ResponsiveNavLink
+							href="/clients"
+							active={usePathname().startsWith("/clients")}
+							onClick={() => setOpen(false)}>
+							Clients
+						</ResponsiveNavLink>
+
+						<ResponsiveNavLink
+							href="/invoices"
+							active={usePathname().startsWith("/invoices")}
+							onClick={() => setOpen(false)}>
+							Invoices
+						</ResponsiveNavLink>
+
+						<ResponsiveNavLink
+							href="/payments"
+							active={usePathname().startsWith("/payments")}
+							onClick={() => setOpen(false)}>
+							Payments
+						</ResponsiveNavLink>
+
+						<ResponsiveNavLink
+							href="/credit-notes"
+							active={usePathname().startsWith("/credit-notes")}
+							onClick={() => setOpen(false)}>
+							Credit Notes
+						</ResponsiveNavLink>
+
+						<ResponsiveNavLink
+							href="/deductions"
+							active={usePathname().startsWith("/deductions")}
+							onClick={() => setOpen(false)}>
+							Deductions
 						</ResponsiveNavLink>
 					</div>
 

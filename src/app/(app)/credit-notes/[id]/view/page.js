@@ -104,7 +104,7 @@ const ViewCreditNote = ({ params }) => {
 						{/* Credit Note Header */}
 						<div className="flex justify-between items-start mb-8 pb-6 border-b border-white/20 print:border-gray-300">
 							<div className="text-white print:text-gray-900">
-								<div className="text-4xl mb-2">
+								<div className="text-xl sm:text-4xl mb-2">
 									<LogoSVG />
 								</div>
 							</div>
@@ -113,39 +113,31 @@ const ViewCreditNote = ({ params }) => {
 								<h2 className="text-2xl text-white font-nunito mb-2 print:text-gray-900">
 									CREDIT NOTE
 								</h2>
+							</div>
+						</div>
 
-								<h5 className="text-white font-nunito mb-4 print:text-gray-900">
-									Issued To:
-								</h5>
-								<div className="text-white/80 print:text-gray-700">
-									<p className="font-semibold">
-										{creditNote.invoice?.client?.name}
-									</p>
-									<p>{creditNote.invoice?.client?.email}</p>
-									<p>{creditNote.invoice?.client?.phone}</p>
+						{/* Credit Note Info */}
+						<div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
+							<div className="text-white print:text-gray-900">
+								<h5 className="text-lg font-nunito mb-4">Issued To:</h5>
+								<div className="text-white/80 print:text-gray-700 space-y-1">
+									<div className="font-semibold">{creditNote.clientName}</div>
+									<div>{creditNote.clientEmail}</div>
+									<div>{creditNote.clientPhone}</div>
 								</div>
 							</div>
-
-							<div className="text-left md:text-right">
-								<div className="space-y-2">
-									<p className="text-white/80 print:text-gray-700">
-										<span className="font-semibold text-white print:text-gray-900">
-											Credit Note #:
-										</span>{" "}
-										{creditNote.number}
-									</p>
-									<p className="text-white/80 print:text-gray-700">
-										<span className="font-semibold text-white print:text-gray-900">
-											Related Invoice #:
-										</span>{" "}
-										{creditNote.invoice?.number}
-									</p>
-									<p className="text-white/80 print:text-gray-700">
+							<div className="text-right text-white print:text-gray-900">
+								<h5 className="text-lg font-nunito mb-4">
+									Credit Note #: {creditNote.number}
+								</h5>
+								<div className="text-white/80 print:text-gray-700 space-y-1">
+									<div>Related Invoice #: {creditNote.invoiceNumber}</div>
+									<div className="text-white/80 print:text-gray-700">
 										<span className="font-semibold text-white print:text-gray-900">
 											Issue Date:
 										</span>{" "}
 										{formatDate(creditNote.issueDate)}
-									</p>
+									</div>
 								</div>
 							</div>
 						</div>
@@ -180,15 +172,6 @@ const ViewCreditNote = ({ params }) => {
 								Thank you for your business
 							</p>
 						</div>
-					</div>
-
-					{/* Action Buttons */}
-					<div className="flex justify-end items-center gap-4 mt-6">
-						<MyLink
-							href={`/credit-notes/${creditNote.id}/edit`}
-							icon={<BackSVG />}
-							text="Edit Credit Note"
-						/>
 					</div>
 				</div>
 			</div>

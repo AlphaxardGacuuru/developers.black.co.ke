@@ -101,8 +101,10 @@ const ViewDeduction = ({ params }) => {
 						className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl p-8 print:bg-white print:border-gray-300">
 						{/* Header */}
 						<div className="flex flex-col md:flex-row justify-between items-start mb-8 pb-6 border-b border-white/20 print:border-gray-300">
-							<div>
-								<LogoSVG />
+							<div className="text-white print:text-gray-900">
+								<div className="text-xl sm:text-4xl mb-2">
+									<LogoSVG />
+								</div>
 							</div>
 
 							<div className="text-right">
@@ -119,18 +121,13 @@ const ViewDeduction = ({ params }) => {
 									Issued To:
 								</h5>
 								<div className="text-white/80 print:text-gray-700">
-									<p className="font-semibold">
-										{deduction.invoice?.client?.name}
-									</p>
-									<p>{deduction.invoice?.client?.email}</p>
-									<p>{deduction.invoice?.client?.phone}</p>
-									{deduction.invoice?.client?.address && (
-										<p className="mt-2">{deduction.invoice?.client?.address}</p>
-									)}
+									<div className="font-semibold">{deduction.clientName}</div>
+									<div>{deduction.clientEmail}</div>
+									<div>{deduction.clientPhone}</div>
 								</div>
 							</div>
 
-							<div className="text-right">
+							<div className="text-right text-white print:text-gray-900">
 								<div className="space-y-2 text-white/80 print:text-gray-700">
 									<p>
 										<span className="font-semibold">Deduction Number:</span>{" "}
@@ -138,7 +135,7 @@ const ViewDeduction = ({ params }) => {
 									</p>
 									<p>
 										<span className="font-semibold">Invoice Number:</span>{" "}
-										{deduction.invoice?.number}
+										{deduction.invoiceNumber}
 									</p>
 									<p>
 										<span className="font-semibold">Issue Date:</span>{" "}

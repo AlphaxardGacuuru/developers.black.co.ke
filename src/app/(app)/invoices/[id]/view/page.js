@@ -94,7 +94,7 @@ const ViewInvoice = ({ params }) => {
 						{/* Invoice Header */}
 						<div className="flex justify-between items-start mb-8 pb-6 border-b border-white/20 print:border-gray-300">
 							<div className="text-white print:text-gray-900">
-								<div className="text-4xl mb-2">
+								<div className="text-xl sm:text-4xl mb-2">
 									<LogoSVG />
 								</div>
 							</div>

@@ -278,43 +278,41 @@ const PaymentList = (props) => {
 			{/* Send Receipt Modal End */}
 
 			{/* Data */}
-			<div className="bg-white/10 backdrop-blur-xl border border-white/20 shadow-sm rounded-3xl mb-2 p-2 px-5 hover:bg-white/15 transition-all duration-500">
-				{/* Total */}
-				<div className="grid grid-cols-2 gap-4">
-					{/* Count */}
-					<div>
-						<div className="flex justify-between flex-grow mx-2">
-							<HeroHeading
-								heading="Count"
-								data={
-									<span>
-										<small>KES</small> {props.payments.meta?.total}
-									</span>
-								}
-							/>
-							<HeroIcon>
-								<PaymentSVG />
-							</HeroIcon>
-						</div>
-					</div>
-					{/* Count End */}
-					<div>
-						<div className="flex justify-between flex-grow mx-2">
-							<HeroHeading
-								heading="Total Payments"
-								data={
-									<span>
-										<small>KES</small> {props.payments.sum}
-									</span>
-								}
-							/>
-							<HeroIcon>
-								<MoneySVG />
-							</HeroIcon>
-						</div>
+			<div className="bg-white/10 backdrop-blur-xl border border-white/20 shadow-sm rounded-3xl mb-2 p-2 px-5 hover:bg-white/15 transition-all duration-500 grid grid-cols-1 sm:grid-cols-2 gap-4">
+				{/* Count */}
+				<div>
+					<div className="flex justify-between flex-grow mx-2">
+						<HeroHeading
+							heading="Count"
+							data={
+								<span>
+									<small>KES</small> {props.payments.meta?.total}
+								</span>
+							}
+						/>
+						<HeroIcon>
+							<PaymentSVG />
+						</HeroIcon>
 					</div>
 				</div>
-				{/* Total End */}
+				{/* Count End */}
+				{/* Total Payments Start */}
+				<div>
+					<div className="flex justify-between flex-grow mx-2">
+						<HeroHeading
+							heading="Total Payments"
+							data={
+								<span>
+									<small>KES</small> {props.payments.sum}
+								</span>
+							}
+						/>
+						<HeroIcon>
+							<MoneySVG />
+						</HeroIcon>
+					</div>
+				</div>
+				{/* Total Payments End */}
 			</div>
 			{/* Data End */}
 

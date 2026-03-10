@@ -59,7 +59,7 @@ const PageLoader = (props) => {
 		}
 	}, [props.loadingItems])
 
-	return <div className="py-3"></div>
+	return <div></div>
 }
 
 export default PageLoader

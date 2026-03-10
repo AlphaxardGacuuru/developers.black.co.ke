@@ -95,43 +95,35 @@ const CreditNoteList = (props) => {
 			{/* Bulk Delete Confirmation Modal End */}
 
 			{/* Data */}
-			<div className="bg-white/10 backdrop-blur-xl border border-white/20 shadow-sm rounded-3xl mb-2 p-2 px-5 hover:bg-white/15 transition-all duration-500">
+			<div className="bg-white/10 backdrop-blur-xl border border-white/20 shadow-sm rounded-3xl mb-2 p-2 px-5 hover:bg-white/15 transition-all duration-500 grid grid-cols-1 sm:grid-cols-2 gap-4">
+				{/* Count */}
+				<div className="flex justify-between flex-grow mx-2">
+					<HeroHeading
+						heading="Count"
+						data={
+							<span>
+								<small>KES</small> {props.creditNotes.meta?.total}
+							</span>
+						}
+					/>
+					<HeroIcon>
+						<CreditNoteSVG />
+					</HeroIcon>
+				</div>
+				{/* Count End */}
 				{/* Total */}
-				<div className="grid grid-cols-2 gap-4">
-					{/* Count */}
-					<div>
-						<div className="flex justify-between flex-grow mx-2">
-							<HeroHeading
-								heading="Count"
-								data={
-									<span>
-										<small>KES</small> {props.creditNotes.meta?.total}
-									</span>
-								}
-							/>
-							<HeroIcon>
-								<CreditNoteSVG />
-							</HeroIcon>
-						</div>
-					</div>
-					{/* Count End */}
-					{/* Total */}
-					<div>
-						<div className="flex justify-between flex-grow mx-2">
-							<HeroHeading
-								heading="Total"
-								data={
-									<span>
-										<small>KES</small> {props.creditNotes.sum}
-									</span>
-								}
-							/>
-							<HeroIcon>
-								<MoneySVG />
-							</HeroIcon>
-						</div>
-					</div>
-					{/* Total End */}
+				<div className="flex justify-between flex-grow mx-2">
+					<HeroHeading
+						heading="Total"
+						data={
+							<span>
+								<small>KES</small> {props.creditNotes.sum}
+							</span>
+						}
+					/>
+					<HeroIcon>
+						<MoneySVG />
+					</HeroIcon>
 				</div>
 				{/* Total End */}
 			</div>

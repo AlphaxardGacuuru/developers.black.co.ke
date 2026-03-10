@@ -283,79 +283,67 @@ const InvoiceList = (props) => {
 			{/* Send Invoice Modal End */}
 
 			{/* Data */}
-			<div className="bg-white/10 backdrop-blur-xl border border-white/20 shadow-sm rounded-3xl mb-2 p-2 px-5 hover:bg-white/15 transition-all duration-500">
+			<div className="bg-white/10 backdrop-blur-xl border border-white/20 shadow-sm rounded-3xl mb-2 p-2 px-5 hover:bg-white/15 transition-all duration-500 grid grid-cols-1 sm:grid-cols-4 gap-4">
+				{/* Count */}
+				<div className="flex justify-between flex-grow mx-2">
+					<HeroHeading
+						heading="Count"
+						data={
+							<span>
+								<small>KES</small> {props.invoices.meta?.total}
+							</span>
+						}
+					/>
+					<HeroIcon>
+						<InvoiceSVG />
+					</HeroIcon>
+				</div>
+				{/* Count End */}
 				{/* Total */}
-				<div className="grid grid-cols-1 sm:grid-cols-4 gap-4">
-					{/* Count */}
-					<div>
-						<div className="flex justify-between flex-grow mx-2">
-							<HeroHeading
-								heading="Count"
-								data={
-									<span>
-										<small>KES</small> {props.invoices.meta?.total}
-									</span>
-								}
-							/>
-							<HeroIcon>
-								<InvoiceSVG />
-							</HeroIcon>
-						</div>
-					</div>
-					{/* Count End */}
-					{/* Total */}
-					<div>
-						<div className="flex justify-between flex-grow mx-2">
-							<HeroHeading
-								heading="Total"
-								data={
-									<span>
-										<small>KES</small> {props.invoices.sum}
-									</span>
-								}
-							/>
-							<HeroIcon>
-								<MoneySVG />
-							</HeroIcon>
-						</div>
-					</div>
-					{/* Total End */}
-					{/* Balance */}
-					<div>
-						<div className="flex justify-between flex-grow mx-2">
-							<HeroHeading
-								heading="Balance"
-								data={
-									<span>
-										<small>KES</small> {props.invoices.balance}
-									</span>
-								}
-							/>
-							<HeroIcon>
-								<BalanceSVG />
-							</HeroIcon>
-						</div>
-					</div>
-					{/* Balance End */}
-					{/* Paid */}
-					<div>
-						<div className="flex justify-between flex-grow mx-2">
-							<HeroHeading
-								heading="Paid"
-								data={
-									<span>
-										<small>KES</small> {props.invoices.paid}
-									</span>
-								}
-							/>
-							<HeroIcon>
-								<CoinSVG />
-							</HeroIcon>
-						</div>
-					</div>
-					{/* Paid End */}
+				<div className="flex justify-between flex-grow mx-2">
+					<HeroHeading
+						heading="Total"
+						data={
+							<span>
+								<small>KES</small> {props.invoices.sum}
+							</span>
+						}
+					/>
+					<HeroIcon>
+						<MoneySVG />
+					</HeroIcon>
 				</div>
 				{/* Total End */}
+				{/* Balance */}
+				<div className="flex justify-between flex-grow mx-2">
+					<HeroHeading
+						heading="Balance"
+						data={
+							<span>
+								<small>KES</small> {props.invoices.balance}
+							</span>
+						}
+					/>
+					<HeroIcon>
+						<BalanceSVG />
+					</HeroIcon>
+				</div>
+				{/* Balance End */}
+				{/* Paid */}
+				<div className="flex justify-between flex-grow mx-2">
+					<HeroHeading
+						heading="Paid"
+						data={
+							<span>
+								<small>KES</small> {props.invoices.paid}
+							</span>
+						}
+					/>
+					<HeroIcon>
+						<CoinSVG />
+					</HeroIcon>
+				</div>
+				{/* Paid End */}
 			</div>
 			{/* Data End */}
 

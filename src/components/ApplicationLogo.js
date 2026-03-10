@@ -1,10 +1,11 @@
-const ApplicationLogo = () => (
+const ApplicationLogo = ({ className, ...props }) => (
     <svg
         data-v-423bf9ae=""
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 708 90"
-        className="iconLeft"
-        width="20em">
+        className={className || "iconLeft"}
+        width="20em"
+        {...props}>
         <g
             data-v-423bf9ae=""
             id="c492b7ce-31d2-4f62-8945-84101202cbeb"

@@ -70,95 +70,100 @@ export function DataTable({
 	})
 
 	const PaginationControl = (
-		<div className="flex items-center justify-end space-x-4 py-4">
+		<div className="flex flex-col sm:flex-row items-center justify-between sm:justify-end gap-4 py-4">
 			{/* Rows selected Start */}
-			<div className="flex-1 text-sm text-muted-foreground text-white">
+			<div className="w-full sm:flex-1 text-sm text-center sm:text-left text-muted-foreground text-white">
 				{table.getFilteredSelectedRowModel().rows.length} of{" "}
 				{table.getFilteredRowModel().rows.length} row
 				{table.getFilteredRowModel().rows.length !== 1 ? "s" : ""} selected.
 			</div>
 			{/* Rows selected End */}
 
-			{/* Columns Visibility Start */}
-			<DropdownMenu>
-				<DropdownMenuTrigger asChild>
-					<Btn
-						variant="outline"
-						size="sm">
-						Columns <ChevronDown className="ml-2 h-4 w-4" />
-					</Btn>
-				</DropdownMenuTrigger>
-				<DropdownMenuContent align="end">
-					{table
-						.getAllColumns()
-						.filter((column) => column.getCanHide())
-						.map((column) => {
-							return (
-								<DropdownMenuCheckboxItem
-									key={column.id}
-									className="capitalize"
-									checked={column.getIsVisible()}
-									onCheckedChange={(value) => column.toggleVisibility(!!value)}>
-									{column.id}
-								</DropdownMenuCheckboxItem>
-							)
-						})}
-				</DropdownMenuContent>
-			</DropdownMenu>
-			{/* Columns Visibility End */}
+			<div className="flex flex-wrap items-center justify-center gap-2 sm:space-x-4">
+				{/* Columns Visibility Start */}
+				<DropdownMenu>
+					<DropdownMenuTrigger asChild>
+						<Btn
+							variant="outline"
+							size="sm">
+							Columns <ChevronDown className="ml-2 h-4 w-4" />
+						</Btn>
+					</DropdownMenuTrigger>
+					<DropdownMenuContent align="end">
+						{table
+							.getAllColumns()
+							.filter((column) => column.getCanHide())
+							.map((column) => {
+								return (
+									<DropdownMenuCheckboxItem
+										key={column.id}
+										className="capitalize"
+										checked={column.getIsVisible()}
+										onCheckedChange={(value) =>
+											column.toggleVisibility(!!value)
+										}>
+										{column.id}
+									</DropdownMenuCheckboxItem>
+								)
+							})}
+					</DropdownMenuContent>
+				</DropdownMenu>
+				{/* Columns Visibility End */}
 
-			{/* Pagination Start */}
-			{pagination ? (
-				<PaginationLinks {...pagination} />
-			) : (
-				<div className="flex items-center space-x-2">
-					<DropdownMenu>
-						<DropdownMenuTrigger asChild>
-							<Btn
-								variant="outline"
-								size="sm">
-								Rows Per Page: {table.getState().pagination.pageSize}{" "}
-								<ChevronDown className="ml-2 h-4 w-4" />
-							</Btn>
-						</DropdownMenuTrigger>
-						<DropdownMenuContent align="end">
-							<DropdownMenuRadioGroup
-								value={table.getState().pagination.pageSize.toString()}
-								onValueChange={(value) => table.setPageSize(Number(value))}>
-								{[5, 10, 20, 30, 40, 50].map((pageSize) => (
-									<DropdownMenuRadioItem
-										key={pageSize}
-										value={pageSize.toString()}>
-										{pageSize}
-									</DropdownMenuRadioItem>
-								))}
-							</DropdownMenuRadioGroup>
-						</DropdownMenuContent>
-					</DropdownMenu>
-					<Btn
-						variant="outline"
-						size="sm"
-						onClick={() => table.previousPage()}
-						disabled={!table.getCanPreviousPage()}>
-						Previous
-					</Btn>
-					<Btn
-						variant="outline"
-						size="sm"
-						onClick={() => table.nextPage()}
-						disabled={!table.getCanNextPage()}>
-						Next
-					</Btn>
-				</div>
-			)}
-			{/* Pagination End */}
+				{/* Pagination Start */}
+				{pagination ? (
+					<PaginationLinks {...pagination} />
+				) : (
+					<div className="flex items-center space-x-2">
+						<DropdownMenu>
+							<DropdownMenuTrigger asChild>
+								<Btn
+									variant="outline"
+									size="sm">
+									<span className="hidden sm:inline">Rows Per Page: </span>
+									{table.getState().pagination.pageSize}{" "}
+									<ChevronDown className="ml-2 h-4 w-4" />
+								</Btn>
+							</DropdownMenuTrigger>
+							<DropdownMenuContent align="end">
+								<DropdownMenuRadioGroup
+									value={table.getState().pagination.pageSize.toString()}
+									onValueChange={(value) => table.setPageSize(Number(value))}>
+									{[5, 10, 20, 30, 40, 50].map((pageSize) => (
+										<DropdownMenuRadioItem
+											key={pageSize}
+											value={pageSize.toString()}>
+											{pageSize}
+										</DropdownMenuRadioItem>
+									))}
+								</DropdownMenuRadioGroup>
+							</DropdownMenuContent>
+						</DropdownMenu>
+						<Btn
+							variant="outline"
+							size="sm"
+							onClick={() => table.previousPage()}
+							disabled={!table.getCanPreviousPage()}>
+							Prev
+						</Btn>
+						<Btn
+							variant="outline"
+							size="sm"
+							onClick={() => table.nextPage()}
+							disabled={!table.getCanNextPage()}>
+							Next
+						</Btn>
+					</div>
+				)}
+				{/* Pagination End */}
+			</div>
 		</div>
 	)
 
 	return (
-		<div className="w-full">
+		<div className="w-full relative">
 			{PaginationControl}
-			<div className="rounded-md border border-white/20">
+			<div className="rounded-md border border-white/20 overflow-x-auto">
 				<Table>
 					<TableHeader>
 						{table.getHeaderGroups().map((headerGroup) => (
