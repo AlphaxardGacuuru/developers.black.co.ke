@@ -117,7 +117,7 @@ const ViewDeduction = ({ params }) => {
 						{/* Deduction Info */}
 						<div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8 pb-6 border-b border-white/20 print:border-gray-300">
 							<div>
-								<h5 className="text-white font-nunito mb-4 print:text-gray-900">
+								<h5 className="text-lg text-white font-nunito mb-4 print:text-gray-900">
 									Issued To:
 								</h5>
 								<div className="text-white/80 print:text-gray-700">
@@ -129,10 +129,10 @@ const ViewDeduction = ({ params }) => {
 
 							<div className="text-right text-white print:text-gray-900">
 								<div className="space-y-2 text-white/80 print:text-gray-700">
-									<p>
+								<h5 className="text-lg ext-white font-nunito mb-4 print:text-gray-900">
 										<span className="font-semibold">Deduction Number:</span>{" "}
 										{deduction.number}
-									</p>
+									</h5>
 									<p>
 										<span className="font-semibold">Invoice Number:</span>{" "}
 										{deduction.invoiceNumber}
