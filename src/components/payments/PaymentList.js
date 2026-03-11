@@ -31,52 +31,15 @@ const PaymentList = (props) => {
 	const [showBulkDeleteDialog, setShowBulkDeleteDialog] = useState(false)
 	const [showSendPaymentModal, setShowSendPaymentModal] = useState(false)
 
-	// Timer states
-	const [emailCountdown, setEmailCountdown] = useState(0)
-	const [smsCountdown, setSmsCountdown] = useState(0)
-	const [canSendEmail, setCanSendEmail] = useState(true)
-	const [canSendSms, setCanSendSms] = useState(true)
-
-	// Timer effects
-	useEffect(() => {
-		let timer
-
-		if (emailCountdown > 0) {
-			timer = setTimeout(() => {
-				setEmailCountdown(emailCountdown - 1)
-			}, 1000)
-		} else if (emailCountdown === 0 && !canSendEmail) {
-			setCanSendEmail(true)
-		}
-
-		return () => clearTimeout(timer)
-	}, [emailCountdown, canSendEmail])
-
-	useEffect(() => {
-		let timer
-
-		if (smsCountdown > 0) {
-			timer = setTimeout(() => {
-				setSmsCountdown(smsCountdown - 1)
-			}, 1000)
-		} else if (smsCountdown === 0 && !canSendSms) {
-			setCanSendSms(true)
-		}
-
-		return () => clearTimeout(timer)
-	}, [smsCountdown, canSendSms])
-
 	const [paymentToSend, setPaymentToSend] = useState({})
 
 	/*
 	 * Send Email with PDF Attachment
 	 */
 	const onSendEmail = (paymentId) => {
-		if (!canSendEmail || loadingEmail) return
+		if (loadingEmail) return
 
 		setLoadingEmail(true)
-		setCanSendEmail(false)
-		setEmailCountdown(60) // 60 second cooldown
 
 		// Call Laravel endpoint that generates PDF using Browsershot and sends email
 		Axios.post(`api/payments/${paymentId}/send-email`)
@@ -111,9 +74,6 @@ const PaymentList = (props) => {
 			.catch((err) => {
 				setLoadingEmail(false)
 				props.getErrors(err)
-				// Reset timer on error
-				setCanSendEmail(true)
-				setEmailCountdown(0)
 			})
 	}
 
@@ -121,11 +81,9 @@ const PaymentList = (props) => {
 	 * Send SMS
 	 */
 	const onSendSMS = (paymentId) => {
-		if (!canSendSms || loadingSMS) return
+		if (loadingSMS) return
 
 		setLoadingSMS(true)
-		setCanSendSms(false)
-		setSmsCountdown(60) // 60 second cooldown
 
 		Axios.post(`api/payments/send-sms/${paymentId}`)
 			.then((res) => {
@@ -137,9 +95,6 @@ const PaymentList = (props) => {
 			.catch((err) => {
 				setLoadingSMS(false)
 				props.getErrors(err)
-				// Reset timer on error
-				setCanSendSms(true)
-				setSmsCountdown(0)
 			})
 	}
 
@@ -227,39 +182,29 @@ const PaymentList = (props) => {
 						<div className="flex gap-2">
 							<Btn
 								icon={<SMSSVG />}
-								text={
-									smsCountdown > 0
-										? `Send SMS in ${smsCountdown}s`
-										: `Send SMS ${
-												paymentToSend.smsesSent
-													? `(${paymentToSend.smsesSent})`
-													: ""
-											}`
-								}
+								text={`Send SMS ${paymentToSend.smsesSent ? `(${paymentToSend.smsesSent})` : ""}`}
 								className={`hidden ${
 									paymentToSend.smsesSent ? `btn-green` : `btn-2`
-								} ${!canSendSms ? "opacity-50 cursor-not-allowed" : ""}`}
+								}`}
 								onClick={() => onSendSMS(paymentToSend.id)}
 								loading={loadingSMS}
-								disabled={!canSendSms || loadingSMS}
+								disabled={loadingSMS}
 							/>
 							<Btn
 								icon={<SendEmailSVG />}
 								text={
 									loadingEmail
 										? "Generating PDF & Sending..."
-										: emailCountdown > 0
-											? `Wait ${emailCountdown}s`
-											: paymentToSend.emailsSent
-												? `Send Email (${paymentToSend.emailsSent} sent)`
-												: "Send Email with PDF"
+										: paymentToSend.emailsSent
+											? `Send Email (${paymentToSend.emailsSent} sent)`
+											: "Send Email with PDF"
 								}
 								className={`${
 									paymentToSend.emailsSent ? `btn-green` : `btn-2`
-								} ${!canSendEmail ? "opacity-50 cursor-not-allowed" : ""}`}
+								}`}
 								onClick={() => onSendEmail(paymentToSend.id)}
 								loading={loadingEmail}
-								disabled={!canSendEmail || loadingEmail}
+								disabled={loadingEmail}
 							/>
 						</div>
 					</div>

@@ -32,52 +32,15 @@ const InvoiceList = (props) => {
 	const [showBulkDeleteDialog, setShowBulkDeleteDialog] = useState(false)
 	const [showSendInvoiceModal, setShowSendInvoiceModal] = useState(false)
 
-	// Timer states
-	const [emailCountdown, setEmailCountdown] = useState(0)
-	const [smsCountdown, setSmsCountdown] = useState(0)
-	const [canSendEmail, setCanSendEmail] = useState(true)
-	const [canSendSms, setCanSendSms] = useState(true)
-
-	// Timer effects
-	useEffect(() => {
-		let timer
-
-		if (emailCountdown > 0) {
-			timer = setTimeout(() => {
-				setEmailCountdown(emailCountdown - 1)
-			}, 1000)
-		} else if (emailCountdown === 0 && !canSendEmail) {
-			setCanSendEmail(true)
-		}
-
-		return () => clearTimeout(timer)
-	}, [emailCountdown, canSendEmail])
-
-	useEffect(() => {
-		let timer
-
-		if (smsCountdown > 0) {
-			timer = setTimeout(() => {
-				setSmsCountdown(smsCountdown - 1)
-			}, 1000)
-		} else if (smsCountdown === 0 && !canSendSms) {
-			setCanSendSms(true)
-		}
-
-		return () => clearTimeout(timer)
-	}, [smsCountdown, canSendSms])
-
 	const [invoiceToSend, setInvoiceToSend] = useState({})
 
 	/*
 	 * Send Email with PDF Attachment
 	 */
 	const onSendEmail = (invoiceId) => {
-		if (!canSendEmail || loadingEmail) return
+		if (loadingEmail) return
 
 		setLoadingEmail(true)
-		setCanSendEmail(false)
-		setEmailCountdown(60) // 60 second cooldown
 
 		// Call Laravel endpoint that generates PDF using Browsershot and sends email
 		Axios.post(`api/invoices/${invoiceId}/send-email`)
@@ -112,9 +75,6 @@ const InvoiceList = (props) => {
 			.catch((err) => {
 				setLoadingEmail(false)
 				props.getErrors(err)
-				// Reset timer on error
-				setCanSendEmail(true)
-				setEmailCountdown(0)
 			})
 	}
 
@@ -122,11 +82,9 @@ const InvoiceList = (props) => {
 	 * Send SMS
 	 */
 	const onSendSMS = (invoiceId) => {
-		if (!canSendSms || loadingSMS) return
+		if (loadingSMS) return
 
 		setLoadingSMS(true)
-		setCanSendSms(false)
-		setSmsCountdown(60) // 60 second cooldown
 
 		Axios.post(`api/invoices/send-sms/${invoiceId}`)
 			.then((res) => {
@@ -138,9 +96,6 @@ const InvoiceList = (props) => {
 			.catch((err) => {
 				setLoadingSMS(false)
 				props.getErrors(err)
-				// Reset timer on error
-				setCanSendSms(true)
-				setSmsCountdown(0)
 			})
 	}
 
@@ -232,39 +187,29 @@ const InvoiceList = (props) => {
 						<div className="flex gap-2">
 							<Btn
 								icon={<SMSSVG />}
-								text={
-									smsCountdown > 0
-										? `Send SMS in ${smsCountdown}s`
-										: `Send SMS ${
-												invoiceToSend.smsesSent
-													? `(${invoiceToSend.smsesSent})`
-													: ""
-											}`
-								}
+								text={`Send SMS ${invoiceToSend.smsesSent ? `(${invoiceToSend.smsesSent})` : ""}`}
 								className={`hidden ${
 									invoiceToSend.smsesSent ? `btn-green` : `btn-2`
-								} ${!canSendSms ? "opacity-50 cursor-not-allowed" : ""}`}
+								}`}
 								onClick={() => onSendSMS(invoiceToSend.id)}
 								loading={loadingSMS}
-								disabled={!canSendSms || loadingSMS}
+								disabled={loadingSMS}
 							/>
 							<Btn
 								icon={<SendEmailSVG />}
 								text={
 									loadingEmail
 										? "Generating PDF & Sending..."
-										: emailCountdown > 0
-											? `Wait ${emailCountdown}s`
-											: invoiceToSend.emailsSent
-												? `Send Email (${invoiceToSend.emailsSent} sent)`
-												: "Send Email with PDF"
+										: invoiceToSend.emailsSent
+											? `Send Email (${invoiceToSend.emailsSent} sent)`
+											: "Send Email with PDF"
 								}
 								className={`${
 									invoiceToSend.emailsSent ? `btn-green` : `btn-2`
-								} ${!canSendEmail ? "opacity-50 cursor-not-allowed" : ""}`}
+								}`}
 								onClick={() => onSendEmail(invoiceToSend.id)}
 								loading={loadingEmail}
-								disabled={!canSendEmail || loadingEmail}
+								disabled={loadingEmail}
 							/>
 						</div>
 					</div>

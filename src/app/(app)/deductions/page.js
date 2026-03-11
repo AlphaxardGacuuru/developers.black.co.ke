@@ -35,7 +35,8 @@ const Deductions = (props) => {
 			endMonth=${endMonth}&
 			startYear=${startYear}&
 			endYear=${endYear}`,
-			setDeductions
+			setDeductions,
+			 "deductions"
 		)
 
 		props.get("users?idAndName=true&type=client", setClients)

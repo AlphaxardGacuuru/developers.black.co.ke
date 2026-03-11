@@ -31,7 +31,8 @@ const Payments = (props) => {
 			endMonth=${endMonth}&
 			startYear=${startYear}&
 			endYear=${endYear}`,
-			setPayments
+			setPayments,
+			 "payments"
 		)
 
 		props.get("users?idAndName=true&type=client", setClients)

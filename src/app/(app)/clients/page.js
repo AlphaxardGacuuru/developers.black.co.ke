@@ -24,7 +24,8 @@ const Clients = (props) => {
 			name=${name}&
 			email=${email}&
 			phone=${phone}`,
-			setClients
+			setClients,
+			"clients"
 		)
 	}, [name, email, phone])
 

@@ -33,7 +33,8 @@ const Invoices = (props) => {
 			endMonth=${endMonth}&
 			startYear=${startYear}&
 			endYear=${endYear}`,
-			setInvoices
+			setInvoices,
+			 "invoices"
 		)
 
 		props.get("users?idAndName=true&type=client", setClients)
