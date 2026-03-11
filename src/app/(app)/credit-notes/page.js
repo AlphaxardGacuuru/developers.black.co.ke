@@ -12,7 +12,9 @@ const CreditNotes = (props) => {
 	// Add appProps to props
 	props = { ...props, ...appProps }
 
-	const [creditNotes, setCreditNotes] = useState([])
+	const [creditNotes, setCreditNotes] = useState(
+		props.getLocalStorage("creditNotes")
+	)
 	const [clients, setClients] = useState([])
 
 	const [number, setNumber] = useState("")

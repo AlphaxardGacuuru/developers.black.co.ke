@@ -44,4 +44,8 @@ export const metadata = {
 	title: "Laravel",
 }
 
+export const viewport = {
+	themeColor: "#000000",
+}
+
 export default RootLayout

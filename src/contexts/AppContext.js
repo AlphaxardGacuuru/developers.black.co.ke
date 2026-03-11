@@ -55,9 +55,6 @@ export const AppProvider = ({ children }) => {
 		// Load auth from localStorage
 		setAuth(getLocalStorageAuth("auth"))
 		
-		// Load properties from localStorage
-		setProperties(getLocalStorage("properties"))
-		
 		// Set admin menu based on screen size
 		if (typeof window !== "undefined" && window.innerWidth <= 768) {
 			setAdminMenu("")
@@ -264,6 +261,10 @@ export const AppProvider = ({ children }) => {
 		// Functions
 		get,
 		getPaginated,
+		getLocalStorage,
+		getNormalLocalStorage,
+		getLocalStorageAuth,
+		setLocalStorage,
 		iterator,
 		getErrors,
 		formatToCommas,

@@ -12,7 +12,7 @@ const Payments = (props) => {
 	// Add appProps to props
 	props = { ...props, ...appProps }
 
-	const [payments, setPayments] = useState([])
+	const [payments, setPayments] = useState(props.getLocalStorage("payments"))
 	const [clients, setClients] = useState([])
 
 	const [number, setNumber] = useState("")

@@ -11,7 +11,7 @@ const Clients = (props) => {
 	// Add appProps to props
 	props = { ...props, ...appProps }
 
-	const [clients, setClients] = useState([])
+	const [clients, setClients] = useState(props.getLocalStorage("clients"))
 
 	const [name, setName] = useState("")
 	const [email, setEmail] = useState("")

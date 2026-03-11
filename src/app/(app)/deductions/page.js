@@ -12,7 +12,9 @@ const Deductions = (props) => {
 	// Add appProps to props
 	props = { ...props, ...appProps }
 
-	const [deductions, setDeductions] = useState([])
+	const [deductions, setDeductions] = useState(
+		props.getLocalStorage("deductions")
+	)
 	const [clients, setClients] = useState([])
 
 	const [number, setNumber] = useState("")
@@ -36,7 +38,7 @@ const Deductions = (props) => {
 			startYear=${startYear}&
 			endYear=${endYear}`,
 			setDeductions,
-			 "deductions"
+			"deductions"
 		)
 
 		props.get("users?idAndName=true&type=client", setClients)
