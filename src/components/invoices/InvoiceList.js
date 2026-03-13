@@ -597,6 +597,13 @@ const InvoiceList = (props) => {
 											/>
 										)}
 										{/* Send Invoice End */}
+										{/* Create Payment Start */}
+										<MyLink
+											href={`/payments/${invoice.id}/create`}
+											icon={<PlusSVG />}
+											text="create payment"
+										/>
+										{/* Create Payment End */}
 										{/* View Start */}
 										<MyLink
 											href={`/invoices/${invoice.id}/view`}

@@ -2,10 +2,10 @@
 
 import Create from "@/components/payments/Create"
 
-const CreatePayment = (props) => {
+const CreatePaymentFromInvoice = (props) => {
 	return (
 		<Create {...props} />
 	)
 }
 
-export default CreatePayment
+export default CreatePaymentFromInvoice
