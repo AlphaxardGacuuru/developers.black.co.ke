@@ -5,8 +5,8 @@ export default function manifest() {
 		description: "Black Developers platform",
 		start_url: "/",
 		display: "standalone",
-		background_color: "#000000",
-		theme_color: "#000000",
+		background_color: "#232323",
+		theme_color: "#232323",
 		icons: [
 			{
 				src: "/android-chrome-192x192.png",
