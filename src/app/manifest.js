@@ -1,7 +1,7 @@
 export default function manifest() {
 	return {
 		name: "Black Developers",
-		short_name: "BlackDev",
+		short_name: "Black Developers",
 		description: "Black Developers platform",
 		start_url: "/",
 		display: "standalone",
