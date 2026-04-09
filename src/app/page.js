@@ -199,8 +199,9 @@ const Home = () => {
 						</div>
 
 						{/* Service 2 */}
-						<div className="group relative p-8 rounded-3xl bg-white/10 backdrop-blur-xl border border-white/20 hover:border-white/50 transition-all duration-700 hover:scale-105 hover:-rotate-1">
-							<div className="absolute inset-0 bg-gradient-to-br from-white/10 to-transparent opacity-0 group-hover:opacity-100 rounded-3xl transition-opacity duration-500" />
+						<div className="group relative p-8 rounded-3xl bg-white/10 backdrop-blur-xl border border-white/20 hover:border-white/40 hover:shadow-2xl hover:shadow-white/10 transition-all duration-700 hover:scale-110 hover:rotate-2">
+							<div className="absolute inset-0 bg-gradient-to-br from-blue-400/20 to-purple-400/15 opacity-0 group-hover:opacity-100 rounded-3xl transition-opacity duration-500" />
+							<div className="absolute -inset-1 bg-gradient-to-r from-white/20 via-blue-400/30 to-purple-400/30 rounded-3xl blur opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 							<div className="relative z-10">
 								<div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-[#232323] to-[#1a1a1a] flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-500">
 									<svg
@@ -238,8 +239,9 @@ const Home = () => {
 						</div>
 
 						{/* Service 3 */}
-						<div className="group relative p-8 rounded-3xl bg-white/10 backdrop-blur-xl border border-white/20 hover:border-white/50 transition-all duration-700 hover:scale-105 hover:rotate-1">
-							<div className="absolute inset-0 bg-gradient-to-br from-white/10 to-transparent opacity-0 group-hover:opacity-100 rounded-3xl transition-opacity duration-500" />
+						<div className="group relative p-8 rounded-3xl bg-white/10 backdrop-blur-xl border border-white/20 hover:border-white/40 hover:shadow-2xl hover:shadow-white/10 transition-all duration-700 hover:scale-110 hover:rotate-2">
+							<div className="absolute inset-0 bg-gradient-to-br from-blue-400/20 to-purple-400/15 opacity-0 group-hover:opacity-100 rounded-3xl transition-opacity duration-500" />
+							<div className="absolute -inset-1 bg-gradient-to-r from-white/20 via-blue-400/30 to-purple-400/30 rounded-3xl blur opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 							<div className="relative z-10">
 								<div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-[#232323] to-[#1a1a1a] flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-500">
 									<svg
@@ -277,8 +279,9 @@ const Home = () => {
 						</div>
 
 						{/* Service 4 */}
-						<div className="group relative p-8 rounded-3xl bg-white/10 backdrop-blur-xl border border-white/20 hover:border-white/50 transition-all duration-700 hover:scale-105 hover:-rotate-1">
-							<div className="absolute inset-0 bg-gradient-to-br from-white/10 to-transparent opacity-0 group-hover:opacity-100 rounded-3xl transition-opacity duration-500" />
+						<div className="group relative p-8 rounded-3xl bg-white/10 backdrop-blur-xl border border-white/20 hover:border-white/40 hover:shadow-2xl hover:shadow-white/10 transition-all duration-700 hover:scale-110 hover:rotate-2">
+							<div className="absolute inset-0 bg-gradient-to-br from-blue-400/20 to-purple-400/15 opacity-0 group-hover:opacity-100 rounded-3xl transition-opacity duration-500" />
+							<div className="absolute -inset-1 bg-gradient-to-r from-white/20 via-blue-400/30 to-purple-400/30 rounded-3xl blur opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 							<div className="relative z-10">
 								<div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-[#232323] to-[#1a1a1a] flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-500">
 									<svg
@@ -316,8 +319,9 @@ const Home = () => {
 						</div>
 
 						{/* Service 5 */}
-						<div className="group relative p-8 rounded-3xl bg-white/10 backdrop-blur-xl border border-white/20 hover:border-white/50 transition-all duration-700 hover:scale-105 hover:rotate-1">
-							<div className="absolute inset-0 bg-gradient-to-br from-white/10 to-transparent opacity-0 group-hover:opacity-100 rounded-3xl transition-opacity duration-500" />
+						<div className="group relative p-8 rounded-3xl bg-white/10 backdrop-blur-xl border border-white/20 hover:border-white/40 hover:shadow-2xl hover:shadow-white/10 transition-all duration-700 hover:scale-110 hover:rotate-2">
+							<div className="absolute inset-0 bg-gradient-to-br from-blue-400/20 to-purple-400/15 opacity-0 group-hover:opacity-100 rounded-3xl transition-opacity duration-500" />
+							<div className="absolute -inset-1 bg-gradient-to-r from-white/20 via-blue-400/30 to-purple-400/30 rounded-3xl blur opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 							<div className="relative z-10">
 								<div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-[#232323] to-[#1a1a1a] flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-500">
 									<svg
@@ -355,8 +359,9 @@ const Home = () => {
 						</div>
 
 						{/* Service 6 */}
-						<div className="group relative p-8 rounded-3xl bg-white/10 backdrop-blur-xl border border-white/20 hover:border-white/50 transition-all duration-700 hover:scale-105 hover:-rotate-1">
-							<div className="absolute inset-0 bg-gradient-to-br from-white/10 to-transparent opacity-0 group-hover:opacity-100 rounded-3xl transition-opacity duration-500" />
+						<div className="group relative p-8 rounded-3xl bg-white/10 backdrop-blur-xl border border-white/20 hover:border-white/40 hover:shadow-2xl hover:shadow-white/10 transition-all duration-700 hover:scale-110 hover:rotate-2">
+							<div className="absolute inset-0 bg-gradient-to-br from-blue-400/20 to-purple-400/15 opacity-0 group-hover:opacity-100 rounded-3xl transition-opacity duration-500" />
+							<div className="absolute -inset-1 bg-gradient-to-r from-white/20 via-blue-400/30 to-purple-400/30 rounded-3xl blur opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 							<div className="relative z-10">
 								<div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-[#232323] to-[#1a1a1a] flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-500">
 									<svg
