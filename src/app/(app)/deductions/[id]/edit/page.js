@@ -164,7 +164,7 @@ const EditDeduction = ({ params }) => {
 								<MyLink
 									href="/deductions"
 									icon={<BackSVG />}
-									text="cancel"
+									text="back to deductions"
 								/>
 
 								<Btn

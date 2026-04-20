@@ -1,7 +1,7 @@
 "use client"
 
 import * as React from "react"
-import { useState, useEffect, useRef } from "react"
+import { useState, useEffect, useMemo, useRef } from "react"
 import {
 	CalendarIcon,
 	ChevronDownIcon,
@@ -246,7 +246,36 @@ export function DatePicker({
 	const [open, setOpen] = useState(false)
 
 	// Convert string value to Date for internal use
-	const dateValue = typeof value === "string" ? parseLocalDate(value) : value
+	const dateValue = useMemo(
+		() => (typeof value === "string" ? parseLocalDate(value) : value),
+		[value]
+	)
+	const [month, setMonth] = useState(dateValue || new Date())
+
+	useEffect(() => {
+		if (!dateValue) return
+
+		setMonth((currentMonth) => {
+			const sameMonth =
+				currentMonth &&
+				currentMonth.getFullYear() === dateValue.getFullYear() &&
+				currentMonth.getMonth() === dateValue.getMonth()
+
+			return sameMonth ? currentMonth : dateValue
+		})
+	}, [dateValue])
+
+	const handleSelect = (date) => {
+		onChange?.(formatLocalDate(date))
+		setOpen(false)
+	}
+
+	const handleSelectToday = () => {
+		const today = new Date()
+		setMonth(today)
+		onChange?.(formatLocalDate(today))
+		setOpen(false)
+	}
 
 	const isActive = value
 
@@ -308,13 +337,21 @@ export function DatePicker({
 					<CalendarComponent
 						mode="single"
 						selected={dateValue}
-						defaultMonth={dateValue}
+						month={month}
+						onMonthChange={setMonth}
 						captionLayout="dropdown"
-						onSelect={(date) => {
-							onChange?.(formatLocalDate(date))
-							setOpen(false)
-						}}
+						onSelect={handleSelect}
 					/>
+					<div className="border-t border-white/20 p-2">
+						<Btn
+							type="button"
+							variant="ghost"
+							size="sm"
+							className="w-full justify-center text-white hover:bg-white/20"
+							onClick={handleSelectToday}>
+							Today
+						</Btn>
+					</div>
 				</PopoverContent>
 			</Popover>
 

@@ -134,7 +134,7 @@ const EditClient = ({ params }) => {
 								<MyLink
 									href="/clients"
 									icon={<BackSVG />}
-									text="back to Clients"
+									text="back to clients"
 								/>
 
 								<Btn

@@ -375,7 +375,7 @@ const CreateInvoice = (props) => {
 								<MyLink
 									href="/invoices"
 									icon={<BackSVG />}
-									text="cancel"
+									text="back to invoices"
 								/>
 
 								<Btn

@@ -133,7 +133,7 @@ const CreateDeduction = (props) => {
 								<MyLink
 									href="/deductions"
 									icon={<BackSVG />}
-									text="cancel"
+									text="back to deductions"
 								/>
 
 								<Btn

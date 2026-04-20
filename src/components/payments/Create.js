@@ -132,7 +132,7 @@ const Create = (props) => {
 								<MyLink
 									href="/payments"
 									icon={<BackSVG />}
-									text="cancel"
+									text="back to payments"
 								/>
 
 								<Btn

@@ -170,7 +170,7 @@ const EditPayment = ({ params }) => {
 								<MyLink
 									href="/payments"
 									icon={<BackSVG />}
-									text="cancel"
+									text="back to payments"
 								/>
 
 								<Btn

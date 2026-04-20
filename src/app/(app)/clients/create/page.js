@@ -102,7 +102,7 @@ const CreateClient = (props) => {
 								<MyLink
 									href="/clients"
 									icon={<BackSVG />}
-									text="cancel"
+									text="back to clients"
 								/>
 
 								<Btn

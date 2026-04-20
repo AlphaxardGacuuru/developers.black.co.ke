@@ -413,7 +413,7 @@ const EditInvoice = ({ params }) => {
 								<MyLink
 									href="/invoices"
 									icon={<BackSVG />}
-									text="cancel"
+									text="back to invoices"
 								/>
 
 								<Btn

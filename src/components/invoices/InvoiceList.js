@@ -145,7 +145,7 @@ const InvoiceList = (props) => {
 				title="Delete Selected Invoices"
 				className="bg-white/10 backdrop-blur-xl border border-white/20 shadow-sm rounded-3xl text-white data-[state=open]:slide-in-from-top data-[state=closed]:slide-out-to-top"
 				footer={
-					<div className="flex justify-between w-full">
+					<div className="flex justify-between flex-wrap w-full">
 						<Btn
 							type="button"
 							text="Cancel"
@@ -178,17 +178,18 @@ const InvoiceList = (props) => {
 				title={`Send Invoice ${invoiceToSend.number}`}
 				className="bg-white/10 backdrop-blur-xl border border-white/20 shadow-sm rounded-3xl text-white data-[state=open]:slide-in-from-top data-[state=closed]:slide-out-to-top"
 				footer={
-					<div className="flex justify-between w-full">
+					<div className="flex w-full flex-wrap gap-2 sm:flex-nowrap sm:justify-between">
 						<Btn
 							type="button"
 							text="Cancel"
+							className="w-full sm:w-auto"
 							onClick={() => setShowSendInvoiceModal(false)}
 						/>
-						<div className="flex gap-2">
+						<div className="flex w-full flex-wrap gap-2 sm:w-auto sm:flex-nowrap">
 							<Btn
 								icon={<SMSSVG />}
 								text={`Send SMS ${invoiceToSend.smsesSent ? `(${invoiceToSend.smsesSent})` : ""}`}
-								className={`hidden ${
+								className={`hidden w-full sm:w-auto ${
 									invoiceToSend.smsesSent ? `btn-green` : `btn-2`
 								}`}
 								onClick={() => onSendSMS(invoiceToSend.id)}
@@ -202,9 +203,9 @@ const InvoiceList = (props) => {
 										? "Generating PDF & Sending..."
 										: invoiceToSend.emailsSent
 											? `Send Email (${invoiceToSend.emailsSent} sent)`
-											: "Send Email with PDF"
+											: "Send Email"
 								}
-								className={`${
+								className={`w-full sm:w-auto ${
 									invoiceToSend.emailsSent ? `btn-green` : `btn-2`
 								}`}
 								onClick={() => onSendEmail(invoiceToSend.id)}
@@ -438,17 +439,19 @@ const InvoiceList = (props) => {
 			{/* DataTable */}
 			<div className="bg-white/10 backdrop-blur-xl border border-white/20 rounded-3xl p-4 mb-5">
 				{/* Create Invoice Link Start */}
-				<div className="flex justify-end gap-2">
+				<div className="flex w-full flex-wrap gap-2 sm:flex-nowrap sm:justify-end">
 					{Object.keys(rowSelection).length > 0 && (
 						<Btn
 							icon={<DeleteSVG />}
 							text={`Delete Selected (${Object.keys(rowSelection).length})`}
+							className="w-full sm:w-auto"
 							onClick={() => setShowBulkDeleteDialog(true)}
 						/>
 					)}
 					<MyLink
 						href={`/invoices/create`}
 						icon={<PlusSVG />}
+						className="w-full sm:w-auto"
 						text="create invoice"
 					/>
 				</div>

@@ -166,7 +166,7 @@ const EditCreditNote = ({ params }) => {
 								<MyLink
 									href="/credit-notes"
 									icon={<BackSVG />}
-									text="cancel"
+									text="back to credit notes"
 								/>
 
 								<Btn
