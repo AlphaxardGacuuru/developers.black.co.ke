@@ -31,7 +31,12 @@ const Messages = ({
 	useEffect(() => {
 		// Display messages and errors as toasts
 		if (messages.length > 0) {
-			messages.forEach((message) => toast.success(message))
+			messages.forEach((message) =>
+				toast.success(message, {
+					style: { background: "#ffffff", color: "#111827" },
+					progressStyle: { background: "#111827" },
+				})
+			)
 			setTimeout(() => setMessages([]), 2900)
 		}
 
