@@ -42,8 +42,11 @@ const EditInvoice = ({ params }) => {
 
 	// Invoice Items
 	const [invoiceItems, setInvoiceItems] = useState([
-		{ description: "", quantity: 1, rate: 0, amount: 0 },
+		{ item: "", description: "", quantity: 1, rate: 0, amount: 0 },
 	])
+
+	// Withholding Tax
+	const [applyWithholdingTax, setApplyWithholdingTax] = useState(false)
 
 	// Get data
 	useEffect(() => {
@@ -65,6 +68,7 @@ const EditInvoice = ({ params }) => {
 				// Set invoice items from invoice
 				if (invoice.invoiceItems && invoice.invoiceItems.length > 0) {
 					const formattedInvoiceItems = invoice.invoiceItems.map((item) => ({
+						item: item.item || "",
 						description: item.description || "",
 						quantity: parseFloat(item.quantity) || 1,
 						rate: parseFloat(item.rate) || 0,
@@ -74,6 +78,7 @@ const EditInvoice = ({ params }) => {
 					setInvoiceItems(formattedInvoiceItems)
 				}
 
+				setApplyWithholdingTax(parseFloat(invoice.withholdingTax) > 0)
 				setLoadingInvoice(false)
 			})
 			.catch(() => {
@@ -106,7 +111,7 @@ const EditInvoice = ({ params }) => {
 	const addInvoiceItem = () => {
 		setInvoiceItems([
 			...invoiceItems,
-			{ description: "", quantity: 1, rate: 0, amount: 0 },
+			{ item: "", description: "", quantity: 1, rate: 0, amount: 0 },
 		])
 	}
 
@@ -125,8 +130,12 @@ const EditInvoice = ({ params }) => {
 		)
 	}
 
+	const calculateWithholdingTax = () => {
+		return applyWithholdingTax ? calculateSubtotal() * 0.05 : 0
+	}
+
 	const calculateTotal = () => {
-		return calculateSubtotal()
+		return calculateSubtotal() - calculateWithholdingTax()
 	}
 
 	/*
@@ -143,6 +152,7 @@ const EditInvoice = ({ params }) => {
 			invoiceItems: invoiceItems.filter(
 				(item) => item.description.trim() !== ""
 			),
+			withholdingTax: calculateWithholdingTax(),
 			total: calculateTotal(),
 			notes,
 			terms,
@@ -239,7 +249,8 @@ const EditInvoice = ({ params }) => {
 									<div className="min-w-full space-y-3">
 										{/* Header */}
 										<div className="hidden md:grid md:grid-cols-12 gap-3 px-4 py-2 text-white/60 font-light font-nunito text-sm">
-											<div className="col-span-5">Description</div>
+											<div className="col-span-2">Item</div>
+											<div className="col-span-3">Description</div>
 											<div className="col-span-2">Quantity</div>
 											<div className="col-span-2">Rate (KES)</div>
 											<div className="col-span-2">Amount (KES)</div>
@@ -251,8 +262,32 @@ const EditInvoice = ({ params }) => {
 											<div
 												key={index}
 												className="grid grid-cols-1 md:grid-cols-12 gap-3 p-4 bg-white/5 border border-white/10 rounded-xl">
+												{/* Item */}
+												<div className="col-span-12 md:col-span-2">
+													<Input
+														type="text"
+														label="Item"
+														className="md:hidden"
+														value={item.item}
+														onChange={(e) =>
+															updateInvoiceItem(index, "item", e.target.value)
+														}
+														required
+													/>
+													<input
+														type="text"
+														className="hidden md:block w-full px-3 py-2 bg-white/10 border border-white/20 rounded-lg text-white font-light font-nunito focus:outline-none focus:border-white/40 transition-all duration-300"
+														placeholder="Web Design"
+														value={item.item}
+														onChange={(e) =>
+															updateInvoiceItem(index, "item", e.target.value)
+														}
+														required
+													/>
+												</div>
+
 												{/* Description */}
-												<div className="col-span-12 md:col-span-5">
+												<div className="col-span-12 md:col-span-3">
 													<Input
 														type="text"
 														label="Description"
@@ -265,12 +300,11 @@ const EditInvoice = ({ params }) => {
 																e.target.value
 															)
 														}
-														required
 													/>
 													<input
 														type="text"
 														className="hidden md:block w-full px-3 py-2 bg-white/10 border border-white/20 rounded-lg text-white font-light font-nunito focus:outline-none focus:border-white/40 transition-all duration-300"
-														placeholder="Web development services..."
+														placeholder="Homepage & admin dashboard..."
 														value={item.description}
 														onChange={(e) =>
 															updateInvoiceItem(
@@ -279,7 +313,6 @@ const EditInvoice = ({ params }) => {
 																e.target.value
 															)
 														}
-														required
 													/>
 												</div>
 
@@ -374,6 +407,32 @@ const EditInvoice = ({ params }) => {
 							{/* Totals Section */}
 							<div className="flex justify-end">
 								<div className="w-full md:w-96 space-y-3">
+									{/* Subtotal */}
+									<div className="flex justify-between items-center px-4 py-2 text-white/80 font-nunito">
+										<span>Subtotal:</span>
+										<span>KES {formatCurrency(calculateSubtotal())}</span>
+									</div>
+
+									{/* Withholding Tax Toggle */}
+									<div className="flex justify-between items-center px-4 py-2 bg-white/5 border border-white/10 rounded-xl">
+										<label className="flex items-center gap-3 cursor-pointer">
+											<input
+												type="checkbox"
+												checked={applyWithholdingTax}
+												onChange={(e) => setApplyWithholdingTax(e.target.checked)}
+												className="w-4 h-4 rounded accent-white cursor-pointer"
+											/>
+											<span className="text-white/70 font-nunito text-sm">
+												Withholding Tax (5%)
+											</span>
+										</label>
+										{applyWithholdingTax && (
+											<span className="text-red-400 font-nunito text-sm ml-3 whitespace-nowrap">
+												- KES {formatCurrency(calculateWithholdingTax())}
+											</span>
+										)}
+									</div>
+
 									{/* Total */}
 									<div className="flex justify-between items-center px-4 py-3 bg-gradient-to-br from-white/10 to-white/5 border border-white/20 rounded-xl">
 										<span className="text-white font-nunito text-lg">

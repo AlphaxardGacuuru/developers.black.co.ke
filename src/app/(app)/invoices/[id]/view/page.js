@@ -159,6 +159,9 @@ const ViewInvoice = ({ params }) => {
 								<thead className="border-b border-white/20 print:border-gray-300">
 									<tr className="text-white/60 print:text-gray-700">
 										<th className="text-left py-3 font-nunito font-normal">
+											Item
+										</th>
+										<th className="text-left py-3 font-nunito font-normal">
 											Description
 										</th>
 										<th className="text-center py-3 font-nunito font-normal">
@@ -178,6 +181,9 @@ const ViewInvoice = ({ params }) => {
 											key={key}
 											className="border-b border-white/10 print:border-gray-200">
 											<td className="py-4 text-white print:text-gray-900">
+												{item.item}
+											</td>
+											<td className="py-4 text-white/80 text-sm print:text-gray-600">
 												{item.description}
 											</td>
 											<td className="py-4 text-center text-white print:text-gray-900">
@@ -197,18 +203,47 @@ const ViewInvoice = ({ params }) => {
 									{/* Totals */}
 									<tr className="border-t border-white/20 print:border-gray-300">
 										<td
-											colSpan="3"
+											colSpan="4"
 											className="py-3 text-right text-white font-nunito print:text-gray-900">
 											Subtotal:
 										</td>
 										<td className="py-3 text-right text-white font-nunito print:text-gray-900">
+											<small className="mr-1">KES</small>
+											{formatCurrency(
+												invoice.invoiceItems?.reduce(
+													(sum, item) => sum + (parseFloat(item.amount) || 0),
+													0
+												) ?? 0
+											)}
+										</td>
+									</tr>
+									{parseFloat(invoice.withholdingTax) > 0 && (
+										<tr className="border-b border-white/10 print:border-gray-200">
+											<td
+												colSpan="4"
+												className="py-3 text-right text-white font-nunito print:text-gray-900">
+												Withholding Tax (5%):
+											</td>
+											<td className="py-3 text-right text-red-400 font-nunito print:text-red-600">
+												- <small className="mr-1">KES</small>
+												{formatCurrency(invoice.withholdingTax)}
+											</td>
+										</tr>
+									)}
+									<tr className="border-b border-white/10 print:border-gray-200">
+										<td
+											colSpan="4"
+											className="py-3 text-right text-white font-nunito print:text-gray-900">
+											Total:
+										</td>
+										<td className="py-3 text-right text-white font-nunito font-medium print:text-gray-900">
 											<small className="mr-1">KES</small>
 											{formatCurrency(invoice.amount)}
 										</td>
 									</tr>
 									<tr className="border-b border-white/10 print:border-gray-200">
 										<td
-											colSpan="3"
+											colSpan="4"
 											className="py-3 text-right text-white font-nunito print:text-gray-900">
 											Paid:
 										</td>
@@ -219,7 +254,7 @@ const ViewInvoice = ({ params }) => {
 									</tr>
 									<tr className="border-t-2 border-white/30 print:border-gray-400">
 										<td
-											colSpan="3"
+											colSpan="4"
 											className="py-4 text-right text-white text-lg font-nunito print:text-gray-900">
 											Balance Due:
 										</td>
@@ -261,7 +296,7 @@ const ViewInvoice = ({ params }) => {
 						{/* Footer */}
 						<div className="text-center mb-4">
 							<h4 className="text-white text-xl font-nunito print:text-gray-900">
-								<div className="mb-2">Pay to 0700364446 via M-Pesa.</div>
+								<div className="mb-2">Pay to 0700364446 via M-Pesa, unless otherwise stated.</div>
 								<div>Thank you for your business!</div>
 							</h4>
 						</div>
