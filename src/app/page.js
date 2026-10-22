@@ -9,6 +9,7 @@ import PhoneSVG from "@/svgs/PhoneSVG"
 import WhatsAppSVG from "@/svgs/WhatsAppSVG"
 import EmailSVG from "@/svgs/EmailSVG"
 import MyLink from "@/components/ui/my-link"
+import ScrollToTopButton from "@/components/ScrollToTopButton"
 
 const Home = () => {
 	const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
@@ -34,6 +35,7 @@ const Home = () => {
 
 	return (
 		<div className="min-h-screen overflow-x-hidden relative">
+			<ScrollToTopButton />
 			<LoginLinks />
 
 			{/* Animated background gradients */}
