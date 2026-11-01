@@ -35,8 +35,16 @@ const nextConfig = {
 				: false,
 	},
 
+	// Lint runs separately with `npm run lint`, not inside the build, to keep
+	// the build within the memory the server has free
+	eslint: {
+		ignoreDuringBuilds: true,
+	},
+
 	// Experimental features for better performance
 	experimental: {
+		// One build worker, so builds fit in the server's free memory
+		cpus: 1,
 		// Optimize package imports
 		optimizePackageImports: [
 			"lucide-react",
