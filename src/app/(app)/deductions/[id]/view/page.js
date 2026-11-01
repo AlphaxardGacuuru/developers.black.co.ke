@@ -66,8 +66,8 @@ const ViewDeduction = ({ params }) => {
 				<Header title="View Deduction" />
 				<div className="py-12">
 					<div className="max-w-4xl mx-auto px-6 lg:px-8">
-						<div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl p-8">
-							<div className="text-white text-center">Loading deduction...</div>
+						<div className="bg-foreground/5 backdrop-blur-xl border border-border rounded-3xl p-8">
+							<div className="text-foreground text-center">Loading deduction...</div>
 						</div>
 					</div>
 				</div>
@@ -98,38 +98,38 @@ const ViewDeduction = ({ params }) => {
 					{/* Deduction Content */}
 					<div
 						id="contentToPrint"
-						className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl p-8 print:bg-white print:border-gray-300">
+						className="bg-foreground/5 backdrop-blur-xl border border-border rounded-3xl p-8 print:bg-white print:border-gray-300">
 						{/* Header */}
-						<div className="flex flex-col md:flex-row justify-between items-start mb-8 pb-6 border-b border-white/20 print:border-gray-300">
-							<div className="text-white print:text-gray-900">
+						<div className="flex flex-col md:flex-row justify-between items-start mb-8 pb-6 border-b border-border print:border-gray-300">
+							<div className="text-foreground print:text-gray-900">
 								<div className="text-xl sm:text-4xl mb-2">
 									<LogoSVG />
 								</div>
 							</div>
 
 							<div className="text-right">
-								<h2 className="text-2xl text-white font-nunito mb-2 print:text-gray-900">
+								<h2 className="text-2xl text-foreground mb-2 print:text-gray-900">
 									DEDUCTION
 								</h2>
 							</div>
 						</div>
 
 						{/* Deduction Info */}
-						<div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8 pb-6 border-b border-white/20 print:border-gray-300">
+						<div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8 pb-6 border-b border-border print:border-gray-300">
 							<div>
-								<h5 className="text-lg text-white font-nunito mb-4 print:text-gray-900">
+								<h5 className="text-lg text-foreground mb-4 print:text-gray-900">
 									Issued To:
 								</h5>
-								<div className="text-white/80 print:text-gray-700">
+								<div className="text-foreground/80 print:text-gray-700">
 									<div className="font-semibold">{deduction.clientName}</div>
 									<div>{deduction.clientEmail}</div>
 									<div>{deduction.clientPhone}</div>
 								</div>
 							</div>
 
-							<div className="text-right text-white print:text-gray-900">
-								<div className="space-y-2 text-white/80 print:text-gray-700">
-								<h5 className="text-lg ext-white font-nunito mb-4 print:text-gray-900">
+							<div className="text-right text-foreground print:text-gray-900">
+								<div className="space-y-2 text-foreground/80 print:text-gray-700">
+								<h5 className="text-lg ext-white mb-4 print:text-gray-900">
 										<span className="font-semibold">Deduction Number:</span>{" "}
 										{deduction.number}
 									</h5>
@@ -146,13 +146,13 @@ const ViewDeduction = ({ params }) => {
 						</div>
 
 						{/* Amount Details */}
-						<div className="mb-8 pb-6 border-b border-white/20 print:border-gray-300">
-							<h5 className="text-white font-nunito mb-4 print:text-gray-900">
+						<div className="mb-8 pb-6 border-b border-border print:border-gray-300">
+							<h5 className="text-foreground mb-4 print:text-gray-900">
 								Deduction Amount
 							</h5>
-							<div className="bg-white/5 rounded-2xl p-6 print:bg-gray-50">
+							<div className="bg-foreground/5 rounded-2xl p-6 print:bg-gray-50">
 								<div className="flex justify-between items-center">
-									<span className="text-white/80 font-semibold print:text-gray-700">
+									<span className="text-foreground/80 font-semibold print:text-gray-700">
 										Amount:
 									</span>
 									<span className="text-2xl font-bold text-red-500 print:text-red-600">
@@ -165,10 +165,10 @@ const ViewDeduction = ({ params }) => {
 						{/* Notes */}
 						{deduction.notes && (
 							<div className="mb-6">
-								<h5 className="text-white font-nunito mb-4 print:text-gray-900">
+								<h5 className="text-foreground mb-4 print:text-gray-900">
 									Notes
 								</h5>
-								<div className="bg-white/5 rounded-2xl p-6 text-white/80 print:bg-gray-50 print:text-gray-700">
+								<div className="bg-foreground/5 rounded-2xl p-6 text-foreground/80 print:bg-gray-50 print:text-gray-700">
 									<p className="whitespace-pre-wrap">{deduction.notes}</p>
 								</div>
 							</div>

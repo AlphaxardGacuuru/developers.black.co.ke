@@ -71,8 +71,8 @@ const ViewPayment = ({ params }) => {
 				<Header title="View Payment" />
 				<div className="py-12">
 					<div className="max-w-4xl mx-auto px-6 lg:px-8">
-						<div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl p-8">
-							<div className="text-white text-center">Loading payment...</div>
+						<div className="bg-foreground/5 backdrop-blur-xl border border-border rounded-3xl p-8">
+							<div className="text-foreground text-center">Loading payment...</div>
 						</div>
 					</div>
 				</div>
@@ -103,17 +103,17 @@ const ViewPayment = ({ params }) => {
 					{/* Payment Content */}
 					<div
 						id="contentToPrint"
-						className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl p-8 print:bg-white print:border-gray-300">
+						className="bg-foreground/5 backdrop-blur-xl border border-border rounded-3xl p-8 print:bg-white print:border-gray-300">
 						{/* Payment Header */}
-						<div className="flex justify-between items-start mb-8 pb-6 border-b border-white/20 print:border-gray-300">
-							<div className="text-white print:text-gray-900">
+						<div className="flex justify-between items-start mb-8 pb-6 border-b border-border print:border-gray-300">
+							<div className="text-foreground print:text-gray-900">
 								<div className="text-xl sm:text-4xl mb-2">
 									<LogoSVG />
 								</div>
 							</div>
 
 							<div className="text-right">
-								<h2 className="text-2xl text-white font-nunito mb-2 print:text-gray-900">
+								<h2 className="text-2xl text-foreground mb-2 print:text-gray-900">
 									PAYMENT RECEIPT
 								</h2>
 							</div>
@@ -121,9 +121,9 @@ const ViewPayment = ({ params }) => {
 
 						{/* Payment Info */}
 						<div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
-							<div className="text-white print:text-gray-900">
-								<h5 className="text-lg font-nunito mb-4">Payment From</h5>
-								<div className="text-white/80 print:text-gray-700 space-y-1">
+							<div className="text-foreground print:text-gray-900">
+								<h5 className="text-lg mb-4">Payment From</h5>
+								<div className="text-foreground/80 print:text-gray-700 space-y-1">
 									<div>Client: {payment.clientName}</div>
 									<div>Email: {payment.clientEmail}</div>
 									{payment.clientPhone && (
@@ -131,9 +131,9 @@ const ViewPayment = ({ params }) => {
 									)}
 								</div>
 							</div>
-							<div className="text-right text-white print:text-gray-900">
-								<h5 className="text-lg font-nunito mb-4">Payment Details</h5>
-								<div className="text-white/80 print:text-gray-700 space-y-1">
+							<div className="text-right text-foreground print:text-gray-900">
+								<h5 className="text-lg mb-4">Payment Details</h5>
+								<div className="text-foreground/80 print:text-gray-700 space-y-1">
 									<div>Payment Date: {formatDate(payment.paymentDate)}</div>
 								</div>
 							</div>
@@ -142,33 +142,33 @@ const ViewPayment = ({ params }) => {
 						{/* Payment Details Table */}
 						<div className="overflow-x-auto mb-8">
 							<table className="w-full">
-								<thead className="border-b border-white/20 print:border-gray-300">
-									<tr className="text-white/60 print:text-gray-700">
-										<th className="text-left py-3 font-nunito font-normal">
+								<thead className="border-b border-border print:border-gray-300">
+									<tr className="text-foreground/60 print:text-gray-700">
+										<th className="text-left py-3 font-normal">
 											Description
 										</th>
-										<th className="text-right py-3 font-nunito font-normal">
+										<th className="text-right py-3 font-normal">
 											Amount
 										</th>
 									</tr>
 								</thead>
 								<tbody>
-									<tr className="border-b border-white/10 print:border-gray-200">
-										<td className="py-4 text-white print:text-gray-900">
+									<tr className="border-b border-border print:border-gray-200">
+										<td className="py-4 text-foreground print:text-gray-900">
 											Payment for Invoice: {payment.invoiceNumber}
 										</td>
-										<td className="py-4 text-right text-white print:text-gray-900">
+										<td className="py-4 text-right text-foreground print:text-gray-900">
 											<small className="mr-1">KES</small>
 											{formatCurrency(payment.amount)}
 										</td>
 									</tr>
 
 									{/* Total */}
-									<tr className="border-t-2 border-white/30 print:border-gray-400">
-										<td className="py-4 text-right text-white text-lg font-nunito print:text-gray-900">
+									<tr className="border-t-2 border-foreground/30 print:border-gray-400">
+										<td className="py-4 text-right text-foreground text-lg print:text-gray-900">
 											Total Paid:
 										</td>
-										<td className="py-4 text-right text-white text-lg font-nunito font-medium print:text-gray-900">
+										<td className="py-4 text-right text-foreground text-lg font-medium print:text-gray-900">
 											<small className="mr-1">KES</small>
 											{formatCurrency(payment.amount)}
 										</td>
@@ -179,11 +179,11 @@ const ViewPayment = ({ params }) => {
 
 						{/* Notes */}
 						{payment.notes && (
-							<div className="mb-8 pb-6 border-b border-white/20 print:border-gray-300">
-								<h5 className="text-white font-nunito mb-2 print:text-gray-900">
+							<div className="mb-8 pb-6 border-b border-border print:border-gray-300">
+								<h5 className="text-foreground mb-2 print:text-gray-900">
 									Notes
 								</h5>
-								<p className="text-white/80 text-sm print:text-gray-700">
+								<p className="text-foreground/80 text-sm print:text-gray-700">
 									{payment.notes}
 								</p>
 							</div>
@@ -191,15 +191,15 @@ const ViewPayment = ({ params }) => {
 
 						{/* Footer */}
 						<div className="text-center mb-4">
-							<h4 className="text-white text-xl font-nunito print:text-gray-900">
+							<h4 className="text-foreground text-xl print:text-gray-900">
 								Thank you for your payment!
 							</h4>
 						</div>
 
 						<div className="flex justify-end">
-							<div className="text-right text-white print:text-gray-900">
-								<h3 className="text-xl font-nunito mb-2">Black Developers</h3>
-								<div className="text-white/80 text-sm print:text-gray-700">
+							<div className="text-right text-foreground print:text-gray-900">
+								<h3 className="text-xl mb-2">Black Developers</h3>
+								<div className="text-foreground/80 text-sm print:text-gray-700">
 									<div>Email: al@black.co.ke</div>
 									<div>Phone: +254 700 364446</div>
 								</div>

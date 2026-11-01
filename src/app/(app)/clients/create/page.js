@@ -59,7 +59,7 @@ const CreateClient = (props) => {
 			<div className="py-12">
 				<div className="max-w-4xl mx-auto px-6 lg:px-8">
 					<form onSubmit={onSubmit}>
-						<div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl p-8 space-y-8">
+						<div className="bg-foreground/5 backdrop-blur-xl border border-border rounded-3xl p-8 space-y-8">
 							{/* Basic Information */}
 							<div className="grid grid-cols-1 md:grid-cols-2 gap-6">
 								{/* Name Start */}

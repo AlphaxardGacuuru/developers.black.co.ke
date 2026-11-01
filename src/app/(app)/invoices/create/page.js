@@ -152,7 +152,7 @@ const CreateInvoice = (props) => {
 			<div className="py-12">
 				<div className="max-w-4xl mx-auto px-6 lg:px-8">
 					<form onSubmit={onSubmit}>
-						<div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl p-8 space-y-8">
+						<div className="bg-foreground/5 backdrop-blur-xl border border-border rounded-3xl p-8 space-y-8">
 							{/* Invoice Header Info */}
 							{/* Client Selection Start */}
 							<div className="grid grid-cols-1 gap-6">
@@ -194,7 +194,7 @@ const CreateInvoice = (props) => {
 							{/* Invoice Items Section */}
 							<div className="space-y-4">
 								<div className="flex items-center justify-between">
-									<h3 className="text-xl text-white font-light font-nunito">
+									<h3 className="text-xl text-foreground ">
 										Invoice Items
 									</h3>
 									<Btn
@@ -208,7 +208,7 @@ const CreateInvoice = (props) => {
 								<div className="overflow-x-auto">
 									<div className="min-w-full space-y-3">
 										{/* Header */}
-										<div className="hidden md:grid md:grid-cols-12 gap-3 px-4 py-2 text-white/60 font-light font-nunito text-sm">
+										<div className="hidden md:grid md:grid-cols-12 gap-3 px-4 py-2 text-foreground/60 text-sm">
 											<div className="col-span-2">Item</div>
 											<div className="col-span-3">Description</div>
 											<div className="col-span-2">Quantity</div>
@@ -221,7 +221,7 @@ const CreateInvoice = (props) => {
 										{invoiceItems.map((item, index) => (
 											<div
 												key={index}
-												className="grid grid-cols-1 md:grid-cols-12 gap-3 p-4 bg-white/5 border border-white/10 rounded-xl">
+												className="grid grid-cols-1 md:grid-cols-12 gap-3 p-4 bg-foreground/5 border border-border rounded-xl">
 												{/* Item */}
 												<div className="col-span-12 md:col-span-2">
 													<Input
@@ -236,7 +236,7 @@ const CreateInvoice = (props) => {
 													/>
 													<input
 														type="text"
-														className="hidden md:block w-full px-3 py-2 bg-white/10 border border-white/20 rounded-lg text-white font-light font-nunito focus:outline-none focus:border-white/40 transition-all duration-300"
+														className="hidden md:block w-full px-3 py-2 bg-foreground/10 border border-border rounded-lg text-foreground focus:outline-hidden focus:border-foreground/40 transition-all duration-300"
 														placeholder="Web Design"
 														value={item.item}
 														onChange={(e) =>
@@ -263,7 +263,7 @@ const CreateInvoice = (props) => {
 													/>
 													<input
 														type="text"
-														className="hidden md:block w-full px-3 py-2 bg-white/10 border border-white/20 rounded-lg text-white font-light font-nunito focus:outline-none focus:border-white/40 transition-all duration-300"
+														className="hidden md:block w-full px-3 py-2 bg-foreground/10 border border-border rounded-lg text-foreground focus:outline-hidden focus:border-foreground/40 transition-all duration-300"
 														placeholder="Homepage & admin dashboard..."
 														value={item.description}
 														onChange={(e) =>
@@ -298,7 +298,7 @@ const CreateInvoice = (props) => {
 														type="number"
 														min="0"
 														step="0.01"
-														className="hidden md:block w-full px-3 py-2 bg-white/10 border border-white/20 rounded-lg text-white font-light font-nunito focus:outline-none focus:border-white/40 transition-all duration-300"
+														className="hidden md:block w-full px-3 py-2 bg-foreground/10 border border-border rounded-lg text-foreground focus:outline-hidden focus:border-foreground/40 transition-all duration-300"
 														value={item.quantity}
 														onChange={(e) =>
 															updateInvoiceItem(
@@ -329,7 +329,7 @@ const CreateInvoice = (props) => {
 														type="number"
 														min="0"
 														step="0.01"
-														className="hidden md:block w-full px-3 py-2 bg-white/10 border border-white/20 rounded-lg text-white font-light font-nunito focus:outline-none focus:border-white/40 transition-all duration-300"
+														className="hidden md:block w-full px-3 py-2 bg-foreground/10 border border-border rounded-lg text-foreground focus:outline-hidden focus:border-foreground/40 transition-all duration-300"
 														value={item.rate}
 														onChange={(e) =>
 															updateInvoiceItem(index, "rate", e.target.value)
@@ -340,10 +340,10 @@ const CreateInvoice = (props) => {
 
 												{/* Amount */}
 												<div className="col-span-10 md:col-span-2">
-													<label className="block md:hidden text-white/60 font-light font-nunito text-sm mb-1">
+													<label className="block md:hidden text-foreground/60 text-sm mb-1">
 														Amount
 													</label>
-													<div className="px-3 py-2 bg-white/5 border border-white/10 rounded-lg text-white/80 font-light font-nunito">
+													<div className="px-3 py-2 bg-foreground/5 border border-border rounded-lg text-foreground/80 ">
 														{formatCurrency(item.amount)}
 													</div>
 												</div>
@@ -354,7 +354,7 @@ const CreateInvoice = (props) => {
 														type="button"
 														onClick={() => removeInvoiceItem(index)}
 														disabled={invoiceItems.length === 1}
-														className="p-2 text-white/60 hover:text-red-400 disabled:opacity-30 disabled:cursor-not-allowed transition-colors">
+														className="p-2 text-foreground/60 hover:text-red-400 disabled:opacity-30 disabled:cursor-not-allowed transition-colors">
 														<CloseSVG />
 													</button>
 												</div>
@@ -368,37 +368,37 @@ const CreateInvoice = (props) => {
 							<div className="flex justify-end">
 								<div className="w-full md:w-96 space-y-3">
 									{/* Subtotal */}
-									<div className="flex justify-between items-center px-4 py-2 text-white/80 font-nunito">
+									<div className="flex justify-between items-center px-4 py-2 text-foreground/80 ">
 										<span>Subtotal:</span>
 										<span>KES {formatCurrency(calculateSubtotal())}</span>
 									</div>
 
 									{/* Withholding Tax Toggle */}
-									<div className="flex justify-between items-center px-4 py-2 bg-white/5 border border-white/10 rounded-xl">
+									<div className="flex justify-between items-center px-4 py-2 bg-foreground/5 border border-border rounded-xl">
 										<label className="flex items-center gap-3 cursor-pointer">
 											<input
 												type="checkbox"
 												checked={applyWithholdingTax}
 												onChange={(e) => setApplyWithholdingTax(e.target.checked)}
-												className="w-4 h-4 rounded accent-white cursor-pointer"
+												className="w-4 h-4 rounded-sm accent-white cursor-pointer"
 											/>
-											<span className="text-white/70 font-nunito text-sm">
+											<span className="text-foreground/70 text-sm">
 												Withholding Tax (5%)
 											</span>
 										</label>
 										{applyWithholdingTax && (
-											<span className="text-red-400 font-nunito text-sm ml-3 whitespace-nowrap">
+											<span className="text-red-400 text-sm ml-3 whitespace-nowrap">
 												- KES {formatCurrency(calculateWithholdingTax())}
 											</span>
 										)}
 									</div>
 
 									{/* Total */}
-									<div className="flex justify-between items-center px-4 py-3 bg-gradient-to-br from-white/10 to-white/5 border border-white/20 rounded-xl">
-										<span className="text-white font-nunito text-lg">
+									<div className="flex justify-between items-center px-4 py-3 bg-linear-to-br from-foreground/10 to-foreground/5 border border-border rounded-xl">
+										<span className="text-foreground text-lg">
 											Total:
 										</span>
-										<span className="text-white font-nunito text-xl font-medium">
+										<span className="text-foreground text-xl font-medium">
 											KES {formatCurrency(calculateTotal())}
 										</span>
 									</div>

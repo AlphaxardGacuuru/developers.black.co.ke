@@ -37,9 +37,9 @@ function CalendarComponent({
 		<DayPicker
 			showOutsideDays={showOutsideDays}
 			className={cn(
-				"bg-background group/calendar p-3 [--cell-size:--spacing(8)] [[data-slot=card-content]_&]:bg-transparent [[data-slot=popover-content]_&]:bg-transparent",
-				String.raw`rtl:**:[.rdp-button\_next>svg]:rotate-180`,
-				String.raw`rtl:**:[.rdp-button\_previous>svg]:rotate-180`,
+				"bg-background group/calendar p-3 [--cell-size:--spacing(8)] in-data-[slot=card-content]:bg-transparent in-data-[slot=popover-content]:bg-transparent",
+				String.raw`[.rdp-button\_next>svg]:**:rtl:rotate-180`,
+				String.raw`[.rdp-button\_previous>svg]:**:rtl:rotate-180`,
 				className
 			)}
 			captionLayout={captionLayout}
@@ -78,25 +78,25 @@ function CalendarComponent({
 					defaultClassNames.dropdowns
 				),
 				dropdown_root: cn(
-					"relative border border-white/20 bg-white/10 backdrop-blur-xl shadow-xs rounded-md text-white overflow-hidden min-h-[35px] flex items-center min-w-[90px]",
+					"relative border border-border bg-foreground/10 backdrop-blur-xl shadow-2xs rounded-md text-foreground overflow-hidden min-h-[35px] flex items-center min-w-[90px]",
 					defaultClassNames.dropdown_root
 				),
 				dropdown: cn(
-					"absolute inset-0 w-full h-full cursor-pointer text-white bg-transparent appearance-none px-2 z-10 py-0 flex items-center",
-					"[&>option]:bg-gray-900 [&>option]:text-white",
+					"absolute inset-0 w-full h-full cursor-pointer text-foreground bg-transparent appearance-none px-2 z-10 py-0 flex items-center",
+					"[&>option]:bg-gray-900 [&>option]:text-foreground",
 					defaultClassNames.dropdown
 				),
 				caption_label: cn(
-					"select-none font-medium text-white pointer-events-none",
+					"select-none font-medium text-foreground pointer-events-none",
 					captionLayout === "label"
 						? "text-sm"
-						: "opacity-0 rounded-md pl-2 pr-1 flex items-center gap-1 text-sm h-8 [&>svg]:text-white/60 [&>svg]:size-3.5 [&>svg]:pointer-events-none",
+						: "opacity-0 rounded-md pl-2 pr-1 flex items-center gap-1 text-sm h-8 [&>svg]:text-foreground/60 [&>svg]:size-3.5 [&>svg]:pointer-events-none",
 					defaultClassNames.caption_label
 				),
 				table: "w-full border-collapse",
 				weekdays: cn("flex", defaultClassNames.weekdays),
 				weekday: cn(
-					"text-white/60 rounded-md flex-1 font-normal text-[0.8rem] select-none",
+					"text-foreground/60 rounded-md flex-1 font-normal text-[0.8rem] select-none",
 					defaultClassNames.weekday
 				),
 				week: cn("flex w-full mt-2", defaultClassNames.week),
@@ -105,7 +105,7 @@ function CalendarComponent({
 					defaultClassNames.week_number_header
 				),
 				week_number: cn(
-					"text-[0.8rem] select-none text-white/60",
+					"text-[0.8rem] select-none text-foreground/60",
 					defaultClassNames.week_number
 				),
 				day: cn(
@@ -116,20 +116,20 @@ function CalendarComponent({
 					defaultClassNames.day
 				),
 				range_start: cn(
-					"rounded-l-md bg-white/20",
+					"rounded-l-md bg-foreground/20",
 					defaultClassNames.range_start
 				),
 				range_middle: cn("rounded-none", defaultClassNames.range_middle),
-				range_end: cn("rounded-r-md bg-white/20", defaultClassNames.range_end),
+				range_end: cn("rounded-r-md bg-foreground/20", defaultClassNames.range_end),
 				today: cn(
-					"bg-white/20 text-white rounded-md data-[selected=true]:rounded-none",
+					"bg-foreground/20 text-foreground rounded-md data-[selected=true]:rounded-none",
 					defaultClassNames.today
 				),
 				outside: cn(
-					"text-white/40 aria-selected:text-white/40",
+					"text-foreground/40 aria-selected:text-foreground/40",
 					defaultClassNames.outside
 				),
-				disabled: cn("text-white/30 opacity-50", defaultClassNames.disabled),
+				disabled: cn("text-foreground/30 opacity-50", defaultClassNames.disabled),
 				hidden: cn("invisible", defaultClassNames.hidden),
 				...classNames,
 			}}
@@ -211,7 +211,7 @@ function CalendarDayButton({ className, day, modifiers, ...props }) {
 			data-range-end={modifiers.range_end}
 			data-range-middle={modifiers.range_middle}
 			className={cn(
-				"data-[selected-single=true]:bg-white/30 data-[selected-single=true]:text-white data-[range-middle=true]:bg-white/20 data-[range-middle=true]:text-white data-[range-start=true]:bg-white/30 data-[range-start=true]:text-white data-[range-end=true]:bg-white/30 data-[range-end=true]:text-white group-data-[focused=true]/day:border-ring group-data-[focused=true]/day:ring-ring/50 hover:bg-white/20 hover:text-white flex aspect-square size-auto w-full min-w-(--cell-size) flex-col gap-1 leading-none font-normal group-data-[focused=true]/day:relative group-data-[focused=true]/day:z-10 group-data-[focused=true]/day:ring-[3px] data-[range-end=true]:rounded-md data-[range-end=true]:rounded-r-md data-[range-middle=true]:rounded-none data-[range-start=true]:rounded-md data-[range-start=true]:rounded-l-md [&>span]:text-xs [&>span]:opacity-70",
+				"data-[selected-single=true]:bg-foreground/30 data-[selected-single=true]:text-foreground data-[range-middle=true]:bg-foreground/20 data-[range-middle=true]:text-foreground data-[range-start=true]:bg-foreground/30 data-[range-start=true]:text-foreground data-[range-end=true]:bg-foreground/30 data-[range-end=true]:text-foreground group-data-[focused=true]/day:border-ring group-data-[focused=true]/day:ring-ring/50 hover:bg-foreground/20 hover:text-foreground flex aspect-square size-auto w-full min-w-(--cell-size) flex-col gap-1 leading-none font-normal group-data-[focused=true]/day:relative group-data-[focused=true]/day:z-10 group-data-[focused=true]/day:ring-[3px] data-[range-end=true]:rounded-md data-[range-end=true]:rounded-r-md data-[range-middle=true]:rounded-none data-[range-start=true]:rounded-md data-[range-start=true]:rounded-l-md [&>span]:text-xs [&>span]:opacity-70",
 				defaultClassNames.day,
 				className
 			)}
@@ -294,12 +294,12 @@ export function DatePicker({
 									<button
 										type="button"
 										className={cn(
-											"relative flex h-14 w-full rounded-lg border bg-white/10 backdrop-blur-xl px-4 pt-5 pb-1 text-left text-white font-light font-nunito text-base transition-all",
+											"relative flex h-14 w-full rounded-lg border bg-foreground/10 backdrop-blur-xl px-4 pt-5 pb-1 text-left text-foreground   text-base transition-all",
 											error
 												? "border-red-500 focus:border-red-500 focus:ring-2 focus:ring-red-500/20"
-												: "border-white/20 focus:border-white/40 focus:ring-2 focus:ring-white/10",
-											"focus:outline-none",
-											"disabled:cursor-not-allowed disabled:opacity-50 disabled:bg-white/5"
+												: "border-border focus:border-foreground/40 focus:ring-2 focus:ring-foreground/10",
+											"focus:outline-hidden",
+											"disabled:cursor-not-allowed disabled:opacity-50 disabled:bg-foreground/5"
 										)}
 										onFocus={handleFocus}
 										onBlur={handleBlur}
@@ -317,10 +317,10 @@ export function DatePicker({
 								{label && (
 									<label
 										className={cn(
-											"absolute left-4 transition-all duration-200 pointer-events-none font-light font-nunito z-10",
+											"absolute left-4 transition-all duration-200 pointer-events-none   z-10",
 											isActiveWithFocus
-												? "top-1.5 text-xs text-white/60"
-												: "top-4 text-base text-white/40",
+												? "top-1.5 text-xs text-foreground/60"
+												: "top-4 text-base text-foreground/40",
 											error && isActiveWithFocus && "text-red-400"
 										)}>
 										{label}
@@ -332,7 +332,7 @@ export function DatePicker({
 				</InputWrapper>
 
 				<PopoverContent
-					className="w-auto overflow-hidden p-0 bg-white/10 backdrop-blur-xl border border-white/20 text-white"
+					className="w-auto overflow-hidden p-0 bg-foreground/10 backdrop-blur-xl border border-border text-foreground"
 					align="start">
 					<CalendarComponent
 						mode="single"
@@ -342,12 +342,12 @@ export function DatePicker({
 						captionLayout="dropdown"
 						onSelect={handleSelect}
 					/>
-					<div className="border-t border-white/20 p-2">
+					<div className="border-t border-border p-2">
 						<Btn
 							type="button"
 							variant="ghost"
 							size="sm"
-							className="w-full justify-center text-white hover:bg-white/20"
+							className="w-full justify-center text-foreground hover:bg-foreground/20"
 							onClick={handleSelectToday}>
 							Today
 						</Btn>
@@ -358,8 +358,8 @@ export function DatePicker({
 			{(error || helperText) && (
 				<p
 					className={cn(
-						"mt-1.5 px-4 text-xs font-light font-nunito",
-						error ? "text-red-400" : "text-white/40"
+						"mt-1.5 px-4 text-xs  ",
+						error ? "text-red-400" : "text-foreground/40"
 					)}>
 					{error || helperText}
 				</p>

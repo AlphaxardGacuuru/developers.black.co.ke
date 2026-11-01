@@ -3,18 +3,15 @@ import Axios from "@/lib/axios"
 
 import Btn from "@/components/ui/button"
 import MyLink from "@/components/ui/my-link"
-import DeleteModal from "@/components/core/DeleteModal"
 import { Input } from "@/components/ui/input"
 import { Select } from "@/components/ui/select"
 import { DataTable } from "@/components/ui/data-table"
+import { laravelPagination } from "@/lib/laravel-pagination"
 import Modal from "@/components/ui/modal"
 
 import HeroHeading from "@/components/core/HeroHeading"
 import HeroIcon from "@/components/core/HeroIcon"
 
-import ViewSVG from "@/svgs/ViewSVG"
-import EditSVG from "@/svgs/EditSVG"
-import DeleteSVG from "@/svgs/DeleteSVG"
 import PlusSVG from "@/svgs/PlusSVG"
 import BalanceSVG from "@/svgs/BalanceSVG"
 import SendEmailSVG from "@/svgs/SendEmailSVG"
@@ -29,7 +26,6 @@ const InvoiceList = (props) => {
 	const [loadingSMS, setLoadingSMS] = useState()
 	const [loadingEmail, setLoadingEmail] = useState()
 	const [rowSelection, setRowSelection] = useState({})
-	const [showBulkDeleteDialog, setShowBulkDeleteDialog] = useState(false)
 	const [showSendInvoiceModal, setShowSendInvoiceModal] = useState(false)
 
 	const [invoiceToSend, setInvoiceToSend] = useState({})
@@ -138,45 +134,12 @@ const InvoiceList = (props) => {
 
 	return (
 		<div className={props.activeTab}>
-			{/* Bulk Delete Confirmation Modal Start */}
-			<Modal
-				open={showBulkDeleteDialog}
-				onOpenChange={setShowBulkDeleteDialog}
-				title="Delete Selected Invoices"
-				className="bg-white/10 backdrop-blur-xl border border-white/20 shadow-sm rounded-3xl text-white data-[state=open]:slide-in-from-top data-[state=closed]:slide-out-to-top"
-				footer={
-					<div className="flex justify-between flex-wrap w-full">
-						<Btn
-							type="button"
-							text="Cancel"
-							onClick={() => setShowBulkDeleteDialog(false)}
-						/>
-						<Btn
-							icon={<DeleteSVG />}
-							text="Delete"
-							className="btn-2"
-							onClick={() => {
-								onDeleteInvoice(Object.keys(rowSelection))
-								setShowBulkDeleteDialog(false)
-							}}
-							loading={loading}
-						/>
-					</div>
-				}>
-				<div className="text-white">
-					Are you sure you want to delete {Object.keys(rowSelection).length}{" "}
-					selected invoice{Object.keys(rowSelection).length > 1 ? "s" : ""}?
-					This action cannot be undone.
-				</div>
-			</Modal>
-			{/* Bulk Delete Confirmation Modal End */}
-
 			{/* Send Invoice Modal Start */}
 			<Modal
 				open={showSendInvoiceModal}
 				onOpenChange={setShowSendInvoiceModal}
 				title={`Send Invoice ${invoiceToSend.number}`}
-				className="bg-white/10 backdrop-blur-xl border border-white/20 shadow-sm rounded-3xl text-white data-[state=open]:slide-in-from-top data-[state=closed]:slide-out-to-top"
+				className="bg-foreground/10 backdrop-blur-xl border border-border shadow-xs rounded-3xl text-foreground data-[state=open]:slide-in-from-top data-[state=closed]:slide-out-to-top"
 				footer={
 					<div className="flex w-full flex-wrap gap-2 sm:flex-nowrap sm:justify-between">
 						<Btn
@@ -215,12 +178,12 @@ const InvoiceList = (props) => {
 						</div>
 					</div>
 				}>
-				<div className="text-white">
+				<div className="text-foreground">
 					<p className="mb-2">
 						Send invoice <strong>{invoiceToSend.number}</strong> to{" "}
 						<strong>{invoiceToSend.clientName}</strong>?
 					</p>
-					<p className="text-sm text-white/80">
+					<p className="text-sm text-foreground/80">
 						A PDF invoice will be generated and sent to{" "}
 						<strong>{invoiceToSend.clientEmail || "the client"}</strong>.
 					</p>
@@ -229,9 +192,9 @@ const InvoiceList = (props) => {
 			{/* Send Invoice Modal End */}
 
 			{/* Data */}
-			<div className="bg-white/10 backdrop-blur-xl border border-white/20 shadow-sm rounded-3xl mb-2 p-2 px-5 hover:bg-white/15 transition-all duration-500 grid grid-cols-1 sm:grid-cols-4 gap-4">
+			<div className="bg-foreground/10 backdrop-blur-xl border border-border shadow-xs rounded-3xl mb-2 p-2 px-5 hover:bg-foreground/15 transition-all duration-500 grid grid-cols-1 sm:grid-cols-4 gap-4">
 				{/* Count */}
-				<div className="flex justify-between flex-grow mx-2">
+				<div className="flex justify-between grow mx-2">
 					<HeroHeading
 						heading="Count"
 						data={
@@ -246,7 +209,7 @@ const InvoiceList = (props) => {
 				</div>
 				{/* Count End */}
 				{/* Total */}
-				<div className="flex justify-between flex-grow mx-2">
+				<div className="flex justify-between grow mx-2">
 					<HeroHeading
 						heading="Total"
 						data={
@@ -261,7 +224,7 @@ const InvoiceList = (props) => {
 				</div>
 				{/* Total End */}
 				{/* Balance */}
-				<div className="flex justify-between flex-grow mx-2">
+				<div className="flex justify-between grow mx-2">
 					<HeroHeading
 						heading="Balance"
 						data={
@@ -276,7 +239,7 @@ const InvoiceList = (props) => {
 				</div>
 				{/* Balance End */}
 				{/* Paid */}
-				<div className="flex justify-between flex-grow mx-2">
+				<div className="flex justify-between grow mx-2">
 					<HeroHeading
 						heading="Paid"
 						data={
@@ -296,10 +259,10 @@ const InvoiceList = (props) => {
 			<br />
 
 			{/* Filters */}
-			<div className="bg-white/10 backdrop-blur-xl border border-white/20 shadow-sm rounded-3xl px-4 pt-4 pb-3 mb-2 hover:bg-white/15 transition-all duration-500">
+			<div className="bg-foreground/10 backdrop-blur-xl border border-border shadow-xs rounded-3xl px-4 pt-4 pb-3 mb-2 hover:bg-foreground/15 transition-all duration-500">
 				<div className="flex flex-wrap gap-2">
 					{/* Number */}
-					<div className="flex-grow min-w-0">
+					<div className="grow min-w-0">
 						<Input
 							type="text"
 							label="Number"
@@ -310,7 +273,7 @@ const InvoiceList = (props) => {
 					</div>
 					{/* Number End */}
 					{/* Client */}
-					<div className="flex-grow min-w-0">
+					<div className="grow min-w-0">
 						<Select
 							label="Client"
 							placeholder=""
@@ -330,7 +293,7 @@ const InvoiceList = (props) => {
 					</div>
 					{/* Client End */}
 					{/* Status */}
-					<div className="flex-grow min-w-0">
+					<div className="grow min-w-0">
 						<Select
 							label="Status"
 							placeholder=""
@@ -355,8 +318,8 @@ const InvoiceList = (props) => {
 					</div>
 					{/* Status End */}
 					{/* Start Date */}
-					<div className="flex flex-grow gap-2">
-						<div className="flex-grow">
+					<div className="flex grow gap-2">
+						<div className="grow">
 							{/* Start Month */}
 							<Select
 								label="Start At"
@@ -375,7 +338,7 @@ const InvoiceList = (props) => {
 						</div>
 						{/* Start Month End */}
 						{/* Start Year */}
-						<div className="flex-grow">
+						<div className="grow">
 							<Select
 								label="Year"
 								value={props.startYear}
@@ -394,9 +357,9 @@ const InvoiceList = (props) => {
 					</div>
 					{/* Start Date End */}
 					{/* End Date */}
-					<div className="flex flex-grow gap-2">
+					<div className="flex grow gap-2">
 						{/* End Month */}
-						<div className="flex-grow">
+						<div className="grow">
 							<Select
 								label="End At"
 								value={props.endMonth}
@@ -412,7 +375,7 @@ const InvoiceList = (props) => {
 						</div>
 						{/* End Month End */}
 						{/* End Year */}
-						<div className="flex-grow">
+						<div className="grow">
 							<Select
 								label="Year"
 								value={props.endYear}
@@ -437,17 +400,9 @@ const InvoiceList = (props) => {
 			<br />
 
 			{/* DataTable */}
-			<div className="bg-white/10 backdrop-blur-xl border border-white/20 rounded-3xl p-4 mb-5">
+			<div className="bg-foreground/10 backdrop-blur-xl border border-border rounded-3xl p-4 mb-5">
 				{/* Create Invoice Link Start */}
 				<div className="flex w-full flex-wrap gap-2 sm:flex-nowrap sm:justify-end">
-					{Object.keys(rowSelection).length > 0 && (
-						<Btn
-							icon={<DeleteSVG />}
-							text={`Delete Selected (${Object.keys(rowSelection).length})`}
-							className="w-full sm:w-auto"
-							onClick={() => setShowBulkDeleteDialog(true)}
-						/>
-					)}
 					<MyLink
 						href={`/invoices/create`}
 						icon={<PlusSVG />}
@@ -461,27 +416,6 @@ const InvoiceList = (props) => {
 					rowSelection={rowSelection}
 					setRowSelection={setRowSelection}
 					columns={[
-						{
-							id: "select",
-							header: ({ table }) => (
-								<input
-									type="checkbox"
-									checked={table.getIsAllPageRowsSelected()}
-									onChange={(e) =>
-										table.toggleAllPageRowsSelected(!!e.target.checked)
-									}
-								/>
-							),
-							cell: ({ row }) => (
-								<input
-									type="checkbox"
-									checked={row.getIsSelected()}
-									onChange={row.getToggleSelectedHandler()}
-								/>
-							),
-							enableSorting: false,
-							enableHiding: false,
-						},
 						{
 							accessorKey: "",
 							header: "#",
@@ -554,7 +488,7 @@ const InvoiceList = (props) => {
 														? "bg-yellow-500 text-gray-900"
 														: status == "paid"
 															? "bg-green-600 text-white"
-															: "bg-gray-600 text-white"
+															: "bg-gray-600 text-foreground"
 											}
 											py-1 px-3 rounded capitalize whitespace-nowrap
 										`}>
@@ -572,74 +506,49 @@ const InvoiceList = (props) => {
 							accessorKey: "createdAt",
 							header: "Created At",
 						},
-						{
-							id: "actions",
-							header: "Action",
-							cell: ({ row }) => {
-								const invoice = row.original
-								return (
-									<div className="flex items-center gap-2">
-										{/* Send Invoice Start */}
-										{parseFloat(invoice.balance?.replace(/,/g, "")) > 0 && (
-											<Btn
-												icon={<ChatSendSVG />}
-												text={`send invoice ${
-													invoice.smsesSent || invoice.emailsSent
-														? `(${invoice.smsesSent + invoice.emailsSent})`
-														: ""
-												}`}
-												className={`${
-													invoice.smsesSent || invoice.emailsSent
-														? "btn-green"
-														: ""
-												}`}
-												onClick={() => {
-													setInvoiceToSend(invoice)
-													setShowSendInvoiceModal(true)
-												}}
-											/>
-										)}
-										{/* Send Invoice End */}
-										{/* Create Payment Start */}
-										<MyLink
-											href={`/payments/${invoice.id}/create`}
-											icon={<PlusSVG />}
-											text="create payment"
-										/>
-										{/* Create Payment End */}
-										{/* View Start */}
-										<MyLink
-											href={`/invoices/${invoice.id}/view`}
-											icon={<ViewSVG />}
-											// text="view"
-										/>
-										{/* View End */}
-										{/* Edit Start */}
-										<MyLink
-											href={`/invoices/${invoice.id}/edit`}
-											icon={<EditSVG />}
-											// text="edit"
-										/>
-										{/* Edit End */}
-										{/* Delete Start */}
-										<DeleteModal
-											index={`invoice-dt-${invoice.id}`}
-											model={invoice}
-											modelName="Invoice"
-											onDelete={onDeleteInvoice}
-										/>
-										{/* Delete End */}
-									</div>
-								)
-							},
-						},
 					]}
 					data={props.invoices.data || []}
-					pagination={{
-						getPaginated: props.getPaginated,
-						setState: props.setInvoices,
-						list: props.invoices,
-					}}
+					emptyMessage={props.loadingItems > 0 ? "Loading…" : "No invoices yet"}
+					showHref={(invoice) => `/invoices/${invoice.id}/view`}
+					editHref={(invoice) => `/invoices/${invoice.id}/edit`}
+					onDelete={(invoice) => onDeleteInvoice(invoice.id)}
+					onBulkDelete={(ids) => onDeleteInvoice(ids)}
+					getItemLabel={(invoice) => `Invoice ${invoice.number}`}
+					renderActions={(invoice) => (
+						<>
+							{/* Send Invoice Start */}
+							{parseFloat(invoice.balance?.replace(/,/g, "")) > 0 && (
+								<Btn
+									icon={<ChatSendSVG />}
+									text={`send invoice ${
+										invoice.smsesSent || invoice.emailsSent
+											? `(${invoice.smsesSent + invoice.emailsSent})`
+											: ""
+									}`}
+									className={`${
+										invoice.smsesSent || invoice.emailsSent ? "btn-green" : ""
+									}`}
+									onClick={() => {
+										setInvoiceToSend(invoice)
+										setShowSendInvoiceModal(true)
+									}}
+								/>
+							)}
+							{/* Send Invoice End */}
+							{/* Create Payment Start */}
+							<MyLink
+								href={`/payments/${invoice.id}/create`}
+								icon={<PlusSVG />}
+								text="create payment"
+							/>
+							{/* Create Payment End */}
+						</>
+					)}
+					pagination={laravelPagination(
+						props.invoices,
+						props.getPaginated,
+						props.setInvoices
+					)}
 				/>
 			</div>
 			{/* DataTable End */}

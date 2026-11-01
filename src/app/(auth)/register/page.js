@@ -33,10 +33,10 @@ const Page = () => {
 	return (
 		<>
 			<div className="text-center mb-8">
-				<h2 className="text-3xl sm:text-4xl font-light text-white font-nunito mb-3">
+				<h2 className="text-3xl sm:text-4xl font-semibold tracking-tight text-primary mb-3">
 					Create Account
 				</h2>
-				<p className="text-white/60 font-light font-nunito text-lg">
+				<p className="text-foreground/60 text-lg">
 					Sign up to get started with Black Developers
 				</p>
 			</div>
@@ -57,7 +57,7 @@ const Page = () => {
 						autoFocus
 					/>
 					{errors.name && (
-						<p className="text-sm text-red-400 font-light font-nunito">
+						<p className="text-sm text-red-400 ">
 							{errors.name[0]}
 						</p>
 					)}
@@ -75,7 +75,7 @@ const Page = () => {
 						required
 					/>
 					{errors.email && (
-						<p className="text-sm text-red-400 font-light font-nunito">
+						<p className="text-sm text-red-400 ">
 							{errors.email[0]}
 						</p>
 					)}
@@ -94,7 +94,7 @@ const Page = () => {
 						autoComplete="new-password"
 					/>
 					{errors.password && (
-						<p className="text-sm text-red-400 font-light font-nunito">
+						<p className="text-sm text-red-400 ">
 							{errors.password[0]}
 						</p>
 					)}
@@ -112,7 +112,7 @@ const Page = () => {
 						required
 					/>
 					{errors.password_confirmation && (
-						<p className="text-sm text-red-400 font-light font-nunito">
+						<p className="text-sm text-red-400 ">
 							{errors.password_confirmation[0]}
 						</p>
 					)}
@@ -126,11 +126,11 @@ const Page = () => {
 				/>
 
 				<div className="text-center">
-					<p className="text-white/60 font-light font-nunito text-sm">
+					<p className="text-foreground/60 text-sm">
 						Already have an account?{" "}
 						<Link
 							href="/login"
-							className="text-white hover:text-white/80 transition-colors">
+							className="text-foreground hover:text-foreground/80 transition-colors">
 							Sign in
 						</Link>
 					</p>

@@ -40,14 +40,14 @@ const Home = () => {
 
 			{/* Animated background gradients */}
 			<div className="fixed inset-0 overflow-hidden pointer-events-none">
-				<div className="absolute -top-40 -left-40 w-96 h-96 bg-gradient-to-r from-[#232323]/20 to-[#3a3a3a]/30 rounded-full blur-3xl animate-pulse" />
-				<div className="absolute top-1/3 -right-40 w-80 h-80 bg-gradient-to-l from-[#3a3a3a]/30 to-[#232323]/20 rounded-full blur-3xl animate-pulse animation-delay-1000" />
-				<div className="absolute bottom-20 left-1/4 w-64 h-64 bg-gradient-to-t from-[#4a4a4a]/30 to-[#232323]/20 rounded-full blur-2xl animate-pulse animation-delay-2000" />
+				<div className="absolute -top-40 -left-40 w-96 h-96 bg-linear-to-r from-card/20 to-[#3a3a3a]/30 rounded-full blur-3xl animate-pulse" />
+				<div className="absolute top-1/3 -right-40 w-80 h-80 bg-linear-to-l from-[#3a3a3a]/30 to-card/20 rounded-full blur-3xl animate-pulse animation-delay-1000" />
+				<div className="absolute bottom-20 left-1/4 w-64 h-64 bg-linear-to-t from-[#4a4a4a]/30 to-card/20 rounded-full blur-2xl animate-pulse animation-delay-2000" />
 			</div>
 
 			{/* Mouse follower gradient - Light Effect */}
 			<div
-				className="fixed w-[500px] h-[500px] bg-gradient-radial from-white/30 via-blue-200/40 to-transparent rounded-full pointer-events-none blur-3xl transition-all duration-700 ease-out -translate-x-1/2 -translate-y-1/2 z-10"
+				className="fixed w-[500px] h-[500px] bg-gradient-radial from-foreground/30 via-blue-200/40 to-transparent rounded-full pointer-events-none blur-3xl transition-all duration-700 ease-out -translate-x-1/2 -translate-y-1/2 z-10"
 				style={{
 					left: mousePosition.x,
 					top: mousePosition.y,
@@ -57,7 +57,7 @@ const Home = () => {
 			{/* Hero Section */}
 			<section className="relative min-h-screen flex items-center justify-center px-6 lg:px-8">
 				<div
-					className="absolute inset-0 bg-gradient-to-b from-transparent via-[#232323]/10 to-[#232323]/20"
+					className="absolute inset-0 bg-linear-to-b from-transparent via-card/10 to-card/20"
 					style={{
 						transform: `translateY(${scrollY * 0.5}px)`,
 					}}
@@ -65,7 +65,7 @@ const Home = () => {
 
 				{/* Hero decorative elements */}
 				<div className="absolute inset-0 overflow-hidden pointer-events-none">
-					<div className="absolute top-20 left-10 w-32 h-32 bg-white/5 rounded-full blur-2xl animate-pulse" />
+					<div className="absolute top-20 left-10 w-32 h-32 bg-foreground/5 rounded-full blur-2xl animate-pulse" />
 					<div className="absolute bottom-32 right-16 w-48 h-48 bg-blue-400/10 rounded-full blur-3xl animate-pulse animation-delay-1000" />
 					<div className="absolute top-1/2 left-1/4 w-24 h-24 bg-purple-400/8 rounded-full blur-xl animate-pulse animation-delay-2000" />
 				</div>
@@ -75,13 +75,13 @@ const Home = () => {
 					<div className="mb-5 relative">
 						{/* Subtle glow effect behind logo */}
 						<div className="absolute inset-0 flex items-center justify-center">
-							<div className="w-96 h-32 bg-gradient-to-r from-transparent via-white/10 to-transparent blur-2xl" />
+							<div className="w-96 h-32 bg-linear-to-r from-transparent via-foreground/10 to-transparent blur-2xl" />
 						</div>
 
 						{/* Logo standalone */}
 						<div className="relative transform hover:scale-105 sm:hover:scale-110 transition-all duration-700 ease-out group cursor-pointer">
 							<div className="mx-auto w-48 sm:w-64 md:w-80 h-12 sm:h-16 md:h-20 flex items-center justify-center">
-								<div className="text-white opacity-90 group-hover:opacity-100 transition-opacity duration-500 text-md sm:text-2xl md:text-3xl">
+								<div className="text-foreground opacity-90 group-hover:opacity-100 transition-opacity duration-500 text-md sm:text-2xl md:text-3xl">
 									<ApplicationLogo />
 								</div>
 							</div>
@@ -91,30 +91,30 @@ const Home = () => {
 					{/* Main Headlines */}
 					<div className="space-y-8 mb-16">
 						<div className="relative">
-							<h2 className="text-2xl sm:text-3xl lg:text-4xl font-thin text-gray-400 tracking-wide font-nunito">
+							<h2 className="text-2xl sm:text-3xl lg:text-4xl font-thin text-muted-foreground tracking-wide ">
 								Crafting Digital Excellence
 							</h2>
-							<div className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-24 h-0.5 bg-gradient-to-r from-transparent via-[#232323] to-transparent" />
+							<div className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-24 h-0.5 bg-linear-to-r from-transparent via-card to-transparent" />
 						</div>
 
 						{/* Lead Developer Info */}
-						<div className="mt-20 p-8 rounded-3xl bg-white/5 backdrop-blur-xl border border-white/10 hover:bg-white/10 transition-all duration-700 ease-out group">
+						<div className="mt-20 p-8 rounded-3xl bg-foreground/5 backdrop-blur-xl border border-border hover:bg-foreground/10 transition-all duration-700 ease-out group">
 							<div className="flex items-center justify-center space-x-4 mb-4">
-								<div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-[#232323] to-[#1a1a1a] flex items-center justify-center group-hover:scale-110 transition-transform duration-500">
-									<span className="text-lg font-light text-white font-roboto">
+								<div className="w-16 h-16 rounded-2xl bg-linear-to-br from-card to-background flex items-center justify-center group-hover:scale-110 transition-transform duration-500">
+									<span className="text-lg font-light text-foreground ">
 										AG
 									</span>
 								</div>
 								<div className="text-left">
-									<h3 className="text-xl font-light text-white font-nunito">
+									<h3 className="text-xl font-light text-foreground ">
 										Alphaxard Gacuuru
 									</h3>
-									<p className="text-[#232323] font-light font-nunito">
+									<p className="text-muted-foreground font-light">
 										Lead Developer & Founder
 									</p>
 								</div>
 							</div>
-							<p className="text-gray-300 text-lg leading-relaxed max-w-2xl mx-auto">
+							<p className="text-muted-foreground text-lg leading-relaxed max-w-2xl mx-auto">
 								Leading a team of exceptional developers to create innovative
 								solutions that transform businesses and elevate digital
 								experiences.
@@ -125,8 +125,8 @@ const Home = () => {
 					{/* CTA Buttons */}
 					{/* Scroll indicator */}
 					<div className="flex justify-center bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
-						<div className="w-6 h-10 border-2 border-white/30 rounded-full flex justify-center bg-white/20 backdrop-blur-sm">
-							<div className="w-1 h-3 bg-white/70 rounded-full mt-2 animate-pulse" />
+						<div className="w-6 h-10 border-2 border-foreground/30 rounded-full flex justify-center bg-foreground/20 backdrop-blur-xs">
+							<div className="w-1 h-3 bg-foreground/70 rounded-full mt-2 animate-pulse" />
 						</div>
 					</div>
 				</div>
@@ -135,25 +135,25 @@ const Home = () => {
 			{/* Services Section */}
 			<section
 				id="services"
-				className="py-32 relative bg-gradient-to-b from-[#000000] via-[#1a1a1a] to-[#232323]">
-				<div className="absolute inset-0 bg-gradient-to-b from-transparent via-white/5 to-transparent" />
+				className="py-32 relative bg-linear-to-b from-background via-background to-card">
+				<div className="absolute inset-0 bg-linear-to-b from-transparent via-foreground/5 to-transparent" />
 
 				{/* Service section decorative elements */}
 				<div className="absolute inset-0 overflow-hidden pointer-events-none">
-					<div className="absolute top-10 right-20 w-40 h-40 bg-white/20 rounded-full blur-3xl animate-pulse" />
+					<div className="absolute top-10 right-20 w-40 h-40 bg-foreground/20 rounded-full blur-3xl animate-pulse" />
 					<div className="absolute bottom-20 left-16 w-56 h-56 bg-blue-400/20 rounded-full blur-3xl animate-pulse animation-delay-1000" />
 					<div className="absolute top-1/2 right-1/3 w-32 h-32 bg-purple-400/15 rounded-full blur-2xl animate-pulse animation-delay-2000" />
 				</div>
 
 				<div className="relative z-10 mx-auto max-w-7xl px-6 lg:px-8">
 					<div className="text-center mb-20">
-						<h2 className="text-5xl sm:text-6xl font-extralight text-white mb-6 tracking-tight font-roboto drop-shadow-sm">
+						<h2 className="text-5xl sm:text-6xl font-extralight text-foreground mb-6 tracking-tight drop-shadow-xs">
 							Our{" "}
-							<span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-white to-purple-400 font-light">
+							<span className="text-transparent bg-clip-text bg-linear-to-r from-blue-400 via-foreground to-purple-400 font-light">
 								Services
 							</span>
 						</h2>
-						<p className="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed font-light font-nunito">
+						<p className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed font-light ">
 							We deliver cutting-edge digital solutions that drive innovation
 							and transform businesses across industries.
 						</p>
@@ -161,13 +161,13 @@ const Home = () => {
 
 					<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
 						{/* Service 1 */}
-						<div className="group relative p-8 rounded-3xl bg-white/10 backdrop-blur-xl border border-white/20 hover:border-white/40 hover:shadow-2xl hover:shadow-white/10 transition-all duration-700 hover:scale-110 hover:rotate-2">
-							<div className="absolute inset-0 bg-gradient-to-br from-blue-400/20 to-purple-400/15 opacity-0 group-hover:opacity-100 rounded-3xl transition-opacity duration-500" />
-							<div className="absolute -inset-1 bg-gradient-to-r from-white/20 via-blue-400/30 to-purple-400/30 rounded-3xl blur opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+						<div className="group relative p-8 rounded-3xl bg-foreground/10 backdrop-blur-xl border border-border hover:border-foreground/40 hover:shadow-2xl hover:shadow-white/10 transition-all duration-700 hover:scale-110 hover:rotate-2">
+							<div className="absolute inset-0 bg-linear-to-br from-blue-400/20 to-purple-400/15 opacity-0 group-hover:opacity-100 rounded-3xl transition-opacity duration-500" />
+							<div className="absolute -inset-1 bg-linear-to-r from-foreground/20 via-blue-400/30 to-purple-400/30 rounded-3xl blur-sm opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 							<div className="relative z-10">
-								<div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-[#232323] to-gray-700 flex items-center justify-center mb-6 group-hover:scale-125 group-hover:rotate-12 transition-transform duration-700 shadow-lg">
+								<div className="w-16 h-16 rounded-2xl bg-linear-to-br from-card to-gray-700 flex items-center justify-center mb-6 group-hover:scale-125 group-hover:rotate-12 transition-transform duration-700 shadow-lg">
 									<svg
-										className="w-8 h-8 text-white"
+										className="w-8 h-8 text-foreground"
 										fill="none"
 										viewBox="0 0 24 24"
 										stroke="currentColor">
@@ -179,21 +179,21 @@ const Home = () => {
 										/>
 									</svg>
 								</div>
-								<h3 className="text-2xl font-light text-white mb-4 font-nunito">
+								<h3 className="text-2xl font-light text-foreground mb-4 ">
 									Full-Stack Development
 								</h3>
-								<p className="text-gray-300 leading-relaxed mb-6 font-light font-nunito">
+								<p className="text-muted-foreground leading-relaxed mb-6 font-light ">
 									End-to-end web applications with modern frameworks, scalable
 									architecture, and exceptional user experiences.
 								</p>
 								<div className="flex flex-wrap gap-2">
-									<span className="px-3 py-1 text-xs font-light bg-[#232323] text-white rounded-full">
+									<span className="px-3 py-1 text-xs font-light bg-card text-foreground rounded-full">
 										React
 									</span>
-									<span className="px-3 py-1 text-xs font-light bg-[#232323] text-white rounded-full">
+									<span className="px-3 py-1 text-xs font-light bg-card text-foreground rounded-full">
 										Next.js
 									</span>
-									<span className="px-3 py-1 text-xs font-light bg-[#232323] text-white rounded-full">
+									<span className="px-3 py-1 text-xs font-light bg-card text-foreground rounded-full">
 										Laravel
 									</span>
 								</div>
@@ -201,13 +201,13 @@ const Home = () => {
 						</div>
 
 						{/* Service 2 */}
-						<div className="group relative p-8 rounded-3xl bg-white/10 backdrop-blur-xl border border-white/20 hover:border-white/40 hover:shadow-2xl hover:shadow-white/10 transition-all duration-700 hover:scale-110 hover:rotate-2">
-							<div className="absolute inset-0 bg-gradient-to-br from-blue-400/20 to-purple-400/15 opacity-0 group-hover:opacity-100 rounded-3xl transition-opacity duration-500" />
-							<div className="absolute -inset-1 bg-gradient-to-r from-white/20 via-blue-400/30 to-purple-400/30 rounded-3xl blur opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+						<div className="group relative p-8 rounded-3xl bg-foreground/10 backdrop-blur-xl border border-border hover:border-foreground/40 hover:shadow-2xl hover:shadow-white/10 transition-all duration-700 hover:scale-110 hover:rotate-2">
+							<div className="absolute inset-0 bg-linear-to-br from-blue-400/20 to-purple-400/15 opacity-0 group-hover:opacity-100 rounded-3xl transition-opacity duration-500" />
+							<div className="absolute -inset-1 bg-linear-to-r from-foreground/20 via-blue-400/30 to-purple-400/30 rounded-3xl blur-sm opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 							<div className="relative z-10">
-								<div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-[#232323] to-[#1a1a1a] flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-500">
+								<div className="w-16 h-16 rounded-2xl bg-linear-to-br from-card to-background flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-500">
 									<svg
-										className="w-8 h-8 text-white"
+										className="w-8 h-8 text-foreground"
 										fill="none"
 										viewBox="0 0 24 24"
 										stroke="currentColor">
@@ -219,21 +219,21 @@ const Home = () => {
 										/>
 									</svg>
 								</div>
-								<h3 className="text-2xl font-light text-white mb-4 font-nunito">
+								<h3 className="text-2xl font-light text-foreground mb-4 ">
 									Mobile Applications
 								</h3>
-								<p className="text-gray-300 leading-relaxed mb-6 font-light font-nunito">
+								<p className="text-muted-foreground leading-relaxed mb-6 font-light ">
 									Cross-platform mobile solutions with native performance,
 									intuitive interfaces, and seamless user experiences.
 								</p>
 								<div className="flex flex-wrap gap-2">
-									<span className="px-3 py-1 text-xs font-light bg-[#232323] text-white rounded-full">
+									<span className="px-3 py-1 text-xs font-light bg-card text-foreground rounded-full">
 										React Native
 									</span>
-									<span className="px-3 py-1 text-xs font-light bg-[#232323] text-white rounded-full">
+									<span className="px-3 py-1 text-xs font-light bg-card text-foreground rounded-full">
 										Flutter
 									</span>
-									<span className="px-3 py-1 text-xs font-light bg-[#232323] text-white rounded-full">
+									<span className="px-3 py-1 text-xs font-light bg-card text-foreground rounded-full">
 										Swift
 									</span>
 								</div>
@@ -241,13 +241,13 @@ const Home = () => {
 						</div>
 
 						{/* Service 3 */}
-						<div className="group relative p-8 rounded-3xl bg-white/10 backdrop-blur-xl border border-white/20 hover:border-white/40 hover:shadow-2xl hover:shadow-white/10 transition-all duration-700 hover:scale-110 hover:rotate-2">
-							<div className="absolute inset-0 bg-gradient-to-br from-blue-400/20 to-purple-400/15 opacity-0 group-hover:opacity-100 rounded-3xl transition-opacity duration-500" />
-							<div className="absolute -inset-1 bg-gradient-to-r from-white/20 via-blue-400/30 to-purple-400/30 rounded-3xl blur opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+						<div className="group relative p-8 rounded-3xl bg-foreground/10 backdrop-blur-xl border border-border hover:border-foreground/40 hover:shadow-2xl hover:shadow-white/10 transition-all duration-700 hover:scale-110 hover:rotate-2">
+							<div className="absolute inset-0 bg-linear-to-br from-blue-400/20 to-purple-400/15 opacity-0 group-hover:opacity-100 rounded-3xl transition-opacity duration-500" />
+							<div className="absolute -inset-1 bg-linear-to-r from-foreground/20 via-blue-400/30 to-purple-400/30 rounded-3xl blur-sm opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 							<div className="relative z-10">
-								<div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-[#232323] to-[#1a1a1a] flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-500">
+								<div className="w-16 h-16 rounded-2xl bg-linear-to-br from-card to-background flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-500">
 									<svg
-										className="w-8 h-8 text-white"
+										className="w-8 h-8 text-foreground"
 										fill="none"
 										viewBox="0 0 24 24"
 										stroke="currentColor">
@@ -259,21 +259,21 @@ const Home = () => {
 										/>
 									</svg>
 								</div>
-								<h3 className="text-2xl font-light text-white mb-4 font-nunito">
+								<h3 className="text-2xl font-light text-foreground mb-4 ">
 									Cloud Solutions
 								</h3>
-								<p className="text-gray-300 leading-relaxed mb-6 font-light font-nunito">
+								<p className="text-muted-foreground leading-relaxed mb-6 font-light ">
 									Scalable cloud infrastructure, DevOps automation, and
 									enterprise-grade deployment solutions.
 								</p>
 								<div className="flex flex-wrap gap-2">
-									<span className="px-3 py-1 text-xs font-light bg-[#232323] text-white rounded-full">
+									<span className="px-3 py-1 text-xs font-light bg-card text-foreground rounded-full">
 										AWS
 									</span>
-									<span className="px-3 py-1 text-xs font-light bg-[#232323] text-white rounded-full">
+									<span className="px-3 py-1 text-xs font-light bg-card text-foreground rounded-full">
 										Docker
 									</span>
-									<span className="px-3 py-1 text-xs font-light bg-[#232323] text-white rounded-full">
+									<span className="px-3 py-1 text-xs font-light bg-card text-foreground rounded-full">
 										Kubernetes
 									</span>
 								</div>
@@ -281,13 +281,13 @@ const Home = () => {
 						</div>
 
 						{/* Service 4 */}
-						<div className="group relative p-8 rounded-3xl bg-white/10 backdrop-blur-xl border border-white/20 hover:border-white/40 hover:shadow-2xl hover:shadow-white/10 transition-all duration-700 hover:scale-110 hover:rotate-2">
-							<div className="absolute inset-0 bg-gradient-to-br from-blue-400/20 to-purple-400/15 opacity-0 group-hover:opacity-100 rounded-3xl transition-opacity duration-500" />
-							<div className="absolute -inset-1 bg-gradient-to-r from-white/20 via-blue-400/30 to-purple-400/30 rounded-3xl blur opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+						<div className="group relative p-8 rounded-3xl bg-foreground/10 backdrop-blur-xl border border-border hover:border-foreground/40 hover:shadow-2xl hover:shadow-white/10 transition-all duration-700 hover:scale-110 hover:rotate-2">
+							<div className="absolute inset-0 bg-linear-to-br from-blue-400/20 to-purple-400/15 opacity-0 group-hover:opacity-100 rounded-3xl transition-opacity duration-500" />
+							<div className="absolute -inset-1 bg-linear-to-r from-foreground/20 via-blue-400/30 to-purple-400/30 rounded-3xl blur-sm opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 							<div className="relative z-10">
-								<div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-[#232323] to-[#1a1a1a] flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-500">
+								<div className="w-16 h-16 rounded-2xl bg-linear-to-br from-card to-background flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-500">
 									<svg
-										className="w-8 h-8 text-white"
+										className="w-8 h-8 text-foreground"
 										fill="none"
 										viewBox="0 0 24 24"
 										stroke="currentColor">
@@ -299,21 +299,21 @@ const Home = () => {
 										/>
 									</svg>
 								</div>
-								<h3 className="text-2xl font-light text-white mb-4 font-nunito">
+								<h3 className="text-2xl font-light text-foreground mb-4 ">
 									API Development
 								</h3>
-								<p className="text-gray-300 leading-relaxed mb-6 font-light font-nunito">
+								<p className="text-muted-foreground leading-relaxed mb-6 font-light ">
 									Robust RESTful APIs, GraphQL endpoints, and microservices
 									architecture for seamless integrations.
 								</p>
 								<div className="flex flex-wrap gap-2">
-									<span className="px-3 py-1 text-xs font-light bg-[#232323] text-white rounded-full">
+									<span className="px-3 py-1 text-xs font-light bg-card text-foreground rounded-full">
 										Node.js
 									</span>
-									<span className="px-3 py-1 text-xs font-light bg-[#232323] text-white rounded-full">
+									<span className="px-3 py-1 text-xs font-light bg-card text-foreground rounded-full">
 										GraphQL
 									</span>
-									<span className="px-3 py-1 text-xs font-light bg-[#232323] text-white rounded-full">
+									<span className="px-3 py-1 text-xs font-light bg-card text-foreground rounded-full">
 										REST
 									</span>
 								</div>
@@ -321,13 +321,13 @@ const Home = () => {
 						</div>
 
 						{/* Service 5 */}
-						<div className="group relative p-8 rounded-3xl bg-white/10 backdrop-blur-xl border border-white/20 hover:border-white/40 hover:shadow-2xl hover:shadow-white/10 transition-all duration-700 hover:scale-110 hover:rotate-2">
-							<div className="absolute inset-0 bg-gradient-to-br from-blue-400/20 to-purple-400/15 opacity-0 group-hover:opacity-100 rounded-3xl transition-opacity duration-500" />
-							<div className="absolute -inset-1 bg-gradient-to-r from-white/20 via-blue-400/30 to-purple-400/30 rounded-3xl blur opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+						<div className="group relative p-8 rounded-3xl bg-foreground/10 backdrop-blur-xl border border-border hover:border-foreground/40 hover:shadow-2xl hover:shadow-white/10 transition-all duration-700 hover:scale-110 hover:rotate-2">
+							<div className="absolute inset-0 bg-linear-to-br from-blue-400/20 to-purple-400/15 opacity-0 group-hover:opacity-100 rounded-3xl transition-opacity duration-500" />
+							<div className="absolute -inset-1 bg-linear-to-r from-foreground/20 via-blue-400/30 to-purple-400/30 rounded-3xl blur-sm opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 							<div className="relative z-10">
-								<div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-[#232323] to-[#1a1a1a] flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-500">
+								<div className="w-16 h-16 rounded-2xl bg-linear-to-br from-card to-background flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-500">
 									<svg
-										className="w-8 h-8 text-white"
+										className="w-8 h-8 text-foreground"
 										fill="none"
 										viewBox="0 0 24 24"
 										stroke="currentColor">
@@ -339,21 +339,21 @@ const Home = () => {
 										/>
 									</svg>
 								</div>
-								<h3 className="text-2xl font-light text-white mb-4 font-nunito">
+								<h3 className="text-2xl font-light text-foreground mb-4 ">
 									UI/UX Design
 								</h3>
-								<p className="text-gray-300 leading-relaxed mb-6 font-light font-nunito">
+								<p className="text-muted-foreground leading-relaxed mb-6 font-light ">
 									User-centered design, prototyping, and interface development
 									that converts visitors into customers.
 								</p>
 								<div className="flex flex-wrap gap-2">
-									<span className="px-3 py-1 text-xs font-light bg-[#232323] text-white rounded-full">
+									<span className="px-3 py-1 text-xs font-light bg-card text-foreground rounded-full">
 										Figma
 									</span>
-									<span className="px-3 py-1 text-xs font-light bg-[#232323] text-white rounded-full">
+									<span className="px-3 py-1 text-xs font-light bg-card text-foreground rounded-full">
 										Adobe XD
 									</span>
-									<span className="px-3 py-1 text-xs font-light bg-[#232323] text-white rounded-full">
+									<span className="px-3 py-1 text-xs font-light bg-card text-foreground rounded-full">
 										Tailwind
 									</span>
 								</div>
@@ -361,13 +361,13 @@ const Home = () => {
 						</div>
 
 						{/* Service 6 */}
-						<div className="group relative p-8 rounded-3xl bg-white/10 backdrop-blur-xl border border-white/20 hover:border-white/40 hover:shadow-2xl hover:shadow-white/10 transition-all duration-700 hover:scale-110 hover:rotate-2">
-							<div className="absolute inset-0 bg-gradient-to-br from-blue-400/20 to-purple-400/15 opacity-0 group-hover:opacity-100 rounded-3xl transition-opacity duration-500" />
-							<div className="absolute -inset-1 bg-gradient-to-r from-white/20 via-blue-400/30 to-purple-400/30 rounded-3xl blur opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+						<div className="group relative p-8 rounded-3xl bg-foreground/10 backdrop-blur-xl border border-border hover:border-foreground/40 hover:shadow-2xl hover:shadow-white/10 transition-all duration-700 hover:scale-110 hover:rotate-2">
+							<div className="absolute inset-0 bg-linear-to-br from-blue-400/20 to-purple-400/15 opacity-0 group-hover:opacity-100 rounded-3xl transition-opacity duration-500" />
+							<div className="absolute -inset-1 bg-linear-to-r from-foreground/20 via-blue-400/30 to-purple-400/30 rounded-3xl blur-sm opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 							<div className="relative z-10">
-								<div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-[#232323] to-[#1a1a1a] flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-500">
+								<div className="w-16 h-16 rounded-2xl bg-linear-to-br from-card to-background flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-500">
 									<svg
-										className="w-8 h-8 text-white"
+										className="w-8 h-8 text-foreground"
 										fill="none"
 										viewBox="0 0 24 24"
 										stroke="currentColor">
@@ -379,21 +379,21 @@ const Home = () => {
 										/>
 									</svg>
 								</div>
-								<h3 className="text-2xl font-light text-white mb-4 font-nunito">
+								<h3 className="text-2xl font-light text-foreground mb-4 ">
 									Technical Consulting
 								</h3>
-								<p className="text-gray-300 leading-relaxed mb-6 font-light font-nunito">
+								<p className="text-muted-foreground leading-relaxed mb-6 font-light ">
 									Strategic technology guidance, architecture reviews, and
 									digital transformation consulting.
 								</p>
 								<div className="flex flex-wrap gap-2">
-									<span className="px-3 py-1 text-xs font-light bg-[#232323] text-white rounded-full">
+									<span className="px-3 py-1 text-xs font-light bg-card text-foreground rounded-full">
 										Strategy
 									</span>
-									<span className="px-3 py-1 text-xs font-light bg-[#232323] text-white rounded-full">
+									<span className="px-3 py-1 text-xs font-light bg-card text-foreground rounded-full">
 										Architecture
 									</span>
-									<span className="px-3 py-1 text-xs font-light bg-[#232323] text-white rounded-full">
+									<span className="px-3 py-1 text-xs font-light bg-card text-foreground rounded-full">
 										Scaling
 									</span>
 								</div>
@@ -406,31 +406,31 @@ const Home = () => {
 			{/* Portfolio Section Start */}
 			<section
 				id="portfolio"
-				className="py-32 bg-gradient-to-b from-purple-50/30 via-white to-blue-50/40 relative">
+				className="py-32 bg-linear-to-b from-muted via-background to-muted relative">
 				{/* Portfolio decorative elements */}
 				<div className="absolute inset-0 overflow-hidden pointer-events-none">
-					<div className="absolute top-20 left-10 w-64 h-64 bg-[#232323]/5 rounded-full blur-3xl animate-pulse animate-float" />
+					<div className="absolute top-20 left-10 w-64 h-64 bg-card/5 rounded-full blur-3xl animate-pulse animate-float" />
 					<div className="absolute bottom-32 right-20 w-80 h-80 bg-purple-300/15 rounded-full blur-3xl animate-pulse animation-delay-1000" />
 					<div className="absolute top-1/2 left-1/3 w-40 h-40 bg-blue-300/20 rounded-full blur-2xl animate-pulse animation-delay-2000" />
 				</div>
 
 				<div className="mx-auto px-6 lg:px-8 relative z-10">
 					<div className="text-center mb-20">
-						<h2 className="text-5xl sm:text-6xl font-extralight text-[#232323] mb-6 tracking-tight font-roboto drop-shadow-sm">
+						<h2 className="text-5xl sm:text-6xl font-extralight text-foreground mb-6 tracking-tight drop-shadow-xs">
 							Latest{" "}
-							<span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-600 via-[#232323] to-blue-600 font-light">
+							<span className="text-transparent bg-clip-text bg-linear-to-r from-purple-600 via-card to-blue-600 font-light">
 								Work
 							</span>
 						</h2>
-						<p className="text-xl text-gray-900 max-w-3xl mx-auto leading-relaxed font-light font-nunito">
+						<p className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed font-light ">
 							Discover our recent projects that showcase innovation, technical
 							excellence, and transformative digital solutions.
 						</p>
 					</div>
 					<div className="grid grid-cols-1 lg:grid-cols-4 gap-12">
 						{/* eCitizen Onboarding Start */}
-						<div className="group relative overflow-hidden bg-gradient-to-br rounded-3xl from-[#232323] to-[#1a1a1a] backdrop-blur-xl border border-white/10 hover:border-white/20 transition-all duration-700 hover:scale-105">
-							<h3 className="text-center text-2xl font-light text-white mt-8 mb-6 font-nunito">
+						<div className="group relative overflow-hidden bg-linear-to-br rounded-3xl from-card to-background backdrop-blur-xl border border-border hover:border-border transition-all duration-700 hover:scale-105">
+							<h3 className="text-center text-2xl font-light text-foreground mt-8 mb-6 ">
 								eCitizen Onboarding
 							</h3>
 							<div className="flex justify-center px-5">
@@ -453,10 +453,10 @@ const Home = () => {
 							<div className="p-8">
 								{/* Description Start */}
 								<div className="flex items-center flex-wrap gap-2 mb-4">
-									<span className="px-3 py-1 text-xs font-light bg-[rgba(255,255,255,1)] rounded-full">
+									<span className="px-3 py-1 text-xs font-light bg-foreground/10 text-foreground rounded-full">
 										Government Services
 									</span>
-									<span className="px-3 py-1 text-xs font-light bg-[rgba(35,30,31,1)] border border-white  rounded-full text-white">
+									<span className="px-3 py-1 text-xs font-light bg-[rgba(35,30,31,1)] border border-white rounded-full text-white">
 										Bootstrap
 									</span>
 									<span className="px-3 py-1 text-xs font-light bg-[rgba(20,175,77,1)] rounded-full text-white">
@@ -466,7 +466,7 @@ const Home = () => {
 										Postgres
 									</span>
 								</div>
-								<p className="text-white/80 leading-relaxed">
+								<p className="text-foreground/80 leading-relaxed">
 									eCitizen Digitization Onboarding Platform.
 								</p>
 							</div>
@@ -487,8 +487,8 @@ const Home = () => {
 						{/* eCitizen Onboarding End */}
 
 						{/* PaySoko Finance Start */}
-						<div className="group relative overflow-hidden bg-gradient-to-br rounded-3xl from-[#232323] to-[#1a1a1a] backdrop-blur-xl border border-white/10 hover:border-white/20 transition-all duration-700 hover:scale-105">
-							<h3 className="text-center text-2xl font-light text-white mt-8 mb-6 font-nunito">
+						<div className="group relative overflow-hidden bg-linear-to-br rounded-3xl from-card to-background backdrop-blur-xl border border-border hover:border-border transition-all duration-700 hover:scale-105">
+							<h3 className="text-center text-2xl font-light text-foreground mt-8 mb-6 ">
 								PaySoko Finance
 							</h3>
 							<div className="flex justify-center px-5">
@@ -511,7 +511,7 @@ const Home = () => {
 							<div className="p-8">
 								{/* Description Start */}
 								<div className="flex items-center flex-wrap gap-2 mb-4">
-									<span className="px-3 py-1 text-xs font-light bg-[rgba(255,255,255,1)] rounded-full">
+									<span className="px-3 py-1 text-xs font-light bg-foreground/10 text-foreground rounded-full">
 										Lending Management System
 									</span>
 									<span className="px-3 py-1 text-xs font-light bg-[rgba(5,75,234,1)] rounded-full text-white">
@@ -524,7 +524,7 @@ const Home = () => {
 										MySQL
 									</span>
 								</div>
-								<p className="text-white/80 leading-relaxed">
+								<p className="text-foreground/80 leading-relaxed">
 									Fintech firm delivering state-of-the-art Lending Management
 									Systems (LMS) for US-based Community Development Financial
 									Institutions (CDFIs), automating the full credit lifecycle
@@ -548,8 +548,8 @@ const Home = () => {
 						{/* PaySoko Finance End */}
 
 						{/* Amahoro Coalition Start */}
-						<div className="group relative overflow-hidden bg-gradient-to-br rounded-3xl from-[#232323] to-[#1a1a1a] backdrop-blur-xl border border-white/10 hover:border-white/20 transition-all duration-700 hover:scale-105">
-							<h3 className="text-center text-2xl font-light text-white mt-8 mb-6 font-nunito">
+						<div className="group relative overflow-hidden bg-linear-to-br rounded-3xl from-card to-background backdrop-blur-xl border border-border hover:border-border transition-all duration-700 hover:scale-105">
+							<h3 className="text-center text-2xl font-light text-foreground mt-8 mb-6 ">
 								Amahoro Coalition
 							</h3>
 							<div className="flex justify-center px-5">
@@ -572,7 +572,7 @@ const Home = () => {
 							<div className="p-8">
 								{/* Description Start */}
 								<div className="flex items-center flex-wrap gap-2 mb-4">
-									<span className="px-3 py-1 text-xs font-light bg-[rgba(255,255,255,1)] rounded-full">
+									<span className="px-3 py-1 text-xs font-light bg-foreground/10 text-foreground rounded-full">
 										Management Information System
 									</span>
 									<span className="px-3 py-1 text-xs font-light bg-[rgba(31,27,133,1)] rounded-full text-white">
@@ -588,7 +588,7 @@ const Home = () => {
 										MySQL
 									</span>
 								</div>
-								<p className="text-white/80 leading-relaxed">
+								<p className="text-foreground/80 leading-relaxed">
 									a high-complexity Management Information System (MIS) for the
 									Amahoro Coalition, an NGO focused on refugee inclusion,
 									designed to automate multi-country program tracking and impact
@@ -612,8 +612,8 @@ const Home = () => {
 						{/* Amahoro Coalition End */}
 
 						{/* Nathan Digital Start */}
-						<div className="group relative overflow-hidden bg-gradient-to-br rounded-3xl from-[#232323] to-[#1a1a1a] backdrop-blur-xl border border-white/10 hover:border-white/20 transition-all duration-700 hover:scale-105">
-							<h3 className="text-center text-2xl font-light text-white mt-8 mb-6 font-nunito">
+						<div className="group relative overflow-hidden bg-linear-to-br rounded-3xl from-card to-background backdrop-blur-xl border border-border hover:border-border transition-all duration-700 hover:scale-105">
+							<h3 className="text-center text-2xl font-light text-foreground mt-8 mb-6 ">
 								Nathan Digital
 							</h3>
 							<div className="flex justify-center px-5">
@@ -636,7 +636,7 @@ const Home = () => {
 							<div className="p-8">
 								{/* Description Start */}
 								<div className="flex items-center flex-wrap gap-2 mb-4">
-									<span className="px-3 py-1 text-xs font-light bg-[rgba(255,255,255,1)] rounded-full">
+									<span className="px-3 py-1 text-xs font-light bg-foreground/10 text-foreground rounded-full">
 										ERP / HR Management System
 									</span>
 									<span className="px-3 py-1 text-xs font-light bg-[rgba(36,145,199,1)] rounded-full text-white">
@@ -652,7 +652,7 @@ const Home = () => {
 										MongoDB
 									</span>
 								</div>
-								<p className="text-white/80 leading-relaxed">
+								<p className="text-foreground/80 leading-relaxed">
 									Human Resource Management System (HRMS) for UAE companies such
 									as IKEA, Hitachi, Chanel by Nathan Digital, the leading HR
 									solutions provider in UAE.
@@ -675,8 +675,8 @@ const Home = () => {
 						{/* Nathan Digital End */}
 
 						{/* Bulk Agencies Start */}
-						<div className="group relative overflow-hidden bg-gradient-to-br rounded-3xl from-[#232323] to-[#1a1a1a] backdrop-blur-xl border border-white/10 hover:border-white/20 transition-all duration-700 hover:scale-105">
-							<h3 className="text-center text-2xl font-light text-white mt-8 mb-6 font-nunito">
+						<div className="group relative overflow-hidden bg-linear-to-br rounded-3xl from-card to-background backdrop-blur-xl border border-border hover:border-border transition-all duration-700 hover:scale-105">
+							<h3 className="text-center text-2xl font-light text-foreground mt-8 mb-6 ">
 								Bulk Agencies
 							</h3>
 							<div className="flex justify-center px-5">
@@ -699,7 +699,7 @@ const Home = () => {
 							<div className="p-8">
 								{/* Description Start */}
 								<div className="flex items-center flex-wrap gap-2 mb-4">
-									<span className="px-3 py-1 text-xs font-light bg-[rgba(255,255,255,1)] rounded-full">
+									<span className="px-3 py-1 text-xs font-light bg-foreground/10 text-foreground rounded-full">
 										CRM
 									</span>
 									<span className="px-3 py-1 text-xs font-light bg-[rgba(68,68,68,1)] rounded-full text-white">
@@ -715,7 +715,7 @@ const Home = () => {
 										MySQL
 									</span>
 								</div>
-								<p className="text-white/80 leading-relaxed">
+								<p className="text-foreground/80 leading-relaxed">
 									A ERP for Bulk Agencies, a logistics company.
 								</p>
 							</div>
@@ -736,8 +736,8 @@ const Home = () => {
 						{/* Bulk Agencies End */}
 
 						{/* Marcus Miles Start */}
-						<div className="group relative overflow-hidden bg-gradient-to-br rounded-3xl from-[#232323] to-[#1a1a1a] backdrop-blur-xl border border-white/10 hover:border-white/20 transition-all duration-700 hover:scale-105">
-							<h3 className="text-center text-2xl font-light text-white mt-8 mb-6 font-nunito">
+						<div className="group relative overflow-hidden bg-linear-to-br rounded-3xl from-card to-background backdrop-blur-xl border border-border hover:border-border transition-all duration-700 hover:scale-105">
+							<h3 className="text-center text-2xl font-light text-foreground mt-8 mb-6 ">
 								Marcus Miles
 							</h3>
 							<div className="flex justify-center px-5">
@@ -760,7 +760,7 @@ const Home = () => {
 							<div className="p-8">
 								{/* Description Start */}
 								<div className="flex items-center flex-wrap gap-2 mb-4">
-									<span className="px-3 py-1 text-xs font-light bg-[rgba(255,255,255,1)] rounded-full">
+									<span className="px-3 py-1 text-xs font-light bg-foreground/10 text-foreground rounded-full">
 										ERP
 									</span>
 									<span className="px-3 py-1 text-xs font-light bg-[rgba(0,0,0,1)] rounded-full text-white">
@@ -776,7 +776,7 @@ const Home = () => {
 										MySQL
 									</span>
 								</div>
-								<p className="text-white/80 leading-relaxed">
+								<p className="text-foreground/80 leading-relaxed">
 									A ERP, CRM and HRMS for a construction and design consultancy
 									company.
 								</p>
@@ -798,8 +798,8 @@ const Home = () => {
 						{/* Marcus Miles End */}
 
 						{/* Online Uni Worldwide Start */}
-						<div className="group relative overflow-hidden bg-gradient-to-br rounded-3xl from-[#232323] to-[#1a1a1a] backdrop-blur-xl border border-white/10 hover:border-white/20 transition-all duration-700 hover:scale-105">
-							<h3 className="text-center text-2xl font-light text-white mt-8 mb-6 font-nunito">
+						<div className="group relative overflow-hidden bg-linear-to-br rounded-3xl from-card to-background backdrop-blur-xl border border-border hover:border-border transition-all duration-700 hover:scale-105">
+							<h3 className="text-center text-2xl font-light text-foreground mt-8 mb-6 ">
 								Online Uni Worldwide
 							</h3>
 							<div className="flex justify-center px-5">
@@ -822,7 +822,7 @@ const Home = () => {
 							<div className="p-8">
 								{/* Description Start */}
 								<div className="flex items-center flex-wrap gap-2 mb-4">
-									<span className="px-3 py-1 text-xs font-light bg-[rgba(255,255,255,1)] rounded-full">
+									<span className="px-3 py-1 text-xs font-light bg-foreground/10 text-foreground rounded-full">
 										LMS
 									</span>
 									<span className="px-3 py-1 text-xs font-light bg-[rgba(0,0,0,1)] rounded-full text-white">
@@ -838,7 +838,7 @@ const Home = () => {
 										MySQL
 									</span>
 								</div>
-								<p className="text-white/80 leading-relaxed">
+								<p className="text-foreground/80 leading-relaxed">
 									A Learning Management System for Online Uni Worldwide an
 									online university.
 								</p>
@@ -860,8 +860,8 @@ const Home = () => {
 						{/* Online Uni Worldwide End */}
 
 						{/* The Public Home Start */}
-						<div className="group relative overflow-hidden bg-gradient-to-br rounded-3xl from-[#232323] to-[#1a1a1a] backdrop-blur-xl border border-white/10 hover:border-white/20 transition-all duration-700 hover:scale-105">
-							<h3 className="text-center text-2xl font-light text-white mt-8 mb-6 font-nunito">
+						<div className="group relative overflow-hidden bg-linear-to-br rounded-3xl from-card to-background backdrop-blur-xl border border-border hover:border-border transition-all duration-700 hover:scale-105">
+							<h3 className="text-center text-2xl font-light text-foreground mt-8 mb-6 ">
 								The Public Home
 							</h3>
 							<div className="flex justify-center px-5">
@@ -884,7 +884,7 @@ const Home = () => {
 							<div className="p-8">
 								{/* Description Start */}
 								<div className="flex items-center flex-wrap gap-2 mb-4">
-									<span className="px-3 py-1 text-xs font-light bg-[rgba(255,255,255,1)] rounded-full">
+									<span className="px-3 py-1 text-xs font-light bg-foreground/10 text-foreground rounded-full">
 										E-Commerce / Social Network
 									</span>
 									<span className="px-3 py-1 text-xs font-light bg-[rgba(37,37,37,1)] rounded-full text-white">
@@ -900,7 +900,7 @@ const Home = () => {
 										MySQL
 									</span>
 								</div>
-								<p className="text-white/80 leading-relaxed">
+								<p className="text-foreground/80 leading-relaxed">
 									An online music store and social network.
 								</p>
 							</div>
@@ -921,8 +921,8 @@ const Home = () => {
 						{/* The Public Home End */}
 
 						{/* Black Music Start */}
-						<div className="group relative overflow-hidden bg-gradient-to-br rounded-3xl from-[#232323] to-[#1a1a1a] backdrop-blur-xl border border-white/10 hover:border-white/20 transition-all duration-700 hover:scale-105">
-							<h3 className="text-center text-2xl font-light text-white mt-8 mb-6 font-nunito">
+						<div className="group relative overflow-hidden bg-linear-to-br rounded-3xl from-card to-background backdrop-blur-xl border border-border hover:border-border transition-all duration-700 hover:scale-105">
+							<h3 className="text-center text-2xl font-light text-foreground mt-8 mb-6 ">
 								Black Music
 							</h3>
 							<div className="flex justify-center px-5">
@@ -961,7 +961,7 @@ const Home = () => {
 										MySQL
 									</span>
 								</div>
-								<p className="text-white/80 leading-relaxed">
+								<p className="text-foreground/80 leading-relaxed">
 									An online music store and social network.
 								</p>
 							</div>
@@ -982,8 +982,8 @@ const Home = () => {
 						{/* Black Music End */}
 
 						{/* Black Pay Start */}
-						<div className="group relative overflow-hidden bg-gradient-to-br rounded-3xl from-[#232323] to-[#1a1a1a] backdrop-blur-xl border border-white/10 hover:border-white/20 transition-all duration-700 hover:scale-105">
-							<h3 className="text-center text-2xl font-light text-white mt-8 mb-6 font-nunito">
+						<div className="group relative overflow-hidden bg-linear-to-br rounded-3xl from-card to-background backdrop-blur-xl border border-border hover:border-border transition-all duration-700 hover:scale-105">
+							<h3 className="text-center text-2xl font-light text-foreground mt-8 mb-6 ">
 								Black Pay
 							</h3>
 							<div className="flex justify-center px-5">
@@ -1022,7 +1022,7 @@ const Home = () => {
 										MySQL
 									</span>
 								</div>
-								<p className="text-white/80 leading-relaxed">
+								<p className="text-foreground/80 leading-relaxed">
 									A Payment Gateway and Parking payment system.
 								</p>
 							</div>
@@ -1043,8 +1043,8 @@ const Home = () => {
 						{/* Black Pay End */}
 
 						{/* Black Property Start */}
-						<div className="group relative overflow-hidden bg-gradient-to-br rounded-3xl from-[#232323] to-[#1a1a1a] backdrop-blur-xl border border-white/10 hover:border-white/20 transition-all duration-700 hover:scale-105">
-							<h3 className="text-center text-2xl font-light text-white mt-8 mb-6 font-nunito">
+						<div className="group relative overflow-hidden bg-linear-to-br rounded-3xl from-card to-background backdrop-blur-xl border border-border hover:border-border transition-all duration-700 hover:scale-105">
+							<h3 className="text-center text-2xl font-light text-foreground mt-8 mb-6 ">
 								Black Property
 							</h3>
 							<div className="flex justify-center px-5">
@@ -1083,7 +1083,7 @@ const Home = () => {
 										MySQL
 									</span>
 								</div>
-								<p className="text-white/80 leading-relaxed">
+								<p className="text-foreground/80 leading-relaxed">
 									A Property Management CRM.
 								</p>
 							</div>
@@ -1104,8 +1104,8 @@ const Home = () => {
 						{/* Black Property End */}
 
 						{/* Black Photography Start */}
-						<div className="group relative overflow-hidden bg-gradient-to-br rounded-3xl from-[#232323] to-[#1a1a1a] backdrop-blur-xl border border-white/10 hover:border-white/20 transition-all duration-700 hover:scale-105">
-							<h3 className="text-center text-2xl font-light text-white mt-8 mb-6 font-nunito">
+						<div className="group relative overflow-hidden bg-linear-to-br rounded-3xl from-card to-background backdrop-blur-xl border border-border hover:border-border transition-all duration-700 hover:scale-105">
+							<h3 className="text-center text-2xl font-light text-foreground mt-8 mb-6 ">
 								Black Photography
 							</h3>
 							<div className="flex justify-center px-5">
@@ -1128,23 +1128,23 @@ const Home = () => {
 							<div className="p-8">
 								{/* Description Start */}
 								<div className="flex items-center flex-wrap gap-2 mb-4">
-									<span className="px-3 py-1 text-xs font-light bg-[rgba(255,255,255,1)] rounded-full">
+									<span className="px-3 py-1 text-xs font-light bg-foreground/10 text-foreground rounded-full">
 										E-Commerce / Social Network
 									</span>
-									<span className="px-3 py-1 text-xs font-light bg-[rgba(255,255,255,1)] rounded-full">
+									<span className="px-3 py-1 text-xs font-light bg-foreground/10 text-foreground rounded-full">
 										Bootstrap
 									</span>
-									<span className="px-3 py-1 text-xs font-light bg-[rgba(255,255,255,1)] rounded-full">
+									<span className="px-3 py-1 text-xs font-light bg-foreground/10 text-foreground rounded-full">
 										React
 									</span>
-									<span className="px-3 py-1 text-xs font-light bg-[rgba(255,255,255,1)] rounded-full">
+									<span className="px-3 py-1 text-xs font-light bg-foreground/10 text-foreground rounded-full">
 										Laravel
 									</span>
-									<span className="px-3 py-1 text-xs font-light bg-[rgba(255,255,255,1)] rounded-full">
+									<span className="px-3 py-1 text-xs font-light bg-foreground/10 text-foreground rounded-full">
 										MySQL
 									</span>
 								</div>
-								<p className="text-white/80 leading-relaxed">
+								<p className="text-foreground/80 leading-relaxed">
 									A Landing page for a Photography Business.
 								</p>
 							</div>
@@ -1165,8 +1165,8 @@ const Home = () => {
 						{/* Black Photography End */}
 
 						{/* Black Money Start */}
-						<div className="group relative overflow-hidden bg-gradient-to-br rounded-3xl from-[#232323] to-[#1a1a1a] backdrop-blur-xl border border-white/10 hover:border-white/20 transition-all duration-700 hover:scale-105">
-							<h3 className="text-center text-2xl font-light text-white mt-8 mb-6 font-nunito">
+						<div className="group relative overflow-hidden bg-linear-to-br rounded-3xl from-card to-background backdrop-blur-xl border border-border hover:border-border transition-all duration-700 hover:scale-105">
+							<h3 className="text-center text-2xl font-light text-foreground mt-8 mb-6 ">
 								Black Money
 							</h3>
 							<div className="flex justify-center px-5">
@@ -1189,23 +1189,23 @@ const Home = () => {
 							<div className="p-8">
 								{/* Description Start */}
 								<div className="flex items-center flex-wrap gap-2 mb-4">
-									<span className="px-3 py-1 text-xs font-light bg-[rgba(255,255,255,1)] rounded-full">
+									<span className="px-3 py-1 text-xs font-light bg-foreground/10 text-foreground rounded-full">
 										E-Commerce / Social Network
 									</span>
-									<span className="px-3 py-1 text-xs font-light bg-[rgba(255,255,255,1)] rounded-full">
+									<span className="px-3 py-1 text-xs font-light bg-foreground/10 text-foreground rounded-full">
 										Bootstrap
 									</span>
-									<span className="px-3 py-1 text-xs font-light bg-[rgba(255,255,255,1)] rounded-full">
+									<span className="px-3 py-1 text-xs font-light bg-foreground/10 text-foreground rounded-full">
 										React
 									</span>
-									<span className="px-3 py-1 text-xs font-light bg-[rgba(255,255,255,1)] rounded-full">
+									<span className="px-3 py-1 text-xs font-light bg-foreground/10 text-foreground rounded-full">
 										Laravel
 									</span>
-									<span className="px-3 py-1 text-xs font-light bg-[rgba(255,255,255,1)] rounded-full">
+									<span className="px-3 py-1 text-xs font-light bg-foreground/10 text-foreground rounded-full">
 										MySQL
 									</span>
 								</div>
-								<p className="text-white/80 leading-relaxed">
+								<p className="text-foreground/80 leading-relaxed">
 									A Money Management App.
 								</p>
 							</div>
@@ -1232,16 +1232,16 @@ const Home = () => {
 			{/* Contact Section */}
 			<section
 				id="contact"
-				className="py-32 bg-gradient-to-b from-[#232323]/20 to-[#232323]">
+				className="py-32 bg-linear-to-b from-card/20 to-card">
 				<div className="mx-auto max-w-7xl px-6 lg:px-8">
 					<div className="text-center mb-20">
-						<h2 className="text-5xl sm:text-6xl font-extralight text-white mb-6 tracking-tight font-roboto">
+						<h2 className="text-5xl sm:text-6xl font-extralight text-foreground mb-6 tracking-tight ">
 							Let's Build{" "}
-							<span className="text-transparent bg-clip-text bg-gradient-to-r from-white via-gray-300 to-white font-thin">
+							<span className="text-transparent bg-clip-text bg-linear-to-r from-foreground via-gray-300 to-foreground font-thin">
 								Together
 							</span>
 						</h2>
-						<p className="text-xl text-gray-400 max-w-3xl mx-auto leading-relaxed font-light font-nunito">
+						<p className="text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed font-light ">
 							Ready to transform your ideas into reality? Let's discuss your
 							next project and create something extraordinary.
 						</p>
@@ -1254,16 +1254,16 @@ const Home = () => {
 							<Link
 								href="tel:0700364446"
 								className="block">
-								<div className="group p-8 rounded-3xl bg-white/5 backdrop-blur-xl border border-white/10 hover:bg-white/10 transition-all duration-500">
+								<div className="group p-8 rounded-3xl bg-foreground/5 backdrop-blur-xl border border-border hover:bg-foreground/10 transition-all duration-500">
 									<div className="flex items-center space-x-4 mb-4">
-										<div className="w-12 h-12 rounded-2xl bg-[#232323] flex items-center justify-center text-white">
+										<div className="w-12 h-12 rounded-2xl bg-card flex items-center justify-center text-foreground">
 											<PhoneSVG />
 										</div>
 										<div>
-											<h3 className="text-lg font-light font-nunito text-white">
+											<h3 className="text-lg font-light text-foreground">
 												Phone Us
 											</h3>
-											<p className="text-gray-400">al@black.co.ke</p>
+											<p className="text-muted-foreground">al@black.co.ke</p>
 										</div>
 									</div>
 								</div>
@@ -1274,16 +1274,16 @@ const Home = () => {
 							<Link
 								href="https://wa.me/+2540700364446"
 								className="block">
-								<div className="group p-8 rounded-3xl bg-white/5 backdrop-blur-xl border border-white/10 hover:bg-white/10 transition-all duration-500">
+								<div className="group p-8 rounded-3xl bg-foreground/5 backdrop-blur-xl border border-border hover:bg-foreground/10 transition-all duration-500">
 									<div className="flex items-center space-x-4 mb-4">
-										<div className="w-12 h-12 rounded-2xl bg-[#232323] flex items-center justify-center text-white">
+										<div className="w-12 h-12 rounded-2xl bg-card flex items-center justify-center text-foreground">
 											<WhatsAppSVG />
 										</div>
 										<div>
-											<h3 className="text-lg font-light font-nunito text-white">
+											<h3 className="text-lg font-light text-foreground">
 												WhatsApp Us
 											</h3>
-											<p className="text-gray-400">al@black.co.ke</p>
+											<p className="text-muted-foreground">al@black.co.ke</p>
 										</div>
 									</div>
 								</div>
@@ -1294,16 +1294,16 @@ const Home = () => {
 							<Link
 								href="mailto:al@black.co.ke?subject=Property Management System&body=Enquiry"
 								className="block">
-								<div className="group p-8 rounded-3xl bg-white/5 backdrop-blur-xl border border-white/10 hover:bg-white/10 transition-all duration-500">
+								<div className="group p-8 rounded-3xl bg-foreground/5 backdrop-blur-xl border border-border hover:bg-foreground/10 transition-all duration-500">
 									<div className="flex items-center space-x-4 mb-4">
-										<div className="w-12 h-12 rounded-2xl bg-[#232323] flex items-center justify-center text-white">
+										<div className="w-12 h-12 rounded-2xl bg-card flex items-center justify-center text-foreground">
 											<EmailSVG />
 										</div>
 										<div>
-											<h3 className="text-lg font-light font-nunito text-white">
+											<h3 className="text-lg font-light text-foreground">
 												Email Us
 											</h3>
-											<p className="text-gray-400">al@black.co.ke</p>
+											<p className="text-muted-foreground">al@black.co.ke</p>
 										</div>
 									</div>
 								</div>
@@ -1315,11 +1315,11 @@ const Home = () => {
 								href="https://github.com/AlphaxardGacuuru"
 								target="_blank"
 								className="block">
-								<div className="group p-8 rounded-3xl bg-white/5 backdrop-blur-xl border border-white/10 hover:bg-white/10 transition-all duration-500">
+								<div className="group p-8 rounded-3xl bg-foreground/5 backdrop-blur-xl border border-border hover:bg-foreground/10 transition-all duration-500">
 									<div className="flex items-center space-x-4 mb-4">
-										<div className="w-12 h-12 rounded-2xl bg-[#232323] flex items-center justify-center">
+										<div className="w-12 h-12 rounded-2xl bg-card flex items-center justify-center">
 											<svg
-												className="w-6 h-6 text-white"
+												className="w-6 h-6 text-foreground"
 												fill="currentColor"
 												viewBox="0 0 24 24">
 												<path
@@ -1329,10 +1329,10 @@ const Home = () => {
 											</svg>
 										</div>
 										<div>
-											<h3 className="text-lg font-light font-nunito text-white">
+											<h3 className="text-lg font-light text-foreground">
 												GitHub
 											</h3>
-											<p className="text-gray-400">@AlphaxardGacuuru</p>
+											<p className="text-muted-foreground">@AlphaxardGacuuru</p>
 										</div>
 									</div>
 								</div>
@@ -1340,21 +1340,21 @@ const Home = () => {
 							{/* GitHub End */}
 
 							{/* Linked In Start */}
-							{/* <div className="group p-8 rounded-3xl bg-white/5 backdrop-blur-xl border border-white/10 hover:bg-white/10 transition-all duration-500">
+							{/* <div className="group p-8 rounded-3xl bg-foreground/5 backdrop-blur-xl border border-border hover:bg-foreground/10 transition-all duration-500">
 								<div className="flex items-center space-x-4 mb-4">
-									<div className="w-12 h-12 rounded-2xl bg-[#232323] flex items-center justify-center">
+									<div className="w-12 h-12 rounded-2xl bg-card flex items-center justify-center">
 										<svg
-											className="w-6 h-6 text-white"
+											className="w-6 h-6 text-foreground"
 											fill="currentColor"
 											viewBox="0 0 24 24">
 											<path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
 										</svg>
 									</div>
 									<div>
-										<h3 className="text-lg font-light font-nunito text-white">
+										<h3 className="text-lg font-light text-foreground">
 											LinkedIn
 										</h3>
-										<p className="text-gray-400">Connect with us</p>
+										<p className="text-muted-foreground">Connect with us</p>
 									</div>
 								</div>
 							</div> */}
@@ -1363,12 +1363,12 @@ const Home = () => {
 
 						{/* CTA Card */}
 						<div className="relative">
-							<div className="absolute inset-0 bg-gradient-to-br from-[#232323] to-[#1a1a1a] rounded-3xl transform rotate-3" />
-							<div className="relative h-full flex flex-col justify-center p-12 rounded-3xl bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-xl border border-white/20">
-								<h3 className="text-3xl font-light font-nunito text-white mb-6">
+							<div className="absolute inset-0 bg-linear-to-br from-card to-background rounded-3xl transform rotate-3" />
+							<div className="relative h-full flex flex-col justify-center p-12 rounded-3xl bg-linear-to-br from-foreground/10 to-foreground/5 backdrop-blur-xl border border-border">
+								<h3 className="text-3xl font-light text-foreground mb-6">
 									Ready to Start?
 								</h3>
-								<p className="text-gray-300 mb-8 leading-relaxed">
+								<p className="text-muted-foreground mb-8 leading-relaxed">
 									Whether you need a complete digital transformation, a custom
 									application, or technical consulting, we're here to help bring
 									your vision to life.
@@ -1377,12 +1377,12 @@ const Home = () => {
 									<Link
 										target="_blank"
 										href="mailto:alphaxardgacuuru@gmail.com"
-										className="block w-full px-8 py-4 bg-white text-[#232323] rounded-2xl font-light font-nunito text-center hover:bg-gray-100 transition-colors text-lg">
+										className="block w-full px-8 py-4 bg-foreground text-background rounded-2xl font-light text-center hover:bg-foreground/90 transition-colors text-lg">
 										Start Your Project
 									</Link>
 									<Link
 										href="#services"
-										className="block w-full px-8 py-4 border-2 border-white text-white rounded-2xl font-light font-nunito text-center hover:bg-white hover:text-[#232323] transition-colors text-lg">
+										className="block w-full px-8 py-4 border-2 border-foreground text-foreground rounded-2xl font-light text-center hover:bg-foreground hover:text-background transition-colors text-lg">
 										View Our Services
 									</Link>
 								</div>
@@ -1393,12 +1393,12 @@ const Home = () => {
 			</section>
 
 			{/* Footer */}
-			<footer className="bg-[#232323] border-t border-white/10">
+			<footer className="bg-card border-t border-border">
 				<div className="mx-auto max-w-7xl px-6 py-16 lg:px-8">
 					<div className="grid grid-cols-1 md:grid-cols-4 gap-8">
 						<div className="md:col-span-2">
 							<div className="flex items-center space-x-4 mb-6">
-								<div className="w-14 h-14 rounded-full bg-gradient-to-br from-white to-gray-300 flex items-center justify-center relative">
+								<div className="w-14 h-14 rounded-full bg-linear-to-br from-foreground to-gray-300 flex items-center justify-center relative">
 									<Img
 										src="/black-developers/android-chrome-512x512.png"
 										width={512}
@@ -1411,13 +1411,13 @@ const Home = () => {
 									/>
 								</div>
 								<div>
-									<h3 className="text-2xl font-light text-white font-nunito">
+									<h3 className="text-2xl font-light text-foreground ">
 										Black Developers
 									</h3>
-									<p className="text-gray-400">Crafting Digital Excellence</p>
+									<p className="text-muted-foreground">Crafting Digital Excellence</p>
 								</div>
 							</div>
-							<p className="text-gray-300 leading-relaxed max-w-md">
+							<p className="text-muted-foreground leading-relaxed max-w-md">
 								Led by Alphaxard Gacuuru, we're a team of passionate developers
 								creating innovative digital solutions that transform businesses
 								and elevate user experiences.
@@ -1425,35 +1425,35 @@ const Home = () => {
 						</div>
 
 						<div>
-							<h4 className="text-white font-light font-nunito mb-4">
+							<h4 className="text-foreground font-light mb-4">
 								Services
 							</h4>
-							<ul className="space-y-2 text-gray-400">
+							<ul className="space-y-2 text-muted-foreground">
 								<li>
 									<a
 										href="#"
-										className="hover:text-white transition-colors">
+										className="hover:text-foreground transition-colors">
 										Full-Stack Development
 									</a>
 								</li>
 								<li>
 									<a
 										href="#"
-										className="hover:text-white transition-colors">
+										className="hover:text-foreground transition-colors">
 										Mobile Applications
 									</a>
 								</li>
 								<li>
 									<a
 										href="#"
-										className="hover:text-white transition-colors">
+										className="hover:text-foreground transition-colors">
 										Cloud Solutions
 									</a>
 								</li>
 								<li>
 									<a
 										href="#"
-										className="hover:text-white transition-colors">
+										className="hover:text-foreground transition-colors">
 										Technical Consulting
 									</a>
 								</li>
@@ -1461,35 +1461,35 @@ const Home = () => {
 						</div>
 
 						<div>
-							<h4 className="text-white font-light font-nunito mb-4">
+							<h4 className="text-foreground font-light mb-4">
 								Connect
 							</h4>
-							<ul className="space-y-2 text-gray-400">
+							<ul className="space-y-2 text-muted-foreground">
 								<li>
 									<a
 										href="tel:0700364446"
-										className="hover:text-white transition-colors">
+										className="hover:text-foreground transition-colors">
 										Phone
 									</a>
 								</li>
 								<li>
 									<a
 										href="https://wa.me/+2540700364446"
-										className="hover:text-white transition-colors">
+										className="hover:text-foreground transition-colors">
 										WhatsApp
 									</a>
 								</li>
 								<li>
 									<a
 										href="mailto:al@black.co.ke?subject=Property Management System&body=Enquiry"
-										className="hover:text-white transition-colors">
+										className="hover:text-foreground transition-colors">
 										Email
 									</a>
 								</li>
 								<li>
 									<a
 										href="https://github.com/AlphaxardGacuuru"
-										className="hover:text-white transition-colors">
+										className="hover:text-foreground transition-colors">
 										GitHub
 									</a>
 								</li>
@@ -1497,8 +1497,8 @@ const Home = () => {
 						</div>
 					</div>
 
-					<div className="border-t border-white/10 mt-12 pt-8 text-center">
-						<p className="text-gray-400">
+					<div className="border-t border-border mt-12 pt-8 text-center">
+						<p className="text-muted-foreground">
 							&copy; 2024 Black Developers. All rights reserved. | Designed &
 							Developed by Alphaxard Gacuuru
 						</p>

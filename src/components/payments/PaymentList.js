@@ -3,19 +3,16 @@ import Axios from "@/lib/axios"
 
 import Btn from "@/components/ui/button"
 import MyLink from "@/components/ui/my-link"
-import DeleteModal from "@/components/core/DeleteModal"
 import { Input } from "@/components/ui/input"
 import { Select } from "@/components/ui/select"
 import { DataTable } from "@/components/ui/data-table"
+import { laravelPagination } from "@/lib/laravel-pagination"
 import Modal from "@/components/ui/modal"
 import { format } from "date-fns"
 
 import HeroHeading from "@/components/core/HeroHeading"
 import HeroIcon from "@/components/core/HeroIcon"
 
-import ViewSVG from "@/svgs/ViewSVG"
-import EditSVG from "@/svgs/EditSVG"
-import DeleteSVG from "@/svgs/DeleteSVG"
 import PlusSVG from "@/svgs/PlusSVG"
 import MoneySVG from "@/svgs/MoneySVG"
 import SendEmailSVG from "@/svgs/SendEmailSVG"
@@ -28,7 +25,6 @@ const PaymentList = (props) => {
 	const [loadingSMS, setLoadingSMS] = useState()
 	const [loadingEmail, setLoadingEmail] = useState()
 	const [rowSelection, setRowSelection] = useState({})
-	const [showBulkDeleteDialog, setShowBulkDeleteDialog] = useState(false)
 	const [showSendPaymentModal, setShowSendPaymentModal] = useState(false)
 
 	const [paymentToSend, setPaymentToSend] = useState({})
@@ -133,45 +129,12 @@ const PaymentList = (props) => {
 
 	return (
 		<div className={props.activeTab}>
-			{/* Bulk Delete Confirmation Modal Start */}
-			<Modal
-				open={showBulkDeleteDialog}
-				onOpenChange={setShowBulkDeleteDialog}
-				title="Delete Selected Payments"
-				className="bg-white/10 backdrop-blur-xl border border-white/20 shadow-sm rounded-3xl text-white data-[state=open]:slide-in-from-top data-[state=closed]:slide-out-to-top"
-				footer={
-					<div className="flex justify-between w-full">
-						<Btn
-							type="button"
-							text="Cancel"
-							onClick={() => setShowBulkDeleteDialog(false)}
-						/>
-						<Btn
-							icon={<DeleteSVG />}
-							text="Delete"
-							className="btn-2"
-							onClick={() => {
-								onDeletePayment(Object.keys(rowSelection))
-								setShowBulkDeleteDialog(false)
-							}}
-							loading={loading}
-						/>
-					</div>
-				}>
-				<div className="text-white">
-					Are you sure you want to delete {Object.keys(rowSelection).length}{" "}
-					selected payment{Object.keys(rowSelection).length > 1 ? "s" : ""}?
-					This action cannot be undone.
-				</div>
-			</Modal>
-			{/* Bulk Delete Confirmation Modal End */}
-
 			{/* Send Receipt Modal Start */}
 			<Modal
 				open={showSendPaymentModal}
 				onOpenChange={setShowSendPaymentModal}
 				title={`Send Receipt ${paymentToSend.number}`}
-				className="bg-white/10 backdrop-blur-xl border border-white/20 shadow-sm rounded-3xl text-white data-[state=open]:slide-in-from-top data-[state=closed]:slide-out-to-top"
+				className="bg-foreground/10 backdrop-blur-xl border border-border shadow-xs rounded-3xl text-foreground data-[state=open]:slide-in-from-top data-[state=closed]:slide-out-to-top"
 				footer={
 					<div className="flex w-full flex-wrap gap-2 sm:flex-nowrap sm:justify-between">
 						<Btn
@@ -210,12 +173,12 @@ const PaymentList = (props) => {
 						</div>
 					</div>
 				}>
-				<div className="text-white">
+				<div className="text-foreground">
 					<p className="mb-2">
 						Send receipt <strong>{paymentToSend.number}</strong> to{" "}
 						<strong>{paymentToSend.clientName}</strong>?
 					</p>
-					<p className="text-sm text-white/80">
+					<p className="text-sm text-foreground/80">
 						A PDF receipt will be generated and sent to{" "}
 						<strong>{paymentToSend.clientEmail || "the client"}</strong>.
 					</p>
@@ -224,10 +187,10 @@ const PaymentList = (props) => {
 			{/* Send Receipt Modal End */}
 
 			{/* Data */}
-			<div className="bg-white/10 backdrop-blur-xl border border-white/20 shadow-sm rounded-3xl mb-2 p-2 px-5 hover:bg-white/15 transition-all duration-500 grid grid-cols-1 sm:grid-cols-2 gap-4">
+			<div className="bg-foreground/10 backdrop-blur-xl border border-border shadow-xs rounded-3xl mb-2 p-2 px-5 hover:bg-foreground/15 transition-all duration-500 grid grid-cols-1 sm:grid-cols-2 gap-4">
 				{/* Count */}
 				<div>
-					<div className="flex justify-between flex-grow mx-2">
+					<div className="flex justify-between grow mx-2">
 						<HeroHeading
 							heading="Count"
 							data={
@@ -244,7 +207,7 @@ const PaymentList = (props) => {
 				{/* Count End */}
 				{/* Total Payments Start */}
 				<div>
-					<div className="flex justify-between flex-grow mx-2">
+					<div className="flex justify-between grow mx-2">
 						<HeroHeading
 							heading="Total Payments"
 							data={
@@ -265,10 +228,10 @@ const PaymentList = (props) => {
 			<br />
 
 			{/* Filters */}
-			<div className="bg-white/10 backdrop-blur-xl border border-white/20 shadow-sm rounded-3xl px-4 pt-4 pb-3 mb-2 hover:bg-white/15 transition-all duration-500">
+			<div className="bg-foreground/10 backdrop-blur-xl border border-border shadow-xs rounded-3xl px-4 pt-4 pb-3 mb-2 hover:bg-foreground/15 transition-all duration-500">
 				<div className="flex flex-wrap gap-2">
 					{/* Number */}
-					<div className="flex-grow min-w-0">
+					<div className="grow min-w-0">
 						<Input
 							type="text"
 							label="Number"
@@ -279,7 +242,7 @@ const PaymentList = (props) => {
 					</div>
 					{/* Number End */}
 					{/* Client */}
-					<div className="flex-grow min-w-0">
+					<div className="grow min-w-0">
 						<Select
 							label="Client"
 							placeholder=""
@@ -299,8 +262,8 @@ const PaymentList = (props) => {
 					</div>
 					{/* Client End */}
 					{/* Start Date */}
-					<div className="flex flex-grow gap-2">
-						<div className="flex-grow">
+					<div className="flex grow gap-2">
+						<div className="grow">
 							{/* Start Month */}
 							<Select
 								label="Start At"
@@ -319,7 +282,7 @@ const PaymentList = (props) => {
 						</div>
 						{/* Start Month End */}
 						{/* Start Year */}
-						<div className="flex-grow">
+						<div className="grow">
 							<Select
 								label="Year"
 								value={props.startYear}
@@ -338,9 +301,9 @@ const PaymentList = (props) => {
 					</div>
 					{/* Start Date End */}
 					{/* End Date */}
-					<div className="flex flex-grow gap-2">
+					<div className="flex grow gap-2">
 						{/* End Month */}
-						<div className="flex-grow">
+						<div className="grow">
 							<Select
 								label="End At"
 								value={props.endMonth}
@@ -356,7 +319,7 @@ const PaymentList = (props) => {
 						</div>
 						{/* End Month End */}
 						{/* End Year */}
-						<div className="flex-grow">
+						<div className="grow">
 							<Select
 								label="Year"
 								value={props.endYear}
@@ -381,17 +344,9 @@ const PaymentList = (props) => {
 			<br />
 
 			{/* DataTable */}
-			<div className="bg-white/10 backdrop-blur-xl border border-white/20 rounded-3xl p-4 mb-5">
+			<div className="bg-foreground/10 backdrop-blur-xl border border-border rounded-3xl p-4 mb-5">
 				{/* Create Payment Link Start */}
 				<div className="flex w-full flex-wrap gap-2 sm:flex-nowrap sm:justify-end">
-					{Object.keys(rowSelection).length > 0 && (
-						<Btn
-							icon={<DeleteSVG />}
-							text={`Delete Selected (${Object.keys(rowSelection).length})`}
-							className="w-full sm:w-auto"
-							onClick={() => setShowBulkDeleteDialog(true)}
-						/>
-					)}
 					<MyLink
 						href={`/payments/create`}
 						icon={<PlusSVG />}
@@ -405,27 +360,6 @@ const PaymentList = (props) => {
 					rowSelection={rowSelection}
 					setRowSelection={setRowSelection}
 					columns={[
-						{
-							id: "select",
-							header: ({ table }) => (
-								<input
-									type="checkbox"
-									checked={table.getIsAllPageRowsSelected()}
-									onChange={(e) =>
-										table.toggleAllPageRowsSelected(!!e.target.checked)
-									}
-								/>
-							),
-							cell: ({ row }) => (
-								<input
-									type="checkbox"
-									checked={row.getIsSelected()}
-									onChange={row.getToggleSelectedHandler()}
-								/>
-							),
-							enableSorting: false,
-							enableHiding: false,
-						},
 						{
 							accessorKey: "",
 							header: "#",
@@ -463,63 +397,40 @@ const PaymentList = (props) => {
 								<div>{format(row.getValue("paymentDate"), "dd MMM yyyy")}</div>
 							),
 						},
-						{
-							id: "actions",
-							header: "Action",
-							cell: ({ row }) => {
-								const payment = row.original
-								return (
-									<div className="flex items-center gap-2">
-										{/* Send Receipt Start */}
-										<Btn
-											icon={<ChatSendSVG />}
-											text={`send receipt ${
-												payment.smsesSent || payment.emailsSent
-													? `(${payment.smsesSent + payment.emailsSent})`
-													: ""
-											}`}
-											className={`${
-												payment.smsesSent || payment.emailsSent
-													? "btn-green"
-													: ""
-											}`}
-											onClick={() => {
-												setPaymentToSend(payment)
-												setShowSendPaymentModal(true)
-											}}
-										/>
-										{/* Send Receipt End */}
-										{/* View Start */}
-										<MyLink
-											href={`/payments/${payment.id}/view`}
-											icon={<ViewSVG />}
-										/>
-										{/* View End */}
-										{/* Edit Start */}
-										<MyLink
-											href={`/payments/${payment.id}/edit`}
-											icon={<EditSVG />}
-										/>
-										{/* Edit End */}
-										{/* Delete Start */}
-										<DeleteModal
-											index={`payment-dt-${payment.id}`}
-											model={payment}
-											modelName="Payment"
-											onDelete={onDeletePayment}
-										/>
-										{/* Delete End */}
-									</div>
-								)
-							},
-						},
 					]}
 					data={props.payments.data || []}
-					pagination={{
-						getPaginated: props.getPaginated,
-						setState: props.setPayments,
-						list: props.payments,
-					}}
+					emptyMessage={props.loadingItems > 0 ? "Loading…" : "No payments yet"}
+					showHref={(payment) => `/payments/${payment.id}/view`}
+					editHref={(payment) => `/payments/${payment.id}/edit`}
+					onDelete={(payment) => onDeletePayment(payment.id)}
+					onBulkDelete={(ids) => onDeletePayment(ids)}
+					getItemLabel={(payment) => `Payment ${payment.number}`}
+					renderActions={(payment) => (
+						<>
+							{/* Send Receipt Start */}
+							<Btn
+								icon={<ChatSendSVG />}
+								text={`send receipt ${
+									payment.smsesSent || payment.emailsSent
+										? `(${payment.smsesSent + payment.emailsSent})`
+										: ""
+								}`}
+								className={`${
+									payment.smsesSent || payment.emailsSent ? "btn-green" : ""
+								}`}
+								onClick={() => {
+									setPaymentToSend(payment)
+									setShowSendPaymentModal(true)
+								}}
+							/>
+							{/* Send Receipt End */}
+						</>
+					)}
+					pagination={laravelPagination(
+						props.payments,
+						props.getPaginated,
+						props.setPayments
+					)}
 				/>
 			</div>
 			{/* DataTable End */}

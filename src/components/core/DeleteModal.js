@@ -36,7 +36,7 @@ const DeleteModal = ({ index, model, modelName, onDelete }) => {
 						/>
 					</div>
 				}>
-				<div className="text-white">
+				<div className="text-foreground">
 					Are you sure you want to delete {model.name ?? modelName}? All
 					associated data will be lost.
 				</div>

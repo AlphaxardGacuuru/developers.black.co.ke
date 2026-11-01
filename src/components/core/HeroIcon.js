@@ -2,7 +2,7 @@ import React from "react"
 
 const HeroIcon = ({ children, color = "white" }) => {
 	const colorClasses = {
-		white: "bg-white/10 border-white/20 text-white hover:bg-white/20",
+		white: "bg-foreground/10 border-border text-foreground hover:bg-foreground/20",
 		purple:
 			"bg-purple-400/10 border-purple-400/30 text-purple-400 hover:bg-purple-400/20",
 		blue: "bg-blue-400/10 border-blue-400/30 text-blue-400 hover:bg-blue-400/20",

@@ -28,6 +28,16 @@ module.exports = {
 			presets: ["@babel/preset-react"],
 		},
 	},
+	overrides: [
+		{
+			// TypeScript files (the shell ported from the other Black apps).
+			files: ["*.ts", "*.tsx"],
+			parser: "@typescript-eslint/parser",
+			rules: {
+				"no-undef": "off",
+			},
+		},
+	],
 	rules: {
 		"import/prefer-default-export": 0,
 		"no-console": "off",
@@ -39,7 +49,10 @@ module.exports = {
 		"no-unused-vars": "off",
 		camelcase: 0,
 		// 'react/self-closing-comp': 1,
-		"react/jsx-filename-extension": [1, { extensions: [".js", "jsx"] }],
+		"react/jsx-filename-extension": [
+			1,
+			{ extensions: [".js", ".jsx", ".tsx"] },
+		],
 		"react/prop-types": 0,
 		"react/display-name": 0,
 		"react/destructuring-assignment": 0,

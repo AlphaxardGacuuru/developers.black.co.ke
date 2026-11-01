@@ -66,8 +66,8 @@ const ViewCreditNote = ({ params }) => {
 				<Header title="View Credit Note" />
 				<div className="py-12">
 					<div className="max-w-4xl mx-auto px-6 lg:px-8">
-						<div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl p-8">
-							<div className="text-white text-center">
+						<div className="bg-foreground/5 backdrop-blur-xl border border-border rounded-3xl p-8">
+							<div className="text-foreground text-center">
 								Loading credit note...
 							</div>
 						</div>
@@ -100,17 +100,17 @@ const ViewCreditNote = ({ params }) => {
 					{/* Credit Note Content */}
 					<div
 						id="contentToPrint"
-						className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl p-8 print:bg-white print:border-gray-300">
+						className="bg-foreground/5 backdrop-blur-xl border border-border rounded-3xl p-8 print:bg-white print:border-gray-300">
 						{/* Credit Note Header */}
-						<div className="flex justify-between items-start mb-8 pb-6 border-b border-white/20 print:border-gray-300">
-							<div className="text-white print:text-gray-900">
+						<div className="flex justify-between items-start mb-8 pb-6 border-b border-border print:border-gray-300">
+							<div className="text-foreground print:text-gray-900">
 								<div className="text-xl sm:text-4xl mb-2">
 									<LogoSVG />
 								</div>
 							</div>
 
 							<div className="text-right">
-								<h2 className="text-2xl text-white font-nunito mb-2 print:text-gray-900">
+								<h2 className="text-2xl text-foreground mb-2 print:text-gray-900">
 									CREDIT NOTE
 								</h2>
 							</div>
@@ -118,22 +118,22 @@ const ViewCreditNote = ({ params }) => {
 
 						{/* Credit Note Info */}
 						<div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
-							<div className="text-white print:text-gray-900">
-								<h5 className="text-lg font-nunito mb-4">Issued To:</h5>
-								<div className="text-white/80 print:text-gray-700 space-y-1">
+							<div className="text-foreground print:text-gray-900">
+								<h5 className="text-lg mb-4">Issued To:</h5>
+								<div className="text-foreground/80 print:text-gray-700 space-y-1">
 									<div className="font-semibold">{creditNote.clientName}</div>
 									<div>{creditNote.clientEmail}</div>
 									<div>{creditNote.clientPhone}</div>
 								</div>
 							</div>
-							<div className="text-right text-white print:text-gray-900">
-								<h5 className="text-lg font-nunito mb-4">
+							<div className="text-right text-foreground print:text-gray-900">
+								<h5 className="text-lg mb-4">
 									Credit Note #: {creditNote.number}
 								</h5>
-								<div className="text-white/80 print:text-gray-700 space-y-1">
+								<div className="text-foreground/80 print:text-gray-700 space-y-1">
 									<div>Related Invoice #: {creditNote.invoiceNumber}</div>
-									<div className="text-white/80 print:text-gray-700">
-										<span className="font-semibold text-white print:text-gray-900">
+									<div className="text-foreground/80 print:text-gray-700">
+										<span className="font-semibold text-foreground print:text-gray-900">
 											Issue Date:
 										</span>{" "}
 										{formatDate(creditNote.issueDate)}
@@ -143,12 +143,12 @@ const ViewCreditNote = ({ params }) => {
 						</div>
 
 						{/* Credit Amount */}
-						<div className="mb-8 pb-6 border-b border-white/20 print:border-gray-300">
-							<div className="flex justify-between items-center p-6 bg-white/5 border border-white/10 rounded-xl print:bg-gray-50 print:border-gray-300">
-								<span className="text-white font-nunito font-semibold text-lg print:text-gray-900">
+						<div className="mb-8 pb-6 border-b border-border print:border-gray-300">
+							<div className="flex justify-between items-center p-6 bg-foreground/5 border border-border rounded-xl print:bg-gray-50 print:border-gray-300">
+								<span className="text-foreground font-semibold text-lg print:text-gray-900">
 									Credit Amount:
 								</span>
-								<span className="text-white font-nunito font-semibold text-2xl print:text-gray-900">
+								<span className="text-foreground font-semibold text-2xl print:text-gray-900">
 									KES {formatCurrency(parseFloat(creditNote.amount))}
 								</span>
 							</div>
@@ -156,11 +156,11 @@ const ViewCreditNote = ({ params }) => {
 
 						{/* Notes */}
 						{creditNote.notes && (
-							<div className="mb-8 pb-6 border-b border-white/20 print:border-gray-300">
-								<h5 className="text-white font-nunito mb-2 print:text-gray-900">
+							<div className="mb-8 pb-6 border-b border-border print:border-gray-300">
+								<h5 className="text-foreground mb-2 print:text-gray-900">
 									Notes
 								</h5>
-								<p className="text-white/80 text-sm print:text-gray-700">
+								<p className="text-foreground/80 text-sm print:text-gray-700">
 									{creditNote.notes}
 								</p>
 							</div>
@@ -168,7 +168,7 @@ const ViewCreditNote = ({ params }) => {
 
 						{/* Footer */}
 						<div className="text-center mb-4">
-							<p className="text-white/60 text-sm print:text-gray-500">
+							<p className="text-foreground/60 text-sm print:text-gray-500">
 								Thank you for your business
 							</p>
 						</div>

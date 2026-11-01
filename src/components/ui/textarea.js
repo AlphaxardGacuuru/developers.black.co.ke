@@ -26,13 +26,13 @@ const Textarea = forwardRef(
 								<textarea
 									rows={rows}
 									className={cn(
-										"relative flex w-full rounded-lg border bg-transparent px-4 pt-5 pb-1 text-white font-light font-nunito text-base transition-all resize-none",
+										"relative flex w-full rounded-lg border bg-transparent px-4 pt-5 pb-1 text-foreground   text-base transition-all resize-none",
 										error
 											? "border-red-500 focus:border-red-500 focus:ring-2 focus:ring-red-500/20"
-											: "border-white/20 focus:border-white/40 focus:ring-2 focus:ring-white/10",
+											: "border-border focus:border-foreground/40 focus:ring-2 focus:ring-foreground/10",
 										"placeholder:text-transparent",
-										"focus:outline-none",
-										"disabled:cursor-not-allowed disabled:opacity-50 disabled:bg-white/5"
+										"focus:outline-hidden",
+										"disabled:cursor-not-allowed disabled:opacity-50 disabled:bg-foreground/5"
 									)}
 									ref={ref}
 									onFocus={(e) => {
@@ -51,10 +51,10 @@ const Textarea = forwardRef(
 								{label && (
 									<label
 										className={cn(
-											"absolute left-4 transition-all duration-200 pointer-events-none font-light font-nunito z-10",
+											"absolute left-4 transition-all duration-200 pointer-events-none   z-10",
 											isActiveWithFocus
-												? "top-1.5 text-xs text-white/60"
-												: "top-4 text-base text-white/40",
+												? "top-1.5 text-xs text-foreground/60"
+												: "top-4 text-base text-foreground/40",
 											error && isActiveWithFocus && "text-red-400"
 										)}>
 										{label}
@@ -68,8 +68,8 @@ const Textarea = forwardRef(
 				{(error || helperText) && (
 					<p
 						className={cn(
-							"mt-1.5 px-4 text-xs font-light font-nunito",
-							error ? "text-red-400" : "text-white/40"
+							"mt-1.5 px-4 text-xs  ",
+							error ? "text-red-400" : "text-foreground/40"
 						)}>
 						{error || helperText}
 					</p>

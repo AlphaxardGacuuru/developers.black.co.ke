@@ -1,65 +1,22 @@
-import React, { useState, useEffect } from "react"
+import { useEffect } from "react"
+import { toast } from "@/lib/toast"
 
-import { ToastContainer, toast, Bounce } from "react-toastify"
-import "react-toastify/dist/ReactToastify.css"
-import { Spinner } from "@/components/ui/spinner"
-import { cn } from "@/lib/utils"
+const PAGE_LOADER_TOAST = "page-loader-toast"
 
 const PageLoader = (props) => {
-	const [called, setCalled] = useState(false)
-	const [isMobile, setIsMobile] = useState(
-		typeof window !== "undefined" && window.innerWidth <= 768
-	)
-	const [isSmallMobile, setIsSmallMobile] = useState(
-		typeof window !== "undefined" && window.innerWidth <= 480
-	)
-
-	const LoaderContent = (
-		<div className="flex items-center justify-between gap-2">
-			<div className="text-sm sm:text-base">Loading items</div>
-			<Spinner className="size-5 text-white" />
-		</div>
-	)
-
-	// Check if there are loading items and show toast
+	// Show one loading toast while anything is loading
 	useEffect(() => {
 		if (props.loadingItems > 0) {
-			if (!called) {
-				toast.info(LoaderContent, {
-					toastId: "page-loader-toast",
-					position: "top-center",
-					autoClose: false,
-					hideProgressBar: false,
-					newestOnTop: false,
-					closeOnClick: false,
-					rtl: false,
-					pauseOnFocusLoss: true,
-					draggable: false,
-					draggablePercent: 40,
-					pauseOnHover: true,
-					theme: "colored",
-					transition: Bounce,
-					closeButton: false,
-					stacked: false,
-					className: cn(
-						"text-sm sm:text-base",
-						isMobile && "right-[30%]"
-					),
-					bodyClassName: cn(
-						"min-h-[50px] sm:min-h-[68px]",
-						isSmallMobile && "m-1 p-3"
-					),
-				})
-
-				setCalled(true)
-			}
+			toast.loading("Loading items", {
+				id: PAGE_LOADER_TOAST,
+				duration: Infinity,
+			})
 		} else {
-			setCalled(false)
-			toast.dismiss("page-loader-toast")
+			toast.dismiss(PAGE_LOADER_TOAST)
 		}
 	}, [props.loadingItems])
 
-	return <div></div>
+	return null
 }
 
 export default PageLoader

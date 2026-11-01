@@ -46,10 +46,10 @@ const Login = () => {
 	return (
 		<>
 			<div className="text-center mb-8">
-				<h2 className="text-3xl sm:text-4xl font-light text-white font-nunito mb-3">
+				<h2 className="text-3xl sm:text-4xl font-semibold tracking-tight text-primary mb-3">
 					Welcome Back
 				</h2>
-				<p className="text-white/60 font-light font-nunito text-lg">
+				<p className="text-foreground/60 text-lg">
 					Sign in to continue to Black Developers
 				</p>
 			</div>
@@ -75,7 +75,7 @@ const Login = () => {
 						autoFocus
 					/>
 					{errors.email && (
-						<p className="text-sm text-red-400 font-light font-nunito">
+						<p className="text-sm text-red-400 ">
 							{errors.email[0]}
 						</p>
 					)}
@@ -94,7 +94,7 @@ const Login = () => {
 						autoComplete="current-password"
 					/>
 					{errors.password && (
-						<p className="text-sm text-red-400 font-light font-nunito">
+						<p className="text-sm text-red-400 ">
 							{errors.password[0]}
 						</p>
 					)}
@@ -108,16 +108,16 @@ const Login = () => {
 						<Checkbox
 							id="remember_me"
 							name="remember"
-							onChange={(event) => setShouldRemember(event.target.checked)}
+							onCheckedChange={(checked) => setShouldRemember(checked === true)}
 						/>
-						<span className="text-sm text-white/60 font-light font-nunito">
+						<span className="text-sm text-foreground/60 ">
 							Remember me
 						</span>
 					</label>
 
 					<Link
 						href="/forgot-password"
-						className="text-sm text-white/60 hover:text-white font-light font-nunito transition-colors">
+						className="text-sm text-foreground/60 hover:text-foreground transition-colors">
 						Forgot password?
 					</Link>
 				</div>
@@ -130,11 +130,11 @@ const Login = () => {
 				/>
 
 				<div className="text-center">
-					<p className="text-white/60 font-light font-nunito text-sm">
+					<p className="text-foreground/60 text-sm">
 						Don't have an account?{" "}
 						<Link
 							href="/register"
-							className="text-white hover:text-white/80 transition-colors">
+							className="text-foreground hover:text-foreground/80 transition-colors">
 							Sign up
 						</Link>
 					</p>

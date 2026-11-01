@@ -1,11 +1,12 @@
-const Header = ({ title }) => {
+// A page heading in the other Black apps' style (gallery's Heading); the
+// floating app header above it already holds the navigation.
+const Header = ({ title, description }) => {
 	return (
-		<header className="bg-white/5 backdrop-blur-xl border-b border-white/10 relative z-10">
-			<div className="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-				<h2 className="font-semibold text-xl text-white leading-tight">
-					{title}
-				</h2>
-			</div>
+		<header className="space-y-0.5">
+			<h2 className="text-xl font-semibold tracking-tight">{title}</h2>
+			{description && (
+				<p className="text-sm text-muted-foreground">{description}</p>
+			)}
 		</header>
 	)
 }

@@ -51,12 +51,12 @@ const Dashboard = () => {
 			<div className="py-12">
 				<div className="max-w-7xl mx-auto px-6 lg:px-8">
 					{/* Welcome Section */}
-					<div className="bg-white/5 backdrop-blur-xl border border-white/10 overflow-hidden rounded-3xl hover:border-white/20 transition-all duration-700 mb-8">
-						<div className="p-8 text-white">
-							<h3 className="text-2xl font-light font-nunito mb-4">
+					<div className="bg-foreground/5 backdrop-blur-xl border border-border overflow-hidden rounded-3xl hover:border-border transition-all duration-700 mb-8">
+						<div className="p-8 text-foreground">
+							<h3 className="text-2xl mb-4">
 								Welcome Back!
 							</h3>
-							<p className="text-gray-300 font-light font-nunito">
+							<p className="text-muted-foreground ">
 								Here's an overview of your business metrics
 							</p>
 						</div>
@@ -65,7 +65,7 @@ const Dashboard = () => {
 					{/* Stats Grid Start */}
 					<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6 mb-6">
 						{/* Clients Stat */}
-						<div className="bg-white/10 backdrop-blur-xl border border-white/20 shadow-sm rounded-3xl p-6 hover:bg-white/15 transition-all duration-500">
+						<div className="bg-foreground/10 backdrop-blur-xl border border-border shadow-xs rounded-3xl p-6 hover:bg-foreground/15 transition-all duration-500">
 							<div className="flex justify-between items-center mb-4">
 								<HeroHeading
 									heading="Clients"
@@ -75,7 +75,7 @@ const Dashboard = () => {
 									<PeopleSVG />
 								</HeroIcon>
 							</div>
-							<div className="text-sm text-white/70 mt-2">
+							<div className="text-sm text-foreground/70 mt-2">
 								<span className="text-purple-400 font-semibold">
 									Active Clients
 								</span>
@@ -83,7 +83,7 @@ const Dashboard = () => {
 						</div>
 
 						{/* Invoices Stat */}
-						<div className="bg-white/10 backdrop-blur-xl border border-white/20 shadow-sm rounded-3xl p-6 hover:bg-white/15 transition-all duration-500">
+						<div className="bg-foreground/10 backdrop-blur-xl border border-border shadow-xs rounded-3xl p-6 hover:bg-foreground/15 transition-all duration-500">
 							<div className="flex justify-between items-center mb-4">
 								<HeroHeading
 									heading="Invoices"
@@ -93,7 +93,7 @@ const Dashboard = () => {
 									<InvoiceSVG />
 								</HeroIcon>
 							</div>
-							<div className="text-sm text-white/70 mt-2">
+							<div className="text-sm text-foreground/70 mt-2">
 								Total:{" "}
 								<span className="text-blue-400 font-semibold">
 									KES {loading ? "..." : formatCurrency(stats.invoices.total)}
@@ -106,7 +106,7 @@ const Dashboard = () => {
 					{/* Stats Grid Start */}
 					<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
 						{/* Payments Stat */}
-						<div className="bg-white/10 backdrop-blur-xl border border-white/20 shadow-sm rounded-3xl p-6 hover:bg-white/15 transition-all duration-500">
+						<div className="bg-foreground/10 backdrop-blur-xl border border-border shadow-xs rounded-3xl p-6 hover:bg-foreground/15 transition-all duration-500">
 							<div className="flex justify-between items-center mb-4">
 								<HeroHeading
 									heading="Payments"
@@ -116,7 +116,7 @@ const Dashboard = () => {
 									<PaymentSVG />
 								</HeroIcon>
 							</div>
-							<div className="text-sm text-white/70 mt-2">
+							<div className="text-sm text-foreground/70 mt-2">
 								Total:{" "}
 								<span className="text-green-400 font-semibold">
 									KES {loading ? "..." : formatCurrency(stats.payments.total)}
@@ -125,7 +125,7 @@ const Dashboard = () => {
 						</div>
 
 						{/* Credit Notes Stat */}
-						<div className="bg-white/10 backdrop-blur-xl border border-white/20 shadow-sm rounded-3xl p-6 hover:bg-white/15 transition-all duration-500">
+						<div className="bg-foreground/10 backdrop-blur-xl border border-border shadow-xs rounded-3xl p-6 hover:bg-foreground/15 transition-all duration-500">
 							<div className="flex justify-between items-center mb-4">
 								<HeroHeading
 									heading="Credit Notes"
@@ -135,7 +135,7 @@ const Dashboard = () => {
 									<CreditNoteSVG />
 								</HeroIcon>
 							</div>
-							<div className="text-sm text-white/70 mt-2">
+							<div className="text-sm text-foreground/70 mt-2">
 								Total:{" "}
 								<span className="text-yellow-400 font-semibold">
 									KES{" "}
@@ -145,7 +145,7 @@ const Dashboard = () => {
 						</div>
 
 						{/* Deductions Stat */}
-						<div className="bg-white/10 backdrop-blur-xl border border-white/20 shadow-sm rounded-3xl p-6 hover:bg-white/15 transition-all duration-500">
+						<div className="bg-foreground/10 backdrop-blur-xl border border-border shadow-xs rounded-3xl p-6 hover:bg-foreground/15 transition-all duration-500">
 							<div className="flex justify-between items-center mb-4">
 								<HeroHeading
 									heading="Deductions"
@@ -155,7 +155,7 @@ const Dashboard = () => {
 									<DeductionSVG />
 								</HeroIcon>
 							</div>
-							<div className="text-sm text-white/70 mt-2">
+							<div className="text-sm text-foreground/70 mt-2">
 								Total:{" "}
 								<span className="text-red-400 font-semibold">
 									KES {loading ? "..." : formatCurrency(stats.deductions.total)}
@@ -166,14 +166,14 @@ const Dashboard = () => {
 					{/* Stats Grid End */}
 
 					{/* Summary Section */}
-					<div className="bg-white/5 backdrop-blur-xl border border-white/10 overflow-hidden rounded-3xl hover:border-white/20 transition-all duration-700 mt-8">
+					<div className="bg-foreground/5 backdrop-blur-xl border border-border overflow-hidden rounded-3xl hover:border-border transition-all duration-700 mt-8">
 						<div className="p-8">
 							<div className="flex justify-between items-center">
 								<div>
-									<h4 className="text-white/70 font-normal text-sm uppercase tracking-wider mb-2">
+									<h4 className="text-foreground/70 font-normal text-sm uppercase tracking-wider mb-2">
 										Net Balance
 									</h4>
-									<p className="text-3xl font-bold text-white">
+									<p className="text-3xl font-bold text-foreground">
 										KES{" "}
 										{loading
 											? "..."
@@ -189,27 +189,27 @@ const Dashboard = () => {
 									<MoneySVG />
 								</HeroIcon>
 							</div>
-							<div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-6 pt-6 border-t border-white/10">
+							<div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-6 pt-6 border-t border-border">
 								<div>
-									<p className="text-white/50 text-xs uppercase">Invoiced</p>
+									<p className="text-foreground/50 text-xs uppercase">Invoiced</p>
 									<p className="text-blue-400 font-semibold">
 										+{loading ? "..." : formatCurrency(stats.invoices.total)}
 									</p>
 								</div>
 								<div>
-									<p className="text-white/50 text-xs uppercase">Received</p>
+									<p className="text-foreground/50 text-xs uppercase">Received</p>
 									<p className="text-green-400 font-semibold">
 										+{loading ? "..." : formatCurrency(stats.payments.total)}
 									</p>
 								</div>
 								<div>
-									<p className="text-white/50 text-xs uppercase">Credits</p>
+									<p className="text-foreground/50 text-xs uppercase">Credits</p>
 									<p className="text-yellow-400 font-semibold">
 										-{loading ? "..." : formatCurrency(stats.creditNotes.total)}
 									</p>
 								</div>
 								<div>
-									<p className="text-white/50 text-xs uppercase">Deductions</p>
+									<p className="text-foreground/50 text-xs uppercase">Deductions</p>
 									<p className="text-red-400 font-semibold">
 										-{loading ? "..." : formatCurrency(stats.deductions.total)}
 									</p>

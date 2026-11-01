@@ -3,24 +3,19 @@ import Axios from "@/lib/axios"
 
 import Btn from "@/components/ui/button"
 import MyLink from "@/components/ui/my-link"
-import DeleteModal from "@/components/core/DeleteModal"
 import { Input } from "@/components/ui/input"
 import { DataTable } from "@/components/ui/data-table"
-import Modal from "@/components/ui/modal"
+import { laravelPagination } from "@/lib/laravel-pagination"
 
 import HeroHeading from "@/components/core/HeroHeading"
 import HeroIcon from "@/components/core/HeroIcon"
 
-import ViewSVG from "@/svgs/ViewSVG"
-import EditSVG from "@/svgs/EditSVG"
-import DeleteSVG from "@/svgs/DeleteSVG"
 import PlusSVG from "@/svgs/PlusSVG"
 import PeopleSVG from "@/svgs/PeopleSVG"
 
 const ClientList = (props) => {
 	const [loading, setLoading] = useState(false)
 	const [rowSelection, setRowSelection] = useState({})
-	const [showBulkDeleteDialog, setShowBulkDeleteDialog] = useState(false)
 
 	/*
 	 * Delete Client
@@ -56,46 +51,13 @@ const ClientList = (props) => {
 
 	return (
 		<div className={props.activeTab}>
-			{/* Bulk Delete Confirmation Modal Start */}
-			<Modal
-				open={showBulkDeleteDialog}
-				onOpenChange={setShowBulkDeleteDialog}
-				title="Delete Selected Clients"
-				className="bg-white/10 backdrop-blur-xl border border-white/20 shadow-sm rounded-3xl text-white data-[state=open]:slide-in-from-top data-[state=closed]:slide-out-to-top"
-				footer={
-					<div className="flex justify-between w-full">
-						<Btn
-							type="button"
-							text="Cancel"
-							onClick={() => setShowBulkDeleteDialog(false)}
-						/>
-						<Btn
-							icon={<DeleteSVG />}
-							text="Delete"
-							className="btn-2"
-							onClick={() => {
-								onDeleteClient(Object.keys(rowSelection))
-								setShowBulkDeleteDialog(false)
-							}}
-							loading={loading}
-						/>
-					</div>
-				}>
-				<div className="text-white">
-					Are you sure you want to delete {Object.keys(rowSelection).length}{" "}
-					selected client{Object.keys(rowSelection).length > 1 ? "s" : ""}? This
-					action cannot be undone.
-				</div>
-			</Modal>
-			{/* Bulk Delete Confirmation Modal End */}
-
 			{/* Data */}
-			<div className="bg-white/10 backdrop-blur-xl border border-white/20 shadow-sm rounded-3xl mb-2 p-2 px-5 hover:bg-white/15 transition-all duration-500">
+			<div className="bg-foreground/10 backdrop-blur-xl border border-border shadow-xs rounded-3xl mb-2 p-2 px-5 hover:bg-foreground/15 transition-all duration-500">
 				{/* Total */}
 				<div className="grid grid-cols-1 gap-4">
 					{/* Total */}
 					<div>
-						<div className="flex justify-between flex-grow mx-2">
+						<div className="flex justify-between grow mx-2">
 							<HeroHeading
 								heading="Total Clients"
 								data={props.clients.meta?.total || 0}
@@ -114,10 +76,10 @@ const ClientList = (props) => {
 			<br />
 
 			{/* Filters */}
-			<div className="bg-white/10 backdrop-blur-xl border border-white/20 shadow-sm rounded-3xl px-4 pt-4 pb-3 mb-2 hover:bg-white/15 transition-all duration-500">
+			<div className="bg-foreground/10 backdrop-blur-xl border border-border shadow-xs rounded-3xl px-4 pt-4 pb-3 mb-2 hover:bg-foreground/15 transition-all duration-500">
 				<div className="flex flex-wrap gap-2">
 					{/* Name */}
-					<div className="flex-grow min-w-0">
+					<div className="grow min-w-0">
 						<Input
 							type="text"
 							label="Name"
@@ -129,7 +91,7 @@ const ClientList = (props) => {
 					{/* Name End */}
 
 					{/* Email */}
-					<div className="flex-grow min-w-0">
+					<div className="grow min-w-0">
 						<Input
 							type="text"
 							label="Email"
@@ -141,7 +103,7 @@ const ClientList = (props) => {
 					{/* Email End */}
 
 					{/* Phone */}
-					<div className="flex-grow min-w-0">
+					<div className="grow min-w-0">
 						<Input
 							type="text"
 							label="Phone"
@@ -158,16 +120,9 @@ const ClientList = (props) => {
 			<br />
 
 			{/* Data */}
-			<div className="bg-white/10 backdrop-blur-xl border border-white/20 rounded-3xl p-4 mb-5">
+			<div className="bg-foreground/10 backdrop-blur-xl border border-border rounded-3xl p-4 mb-5">
 				{/* Create Client Link Start */}
 				<div className="flex justify-end gap-2">
-					{Object.keys(rowSelection).length > 0 && (
-						<Btn
-							icon={<DeleteSVG />}
-							text={`Delete Selected (${Object.keys(rowSelection).length})`}
-							onClick={() => setShowBulkDeleteDialog(true)}
-						/>
-					)}
 					<MyLink
 						href={`/clients/create`}
 						icon={<PlusSVG />}
@@ -179,25 +134,6 @@ const ClientList = (props) => {
 				{/* DataTable Start */}
 				<DataTable
 					columns={[
-						{
-							id: "select",
-							header: ({ table }) => (
-								<input
-									type="checkbox"
-									checked={table.getIsAllPageRowsSelected()}
-									onChange={table.getToggleAllPageRowsSelectedHandler()}
-								/>
-							),
-							cell: ({ row }) => (
-								<input
-									type="checkbox"
-									checked={row.getIsSelected()}
-									onChange={row.getToggleSelectedHandler()}
-								/>
-							),
-							enableSorting: false,
-							enableHiding: false,
-						},
 						{
 							accessorKey: "",
 							header: "#",
@@ -225,40 +161,19 @@ const ClientList = (props) => {
 							accessorKey: "phone",
 							header: "Phone",
 						},
-						{
-							id: "actions",
-							header: "Action",
-							cell: ({ row }) => {
-								const client = row.original
-								return (
-									<div className="flex items-center gap-2">
-										<MyLink
-											href={`/clients/${client.id}/view`}
-											icon={<ViewSVG />}
-											// text="view"
-										/>
-										<MyLink
-											href={`/clients/${client.id}/edit`}
-											icon={<EditSVG />}
-											// text="edit"
-										/>
-										<DeleteModal
-											index={`client-dt-${client.id}`}
-											model={client}
-											modelName="Client"
-											onDelete={onDeleteClient}
-										/>
-									</div>
-								)
-							},
-						},
 					]}
 					data={props.clients.data || []}
-					pagination={{
-						getPaginated: props.getPaginated,
-						setState: props.setClients,
-						list: props.clients,
-					}}
+					emptyMessage={props.loadingItems > 0 ? "Loading…" : "No clients yet"}
+					showHref={(client) => `/clients/${client.id}/view`}
+					editHref={(client) => `/clients/${client.id}/edit`}
+					onDelete={(client) => onDeleteClient(client.id)}
+					onBulkDelete={(ids) => onDeleteClient(ids)}
+					getItemLabel={(client) => client.name}
+					pagination={laravelPagination(
+						props.clients,
+						props.getPaginated,
+						props.setClients
+					)}
 					rowSelection={rowSelection}
 					setRowSelection={setRowSelection}
 				/>

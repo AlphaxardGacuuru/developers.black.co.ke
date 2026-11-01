@@ -52,8 +52,8 @@ const ViewClient = ({ params }) => {
 				<Header title="View Client" />
 				<div className="py-12">
 					<div className="max-w-4xl mx-auto px-6 lg:px-8">
-						<div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl p-8">
-							<div className="text-white text-center">Loading client...</div>
+						<div className="bg-foreground/5 backdrop-blur-xl border border-border rounded-3xl p-8">
+							<div className="text-foreground text-center">Loading client...</div>
 						</div>
 					</div>
 				</div>
@@ -84,17 +84,17 @@ const ViewClient = ({ params }) => {
 					{/* Client Content */}
 					<div
 						id="contentToPrint"
-						className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl p-8 print:bg-white print:border-gray-300">
+						className="bg-foreground/5 backdrop-blur-xl border border-border rounded-3xl p-8 print:bg-white print:border-gray-300">
 						{/* Header */}
-						<div className="flex flex-col md:flex-row justify-between items-start mb-8 pb-6 border-b border-white/20 print:border-gray-300">
-							<div className="text-white print:text-gray-900">
+						<div className="flex flex-col md:flex-row justify-between items-start mb-8 pb-6 border-b border-border print:border-gray-300">
+							<div className="text-foreground print:text-gray-900">
 								<div className="text-4xl mb-2">
 									<LogoSVG />
 								</div>
 							</div>
 
 							<div className="text-right">
-								<h2 className="text-2xl text-white font-nunito mb-2 print:text-gray-900">
+								<h2 className="text-2xl text-foreground mb-2 print:text-gray-900">
 									CLIENT DETAILS
 								</h2>
 							</div>
@@ -103,32 +103,32 @@ const ViewClient = ({ params }) => {
 						{/* Client Info */}
 						<div className="space-y-6">
 							{/* Basic Information */}
-							<div className="bg-white/5 rounded-2xl p-6 print:bg-gray-50">
-								<h5 className="text-white font-nunito mb-4 print:text-gray-900">
+							<div className="bg-foreground/5 rounded-2xl p-6 print:bg-gray-50">
+								<h5 className="text-foreground mb-4 print:text-gray-900">
 									Basic Information
 								</h5>
 								<div className="grid grid-cols-1 md:grid-cols-2 gap-4">
 									<div>
-										<span className="text-white/60 text-sm print:text-gray-600">
+										<span className="text-foreground/60 text-sm print:text-gray-600">
 											Name:
 										</span>
-										<p className="text-white font-semibold print:text-gray-900">
+										<p className="text-foreground font-semibold print:text-gray-900">
 											{client.name}
 										</p>
 									</div>
 									<div>
-										<span className="text-white/60 text-sm print:text-gray-600">
+										<span className="text-foreground/60 text-sm print:text-gray-600">
 											Email:
 										</span>
-										<p className="text-white print:text-gray-900">
+										<p className="text-foreground print:text-gray-900">
 											{client.email}
 										</p>
 									</div>
 									<div>
-										<span className="text-white/60 text-sm print:text-gray-600">
+										<span className="text-foreground/60 text-sm print:text-gray-600">
 											Phone:
 										</span>
-										<p className="text-white print:text-gray-900">
+										<p className="text-foreground print:text-gray-900">
 											{client.phone}
 										</p>
 									</div>
@@ -138,14 +138,14 @@ const ViewClient = ({ params }) => {
 							{/* Statistics */}
 							{(client.invoicesCount !== undefined ||
 								client.totalInvoiced !== undefined) && (
-								<div className="bg-white/5 rounded-2xl p-6 print:bg-gray-50">
-									<h5 className="text-white font-nunito mb-4 print:text-gray-900">
+								<div className="bg-foreground/5 rounded-2xl p-6 print:bg-gray-50">
+									<h5 className="text-foreground mb-4 print:text-gray-900">
 										Statistics
 									</h5>
 									<div className="grid grid-cols-1 md:grid-cols-3 gap-4">
 										{client.invoicesCount !== undefined && (
 											<div>
-												<span className="text-white/60 text-sm print:text-gray-600">
+												<span className="text-foreground/60 text-sm print:text-gray-600">
 													Total Invoices:
 												</span>
 												<p className="text-2xl font-bold text-blue-400 print:text-blue-600">
@@ -155,7 +155,7 @@ const ViewClient = ({ params }) => {
 										)}
 										{client.totalInvoiced !== undefined && (
 											<div>
-												<span className="text-white/60 text-sm print:text-gray-600">
+												<span className="text-foreground/60 text-sm print:text-gray-600">
 													Total Invoiced:
 												</span>
 												<p className="text-2xl font-bold text-green-400 print:text-green-600">
@@ -165,7 +165,7 @@ const ViewClient = ({ params }) => {
 										)}
 										{client.totalPaid !== undefined && (
 											<div>
-												<span className="text-white/60 text-sm print:text-gray-600">
+												<span className="text-foreground/60 text-sm print:text-gray-600">
 													Total Paid:
 												</span>
 												<p className="text-2xl font-bold text-yellow-400 print:text-yellow-600">

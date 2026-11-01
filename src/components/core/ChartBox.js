@@ -8,14 +8,14 @@ import ArrowUpSVG from "@/svgs/ArrowUpSVG"
 const ChartBox = (props) => {
 	return (
 		<div
-			className="border-top-0 border-end-0 border-bottom-0 border-5 border-secondary rounded m-1 me-4 p-2 card"
+			className="border-top-0 border-end-0 border-bottom-0 border-5 border-secondary rounded-sm m-1 me-4 p-2 card"
 			style={{ width: "19.5em", height: "auto" }}>
 			<div className="d-flex justify-content-between align-items-center">
 				<div className="px-4">
 					<h4>{props.title}</h4>
 					<h6>{props.total}</h6>
 				</div>
-				<div className="px-4 fs-2 bg-secondary-subtle text-secondary rounded">
+				<div className="px-4 fs-2 bg-secondary-subtle text-secondary rounded-sm">
 					{props.svg}
 				</div>
 			</div>

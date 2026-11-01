@@ -12,12 +12,8 @@ const Layout = ({ children }) => {
 			logo={
 				<Link
 					href="/"
-					className="relative transform hover:scale-105 sm:hover:scale-110 transition-all duration-700 ease-out group cursor-pointer">
-					<div className="w-48 sm:w-64 md:w-80 h-12 sm:h-16 md:h-20 flex items-center justify-center">
-						<div className="text-white opacity-90 group-hover:opacity-100 transition-opacity duration-500">
-							<ApplicationLogo />
-						</div>
-					</div>
+					className="flex items-center justify-center transition-opacity hover:opacity-80">
+					<ApplicationLogo className="h-12 w-auto" />
 				</Link>
 			}>
 			{children}

@@ -62,8 +62,8 @@ export const useAuth = ({ middleware, redirectIfAuthenticated } = {}) => {
 				setAuthLoading(false)
 				appProps.setMessages(["Login Successful!"])
 
-                mutate()
-            })
+				mutate()
+			})
 			.catch((error) => {
 				setAuthLoading(false)
 

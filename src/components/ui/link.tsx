@@ -1,0 +1,115 @@
+"use client"
+
+import * as React from "react"
+import NextLink from "next/link"
+import { cva, type VariantProps } from "class-variance-authority"
+
+import { cn } from "@/lib/utils"
+
+const linkVariants = cva(
+	"inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-[color,box-shadow,background-color,border-color] disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4 [&_svg]:shrink-0 outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] no-underline capitalize",
+	{
+		variants: {
+			variant: {
+				default:
+					"bg-light/10 text-light hover:bg-light/15",
+				solid:
+					"bg-primary text-primary-foreground shadow-xs hover:bg-primary/90",
+				outline:
+					"border border-primary text-primary shadow-xs hover:bg-primary hover:text-primary-foreground",
+				ghost: "text-foreground hover:bg-accent hover:text-accent-foreground",
+				muted:
+					"text-muted-foreground hover:text-foreground hover:underline underline-offset-4",
+				text: "text-foreground underline decoration-neutral-300 underline-offset-4 transition-colors duration-300 ease-out hover:decoration-current! dark:decoration-neutral-500",
+				unstyled: "",
+			},
+			size: {
+				default: "h-9 px-4 py-2 has-[>svg]:px-3",
+				sm: "h-8 rounded-md px-3 has-[>svg]:px-2.5",
+				lg: "h-10 rounded-md px-6 has-[>svg]:px-4",
+				icon: "size-9",
+				none: "",
+			},
+		},
+		defaultVariants: {
+			variant: "default",
+			size: "default",
+		},
+	}
+)
+
+type LinkProps = Omit<React.ComponentPropsWithoutRef<"a">, "href"> &
+	VariantProps<typeof linkVariants> & {
+		href: string
+		linkStyle?: React.CSSProperties
+		icon?: React.ReactNode
+		iconFront?: React.ReactNode
+		text?: string
+	}
+
+const isExternalHref = (href: string): boolean => {
+	return (
+		/^(?:[a-z][a-z\d+\-.]*:|\/\/)/i.test(href) ||
+		href.startsWith("#")
+	)
+}
+
+const Link = ({
+	href,
+	linkStyle,
+	className,
+	icon,
+	iconFront,
+	text,
+	variant = "default",
+	size = "default",
+	children,
+	...props
+}: LinkProps) => {
+	const canUseClientNavigation =
+		!isExternalHref(href) && props.target !== "_blank"
+
+	const content = (
+		<>
+			{icon && <span className="text-inherit">{icon}</span>}
+
+			{text ? (
+				<span className="mx-0.5 text-inherit text-nowrap">{text}</span>
+			) : (
+				children
+			)}
+
+			{iconFront && <span className="text-inherit">{iconFront}</span>}
+		</>
+	)
+
+	const linkClassName =
+		variant === "unstyled"
+			? className
+			: cn(linkVariants({ variant, size, className }))
+
+	if (canUseClientNavigation) {
+		return (
+			<NextLink
+				href={href}
+				style={linkStyle}
+				className={linkClassName}
+				{...props}>
+				{content}
+			</NextLink>
+		)
+	}
+
+	return (
+		<a
+			href={href}
+			style={linkStyle}
+			className={linkClassName}
+			{...props}>
+			{content}
+		</a>
+	)
+}
+
+export { Link, linkVariants }
+export default Link

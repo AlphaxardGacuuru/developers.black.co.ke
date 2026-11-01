@@ -39,7 +39,7 @@ export default function ScrollToTopButton() {
 			title="Back to top"
 			tabIndex={visible ? 0 : -1}
 			aria-hidden={!visible}
-			className={`fixed right-4 bottom-[max(1rem,env(safe-area-inset-bottom))] z-50 flex h-11 w-11 items-center justify-center rounded-full bg-white text-[#1a1a1a] shadow-black/30 focus-visible:ring-white/60 shadow-lg transition-all duration-300 hover:scale-105 focus-visible:outline-none focus-visible:ring-[3px] sm:right-6 sm:bottom-6 ${
+			className={`fixed right-4 bottom-[max(1rem,env(safe-area-inset-bottom))] z-50 flex h-11 w-11 items-center justify-center rounded-full bg-foreground text-background shadow-black/30 focus-visible:ring-foreground/60 shadow-lg transition-all duration-300 hover:scale-105 focus-visible:outline-hidden focus-visible:ring-[3px] sm:right-6 sm:bottom-6 ${
 				visible ? "translate-y-0 opacity-100" : "pointer-events-none translate-y-4 opacity-0"
 			}`}>
 			<ArrowUp className="h-5 w-5" />
