@@ -15,12 +15,19 @@ const instrumentSans = Instrument_Sans({
 	variable: "--font-instrument-sans",
 })
 
-// Follow the system light/dark setting before first paint, like the other
-// Black apps' inline appearance script.
+// Apply the saved appearance (Settings > Appearance) before first paint,
+// falling back to the system setting, like the other Black apps.
 const appearanceScript = `(function () {
-	if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
-		document.documentElement.classList.add("dark")
-	}
+	var appearance = "system"
+	try {
+		appearance = localStorage.getItem("appearance") || "system"
+	} catch (e) {}
+	var dark =
+		appearance === "dark" ||
+		(appearance === "system" &&
+			window.matchMedia("(prefers-color-scheme: dark)").matches)
+	document.documentElement.classList.toggle("dark", dark)
+	document.documentElement.style.colorScheme = dark ? "dark" : "light"
 })()`
 
 const RootLayout = ({ children }: { children: ReactNode }) => {

@@ -16,6 +16,7 @@ import {
 	SidebarFooter,
 	SidebarGroup,
 	SidebarHeader,
+	SidebarTrigger,
 	SidebarMenu,
 	SidebarMenuButton,
 	SidebarMenuItem,
@@ -67,6 +68,8 @@ export function AppSidebar({ user }: { user: User }) {
 						</SidebarMenuButton>
 					</SidebarMenuItem>
 				</SidebarMenu>
+				{/* The header avatar opens the user menu, so collapsing lives here, like money */}
+				<SidebarTrigger className="hidden self-center md:flex" />
 			</SidebarHeader>
 
 			<SidebarContent>

@@ -1,13 +1,21 @@
 "use client"
 
+import { useEffect } from "react"
 import { Toaster as Sonner, type ToasterProps } from "sonner"
+import { useAppearance } from "@/hooks/use-appearance"
+import { showFlashToast } from "@/lib/toast"
 
-// Gallery's Toaster. This app has no appearance setting, so the theme follows
-// the system like the inline appearance script in the root layout.
+// Gallery's Toaster, following the appearance chosen in Settings.
 function Toaster({ ...props }: ToasterProps) {
+	const { appearance } = useAppearance()
+
+	useEffect(() => {
+		showFlashToast()
+	}, [])
+
 	return (
 		<Sonner
-			theme="system"
+			theme={appearance}
 			className="toaster group"
 			position="top-center"
 			style={

@@ -1,5 +1,5 @@
 import Link from "next/link"
-import { Home, LogOut } from "lucide-react"
+import { Home, LogOut, Settings } from "lucide-react"
 import { useState } from "react"
 import {
 	DropdownMenuGroup,
@@ -9,6 +9,7 @@ import {
 } from "@/components/ui/dropdown-menu"
 import { UserInfo } from "@/components/user-info"
 import { useAuth } from "@/hooks/auth"
+import { flashToast } from "@/lib/toast"
 import type { User } from "@/types"
 
 export function UserMenuContent({ user }: { user: User }) {
@@ -17,6 +18,8 @@ export function UserMenuContent({ user }: { user: User }) {
 
 	const handleLogout = () => {
 		setLoggingOut(true)
+		// Logging out reloads the page, so the toast shows on the login page
+		flashToast("Logged Out")
 		logout().finally(() => setLoggingOut(false))
 	}
 
@@ -38,6 +41,14 @@ export function UserMenuContent({ user }: { user: User }) {
 						href="/">
 						<Home className="mr-2 size-4" />
 						Welcome Page
+					</Link>
+				</DropdownMenuItem>
+				<DropdownMenuItem asChild>
+					<Link
+						className="flex w-full cursor-pointer items-center"
+						href="/settings/profile">
+						<Settings className="mr-2 size-4" />
+						Settings
 					</Link>
 				</DropdownMenuItem>
 			</DropdownMenuGroup>
