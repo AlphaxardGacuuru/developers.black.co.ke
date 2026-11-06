@@ -37,3 +37,6 @@ yarn-error.log*
 
 # typescript
 *.tsbuildinfo
+
+# throwaway npm cache used by `npm run install:production`
+/.npm-cache

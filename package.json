@@ -5,6 +5,7 @@
 	"scripts": {
 		"dev": "next dev -p 3010",
 		"build": "NODE_OPTIONS=--max-old-space-size=768 next build",
+		"install:production": "rm -rf .npm-cache && NODE_OPTIONS=--max-old-space-size=256 npm ci --omit=dev --no-audit --no-fund --maxsockets=1 --cache .npm-cache && rm -rf .npm-cache",
 		"start": "next start",
 		"lint": "next lint",
 		"lint:fix": "next lint --fix"
