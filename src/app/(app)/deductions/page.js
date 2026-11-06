@@ -57,7 +57,7 @@ const Deductions = (props) => {
 		<>
 			<Header title="Deductions" />
 
-			<div className="py-12 px-6">
+			<div>
 				{/* Deductions Tab */}
 				<DeductionList
 					{...props}

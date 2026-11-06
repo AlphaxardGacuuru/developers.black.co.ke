@@ -4,7 +4,7 @@ import { isActive, mainNavItems } from "@/components/app-sidebar"
 import { cn } from "@/lib/utils"
 
 // The other Black apps' phone navigation (gallery's AppBottomNav), with just
-// the icons (at gallery's size) so all six sections fit.
+// the icons (two steps larger than gallery's) so all six sections fit.
 export function AppBottomNav() {
 	const pathname = usePathname()
 
@@ -28,8 +28,8 @@ export function AppBottomNav() {
 									? "bg-primary text-secondary"
 									: "text-sidebar-foreground/70 hover:bg-sidebar-accent hover:text-sidebar-accent-foreground"
 							)}>
-							<span className="flex size-11 items-center justify-center">
-								{Icon && <Icon className="size-10" />}
+							<span className="flex size-13 items-center justify-center">
+								{Icon && <Icon className="size-12" />}
 							</span>
 						</Link>
 					)

@@ -56,8 +56,8 @@ const ViewInvoice = ({ params }) => {
 		return (
 			<>
 				<Header title="View Invoice" />
-				<div className="py-12">
-					<div className="max-w-4xl mx-auto px-6 lg:px-8">
+				<div>
+					<div className="max-w-4xl mx-auto">
 						<div className="bg-foreground/5 backdrop-blur-xl border border-border rounded-3xl p-8">
 							<div className="text-foreground text-center">Loading invoice...</div>
 						</div>
@@ -71,8 +71,8 @@ const ViewInvoice = ({ params }) => {
 		<>
 			<Header title="View Invoice" />
 
-			<div className="py-12">
-				<div className="max-w-4xl mx-auto px-6 lg:px-8">
+			<div>
+				<div className="max-w-4xl mx-auto">
 					{/* Action Buttons */}
 					<div className="flex justify-between items-center mb-4">
 						<MyLink

@@ -83,8 +83,8 @@ const EditDeduction = ({ params }) => {
 		return (
 			<>
 				<Header title="Edit Deduction" />
-				<div className="py-12">
-					<div className="max-w-4xl mx-auto px-6 lg:px-8">
+				<div>
+					<div className="max-w-4xl mx-auto">
 						<div className="bg-foreground/5 backdrop-blur-xl border border-border rounded-3xl p-8">
 							<div className="text-foreground text-center">Loading deduction...</div>
 						</div>
@@ -98,8 +98,8 @@ const EditDeduction = ({ params }) => {
 		<>
 			<Header title="Edit Deduction" />
 
-			<div className="py-12">
-				<div className="max-w-4xl mx-auto px-6 lg:px-8">
+			<div>
+				<div className="max-w-4xl mx-auto">
 					<form onSubmit={onSubmit}>
 						<div className="bg-foreground/5 backdrop-blur-xl border border-border rounded-3xl p-8 space-y-8">
 							{/* Deduction Header Info */}
