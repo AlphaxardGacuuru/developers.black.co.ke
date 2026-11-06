@@ -1,0 +1,67 @@
+name: Build
+
+# Builds the app on GitHub's runners instead of the Forge server, which does
+# not have the memory for `next build`. Each build is uploaded to the `builds`
+# release as <commit sha>.tar.gz, where scripts/forge-deploy.sh picks it up.
+
+on:
+  push:
+    branches: [main]
+  # Pull requests build to catch failures early, but don't upload
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: build-${{ github.sha }}
+
+env:
+  # Public values: both are inlined into the browser bundle
+  NEXT_PUBLIC_APP_NAME: Black Developers
+  NEXT_PUBLIC_BACKEND_URL: https://api.developers.black.co.ke
+  GH_TOKEN: ${{ github.token }}
+  BUILDS_TO_KEEP: 10
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+
+      - run: npm ci --no-audit --no-fund
+
+      - run: npm run build
+
+      - name: Package build
+        if: github.ref == 'refs/heads/main'
+        run: |
+          tar -czf "$GITHUB_SHA.tar.gz" \
+            --exclude=.next/cache \
+            .next \
+            public/sw.js \
+            public/workbox-*.js \
+            public/swe-worker-*.js
+
+      - name: Upload to the builds release
+        if: github.ref == 'refs/heads/main'
+        run: |
+          gh release view builds > /dev/null 2>&1 || gh release create builds \
+            --prerelease \
+            --target "$GITHUB_SHA" \
+            --title "Deploy builds" \
+            --notes "Production builds made by the Build workflow, one asset per commit. The Forge deploy downloads them; do not delete this release."
+          gh release upload builds "$GITHUB_SHA.tar.gz" --clobber
+
+      - name: Prune old builds
+        if: github.ref == 'refs/heads/main'
+        run: |
+          gh release view builds --json assets \
+            --jq ".assets | sort_by(.createdAt) | reverse | .[${BUILDS_TO_KEEP}:] | .[].name" \
+            | xargs -r -n1 gh release delete-asset builds --yes
