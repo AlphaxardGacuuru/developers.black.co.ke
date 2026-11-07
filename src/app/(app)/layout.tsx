@@ -24,7 +24,7 @@ const AppLayout = ({ children }: { children: ReactNode }) => {
 			<SidebarProvider defaultOpen={true}>
 				<SidebarInset className="bg-transparent pb-24 md:pb-0">
 					<AppSidebarHeader user={user} />
-					<div className="flex flex-1 flex-col gap-4 overflow-x-hidden">
+					<div className="flex flex-1 flex-col gap-4 overflow-x-hidden p-2">
 						{children}
 					</div>
 				</SidebarInset>

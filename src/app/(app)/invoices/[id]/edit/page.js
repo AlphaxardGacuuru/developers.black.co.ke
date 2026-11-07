@@ -174,8 +174,8 @@ const EditInvoice = ({ params }) => {
 		return (
 			<>
 				<Header title="Edit Invoice" />
-				<div>
-					<div className="max-w-4xl mx-auto">
+				<div className="py-6">
+					<div className="max-w-4xl mx-auto px-3 lg:px-4">
 						<div className="bg-foreground/5 backdrop-blur-xl border border-border rounded-3xl p-8">
 							<div className="text-foreground text-center">Loading invoice...</div>
 						</div>
@@ -189,8 +189,8 @@ const EditInvoice = ({ params }) => {
 		<>
 			<Header title="Edit Invoice" />
 
-			<div>
-				<div className="max-w-4xl mx-auto">
+			<div className="py-6">
+				<div className="max-w-4xl mx-auto px-3 lg:px-4">
 					<form onSubmit={onSubmit}>
 						<div className="bg-foreground/5 backdrop-blur-xl border border-border rounded-3xl p-8 space-y-8">
 							{/* Invoice Header Info */}

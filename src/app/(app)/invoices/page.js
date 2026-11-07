@@ -52,7 +52,7 @@ const Invoices = (props) => {
 		<>
 			<Header title="Invoices" />
 
-			<div>
+			<div className="py-6 px-3">
 				{/* Invoices Tab */}
 				<InvoiceList
 					{...props}

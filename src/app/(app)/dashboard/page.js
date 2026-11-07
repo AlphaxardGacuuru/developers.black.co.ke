@@ -48,8 +48,8 @@ const Dashboard = () => {
 	return (
 		<>
 			<Header title="Dashboard" />
-			<div>
-				<div className="max-w-7xl mx-auto">
+			<div className="py-6">
+				<div className="max-w-7xl mx-auto px-3 lg:px-4">
 					{/* Welcome Section */}
 					<div className="bg-foreground/5 backdrop-blur-xl border border-border overflow-hidden rounded-3xl hover:border-border transition-all duration-700 mb-8">
 						<div className="p-8 text-foreground">

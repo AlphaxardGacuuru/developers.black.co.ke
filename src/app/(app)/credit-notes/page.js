@@ -57,7 +57,7 @@ const CreditNotes = (props) => {
 		<>
 			<Header title="Credit Notes" />
 
-			<div>
+			<div className="py-6 px-3">
 				{/* Credit Notes Tab */}
 				<CreditNoteList
 					{...props}

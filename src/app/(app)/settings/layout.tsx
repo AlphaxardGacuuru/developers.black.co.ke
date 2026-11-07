@@ -19,7 +19,7 @@ export default function SettingsLayout({ children }: PropsWithChildren) {
 	const pathname = usePathname()
 
 	return (
-		<div>
+		<div className="px-2 py-3">
 			<Heading
 				title="Settings"
 				description="Manage your profile and account settings"

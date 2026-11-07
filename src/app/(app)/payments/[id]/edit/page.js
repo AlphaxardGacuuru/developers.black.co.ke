@@ -89,8 +89,8 @@ const EditPayment = ({ params }) => {
 		return (
 			<>
 				<Header title="Edit Payment" />
-				<div>
-					<div className="max-w-4xl mx-auto">
+				<div className="py-6">
+					<div className="max-w-4xl mx-auto px-3 lg:px-4">
 						<div className="bg-foreground/5 backdrop-blur-xl border border-border rounded-3xl p-8">
 							<div className="text-foreground text-center">Loading payment...</div>
 						</div>
@@ -104,8 +104,8 @@ const EditPayment = ({ params }) => {
 		<>
 			<Header title="Edit Payment" />
 
-			<div>
-				<div className="max-w-4xl mx-auto">
+			<div className="py-6">
+				<div className="max-w-4xl mx-auto px-3 lg:px-4">
 					<form onSubmit={onSubmit}>
 						<div className="bg-foreground/5 backdrop-blur-xl border border-border rounded-3xl p-8 space-y-8">
 							{/* Payment Header Info */}

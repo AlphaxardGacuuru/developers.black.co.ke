@@ -64,8 +64,8 @@ const ViewDeduction = ({ params }) => {
 		return (
 			<>
 				<Header title="View Deduction" />
-				<div>
-					<div className="max-w-4xl mx-auto">
+				<div className="py-6">
+					<div className="max-w-4xl mx-auto px-3 lg:px-4">
 						<div className="bg-foreground/5 backdrop-blur-xl border border-border rounded-3xl p-8">
 							<div className="text-foreground text-center">Loading deduction...</div>
 						</div>
@@ -79,8 +79,8 @@ const ViewDeduction = ({ params }) => {
 		<>
 			<Header title="View Deduction" />
 
-			<div>
-				<div className="max-w-4xl mx-auto">
+			<div className="py-6">
+				<div className="max-w-4xl mx-auto px-3 lg:px-4">
 					{/* Action Buttons */}
 					<div className="flex justify-between items-center mb-4">
 						<MyLink

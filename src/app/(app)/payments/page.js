@@ -42,7 +42,7 @@ const Payments = (props) => {
 		<>
 			<Header title="Payments" />
 
-			<div>
+			<div className="py-6 px-3">
 				{/* Payments Tab */}
 				<PaymentList
 					{...props}

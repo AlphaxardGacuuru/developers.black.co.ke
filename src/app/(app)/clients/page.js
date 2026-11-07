@@ -33,7 +33,7 @@ const Clients = (props) => {
 		<>
 			<Header title="Clients" />
 			
-			<div>
+			<div className="py-6 px-3">
 				{/* Clients Tab */}
 				<ClientList
 					{...props}
