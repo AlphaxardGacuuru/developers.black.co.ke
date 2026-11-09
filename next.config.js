@@ -5,8 +5,53 @@ const withPWA = require("@ducanh2912/next-pwa").default({
 	reloadOnOnline: true,
 	swcMinify: true,
 	disable: process.env.NODE_ENV === "development",
+	// The built-in start URL rule has no network timeout, so it's replaced by
+	// the "start-url" rule below
+	dynamicStartUrl: false,
+	extendDefaultRuntimeCaching: true,
 	workboxOptions: {
 		disableDevLogs: true,
+		// After the phone has been idle the first request often stalls instead
+		// of failing, which left a blank screen until a reload, so pages fall
+		// back to their cached copy if the network hasn't answered in 3 seconds
+		runtimeCaching: [
+			{
+				urlPattern: "/",
+				handler: "NetworkFirst",
+				options: {
+					cacheName: "start-url",
+					networkTimeoutSeconds: 3,
+					plugins: [
+						{
+							// Keeps a redirect from the start URL usable offline
+							cacheWillUpdate: async ({ response }) =>
+								response && response.type === "opaqueredirect"
+									? new Response(response.body, {
+											status: 200,
+											statusText: "OK",
+											headers: response.headers,
+										})
+									: response,
+						},
+					],
+				},
+			},
+			{
+				urlPattern: ({ request, url: { pathname }, sameOrigin }) =>
+					request.mode === "navigate" &&
+					sameOrigin &&
+					!pathname.startsWith("/api/"),
+				handler: "NetworkFirst",
+				options: {
+					cacheName: "navigation",
+					networkTimeoutSeconds: 3,
+					expiration: {
+						maxEntries: 32,
+						maxAgeSeconds: 30 * 24 * 60 * 60,
+					},
+				},
+			},
+		],
 	},
 })
 
