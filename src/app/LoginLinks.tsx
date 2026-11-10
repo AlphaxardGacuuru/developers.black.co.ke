@@ -1,35 +1,26 @@
 "use client"
 
+import { Link } from "@/components/ui/link"
 import { useAuth } from "@/hooks/auth"
-import Link from "next/link"
-import MyLink from "@/components/legacy/my-link"
 
-const LoginLinks = () => {
+export default function LoginLinks() {
 	const { user } = useAuth({ middleware: "guest" })
 
 	return (
 		<div className="fixed top-0 right-0 z-20 px-6 py-4 sm:block">
 			{user ? (
-				<MyLink
-					href="/dashboard">
-					Dashboard
-				</MyLink>
+				<Link href="/dashboard">Dashboard</Link>
 			) : (
 				<>
-					<MyLink
-						href="/login">
-						Login
-					</MyLink>
+					<Link href="/login">Login</Link>
 
-					<MyLink
+					<Link
 						href="/register"
 						className="ml-4">
 						Register
-					</MyLink>
+					</Link>
 				</>
 			)}
 		</div>
 	)
 }
-
-export default LoginLinks

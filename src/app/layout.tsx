@@ -3,7 +3,7 @@ import { Instrument_Sans } from "next/font/google"
 import type { ReactNode } from "react"
 import "@/app/global.css"
 import { AppProvider } from "@/contexts/AppContext"
-import CsrfInitializer from "@/components/CsrfInitializer"
+import { CsrfInitializer } from "@/components/csrf-initializer"
 import { QueryProvider } from "@/components/query-provider"
 import { FlashToastHandler, Toaster } from "@/components/ui/sonner"
 

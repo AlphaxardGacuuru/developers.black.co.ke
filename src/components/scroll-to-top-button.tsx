@@ -2,6 +2,7 @@
 
 import { ArrowUp } from "lucide-react"
 import { useEffect, useState } from "react"
+import { cn } from "@/lib/utils"
 
 /**
  * A floating "back to top" button for long pages. It appears once the
@@ -13,7 +14,7 @@ import { useEffect, useState } from "react"
  */
 const SHOW_AFTER_PX = 400
 
-export default function ScrollToTopButton() {
+export function ScrollToTopButton({ className }: { className?: string }) {
 	const [visible, setVisible] = useState(false)
 
 	useEffect(() => {
@@ -26,7 +27,9 @@ export default function ScrollToTopButton() {
 	}, [])
 
 	const scrollToTop = () => {
-		const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches
+		const reduceMotion = window.matchMedia(
+			"(prefers-reduced-motion: reduce)"
+		).matches
 
 		window.scrollTo({ top: 0, behavior: reduceMotion ? "auto" : "smooth" })
 	}
@@ -39,10 +42,14 @@ export default function ScrollToTopButton() {
 			title="Back to top"
 			tabIndex={visible ? 0 : -1}
 			aria-hidden={!visible}
-			className={`fixed right-4 bottom-[max(1rem,env(safe-area-inset-bottom))] z-50 flex h-11 w-11 items-center justify-center rounded-full bg-foreground text-background shadow-black/30 focus-visible:ring-foreground/60 shadow-lg transition-all duration-300 hover:scale-105 focus-visible:outline-hidden focus-visible:ring-[3px] sm:right-6 sm:bottom-6 ${
-				visible ? "translate-y-0 opacity-100" : "pointer-events-none translate-y-4 opacity-0"
-			}`}>
-			<ArrowUp className="h-5 w-5" />
+			className={cn(
+				"fixed right-4 bottom-[max(1rem,env(safe-area-inset-bottom))] z-50 flex size-11 items-center justify-center rounded-full bg-primary text-primary-foreground shadow-lg shadow-primary/30 transition-all duration-300 hover:scale-105 focus-visible:ring-[3px] focus-visible:ring-ring/50 focus-visible:outline-none sm:right-6 sm:bottom-6",
+				visible
+					? "translate-y-0 opacity-100"
+					: "pointer-events-none translate-y-4 opacity-0",
+				className
+			)}>
+			<ArrowUp className="size-5" />
 		</button>
 	)
 }

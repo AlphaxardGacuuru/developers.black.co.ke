@@ -5,18 +5,17 @@ import Link from "next/link"
 import Img from "next/image"
 import ApplicationLogo from "@/components/ApplicationLogo"
 import { useState, useEffect } from "react"
-import PhoneSVG from "@/svgs/PhoneSVG"
-import WhatsAppSVG from "@/svgs/WhatsAppSVG"
-import EmailSVG from "@/svgs/EmailSVG"
-import MyLink from "@/components/legacy/my-link"
-import ScrollToTopButton from "@/components/ScrollToTopButton"
+import { Mail, Phone } from "lucide-react"
+import { WhatsAppIcon } from "@/components/icons/whatsapp-icon"
+import { Link as ButtonLink } from "@/components/ui/link"
+import { ScrollToTopButton } from "@/components/scroll-to-top-button"
 
 const Home = () => {
 	const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
 	const [scrollY, setScrollY] = useState(0)
 
 	useEffect(() => {
-		const handleMouseMove = (e) => {
+		const handleMouseMove = (e: MouseEvent) => {
 			setMousePosition({ x: e.clientX, y: e.clientY })
 		}
 
@@ -474,12 +473,13 @@ const Home = () => {
 							{/* View Link Start */}
 							<div className="flex justify-center items-center mb-10">
 								<div>
-									<MyLink
+									<ButtonLink
+										variant="outline"
 										target="_blank"
 										href="https://onboarding.ecitizen.go.ke"
 										className="mt-20">
 										Visit eCitizen Onboarding →
-									</MyLink>
+									</ButtonLink>
 								</div>
 							</div>
 							{/* View Link End */}
@@ -535,12 +535,13 @@ const Home = () => {
 							{/* View Link Start */}
 							<div className="flex justify-center items-center mb-10">
 								<div>
-									<MyLink
+									<ButtonLink
+										variant="outline"
 										target="_blank"
 										href="https://demo.paysokofinance.com"
 										className="mt-20">
 										Visit PaySoko Finance →
-									</MyLink>
+									</ButtonLink>
 								</div>
 							</div>
 							{/* View Link End */}
@@ -599,12 +600,13 @@ const Home = () => {
 							{/* View Link Start */}
 							<div className="flex justify-center items-center mb-10">
 								<div>
-									<MyLink
+									<ButtonLink
+										variant="outline"
 										target="_blank"
 										href="https://mis.amahorocoalition.com"
 										className="mt-20">
 										Visit Amahoro Coalition →
-									</MyLink>
+									</ButtonLink>
 								</div>
 							</div>
 							{/* View Link End */}
@@ -662,12 +664,13 @@ const Home = () => {
 							{/* View Link Start */}
 							<div className="flex justify-center items-center mb-10">
 								<div>
-									<MyLink
+									<ButtonLink
+										variant="outline"
 										target="_blank"
 										href="https://ikea.nathanhr.com"
 										className="mt-20">
 										Visit Nathan Digital →
-									</MyLink>
+									</ButtonLink>
 								</div>
 							</div>
 							{/* View Link End */}
@@ -723,12 +726,13 @@ const Home = () => {
 							{/* View Link Start */}
 							<div className="flex justify-center items-center mb-10">
 								<div>
-									<MyLink
+									<ButtonLink
+										variant="outline"
 										target="_blank"
 										href="https://www.bulkagencies.co.ke"
 										className="mt-20">
 										Visit Bulk Agencies →
-									</MyLink>
+									</ButtonLink>
 								</div>
 							</div>
 							{/* View Link End */}
@@ -785,12 +789,13 @@ const Home = () => {
 							{/* View Link Start */}
 							<div className="flex justify-center items-center mb-10">
 								<div>
-									<MyLink
+									<ButtonLink
+										variant="outline"
 										target="_blank"
 										href="https://admin.marcusmiles.co.ke/#/admin/dashboard"
 										className="mt-20">
 										Visit Marcus Miles →
-									</MyLink>
+									</ButtonLink>
 								</div>
 							</div>
 							{/* View Link End */}
@@ -847,12 +852,13 @@ const Home = () => {
 							{/* View Link Start */}
 							<div className="flex justify-center items-center mb-10">
 								<div>
-									<MyLink
+									<ButtonLink
+										variant="outline"
 										target="_blank"
 										href="https://www.onlineuniworldwide.com"
 										className="mt-20">
 										Visit Online Uni Worldwide →
-									</MyLink>
+									</ButtonLink>
 								</div>
 							</div>
 							{/* View Link End */}
@@ -908,12 +914,13 @@ const Home = () => {
 							{/* View Link Start */}
 							<div className="flex justify-center items-center mb-10">
 								<div>
-									<MyLink
+									<ButtonLink
+										variant="outline"
 										target="_blank"
 										href="https://www.thepublichome.com"
 										className="mt-20">
 										Visit The Public Home →
-									</MyLink>
+									</ButtonLink>
 								</div>
 							</div>
 							{/* View Link End */}
@@ -969,12 +976,13 @@ const Home = () => {
 							{/* View Link Start */}
 							<div className="flex justify-center items-center mb-10">
 								<div>
-									<MyLink
+									<ButtonLink
+										variant="outline"
 										target="_blank"
 										href="https://music.black.co.ke"
 										className="mt-20">
 										Visit Black Music →
-									</MyLink>
+									</ButtonLink>
 								</div>
 							</div>
 							{/* View Link End */}
@@ -1030,12 +1038,13 @@ const Home = () => {
 							{/* View Link Start */}
 							<div className="flex justify-center items-center mb-10">
 								<div>
-									<MyLink
+									<ButtonLink
+										variant="outline"
 										target="_blank"
 										href="https://pay.black.co.ke"
 										className="mt-20">
 										Visit Black Pay →
-									</MyLink>
+									</ButtonLink>
 								</div>
 							</div>
 							{/* View Link End */}
@@ -1091,12 +1100,13 @@ const Home = () => {
 							{/* View Link Start */}
 							<div className="flex justify-center items-center mb-10">
 								<div>
-									<MyLink
+									<ButtonLink
+										variant="outline"
 										target="_blank"
 										href="https://property.black.co.ke"
 										className="mt-20">
 										Visit Black Property →
-									</MyLink>
+									</ButtonLink>
 								</div>
 							</div>
 							{/* View Link End */}
@@ -1152,12 +1162,13 @@ const Home = () => {
 							{/* View Link Start */}
 							<div className="flex justify-center items-center mb-10">
 								<div>
-									<MyLink
+									<ButtonLink
+										variant="outline"
 										target="_blank"
 										href="https://photography.black.co.ke"
 										className="mt-20">
 										Visit Black Photography →
-									</MyLink>
+									</ButtonLink>
 								</div>
 							</div>
 							{/* View Link End */}
@@ -1213,12 +1224,13 @@ const Home = () => {
 							{/* View Link Start */}
 							<div className="flex justify-center items-center mb-10">
 								<div>
-									<MyLink
+									<ButtonLink
+										variant="outline"
 										target="_blank"
 										href="https://money.black.co.ke"
 										className="mt-20">
 										Visit Black Money →
-									</MyLink>
+									</ButtonLink>
 								</div>
 							</div>
 							{/* View Link End */}
@@ -1257,7 +1269,7 @@ const Home = () => {
 								<div className="group p-8 rounded-3xl bg-foreground/5 backdrop-blur-xl border border-border hover:bg-foreground/10 transition-all duration-500">
 									<div className="flex items-center space-x-4 mb-4">
 										<div className="w-12 h-12 rounded-2xl bg-card flex items-center justify-center text-foreground">
-											<PhoneSVG />
+											<Phone className="size-[1em]" />
 										</div>
 										<div>
 											<h3 className="text-lg font-light text-foreground">
@@ -1277,7 +1289,7 @@ const Home = () => {
 								<div className="group p-8 rounded-3xl bg-foreground/5 backdrop-blur-xl border border-border hover:bg-foreground/10 transition-all duration-500">
 									<div className="flex items-center space-x-4 mb-4">
 										<div className="w-12 h-12 rounded-2xl bg-card flex items-center justify-center text-foreground">
-											<WhatsAppSVG />
+											<WhatsAppIcon />
 										</div>
 										<div>
 											<h3 className="text-lg font-light text-foreground">
@@ -1297,7 +1309,7 @@ const Home = () => {
 								<div className="group p-8 rounded-3xl bg-foreground/5 backdrop-blur-xl border border-border hover:bg-foreground/10 transition-all duration-500">
 									<div className="flex items-center space-x-4 mb-4">
 										<div className="w-12 h-12 rounded-2xl bg-card flex items-center justify-center text-foreground">
-											<EmailSVG />
+											<Mail className="size-[1em]" />
 										</div>
 										<div>
 											<h3 className="text-lg font-light text-foreground">

@@ -1,4 +1,6 @@
-const ApplicationLogo = ({ className, ...props }) => (
+import type { SVGProps } from "react"
+
+const ApplicationLogo = ({ className, ...props }: SVGProps<SVGSVGElement>) => (
     <svg
         data-v-423bf9ae=""
         xmlns="http://www.w3.org/2000/svg"
