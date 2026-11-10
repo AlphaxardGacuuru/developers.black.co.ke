@@ -25,3 +25,15 @@ export function validationErrors(
 		])
 	)
 }
+
+/** The first message per field, for errors already taken out of a 422 response. */
+export function firstErrors(
+	errors: Record<string, string | string[]>
+): Record<string, string> {
+	return Object.fromEntries(
+		Object.entries(errors).map(([field, messages]) => [
+			field,
+			Array.isArray(messages) ? String(messages[0] ?? "") : String(messages),
+		])
+	)
+}

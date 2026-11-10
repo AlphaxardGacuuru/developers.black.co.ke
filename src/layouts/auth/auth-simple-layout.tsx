@@ -1,5 +1,3 @@
-// import { Link } from "@/lib/spa"
-
 import { Link } from "@/components/ui/link"
 import AppLogoIcon from "@/components/app-logo-icon"
 import { Card, CardContent } from "@/components/ui/card"
@@ -14,14 +12,14 @@ export default function AuthSimpleLayout({
 		<div className="flex min-h-svh flex-col items-center justify-center gap-6 bg-background p-6 md:p-10">
 			{/* START: Page Backdrop Elements */}
 			<div className="pointer-events-none absolute inset-0 z-0 overflow-hidden">
-				<div className="absolute -left-40 -top-28 h-80 w-80 rounded-full bg-[#2D1B69]/38 blur-3xl dark:bg-[#2D1B69]/46" />
-				<div className="absolute -right-24 top-36 h-96 w-96 rounded-full bg-[#C8FF3D]/28 blur-3xl dark:bg-[#C8FF3D]/24" />
-				<div className="absolute bottom-0 left-1/3 h-80 w-80 rounded-full bg-[#2D1B69]/18 blur-3xl dark:bg-[#C8FF3D]/14" />
+				<div className="absolute -left-40 -top-28 h-80 w-80 rounded-full bg-primary/36 blur-3xl dark:bg-primary/28" />
+				<div className="absolute -right-24 top-36 h-96 w-96 rounded-full bg-secondary/70 blur-3xl dark:bg-secondary/35" />
+				<div className="absolute bottom-0 left-1/3 h-80 w-80 rounded-full bg-foreground/18 blur-3xl dark:bg-foreground/12" />
 				<div className="bg-motion-drift bg-motion-delay-1 absolute left-[43%] top-[7%] h-44 w-44 -translate-x-1/2 rounded-[2.5rem] bg-white/58 dark:bg-white/22" />
-				<div className="bg-motion-rotate bg-motion-delay-2 absolute right-[3%] top-[15%] h-36 w-36 rotate-12 rounded-3xl bg-[#C8FF3D]/54 dark:bg-[#C8FF3D]/32" />
-				<div className="bg-motion-float bg-motion-delay-3 absolute bottom-[38%] left-[36%] h-48 w-48 -rotate-12 rounded-full bg-[#2D1B69]/44 dark:bg-[#2D1B69]/36" />
+				<div className="bg-motion-rotate bg-motion-delay-2 absolute right-[3%] top-[15%] h-36 w-36 rotate-12 rounded-3xl bg-secondary/85 dark:bg-secondary/40" />
+				<div className="bg-motion-float bg-motion-delay-3 absolute bottom-[38%] left-[36%] h-48 w-48 -rotate-12 rounded-full bg-primary/46 dark:bg-primary/34" />
 				<div className="bg-motion-drift absolute bottom-[12%] right-[20%] h-56 w-56 rounded-[3rem] bg-slate-200/60 dark:bg-slate-300/26" />
-				<div className="absolute inset-0 bg-[radial-gradient(circle_at_12%_10%,rgba(45,27,105,0.36),transparent_35%),radial-gradient(circle_at_88%_14%,rgba(200,255,61,0.3),transparent_42%),linear-gradient(to_bottom,transparent,rgba(45,27,105,0.14),transparent)] dark:bg-[radial-gradient(circle_at_12%_10%,rgba(45,27,105,0.42),transparent_35%),radial-gradient(circle_at_88%_14%,rgba(200,255,61,0.2),transparent_42%),linear-gradient(to_bottom,transparent,rgba(200,255,61,0.08),transparent)]" />
+				<div className="absolute inset-0 bg-[radial-gradient(circle_at_12%_10%,rgba(0,0,0,0.12),transparent_35%),radial-gradient(circle_at_88%_14%,rgba(255,255,255,0.3),transparent_42%),linear-gradient(to_bottom,transparent,rgba(0,0,0,0.06),transparent)] dark:bg-[radial-gradient(circle_at_12%_10%,rgba(255,255,255,0.08),transparent_35%),radial-gradient(circle_at_88%_14%,rgba(255,255,255,0.06),transparent_42%),linear-gradient(to_bottom,transparent,rgba(255,255,255,0.04),transparent)]" />
 				<div className="absolute inset-0 bg-[radial-gradient(rgba(255,255,255,0.75)_1px,transparent_1px)] bg-size-[16px_16px] opacity-[0.12] dark:opacity-[0.05]" />
 				<div className="absolute inset-0 bg-[linear-gradient(120deg,rgba(255,255,255,0.32)_0%,transparent_30%,rgba(148,163,184,0.2)_50%,transparent_70%,rgba(255,255,255,0.22)_100%)] opacity-[0.26] dark:opacity-[0.12]" />
 				<div className="absolute inset-0 bg-[repeating-linear-gradient(45deg,rgba(15,23,42,0.1)_0_1px,transparent_1px_12px)] opacity-[0.5] dark:opacity-[0.12]" />

@@ -53,7 +53,7 @@ export const useAuth = ({
 		setErrors({})
 		setAuthLoading(true)
 
-		axios
+		return axios
 			.post("/register", props)
 			.then(() => refreshUser())
 			.catch((error) => handleValidationError(error, setErrors))
@@ -74,7 +74,7 @@ export const useAuth = ({
 		setStatus(null)
 		setAuthLoading(true)
 
-		axios
+		return axios
 			.post("/login", props)
 			.then(() => {
 				appProps.setMessages(["Login Successful!"])
@@ -99,7 +99,7 @@ export const useAuth = ({
 		setErrors({})
 		setStatus(null)
 
-		axios
+		return axios
 			.post("/forgot-password", { email })
 			.then((response) => setStatus(response.data.status))
 			.catch((error) => handleValidationError(error, setErrors))
@@ -118,7 +118,7 @@ export const useAuth = ({
 		setErrors({})
 		setStatus(null)
 
-		axios
+		return axios
 			.post("/reset-password", { token: params.token, ...props })
 			.then((response) =>
 				router.push("/login?reset=" + btoa(response.data.status))

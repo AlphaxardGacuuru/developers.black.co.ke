@@ -4,42 +4,47 @@ import type { Dispatch, ReactNode, SetStateAction } from "react"
 import { createContext, useContext, useEffect, useState } from "react"
 import type { BreadcrumbItem } from "@/types"
 
+/** What money's pages declare as `Page.layout`. */
+export type LayoutProps = {
+	breadcrumbs?: BreadcrumbItem[]
+	title?: string
+	description?: string
+}
+
 type LayoutPropsValue = {
-	breadcrumbs: BreadcrumbItem[]
-	setBreadcrumbs: Dispatch<SetStateAction<BreadcrumbItem[]>>
+	layoutProps: LayoutProps
+	setLayoutProps: Dispatch<SetStateAction<LayoutProps>>
 }
 
 const LayoutPropsContext = createContext<LayoutPropsValue | null>(null)
 
 /**
- * Holds what money's pages declare as `Page.layout`. A Next layout can't read
- * its page's statics, so pages hand their breadcrumbs up with useBreadcrumbs.
+ * A Next layout can't read its page's statics the way money's router reads
+ * `Page.layout`, so pages hand their layout props up with useLayout instead.
  */
 export function LayoutPropsProvider({ children }: { children: ReactNode }) {
-	const [breadcrumbs, setBreadcrumbs] = useState<BreadcrumbItem[]>([])
+	const [layoutProps, setLayoutProps] = useState<LayoutProps>({})
 
 	return (
-		<LayoutPropsContext.Provider value={{ breadcrumbs, setBreadcrumbs }}>
+		<LayoutPropsContext.Provider value={{ layoutProps, setLayoutProps }}>
 			{children}
 		</LayoutPropsContext.Provider>
 	)
 }
 
-export function useLayoutProps(): { breadcrumbs: BreadcrumbItem[] } {
-	const context = useContext(LayoutPropsContext)
-
-	return { breadcrumbs: context?.breadcrumbs ?? [] }
+export function useLayoutProps(): LayoutProps {
+	return useContext(LayoutPropsContext)?.layoutProps ?? {}
 }
 
-/** Shows `breadcrumbs` in the app header while the calling page is mounted. */
-export function useBreadcrumbs(breadcrumbs: BreadcrumbItem[]): void {
-	const setBreadcrumbs = useContext(LayoutPropsContext)?.setBreadcrumbs
-	const key = JSON.stringify(breadcrumbs)
+/** Passes `layoutProps` to the surrounding layout while the calling page is mounted. */
+export function useLayout(layoutProps: LayoutProps): void {
+	const setLayoutProps = useContext(LayoutPropsContext)?.setLayoutProps
+	const key = JSON.stringify(layoutProps)
 
 	useEffect(() => {
-		setBreadcrumbs?.(breadcrumbs)
+		setLayoutProps?.(layoutProps)
 
-		return () => setBreadcrumbs?.([])
+		return () => setLayoutProps?.({})
 	}, [key])
 }
 
