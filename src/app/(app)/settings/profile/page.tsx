@@ -3,21 +3,20 @@
 import { LoaderCircle } from "lucide-react"
 import { useState } from "react"
 import type { FormEvent } from "react"
-import useSWR, { useSWRConfig } from "swr"
 import DeleteUser from "@/components/delete-user"
 import Heading from "@/components/heading"
 import InputError from "@/components/input-error"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
+import { AUTH_QUERY_KEY, useAuth } from "@/hooks/auth"
 import axios from "@/lib/axios"
 import { validationErrors } from "@/lib/form-errors"
+import { queryClient } from "@/lib/query-client"
 import toast from "@/lib/toast"
-import type { User } from "@/types"
 
 export default function Profile() {
 	// Already loaded by the app layout's useAuth
-	const { data: user } = useSWR<User>("/api/user")
-	const { mutate } = useSWRConfig()
+	const { user } = useAuth()
 	const [processing, setProcessing] = useState(false)
 	const [errors, setErrors] = useState<Record<string, string>>({})
 
@@ -33,7 +32,7 @@ export default function Profile() {
 			)
 			.then((response) => {
 				toast.success(response.data.message ?? "Profile Updated")
-				mutate("/api/user")
+				queryClient.invalidateQueries({ queryKey: AUTH_QUERY_KEY })
 			})
 			.catch((error: unknown) => {
 				const fieldErrors = validationErrors(error)

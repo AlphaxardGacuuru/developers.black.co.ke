@@ -5,6 +5,7 @@ import "@/app/global.css"
 import { AppProvider } from "@/contexts/AppContext"
 import AppContextInjector from "@/components/AppContextInjector"
 import CsrfInitializer from "@/components/CsrfInitializer"
+import { QueryProvider } from "@/components/query-provider"
 import { Toaster } from "@/components/ui/sonner"
 
 // The same font as the other Black apps.
@@ -42,10 +43,12 @@ const RootLayout = ({ children }: { children: ReactNode }) => {
 			<body
 				className="min-h-screen font-sans antialiased"
 				suppressHydrationWarning>
-				<AppProvider>
-					<CsrfInitializer />
-					<AppContextInjector>{children}</AppContextInjector>
-				</AppProvider>
+				<QueryProvider>
+					<AppProvider>
+						<CsrfInitializer />
+						<AppContextInjector>{children}</AppContextInjector>
+					</AppProvider>
+				</QueryProvider>
 				<Toaster />
 			</body>
 		</html>
