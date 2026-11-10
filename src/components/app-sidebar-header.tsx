@@ -1,57 +1,67 @@
-import { usePathname } from "next/navigation"
-import { mainNavItems } from "@/components/app-sidebar"
+import { Breadcrumbs } from "@/components/breadcrumbs"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
-import {
-	DropdownMenu,
-	DropdownMenuContent,
-	DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
-import { UserMenuContent } from "@/components/user-menu-content"
+import { SidebarTrigger, useSidebar } from "@/components/ui/sidebar"
+import { useApp } from "@/contexts/AppContext"
 import { useInitials } from "@/hooks/use-initials"
-import type { User } from "@/types"
+import { cn } from "@/lib/utils"
+import type { BreadcrumbItem as BreadcrumbItemType } from "@/types"
 
-// The floating header the other Black apps use: the current section on the
-// left, and the avatar on the right. The avatar opens the user menu (like
-// gallery's floating avatar) so Settings and Log out are a tap away on phones,
-// where the bottom nav replaces the sidebar.
-export function AppSidebarHeader({ user }: { user: User }) {
+/**
+ * Opens the sidebar from the header using the user's avatar instead of a
+ * hamburger icon. Falls back to the hamburger until the user has loaded.
+ */
+function SidebarAvatarTrigger() {
+	const { auth } = useApp()
+	const { toggleSidebar, isMobile, openMobile, state } = useSidebar()
 	const getInitials = useInitials()
-	const pathname = usePathname()
-	const section = mainNavItems.find(
-		(item) => pathname === item.href || pathname.startsWith(`${item.href}/`)
-	)
+
+	if (!auth) {
+		return <SidebarTrigger className="-ml-1" />
+	}
+
+	const isOpen = isMobile ? openMobile : state === "expanded"
 
 	return (
-		<header className="sticky top-0 z-30 mx-2 mt-2 flex shrink-0 flex-row items-center gap-2 rounded-xl border border-white/40 bg-white/34 px-4 py-3 text-sidebar-foreground shadow-[0_20px_45px_-28px_rgba(15,23,42,0.45)] backdrop-blur-xl transition-[width,height] ease-linear md:h-16 md:py-0 dark:border-white/12 dark:bg-slate-950/20">
-			<div className="min-w-0 flex-1 truncate text-sm font-medium">
-				{section?.title ??
-					(pathname.startsWith("/settings") ? "Settings" : null)}
-			</div>
+		<button
+			type="button"
+			data-sidebar="trigger"
+			onClick={toggleSidebar}
+			aria-label={isOpen ? "Close menu" : "Open menu"}
+			aria-expanded={isOpen}
+			className="-ml-1 inline-flex shrink-0 items-center justify-center rounded-full transition-transform duration-200 hover:scale-105 focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none active:scale-95">
+			<Avatar className="size-8 overflow-hidden rounded-full border border-border/50">
+				<AvatarImage
+					src={auth.avatar}
+					alt={auth.name}
+				/>
+				<AvatarFallback className="rounded-full bg-neutral-200 text-xs text-black dark:bg-neutral-700 dark:text-white">
+					{getInitials(auth.name)}
+				</AvatarFallback>
+			</Avatar>
+		</button>
+	)
+}
 
-			<DropdownMenu>
-				<DropdownMenuTrigger asChild>
-					<button
-						type="button"
-						aria-label="Open user menu"
-						className="relative -mr-1 ms-2 flex size-7 shrink-0 items-center justify-center rounded-full transition-opacity hover:opacity-80">
-						<Avatar className="size-10">
-							<AvatarImage
-								src={user.avatar ?? undefined}
-								alt={user.name}
-							/>
-							<AvatarFallback className="text-xs">
-								{getInitials(user.name)}
-							</AvatarFallback>
-						</Avatar>
-					</button>
-				</DropdownMenuTrigger>
-				<DropdownMenuContent
-					className="w-56"
-					align="end"
-					sideOffset={8}>
-					<UserMenuContent user={user} />
-				</DropdownMenuContent>
-			</DropdownMenu>
+export function AppSidebarHeader({
+	breadcrumbs = [],
+	variant = "default",
+}: {
+	breadcrumbs?: BreadcrumbItemType[]
+	variant?: "default" | "floating"
+}) {
+	return (
+		<header
+			className={cn(
+				"sticky top-0 z-30 flex h-16 shrink-0 items-center gap-2 text-sidebar-foreground transition-[width,height] ease-linear group-has-data-[collapsible=icon]/sidebar-wrapper:h-12",
+				variant === "default" &&
+					"border-b border-sidebar-border bg-sidebar px-6 md:px-4",
+				variant === "floating" &&
+					"mx-2 mt-2 rounded-xl border border-white/40 bg-white/34 px-4 shadow-[0_20px_45px_-28px_rgba(15,23,42,0.45)] backdrop-blur-xl dark:border-white/12 dark:bg-slate-950/20"
+			)}>
+			<div className="min-w-0 flex-1">
+				<Breadcrumbs breadcrumbs={breadcrumbs} />
+			</div>
+			<SidebarAvatarTrigger />
 		</header>
 	)
 }

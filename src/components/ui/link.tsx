@@ -1,5 +1,3 @@
-"use client"
-
 import * as React from "react"
 import NextLink from "next/link"
 import { cva, type VariantProps } from "class-variance-authority"
@@ -16,7 +14,7 @@ const linkVariants = cva(
 				solid:
 					"bg-primary text-primary-foreground shadow-xs hover:bg-primary/90",
 				outline:
-					"border border-primary text-primary shadow-xs hover:bg-primary hover:text-primary-foreground",
+					"border border-input bg-background shadow-xs hover:bg-accent hover:text-accent-foreground",
 				ghost: "text-foreground hover:bg-accent hover:text-accent-foreground",
 				muted:
 					"text-muted-foreground hover:text-foreground hover:underline underline-offset-4",

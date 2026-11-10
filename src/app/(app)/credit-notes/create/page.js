@@ -7,14 +7,14 @@ import { useApp } from "@/contexts/AppContext"
 import Axios from "@/lib/axios"
 
 import Header from "@/app/(app)/Header"
-import Btn from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Select } from "@/components/ui/select"
-import { Textarea } from "@/components/ui/textarea"
+import Btn from "@/components/legacy/button"
+import { Input } from "@/components/legacy/input"
+import { Select } from "@/components/legacy/select"
+import { Textarea } from "@/components/legacy/textarea"
 
 import BackSVG from "@/svgs/BackSVG"
-import { DatePicker, formatLocalDate } from "@/components/ui/date-picker"
-import MyLink from "@/components/ui/my-link"
+import { DatePicker, formatLocalDate } from "@/components/legacy/date-picker"
+import MyLink from "@/components/legacy/my-link"
 
 const CreateCreditNote = (props) => {
 	const router = useRouter()

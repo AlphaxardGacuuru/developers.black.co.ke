@@ -2,18 +2,19 @@
 
 import type { ReactNode } from "react"
 import Loading from "@/app/(app)/Loading"
-import { AppBottomNav } from "@/components/app-bottom-nav"
-import { AppSidebar } from "@/components/app-sidebar"
-import { AppSidebarHeader } from "@/components/app-sidebar-header"
-import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar"
 import { TooltipProvider } from "@/components/ui/tooltip"
 import { useAuth } from "@/hooks/auth"
-import type { User } from "@/types"
+import AppLayout from "@/layouts/app-layout"
+import { LayoutPropsProvider, useLayoutProps } from "@/lib/spa"
 
-// The signed-in shell shared with the other Black apps: a floating sidebar
-// on the right and a floating header above the page.
-const AppLayout = ({ children }: { children: ReactNode }) => {
-	const { user } = useAuth({ middleware: "auth" }) as { user?: User }
+function AppLayoutWithBreadcrumbs({ children }: { children: ReactNode }) {
+	const { breadcrumbs } = useLayoutProps()
+
+	return <AppLayout breadcrumbs={breadcrumbs}>{children}</AppLayout>
+}
+
+export default function Layout({ children }: { children: ReactNode }) {
+	const { user } = useAuth({ middleware: "auth" })
 
 	if (!user) {
 		return <Loading />
@@ -21,18 +22,9 @@ const AppLayout = ({ children }: { children: ReactNode }) => {
 
 	return (
 		<TooltipProvider delayDuration={0}>
-			<SidebarProvider defaultOpen={true}>
-				<SidebarInset className="bg-transparent pb-24 md:pb-0">
-					<AppSidebarHeader user={user} />
-					<div className="flex flex-1 flex-col gap-4 overflow-x-hidden p-2">
-						{children}
-					</div>
-				</SidebarInset>
-				<AppSidebar user={user} />
-				<AppBottomNav />
-			</SidebarProvider>
+			<LayoutPropsProvider>
+				<AppLayoutWithBreadcrumbs>{children}</AppLayoutWithBreadcrumbs>
+			</LayoutPropsProvider>
 		</TooltipProvider>
 	)
 }
-
-export default AppLayout

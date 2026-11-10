@@ -3,10 +3,9 @@ import { Instrument_Sans } from "next/font/google"
 import type { ReactNode } from "react"
 import "@/app/global.css"
 import { AppProvider } from "@/contexts/AppContext"
-import AppContextInjector from "@/components/AppContextInjector"
 import CsrfInitializer from "@/components/CsrfInitializer"
 import { QueryProvider } from "@/components/query-provider"
-import { Toaster } from "@/components/ui/sonner"
+import { FlashToastHandler, Toaster } from "@/components/ui/sonner"
 
 // The same font as the other Black apps.
 const instrumentSans = Instrument_Sans({
@@ -46,7 +45,8 @@ const RootLayout = ({ children }: { children: ReactNode }) => {
 				<QueryProvider>
 					<AppProvider>
 						<CsrfInitializer />
-						<AppContextInjector>{children}</AppContextInjector>
+						<FlashToastHandler />
+						{children}
 					</AppProvider>
 				</QueryProvider>
 				<Toaster />

@@ -1,7 +1,7 @@
 import React, { useState } from "react"
 
-import Btn from "@/components/ui/button"
-import Modal from "@/components/ui/modal"
+import Btn from "@/components/legacy/button"
+import Modal from "@/components/legacy/modal"
 
 import DeleteSVG from "@/svgs/DeleteSVG"
 

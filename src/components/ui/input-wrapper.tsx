@@ -1,3 +1,5 @@
+"use client"
+
 import * as React from "react"
 import { useState, forwardRef } from "react"
 import { cn } from "@/lib/utils"
@@ -46,7 +48,7 @@ const InputWrapper = forwardRef<HTMLDivElement, InputWrapperProps>(
 				{...props}>
 				{/* Shimmer border effect */}
 				{showBorder && !error && (
-					<div className="absolute -inset-0.5 rounded-lg overflow-hidden">
+					<div className="absolute -inset-0.5 rounded-4xl overflow-hidden">
 						<div
 							key={`${shimmerAnimation}-${animationTick}`}
 							className="input-wrapper-shimmer absolute inset-0"
@@ -72,7 +74,7 @@ const InputWrapper = forwardRef<HTMLDivElement, InputWrapperProps>(
 								setShimmerAnimation("idle")
 							}}
 						/>
-						<div className="absolute inset-0.5 rounded-lg bg-white dark:bg-[#0a0a0a]" />
+						<div className="absolute inset-0.5 rounded-4xl bg-white dark:bg-[#0a0a0a]" />
 					</div>
 				)}
 

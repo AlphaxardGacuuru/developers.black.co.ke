@@ -5,9 +5,9 @@ import { useEffect, useState } from "react"
 import { useApp } from "@/contexts/AppContext"
 import axios from "@/lib/axios"
 import { queryClient } from "@/lib/query-client"
-import type { User } from "@/types"
+import { AUTH_QUERY, isUnverified } from "@/middleware/auth"
 
-export const AUTH_QUERY_KEY = ["auth"] as const
+export const AUTH_QUERY_KEY = AUTH_QUERY.queryKey
 
 type Errors = Record<string, string[]>
 type SetErrors = (errors: Errors) => void
@@ -16,10 +16,6 @@ type SetStatus = (status: string | null) => void
 type UseAuthOptions = {
 	middleware?: "auth" | "guest"
 	redirectIfAuthenticated?: string
-}
-
-function isUnauthenticated(error: unknown): boolean {
-	return isAxiosError(error) && error.response?.status === 401
 }
 
 /** Re-throws anything that isn't a 422 and hands the validation errors to `setErrors`. */
@@ -41,25 +37,7 @@ export const useAuth = ({
 
 	const [authLoading, setAuthLoading] = useState(false)
 
-	const { data: user, error } = useQuery({
-		queryKey: AUTH_QUERY_KEY,
-		queryFn: (): Promise<User | null> =>
-			axios
-				.get("/api/user")
-				.then((res) => res.data)
-				.catch((error) => {
-					if (!isAxiosError(error) || error.response?.status !== 409) {
-						throw error
-					}
-
-					router.push("/verify-email")
-
-					return null
-				}),
-		// A 401 means the session is gone; retrying only delays sending the user to /login.
-		retry: (failureCount, error) =>
-			!isUnauthenticated(error) && failureCount < 3,
-	})
+	const { data: user, error } = useQuery(AUTH_QUERY)
 
 	const refreshUser = () =>
 		queryClient.invalidateQueries({ queryKey: AUTH_QUERY_KEY })
@@ -175,13 +153,19 @@ export const useAuth = ({
 			router.push(redirectIfAuthenticated)
 		}
 
+		if (isUnverified(error)) {
+			router.push("/verify-email")
+
+			return
+		}
+
 		if (middleware === "auth" && error) {
 			logout()
 		}
 	}, [user, error])
 
 	return {
-		user: user ?? undefined,
+		user,
 		register,
 		login,
 		forgotPassword,

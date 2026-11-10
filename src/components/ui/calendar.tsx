@@ -1,13 +1,20 @@
+"use client"
+
 import * as React from "react"
 import {
   ChevronDownIcon,
   ChevronLeftIcon,
   ChevronRightIcon,
 } from "lucide-react"
-import { DayPicker, getDefaultClassNames } from "react-day-picker"
+import { DayPicker, getDefaultClassNames, type DayPickerProps, type DayButtonProps, type ChevronProps, type RootProps, type WeekNumberProps } from "react-day-picker"
 
 import { cn } from "@/lib/utils"
-import { Btn, btnVariants } from "@/components/ui/button"
+import { Button, buttonVariants } from "@/components/ui/button"
+import { type VariantProps } from "class-variance-authority"
+
+type CalendarProps = DayPickerProps & {
+  buttonVariant?: VariantProps<typeof buttonVariants>["variant"]
+}
 
 function Calendar({
   className,
@@ -18,7 +25,7 @@ function Calendar({
   formatters,
   components,
   ...props
-}) {
+}: CalendarProps) {
   const defaultClassNames = getDefaultClassNames()
 
   return (
@@ -26,8 +33,8 @@ function Calendar({
       showOutsideDays={showOutsideDays}
       className={cn(
         "bg-background group/calendar p-3 [--cell-size:--spacing(8)] in-data-[slot=card-content]:bg-transparent in-data-[slot=popover-content]:bg-transparent",
-        String.raw`[.rdp-button\_next>svg]:**:rtl:rotate-180`,
-        String.raw`[.rdp-button\_previous>svg]:**:rtl:rotate-180`,
+        String.raw`rtl:**:[.rdp-button\_next>svg]:rotate-180`,
+        String.raw`rtl:**:[.rdp-button\_previous>svg]:rotate-180`,
         className
       )}
       captionLayout={captionLayout}
@@ -45,12 +52,12 @@ function Calendar({
           defaultClassNames.nav
         ),
         button_previous: cn(
-          btnVariants({ variant: buttonVariant }),
+          buttonVariants({ variant: buttonVariant }),
           "size-(--cell-size) aria-disabled:opacity-50 p-0 select-none",
           defaultClassNames.button_previous
         ),
         button_next: cn(
-          btnVariants({ variant: buttonVariant }),
+          buttonVariants({ variant: buttonVariant }),
           "size-(--cell-size) aria-disabled:opacity-50 p-0 select-none",
           defaultClassNames.button_next
         ),
@@ -63,7 +70,7 @@ function Calendar({
           defaultClassNames.dropdowns
         ),
         dropdown_root: cn(
-          "relative has-focus:border-ring border border-input shadow-2xs has-focus:ring-ring/50 has-focus:ring-[3px] rounded-md",
+          "relative has-focus:border-ring border border-input shadow-xs has-focus:ring-ring/50 has-focus:ring-[3px] rounded-md",
           defaultClassNames.dropdown_root
         ),
         dropdown: cn("absolute bg-popover inset-0 opacity-0", defaultClassNames.dropdown),
@@ -105,10 +112,10 @@ function Calendar({
         ...classNames,
       }}
       components={{
-        Root: ({ className, rootRef, ...props }) => {
+        Root: ({ className, rootRef, ...props }: RootProps) => {
           return (<div data-slot="calendar" ref={rootRef} className={cn(className)} {...props} />)
         },
-        Chevron: ({ className, orientation, ...props }) => {
+        Chevron: ({ className, orientation, ...props }: ChevronProps) => {
           if (orientation === "left") {
             return (<ChevronLeftIcon className={cn("size-4", className)} {...props} />)
           }
@@ -120,7 +127,7 @@ function Calendar({
           return (<ChevronDownIcon className={cn("size-4", className)} {...props} />)
         },
         DayButton: CalendarDayButton,
-        WeekNumber: ({ children, ...props }) => {
+        WeekNumber: ({ children, ...props }: WeekNumberProps) => {
           return (
             <td {...props}>
               <div
@@ -141,16 +148,16 @@ function CalendarDayButton({
   day,
   modifiers,
   ...props
-}) {
+}: DayButtonProps) {
   const defaultClassNames = getDefaultClassNames()
 
-  const ref = React.useRef(null)
+  const ref = React.useRef<HTMLButtonElement>(null)
   React.useEffect(() => {
     if (modifiers.focused) ref.current?.focus()
   }, [modifiers.focused])
 
   return (
-    <Btn
+    <Button
       ref={ref}
       variant="ghost"
       size="icon"

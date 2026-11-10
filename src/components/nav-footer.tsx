@@ -1,0 +1,58 @@
+import type { ComponentPropsWithoutRef } from "react"
+import {
+	SidebarGroup,
+	SidebarGroupContent,
+	SidebarMenu,
+	SidebarMenuButton,
+	SidebarMenuItem,
+	useSidebar,
+} from "@/components/ui/sidebar"
+import { toUrl } from "@/lib/utils"
+import type { NavItem } from "@/types"
+import { Link } from "@/components/ui/link"
+
+export function NavFooter({
+	items,
+	className,
+	...props
+}: ComponentPropsWithoutRef<typeof SidebarGroup> & {
+	items: NavItem[]
+}) {
+	const { isMobile, setOpen, setOpenMobile } = useSidebar()
+
+	function closeSidebar(): void {
+		if (isMobile) {
+			setOpenMobile(false)
+
+			return
+		}
+
+		setOpen(false)
+	}
+
+	return (
+		<SidebarGroup
+			{...props}
+			className={`group-data-[collapsible=icon]:p-0 ${className || ""}`}>
+			<SidebarGroupContent>
+				<SidebarMenu>
+					{items.map((item) => (
+						<SidebarMenuItem key={item.title}>
+							<SidebarMenuButton
+								asChild
+								className="justify-start text-right text-neutral-600 group-data-[collapsible=icon]:justify-center hover:text-sidebar-hover-foreground dark:text-neutral-300">
+								<Link
+									href={toUrl(item.href)}
+									rel="noopener noreferrer"
+									onClick={closeSidebar}>
+									{item.icon && <item.icon className="h-5 w-5" />}
+									<span>{item.title}</span>
+								</Link>
+							</SidebarMenuButton>
+						</SidebarMenuItem>
+					))}
+				</SidebarMenu>
+			</SidebarGroupContent>
+		</SidebarGroup>
+	)
+}

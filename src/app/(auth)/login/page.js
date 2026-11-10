@@ -5,8 +5,8 @@ import { useAuth } from "@/hooks/auth"
 import { useEffect, useState } from "react"
 import { useRouter } from "next/navigation"
 import AuthSessionStatus from "@/app/(auth)/AuthSessionStatus"
-import { Input } from "@/components/ui/input"
-import { Btn } from "@/components/ui/button"
+import { Input } from "@/components/legacy/input"
+import { Btn } from "@/components/legacy/button"
 import { Checkbox } from "@/components/ui/checkbox"
 
 const Login = () => {

@@ -8,7 +8,7 @@ import { useState, useEffect } from "react"
 import PhoneSVG from "@/svgs/PhoneSVG"
 import WhatsAppSVG from "@/svgs/WhatsAppSVG"
 import EmailSVG from "@/svgs/EmailSVG"
-import MyLink from "@/components/ui/my-link"
+import MyLink from "@/components/legacy/my-link"
 import ScrollToTopButton from "@/components/ScrollToTopButton"
 
 const Home = () => {

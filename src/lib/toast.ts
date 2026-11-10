@@ -4,6 +4,8 @@ import type { CSSProperties } from "react"
 const DEFAULT_TOAST_DURATION = 4000
 const PROGRESS_ENABLED_VAR = "--toast-progress-enabled"
 const PROGRESS_DURATION_VAR = "--toast-progress-duration"
+const DEFAULT_TOAST_POSITION: NonNullable<ExternalToast["position"]> =
+	"top-right"
 
 type ToastOptions = ExternalToast
 
@@ -17,11 +19,15 @@ function withProgressStyle(options?: ToastOptions): ToastOptions | undefined {
 	const duration = options?.duration ?? DEFAULT_TOAST_DURATION
 
 	if (!hasFiniteDuration(duration)) {
-		return options
+		return {
+			...options,
+			position: DEFAULT_TOAST_POSITION,
+		}
 	}
 
 	return {
 		...options,
+		position: DEFAULT_TOAST_POSITION,
 		style: {
 			...(options?.style ?? {}),
 			[PROGRESS_ENABLED_VAR]: 1,
@@ -65,30 +71,3 @@ const toast = new Proxy(sonnerToast, {
 
 export { toast }
 export default toast
-
-const FLASH_TOAST_KEY = "flash-toast"
-
-/**
- * Keep a success toast for the next page load, for actions that end in a
- * full reload (logging out, deleting the account).
- */
-export function flashToast(message: string) {
-	try {
-		sessionStorage.setItem(FLASH_TOAST_KEY, message)
-	} catch {
-		// Without storage the toast is skipped
-	}
-}
-
-export function showFlashToast() {
-	try {
-		const message = sessionStorage.getItem(FLASH_TOAST_KEY)
-
-		if (message) {
-			sessionStorage.removeItem(FLASH_TOAST_KEY)
-			toast.success(message)
-		}
-	} catch {
-		// Without storage there is nothing to show
-	}
-}

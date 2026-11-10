@@ -2,7 +2,7 @@
 
 import { useAuth } from "@/hooks/auth"
 import Link from "next/link"
-import MyLink from "@/components/ui/my-link"
+import MyLink from "@/components/legacy/my-link"
 
 const LoginLinks = () => {
 	const { user } = useAuth({ middleware: "guest" })

@@ -1,33 +1,32 @@
 "use client"
 
-import { useEffect } from "react"
-import { Toaster as Sonner, type ToasterProps } from "sonner"
-import { useAppearance } from "@/hooks/use-appearance"
-import { showFlashToast } from "@/lib/toast"
+import { useFlashToast } from '@/hooks/use-flash-toast';
+import { useAppearance } from '@/hooks/use-appearance';
+import { Toaster as Sonner, type ToasterProps } from 'sonner';
 
-// Gallery's Toaster, following the appearance chosen in Settings.
 function Toaster({ ...props }: ToasterProps) {
-	const { appearance } = useAppearance()
+    const { appearance } = useAppearance();
 
-	useEffect(() => {
-		showFlashToast()
-	}, [])
-
-	return (
-		<Sonner
-			theme={appearance}
-			className="toaster group"
-			position="top-center"
-			style={
-				{
-					"--normal-bg": "var(--popover)",
-					"--normal-text": "var(--popover-foreground)",
-					"--normal-border": "var(--border)",
-				} as React.CSSProperties
-			}
-			{...props}
-		/>
-	)
+    return (
+        <Sonner
+            theme={appearance}
+            className="toaster group"
+            position="top-right"
+            style={
+                {
+                    '--normal-bg': 'var(--popover)',
+                    '--normal-text': 'var(--popover-foreground)',
+                    '--normal-border': 'var(--border)',
+                } as React.CSSProperties
+            }
+            {...props}
+        />
+    );
 }
 
-export { Toaster }
+function FlashToastHandler() {
+    useFlashToast();
+    return null;
+}
+
+export { Toaster, FlashToastHandler };

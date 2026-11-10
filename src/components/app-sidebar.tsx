@@ -1,5 +1,3 @@
-import Link from "next/link"
-import { usePathname } from "next/navigation"
 import {
 	CreditCard,
 	FileMinus,
@@ -8,92 +6,86 @@ import {
 	LayoutGrid,
 	Users,
 } from "lucide-react"
-import ApplicationLogo from "@/components/ApplicationLogo"
+import AppLogo from "@/components/app-logo"
+import { NavMain } from "@/components/nav-main"
 import { NavUser } from "@/components/nav-user"
+import { Link } from "@/components/ui/link"
 import {
 	Sidebar,
 	SidebarContent,
 	SidebarFooter,
-	SidebarGroup,
 	SidebarHeader,
-	SidebarTrigger,
 	SidebarMenu,
 	SidebarMenuButton,
 	SidebarMenuItem,
-	useSidebar,
+	SidebarTrigger,
 } from "@/components/ui/sidebar"
-import type { NavItem, User } from "@/types"
+import type { NavItem } from "@/types"
 
 export const mainNavItems: NavItem[] = [
-	{ title: "Dashboard", href: "/dashboard", icon: LayoutGrid },
-	{ title: "Clients", href: "/clients", icon: Users },
-	{ title: "Invoices", href: "/invoices", icon: FileText },
-	{ title: "Payments", href: "/payments", icon: CreditCard },
-	{ title: "Credit Notes", href: "/credit-notes", icon: FilePlus },
-	{ title: "Deductions", href: "/deductions", icon: FileMinus },
+	{
+		title: "Dashboard",
+		href: "/dashboard",
+		icon: LayoutGrid,
+	},
+	{
+		title: "Clients",
+		href: "/clients",
+		icon: Users,
+	},
+	{
+		title: "Invoices",
+		href: "/invoices",
+		icon: FileText,
+	},
+	{
+		title: "Payments",
+		href: "/payments",
+		icon: CreditCard,
+	},
+	{
+		title: "Credit Notes",
+		href: "/credit-notes",
+		icon: FilePlus,
+	},
+	{
+		title: "Deductions",
+		href: "/deductions",
+		icon: FileMinus,
+	},
 ]
 
-export function isActive(pathname: string, href: string) {
-	return pathname === href || pathname.startsWith(`${href}/`)
-}
-
-export function AppSidebar({ user }: { user: User }) {
-	const { state } = useSidebar()
-	const pathname = usePathname()
-
+export function AppSidebar() {
 	return (
 		<Sidebar
 			side="right"
 			collapsible="icon"
-			variant="floating">
+			variant="inset">
 			<SidebarHeader>
-				<SidebarMenu>
-					<SidebarMenuItem>
-						<SidebarMenuButton
-							size="xl"
-							asChild>
-							<Link href="/dashboard">
-								<div className="flex w-full justify-center text-primary">
-									{state === "collapsed" ? (
-										<img
-											src="/android-chrome-192x192.png"
-											alt="Black Developers"
-											className="h-8 w-auto"
-										/>
-									) : (
-										<ApplicationLogo className="h-8 w-auto" />
-									)}
-								</div>
-							</Link>
-						</SidebarMenuButton>
-					</SidebarMenuItem>
-				</SidebarMenu>
-				{/* The header avatar opens the user menu, so collapsing lives here, like money */}
-				<SidebarTrigger className="hidden self-center md:flex" />
+				<div className="mt-2 flex items-center gap-2">
+					<SidebarMenu className="min-w-0 flex-1 items-center">
+						<SidebarMenuItem>
+							<SidebarMenuButton
+								size="lg"
+								asChild>
+								<Link
+									href="/dashboard"
+									variant="unstyled">
+									<AppLogo iconClassName="h-28 w-28 dark:invert" />
+								</Link>
+							</SidebarMenuButton>
+						</SidebarMenuItem>
+					</SidebarMenu>
+					<SidebarTrigger className="shrink-0" />
+				</div>
 			</SidebarHeader>
 
 			<SidebarContent>
-				<SidebarGroup className="hidden px-2 py-0 md:block">
-					<SidebarMenu>
-						{mainNavItems.map((item) => (
-							<SidebarMenuItem key={item.title}>
-								<SidebarMenuButton
-									asChild
-									isActive={isActive(pathname, item.href)}
-									tooltip={item.title}>
-									<Link href={item.href}>
-										{item.icon && <item.icon />}
-										<span>{item.title}</span>
-									</Link>
-								</SidebarMenuButton>
-							</SidebarMenuItem>
-						))}
-					</SidebarMenu>
-				</SidebarGroup>
+				<NavMain items={mainNavItems} />
 			</SidebarContent>
 
 			<SidebarFooter>
-				<NavUser user={user} />
+				<NavUser />
 			</SidebarFooter>
 		</Sidebar>
 	)

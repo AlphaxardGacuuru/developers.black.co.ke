@@ -1,6 +1,6 @@
-import Link from "next/link"
+import type { MouseEvent } from "react"
+import { Link } from "@/components/ui/link"
 import { Home, LogOut, Settings } from "lucide-react"
-import { useState } from "react"
 import {
 	DropdownMenuGroup,
 	DropdownMenuItem,
@@ -9,18 +9,24 @@ import {
 } from "@/components/ui/dropdown-menu"
 import { UserInfo } from "@/components/user-info"
 import { useAuth } from "@/hooks/auth"
-import { flashToast } from "@/lib/toast"
+import { useMobileNavigation } from "@/hooks/use-mobile-navigation"
 import type { User } from "@/types"
 
-export function UserMenuContent({ user }: { user: User }) {
-	const { logout } = useAuth()
-	const [loggingOut, setLoggingOut] = useState(false)
+type Props = {
+	user: User
+}
 
-	const handleLogout = () => {
-		setLoggingOut(true)
-		// Logging out reloads the page, so the toast shows on the login page
-		flashToast("Logged Out")
-		logout().finally(() => setLoggingOut(false))
+export function UserMenuContent({ user }: Props) {
+	const cleanup = useMobileNavigation()
+	const { logout } = useAuth()
+
+	const handleLogout = (
+		event: MouseEvent<HTMLAnchorElement | HTMLButtonElement>
+	) => {
+		event.preventDefault()
+		cleanup()
+
+		logout()
 	}
 
 	return (
@@ -37,17 +43,20 @@ export function UserMenuContent({ user }: { user: User }) {
 			<DropdownMenuGroup>
 				<DropdownMenuItem asChild>
 					<Link
-						className="flex w-full cursor-pointer items-center"
+						variant="unstyled"
+						className="block w-full cursor-pointer"
 						href="/">
-						<Home className="mr-2 size-4" />
+						<Home className="mr-2" />
 						Welcome Page
 					</Link>
 				</DropdownMenuItem>
 				<DropdownMenuItem asChild>
 					<Link
-						className="flex w-full cursor-pointer items-center"
-						href="/settings/profile">
-						<Settings className="mr-2 size-4" />
+						variant="unstyled"
+						className="block w-full cursor-pointer"
+						href="/settings/profile"
+						onClick={cleanup}>
+						<Settings className="mr-2" />
 						Settings
 					</Link>
 				</DropdownMenuItem>
@@ -55,10 +64,10 @@ export function UserMenuContent({ user }: { user: User }) {
 			<DropdownMenuSeparator />
 			<DropdownMenuItem asChild>
 				<button
-					className="flex w-full cursor-pointer items-center disabled:cursor-not-allowed disabled:opacity-50"
+					className="block w-full cursor-pointer"
 					onClick={handleLogout}
-					disabled={loggingOut}>
-					<LogOut className="mr-2 size-4" />
+					data-test="logout-button">
+					<LogOut className="mr-2" />
 					Log out
 				</button>
 			</DropdownMenuItem>

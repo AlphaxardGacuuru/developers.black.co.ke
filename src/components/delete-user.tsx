@@ -1,7 +1,4 @@
-"use client"
-
 import { useRef, useState } from "react"
-import type { FormEvent } from "react"
 import Heading from "@/components/heading"
 import InputError from "@/components/input-error"
 import PasswordInput from "@/components/password-input"
@@ -15,13 +12,10 @@ import {
 	DialogTitle,
 	DialogTrigger,
 } from "@/components/ui/dialog"
-import { Spinner } from "@/components/ui/spinner"
+import { Label } from "@/components/ui/label"
 import axios from "@/lib/axios"
-import { validationErrors } from "@/lib/form-errors"
-import toast, { flashToast } from "@/lib/toast"
+import { Spinner } from "@/components/ui/spinner"
 
-// Gallery's DeleteUser: deleting needs the current password, then the app
-// reloads on the welcome page, signed out.
 export default function DeleteUser() {
 	const passwordInput = useRef<HTMLInputElement>(null)
 	const [processing, setProcessing] = useState(false)
@@ -29,37 +23,43 @@ export default function DeleteUser() {
 
 	function resetAndClearErrors() {
 		setErrors({})
-
 		if (passwordInput.current) {
 			passwordInput.current.value = ""
 		}
 	}
 
-	function handleSubmit(event: FormEvent<HTMLFormElement>) {
+	async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
 		event.preventDefault()
 		setProcessing(true)
 		setErrors({})
-
-		axios
-			.delete("/api/settings/profile", {
-				data: Object.fromEntries(new FormData(event.currentTarget)),
+		const fd = new FormData(event.currentTarget)
+		try {
+			await axios.delete("/api/settings/profile", {
+				data: Object.fromEntries(fd),
 			})
-			.then((response) => {
-				flashToast(response.data.message ?? "Account Deleted")
-				window.location.assign("/")
-			})
-			.catch((error: unknown) => {
-				const fieldErrors = validationErrors(error)
-
-				if (fieldErrors) {
-					setErrors(fieldErrors)
-				} else {
-					toast.error("Couldn't delete your account")
+			window.location.assign("/")
+		} catch (err: unknown) {
+			const e = err as {
+				response?: {
+					status?: number
+					data?: { errors?: Record<string, string | string[]> }
 				}
-
-				passwordInput.current?.focus()
-			})
-			.finally(() => setProcessing(false))
+			}
+			if (e.response?.status === 422) {
+				const raw = e.response.data?.errors ?? {}
+				setErrors(
+					Object.fromEntries(
+						Object.entries(raw).map(([k, v]) => [
+							k,
+							Array.isArray(v) ? String(v[0] ?? "") : String(v),
+						])
+					)
+				)
+			}
+			passwordInput.current?.focus()
+		} finally {
+			setProcessing(false)
+		}
 	}
 
 	return (
@@ -99,10 +99,17 @@ export default function DeleteUser() {
 							onSubmit={handleSubmit}
 							className="space-y-6">
 							<div className="grid gap-2">
+								<Label
+									htmlFor="password"
+									className="sr-only">
+									Password
+								</Label>
+
 								<PasswordInput
-									id="delete_password"
+									id="password"
 									name="password"
 									ref={passwordInput}
+									placeholder="Password"
 									autoComplete="current-password"
 								/>
 
@@ -112,7 +119,6 @@ export default function DeleteUser() {
 							<DialogFooter className="gap-2">
 								<DialogClose asChild>
 									<Button
-										type="button"
 										variant="secondary"
 										onClick={() => resetAndClearErrors()}>
 										Cancel
@@ -120,12 +126,15 @@ export default function DeleteUser() {
 								</DialogClose>
 
 								<Button
-									type="submit"
 									variant="destructive"
 									disabled={processing}
-									data-test="confirm-delete-user-button">
-									{processing && <Spinner className="size-4" />}
-									Delete account
+									asChild>
+									<button
+										type="submit"
+										data-test="confirm-delete-user-button">
+										Delete account
+										{processing && <Spinner />}
+									</button>
 								</Button>
 							</DialogFooter>
 						</form>

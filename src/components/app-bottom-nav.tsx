@@ -1,35 +1,49 @@
-import Link from "next/link"
-import { usePathname } from "next/navigation"
-import { isActive, mainNavItems } from "@/components/app-sidebar"
+import { Link } from "@/components/ui/link"
+import { mainNavItems } from "@/components/app-sidebar"
+import { useCurrentUrl } from "@/hooks/use-current-url"
 import { cn } from "@/lib/utils"
 
-// The other Black apps' phone navigation (gallery's AppBottomNav), with just
-// the icons (two steps larger than gallery's) so all six sections fit.
 export function AppBottomNav() {
-	const pathname = usePathname()
+	const { isCurrentOrParentUrl } = useCurrentUrl()
 
 	return (
 		<div className="pointer-events-none fixed inset-x-0 bottom-0 z-40 px-3 pb-3 md:hidden">
-			<nav className="pointer-events-auto mx-auto flex max-w-md items-center justify-around rounded-2xl border border-sidebar-border bg-sidebar p-1 text-sidebar-foreground shadow-sm backdrop-blur supports-backdrop-filter:bg-sidebar/95">
+			<nav className="bg-sidebar text-sidebar-foreground border-sidebar-border pointer-events-auto mx-auto flex max-w-md items-center justify-around rounded-2xl border shadow-sm backdrop-blur supports-backdrop-filter:bg-sidebar/95">
 				{mainNavItems.map((item) => {
-					const active = isActive(pathname, item.href)
+					const href = typeof item.href === "string" ? item.href : item.href.url
+					const isActive = isCurrentOrParentUrl(item.href)
 					const Icon = item.icon
 
 					return (
 						<Link
 							key={item.title}
-							href={item.href}
-							aria-label={item.title}
-							title={item.title}
-							aria-current={active ? "page" : undefined}
-							className={cn(
-								"flex min-w-0 flex-1 items-center justify-center rounded-2xl py-2 transition-colors",
-								active
-									? "bg-primary text-secondary"
-									: "text-sidebar-foreground/70 hover:bg-sidebar-accent hover:text-sidebar-accent-foreground"
-							)}>
-							<span className="flex size-13 items-center justify-center">
-								{Icon && <Icon className="size-12" />}
+							href={href}
+							variant="unstyled"
+							size="none"
+							aria-current={isActive ? "page" : undefined}
+							onClick={(event) => {
+								if (isCurrentOrParentUrl(item.href)) {
+									event.preventDefault()
+								}
+							}}
+							className="flex min-w-0 flex-1 justify-center">
+							<span
+								className={cn(
+									"flex w-full flex-col items-center gap-1 rounded-2xl px-3 py-2 text-[11px] font-medium transition-colors",
+									isActive
+										? "bg-sidebar-accent text-sidebar-accent-foreground"
+										: "text-sidebar-foreground/70 hover:bg-sidebar-accent hover:text-sidebar-accent-foreground"
+								)}>
+								<span
+									className={cn(
+										"flex size-11 items-center justify-center rounded-2xl border border-transparent transition-all",
+										isActive
+											? "text-sidebar-accent-foreground"
+											: "text-sidebar-foreground"
+									)}>
+									{Icon ? <Icon className="size-10" /> : null}
+								</span>
+								<span className="truncate text-[0.6rem]">{item.title}</span>
 							</span>
 						</Link>
 					)

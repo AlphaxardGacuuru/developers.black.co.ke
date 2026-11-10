@@ -3,8 +3,8 @@
 import Link from "next/link"
 import { useAuth } from "@/hooks/auth"
 import { useState } from "react"
-import { Input } from "@/components/ui/input"
-import { Btn } from "@/components/ui/button"
+import { Input } from "@/components/legacy/input"
+import { Btn } from "@/components/legacy/button"
 
 const Page = () => {
 	const { register, authLoading } = useAuth({

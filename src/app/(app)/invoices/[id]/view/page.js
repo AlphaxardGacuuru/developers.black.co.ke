@@ -6,8 +6,8 @@ import Axios from "@/lib/axios"
 import { format } from "date-fns"
 
 import Header from "@/app/(app)/Header"
-import MyLink from "@/components/ui/my-link"
-import Btn from "@/components/ui/button"
+import MyLink from "@/components/legacy/my-link"
+import Btn from "@/components/legacy/button"
 
 import BackSVG from "@/svgs/BackSVG"
 import PrintSVG from "@/svgs/PrintSVG"

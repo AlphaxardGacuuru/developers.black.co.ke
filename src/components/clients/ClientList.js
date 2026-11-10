@@ -1,9 +1,9 @@
 import React, { useState } from "react"
 import Axios from "@/lib/axios"
 
-import Btn from "@/components/ui/button"
-import MyLink from "@/components/ui/my-link"
-import { Input } from "@/components/ui/input"
+import Btn from "@/components/legacy/button"
+import MyLink from "@/components/legacy/my-link"
+import { Input } from "@/components/legacy/input"
 import { DataTable } from "@/components/ui/data-table"
 import { laravelPagination } from "@/lib/laravel-pagination"
 

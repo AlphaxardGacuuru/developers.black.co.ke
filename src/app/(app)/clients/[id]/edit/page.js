@@ -6,12 +6,12 @@ import { useApp } from "@/contexts/AppContext"
 import Axios from "@/lib/axios"
 
 import Header from "@/app/(app)/Header"
-import Btn from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Textarea } from "@/components/ui/textarea"
+import Btn from "@/components/legacy/button"
+import { Input } from "@/components/legacy/input"
+import { Textarea } from "@/components/legacy/textarea"
 
 import BackSVG from "@/svgs/BackSVG"
-import MyLink from "@/components/ui/my-link"
+import MyLink from "@/components/legacy/my-link"
 
 const EditClient = ({ params }) => {
 	const router = useRouter()
