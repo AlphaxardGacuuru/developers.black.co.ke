@@ -1,3 +1,5 @@
+import type { Dispatch, SetStateAction } from "react"
+
 type LaravelPage = {
 	meta?: {
 		current_page: number
@@ -8,17 +10,18 @@ type LaravelPage = {
 	}
 }
 
+// Takes useApp().getPaginated as it is: a state setter in, anything out.
 type Fetch<TList> = (
 	endpoint: string,
-	setState: (list: TList) => void
-) => void
+	setState: Dispatch<SetStateAction<TList>>
+) => unknown
 
 // A paginated Laravel resource as the DataTable's server pagination. Pages are
 // fetched from the list's own links so its filters are kept.
 export function laravelPagination<TList extends LaravelPage>(
 	list: TList,
 	getPaginated: Fetch<TList>,
-	setState: (list: TList) => void
+	setState: Dispatch<SetStateAction<TList>>
 ) {
 	const meta = list.meta
 
