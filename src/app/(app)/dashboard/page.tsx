@@ -17,7 +17,7 @@ import Axios from "@/lib/axios"
 import { Head, useLayout } from "@/lib/spa"
 import type { ErrorResponse } from "@/types/app-context"
 
-type Totals = { count: number; total: number }
+type Totals = { count: number; total: number | string }
 
 type DashboardStats = {
 	clients: { count: number }
@@ -64,11 +64,15 @@ export default function Dashboard() {
 
 	const show = (value: string | number) => (loading ? "..." : value)
 
+	// The API may send totals formatted ("1,000.00"), so parse before adding.
+	const toNumber = (value: number | string | null | undefined): number =>
+		Number(String(value ?? 0).replace(/,/g, "")) || 0
+
 	const netBalance =
-		(stats.invoices.total || 0) +
-		(stats.payments.total || 0) -
-		(stats.creditNotes.total || 0) -
-		(stats.deductions.total || 0)
+		toNumber(stats.invoices.total) +
+		toNumber(stats.payments.total) -
+		toNumber(stats.creditNotes.total) -
+		toNumber(stats.deductions.total)
 
 	return (
 		<>

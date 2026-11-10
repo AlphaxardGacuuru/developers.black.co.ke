@@ -7,6 +7,7 @@ import {
 	Users,
 } from "lucide-react"
 import AppLogo from "@/components/app-logo"
+import { NavAdmin } from "@/components/nav-admin"
 import { NavMain } from "@/components/nav-main"
 import { NavUser } from "@/components/nav-user"
 import { Link } from "@/components/ui/link"
@@ -82,6 +83,7 @@ export function AppSidebar() {
 
 			<SidebarContent>
 				<NavMain items={mainNavItems} />
+				<NavAdmin />
 			</SidebarContent>
 
 			<SidebarFooter>
