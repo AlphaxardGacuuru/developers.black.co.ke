@@ -4,6 +4,9 @@ const withPWA = require("@ducanh2912/next-pwa").default({
 	aggressiveFrontEndNavCaching: true,
 	reloadOnOnline: true,
 	swcMinify: true,
+	// Registered by ServiceWorkerUpdater, which listens for a waiting
+	// version first so it can offer a refresh
+	register: false,
 	disable: process.env.NODE_ENV === "development",
 	// The built-in start URL rule has no network timeout, so it's replaced by
 	// the "start-url" rule below
@@ -11,6 +14,9 @@ const withPWA = require("@ducanh2912/next-pwa").default({
 	extendDefaultRuntimeCaching: true,
 	workboxOptions: {
 		disableDevLogs: true,
+		// A new version waits for the "Refresh" toast instead of taking over
+		// open tabs mid-session
+		skipWaiting: false,
 		// After the phone has been idle the first request often stalls instead
 		// of failing, which left a blank screen until a reload, so pages fall
 		// back to their cached copy if the network hasn't answered in 3 seconds

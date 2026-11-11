@@ -5,6 +5,7 @@ import "@/app/global.css"
 import { AppProvider } from "@/contexts/AppContext"
 import { CsrfInitializer } from "@/components/csrf-initializer"
 import { QueryProvider } from "@/components/query-provider"
+import { ServiceWorkerUpdater } from "@/components/service-worker-updater"
 import { FlashToastHandler, Toaster } from "@/components/ui/sonner"
 
 // The same font as the other Black apps.
@@ -46,6 +47,7 @@ const RootLayout = ({ children }: { children: ReactNode }) => {
 					<AppProvider>
 						<CsrfInitializer />
 						<FlashToastHandler />
+						<ServiceWorkerUpdater />
 						{children}
 					</AppProvider>
 				</QueryProvider>
