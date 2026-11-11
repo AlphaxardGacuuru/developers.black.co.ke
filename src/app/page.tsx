@@ -1389,12 +1389,12 @@ const Home = () => {
 									<Link
 										target="_blank"
 										href="mailto:alphaxardgacuuru@gmail.com"
-										className="block w-full px-8 py-4 bg-foreground text-background rounded-2xl font-light text-center hover:bg-foreground/90 transition-colors text-lg">
+										className="block w-full px-8 py-4 bg-foreground text-background rounded-4xl font-light text-center hover:bg-foreground/90 transition-[color,background-color,transform] active:scale-95 text-lg">
 										Start Your Project
 									</Link>
 									<Link
 										href="#services"
-										className="block w-full px-8 py-4 border-2 border-foreground text-foreground rounded-2xl font-light text-center hover:bg-foreground hover:text-background transition-colors text-lg">
+										className="block w-full px-8 py-4 border-2 border-foreground text-foreground rounded-4xl font-light text-center hover:bg-foreground hover:text-background transition-[color,background-color,transform] active:scale-95 text-lg">
 										View Our Services
 									</Link>
 								</div>
