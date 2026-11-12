@@ -1,6 +1,7 @@
 "use client"
 
 import { LoaderCircle } from "lucide-react"
+import dynamic from "next/dynamic"
 import { useState } from "react"
 import type { FormEvent } from "react"
 import DeleteUser from "@/components/delete-user"
@@ -9,14 +10,29 @@ import InputError from "@/components/input-error"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { AUTH_QUERY_KEY, useAuth } from "@/hooks/auth"
+import { useInitials } from "@/hooks/use-initials"
 import axios from "@/lib/axios"
 import { validationErrors } from "@/lib/form-errors"
 import { queryClient } from "@/lib/query-client"
 import toast from "@/lib/toast"
 
+// FilePond touches `document` when it loads, so it only renders in the
+// browser. The placeholder keeps the circle's space while it loads.
+const AvatarUploadField = dynamic(
+	() =>
+		import("@/components/avatar-upload-field").then(
+			(module) => module.AvatarUploadField
+		),
+	{
+		ssr: false,
+		loading: () => <div className="size-28 rounded-full bg-muted" />,
+	}
+)
+
 export default function Profile() {
 	// Already loaded by the app layout's useAuth
 	const { user } = useAuth()
+	const getInitials = useInitials()
 	const [processing, setProcessing] = useState(false)
 	const [errors, setErrors] = useState<Record<string, string>>({})
 
@@ -58,8 +74,15 @@ export default function Profile() {
 				<Heading
 					variant="small"
 					title="Profile information"
-					description="Update your name and email address"
+					description="Update your picture, name and email address"
 				/>
+
+				{/* Avatar Start */}
+				<AvatarUploadField
+					avatar={user.avatar}
+					initials={getInitials(user.name)}
+				/>
+				{/* Avatar End */}
 
 				<form
 					onSubmit={handleSubmit}
